@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
+using OpenMyGame.LoggerUnity.Editor.ViewConfig;
+using UnityEditor;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow
@@ -11,18 +13,16 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow
         private static void ShowLogWindow()
         {
             var window = (LoggerEditorWindow)GetWindow(typeof(LoggerEditorWindow));
-            window.minSize = new Vector2(310, 500);
+            window.minSize = LoggerWindowConstantStyles.MinWindowSize;
             window.wantsLessLayoutEvents = true;
-            window.titleContent = new GUIContent("Logger window");
+            window.titleContent = new GUIContent(LoggerWindowConstantStyles.WindowTitle);
             window.Show();
         }
 
         private void CreateGUI()
         {
-            Debug.Log("test");
-            Debug.Log("test");
-            Debug.Log("test");
-            _windowView = new LoggerEditorWindowView(rootVisualElement, this);
+            var config = LoggerWindowViewConfig.Load();
+            _windowView = new LoggerEditorWindowView(this, rootVisualElement, config);
             _windowView.CreateView();
         }
 

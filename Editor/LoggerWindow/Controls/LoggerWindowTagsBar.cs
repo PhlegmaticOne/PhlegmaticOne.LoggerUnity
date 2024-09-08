@@ -3,6 +3,7 @@ using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Base;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Extensions;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls.EventData;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -37,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
         {
             return new LoggerWindowToggle(tag, Color.white, e => OnTagClicked(tag, e))
                 .WithStyle(x => x.AddMargin(1))
-                .WithStyle(x => x.height = 20);
+                .WithStyle(x => x.height = LoggerWindowConstantStyles.ToolbarHeight);
         }
 
         private static VisualElement TagBar()
@@ -49,7 +50,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
                     marginTop = -1,
                     paddingLeft = 5,
                     paddingRight = 5,
-                    minHeight = 20
+                    minHeight = LoggerWindowConstantStyles.ToolbarHeight
                 }
             };
 

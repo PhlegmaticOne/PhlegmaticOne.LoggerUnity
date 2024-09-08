@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components
@@ -7,10 +8,10 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components
     {
         public LoggerWindowSearchField(Action<string> valueChanged)
         {
-            style.width = 300;
+            style.width = LoggerWindowConstantStyles.SearchBarWidth;
             style.marginRight = 10;
-            style.height = 20;
-            tooltip = "Search filter";
+            style.height = LoggerWindowConstantStyles.ToolbarHeight;
+            tooltip = LoggerWindowConstantStyles.SearchBarTooltip;
             this.RegisterValueChangedCallback(e => valueChanged(e.newValue));
         }
     }

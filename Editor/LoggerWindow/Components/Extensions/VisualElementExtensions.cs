@@ -1,21 +1,25 @@
 ﻿using System;
-using UnityEngine;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Extensions
 {
     public static class VisualElementExtensions
     {
-        public static T AddBorder<T>(this T element) where T : VisualElement
+        public static T AddBorder<T>(this T element, int borderWidth = 1) where T : VisualElement
         {
-            element.style.borderBottomWidth = 1;
-            element.style.borderTopWidth = 1;
-            element.style.borderLeftWidth = 1;
-            element.style.borderRightWidth = 1;
-            element.style.borderBottomColor = new StyleColor(new Color(0.13f, 0.13f, 0.13f));
-            element.style.borderTopColor = new StyleColor(new Color(0.13f, 0.13f, 0.13f));
-            element.style.borderRightColor = new StyleColor(new Color(0.13f, 0.13f, 0.13f));
-            element.style.borderLeftColor = new StyleColor(new Color(0.13f, 0.13f, 0.13f));
+            var borderStyleColor = new StyleColor(LoggerWindowConstantStyles.BorderColor);
+            
+            element.style.borderBottomWidth = borderWidth;
+            element.style.borderTopWidth = borderWidth;
+            element.style.borderLeftWidth = borderWidth;
+            element.style.borderRightWidth = borderWidth;
+            
+            element.style.borderBottomColor = borderStyleColor;
+            element.style.borderTopColor = borderStyleColor;
+            element.style.borderRightColor = borderStyleColor;
+            element.style.borderLeftColor = borderStyleColor;
+            
             return element;
         }
         

@@ -1,5 +1,5 @@
 ﻿using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Extensions;
-using UnityEngine;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Base
@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Base
         public HorizontalFlexBordered(Justify justify, params VisualElement[] elements) : base(justify, elements)
         {
             this.AddBorder();
-            style.backgroundColor = new StyleColor(new Color(0.23f, 0.23f, 0.23f));
+            style.backgroundColor = new StyleColor(LoggerWindowConstantStyles.ToolbarBackgroundColor);
         }
     }
 }

@@ -1,24 +1,23 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Extensions;
-using UnityEngine;
+using OpenMyGame.LoggerUnity.Editor.ViewConfig;
+using OpenMyGame.LoggerUnity.Editor.ViewConfig.Models;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
     public class LoggerWindowLogsScroll : ScrollView
     {
-        private static readonly Color ErrorColor = new(0.6509804f, 0.1960784f, 0.1960784f);
-        private static readonly Color WarningColor = new(0.5882353f, 0.3764706f, 0.05490196f);
-        private static readonly Color LogColorLight = new(0.2470588f, 0.2470588f, 0.2470588f);
-        private static readonly Color LogColorDark = new(0.2196079f, 0.2196079f, 0.2196079f);
-        
-        private int _logsCount;
+        private readonly LoggerWindowViewConfig _viewConfig;
+
         private LoggerWindowLog _selectedLog;
+        private int _logsCount;
 
         public event Action<LoggerWindowLog> LogClick;
         
-        public LoggerWindowLogsScroll() : base(ScrollViewMode.Vertical)
+        public LoggerWindowLogsScroll(LoggerWindowViewConfig viewConfig) : base(ScrollViewMode.Vertical)
         {
+            _viewConfig = viewConfig;
             style.height = 300;
             style.marginTop = -1;
             this.AddBorder();
@@ -26,7 +25,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 
         public void AddLog(string logText)
         {
-            Add(new LoggerWindowLog(logText, GetLogColor(), HandleLogClick));
+            Add(new LoggerWindowLog(logText, GetLogColor(), _viewConfig, HandleLogClick));
             _logsCount++;
         }
 
@@ -37,9 +36,11 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
             LogClick?.Invoke(selectedLog);
         }
         
-        private Color GetLogColor()
+        private LoggerWindowColorConfigData GetLogColor()
         {
-            return _logsCount % 2 == 0 ? LogColorLight : LogColorDark;
+            var viewConfig = _viewConfig.ConfigData;
+            var colorIndex = _logsCount % viewConfig.DebugColors.Length;
+            return _viewConfig.ConfigData.DebugColors[colorIndex];
         }
     }
 }

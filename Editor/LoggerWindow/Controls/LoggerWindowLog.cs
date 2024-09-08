@@ -1,4 +1,7 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
+using OpenMyGame.LoggerUnity.Editor.ViewConfig;
+using OpenMyGame.LoggerUnity.Editor.ViewConfig.Models;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,25 +9,28 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
     public sealed class LoggerWindowLog : TextElement
     {
-        private static readonly Color SelectedColor = new(0.172549f, 0.3647059f, 0.5294118f);
-        
-        private readonly Color _colorBackground;
+        private readonly LoggerWindowColorConfigData _colorData;
+        private readonly LoggerWindowViewConfig _viewConfig;
         private readonly Action<LoggerWindowLog> _onClick;
         
         private bool _isSelected;
         
-        public LoggerWindowLog(string logText, Color colorBackground, Action<LoggerWindowLog> onClick)
+        public LoggerWindowLog(
+            string logText, 
+            LoggerWindowColorConfigData colorData, 
+            LoggerWindowViewConfig viewConfig,
+            Action<LoggerWindowLog> onClick)
         {
-            _colorBackground = colorBackground;
+            _colorData = colorData;
+            _viewConfig = viewConfig;
             _onClick = onClick;
             
             text = logText;
-            style.backgroundColor = colorBackground;
-            style.minHeight = 40;
-            style.color = Color.white;
+            style.minHeight = LoggerWindowConstantStyles.LogEntryMinHeight;
             style.paddingLeft = 20;
             style.unityTextAlign = TextAnchor.MiddleLeft;
             
+            UpdateSelected(false);
             this.AddManipulator(new Clickable(HandleClick));
         }
 
@@ -47,7 +53,10 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
         private void UpdateSelected(bool isSelected)
         {
             _isSelected = isSelected;
-            style.backgroundColor = _isSelected ? SelectedColor : _colorBackground;
+
+            var colorData = _isSelected ? _viewConfig.ConfigData.SelectedLogColor : _colorData;
+            style.backgroundColor = colorData.BackgroundColor;
+            style.color = colorData.TextColor;
         }
     }
 }
