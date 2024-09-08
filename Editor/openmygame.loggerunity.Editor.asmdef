@@ -1,0 +1,16 @@
+{
+    "name": "openmygame.loggerunity.Editor",
+    "rootNamespace": "OpenMyGame.LoggerUnity",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

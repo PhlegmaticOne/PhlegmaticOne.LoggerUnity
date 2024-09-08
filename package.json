@@ -1,0 +1,14 @@
+{
+  "name": "com.phlegmaticone.loggerunity",
+  "version": "1.0.0",
+  "displayName": "Logger Unity",
+  "description": "Logger for Unity",
+  "unity": "2021.3",
+  "keywords": [
+    "Logger"
+  ],
+  "author": {
+    "name": "Aleksandr Krotov",
+    "email": "a.krotov@openmygame.com"
+  }
+}
