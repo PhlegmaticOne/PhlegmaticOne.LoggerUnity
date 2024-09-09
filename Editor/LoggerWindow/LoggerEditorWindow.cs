@@ -28,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow
 
         private void OnGUI()
         {
-            _windowView.UpdateView();
+            _windowView?.UpdateView();
         }
 
         // private static void Test(
