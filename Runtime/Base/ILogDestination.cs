@@ -1,0 +1,12 @@
+﻿using OpenMyGame.LoggerUnity.Runtime.Messages;
+
+namespace OpenMyGame.LoggerUnity.Runtime.Base
+{
+    public interface ILogDestination
+    {
+        string DestinationName { get; }
+        LogConfiguration Config { get; }
+        bool IsEnabled { get; set; }
+        void Log(LogMessage message);
+    }
+}

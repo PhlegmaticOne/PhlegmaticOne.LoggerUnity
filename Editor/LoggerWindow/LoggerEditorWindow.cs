@@ -30,13 +30,5 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow
         {
             _windowView?.UpdateView();
         }
-
-        // private static void Test(
-        //     [CallerFilePath] string filePath = "",
-        //     [CallerLineNumber] int lineNumber = 0)
-        // {
-        //     rider64.exe [--line <number>] [--column <number>] <path ...>
-        //     Debug.Log(filePath + lineNumber);
-        // }
     }
 }
