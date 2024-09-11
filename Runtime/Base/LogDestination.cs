@@ -12,20 +12,10 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 
         public void Log(LogMessage message)
         {
-            var enrichedMessage = EnrichMessage(message);
-            LogMessage(enrichedMessage);
+            // var enrichedMessage = EnrichMessage(message);
+            // LogMessage(enrichedMessage);
         }
 
         protected abstract void LogMessage(LogMessage message);
-
-        private LogMessage EnrichMessage(LogMessage message)
-        {
-            foreach (var messageEnricher in Configuration.MessageEnrichers)
-            {
-                messageEnricher.Enrich(message);
-            }
-
-            return message;
-        }
     }
 }

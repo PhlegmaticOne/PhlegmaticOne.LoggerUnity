@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing
 {
@@ -7,31 +6,50 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
     {
         private readonly int _startIndex;
         private readonly int _endIndex;
-        
-        public MessagePart(int startIndex, int endIndex, string format, LogParameter attachedParameter = null)
+        private readonly string _format;
+
+        public MessagePart(int startIndex, int endIndex, string format, bool isParameter)
         {
+            IsParameter = isParameter;
             _startIndex = startIndex;
             _endIndex = endIndex;
-            Format = format;
-            AttachedParameter = attachedParameter;
-        }
-        
-        public readonly string Format;
-        public readonly LogParameter AttachedParameter;
-
-        public bool IsParameter()
-        {
-            return AttachedParameter is not null;
+            _format = format;
         }
 
-        public ReadOnlySpan<char> RenderFormatPart()
+        public bool IsParameter { get; }
+
+        public bool SplitParameterToValueAndFormat(out ReadOnlySpan<char> parameterValue, out ReadOnlySpan<char> format)
         {
-            return Format.AsSpan()[_startIndex.._endIndex];
+            if (!IsParameter)
+            {
+                parameterValue = GetValue();
+                format = ReadOnlySpan<char>.Empty;
+                return false;
+            }
+
+            var value = GetValue();
+            var index = value.IndexOf(':');
+
+            if (index == -1)
+            {
+                format = ReadOnlySpan<char>.Empty;
+                parameterValue = value;
+                return false;
+            }
+
+            parameterValue = value[..index];
+            format = value[index..];
+            return true;
         }
-        
-        public ReadOnlySpan<char> Render()
+
+        private ReadOnlySpan<char> GetValue()
         {
-            return IsParameter() ? AttachedParameter.Render() : RenderFormatPart();
+            if (_startIndex == _endIndex)
+            {
+                return ReadOnlySpan<char>.Empty;
+            }
+            
+            return _format.AsSpan()[_startIndex.._endIndex];
         }
     }
 }

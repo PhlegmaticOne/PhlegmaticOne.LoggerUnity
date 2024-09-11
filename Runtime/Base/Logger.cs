@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Messages;
+using OpenMyGame.LoggerUnity.Runtime.Parsing;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
@@ -7,16 +8,23 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
     {
         private readonly List<LogMessage> _messages;
         private readonly IReadOnlyList<ILogDestination> _loggerDestinations;
+        private readonly IMessageFormatParser _messageFormatParser;
 
-        public Logger(IReadOnlyList<ILogDestination> loggerDestinations, bool isEnabled)
+        public Logger(IReadOnlyList<ILogDestination> loggerDestinations, IMessageFormatParser messageFormatParser, bool isEnabled)
         {
             IsEnabled = isEnabled;
             _loggerDestinations = loggerDestinations;
+            _messageFormatParser = messageFormatParser;
             _messages = new List<LogMessage>();
         }
 
         public bool IsEnabled { get; set; }
         public IReadOnlyList<LogMessage> Messages => _messages;
+
+        public MessageFormat ParseMessage(string format, params object[] parameters)
+        {
+            return _messageFormatParser.Parse(format, parameters);
+        }
 
         public void Log(LogMessage message)
         {

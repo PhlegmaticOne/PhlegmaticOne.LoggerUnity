@@ -1,44 +1,31 @@
 ﻿using System.Text;
 using OpenMyGame.LoggerUnity.Runtime.Messages;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Container;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing
 {
     public class MessageFormat
     {
-        public MessageFormat(MessagePart[] messageParts)
+        private readonly ILogFormatPropertiesContainer _propertiesContainer;
+        private readonly MessagePart[] _messageParts;
+
+        public MessageFormat(MessagePart[] messageParts, ILogFormatPropertiesContainer propertiesContainer)
         {
-            MessageParts = messageParts;
+            _propertiesContainer = propertiesContainer;
+            _messageParts = messageParts;
         }
 
-        public MessagePart[] MessageParts { get; }
-
-        public string Render()
+        public string Render(LogMessage logMessage)
         {
-            var sb = new StringBuilder();
+            var logBuilder = new StringBuilder();
 
-            foreach (var messagePart in MessageParts)
+            foreach (var messagePart in _messageParts)
             {
-                sb.Append(messagePart.Render());
+                var renderMessagePart = _propertiesContainer.RenderMessagePart(messagePart, logMessage);
+                logBuilder.Append(renderMessagePart);
             }
             
-            return sb.ToString();
-        }
-
-        public bool TryGetParameter(string parameterKey, out LogParameter logParameter)
-        {
-            for (var i = 0; i < MessageParts.Length; i++)
-            {
-                var messagePart = MessageParts[i];
-                
-                if (messagePart.IsParameter() && messagePart.AttachedParameter.Key == parameterKey)
-                {
-                    logParameter = messagePart.AttachedParameter;
-                    return true;
-                }
-            }
-
-            logParameter = null;
-            return false;
+            return logBuilder.ToString();
         }
     }
 }
