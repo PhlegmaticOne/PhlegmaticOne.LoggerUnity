@@ -66,9 +66,9 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 
         public ILogger CreateLogger()
         {
-            var propertiesContainer = new LogFormatPropertiesContainerLog(_formatProperties);
-            var formatParser = new MessageFormatParser(propertiesContainer);
-            return new Logger(_loggerDestinations, formatParser, _isEnabled);
+            var propertiesContainer = new LogMessagePartRendererFormatProperties(_formatProperties);
+            var formatProperties = new Dictionary<Type, ILogMessageFormatProperty>();
+            return new Logger(_loggerDestinations, formatProperties, propertiesContainer, _isEnabled);
         }
     }
 }

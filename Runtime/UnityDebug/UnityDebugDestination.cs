@@ -11,7 +11,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
 
         public override string DestinationName => "Debug";
 
-        protected override void LogMessage(LogMessage message)
+        public override void Log(LogMessage message)
         {
             var logType = ConvertToUnityLogType(message.LogLevel);
             //Debug.LogFormat(logType, LogOption.NoStacktrace, null, Format, renderedMessage);

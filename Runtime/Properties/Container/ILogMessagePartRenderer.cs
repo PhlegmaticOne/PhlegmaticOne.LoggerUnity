@@ -4,8 +4,8 @@ using OpenMyGame.LoggerUnity.Runtime.Parsing;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Container
 {
-    public interface ILogFormatPropertiesContainer
+    public interface ILogMessagePartRenderer
     {
-        ReadOnlySpan<char> RenderMessagePart(in MessagePart messagePart, LogMessage message);
+        ReadOnlySpan<char> Render(in MessagePart messagePart, LogMessage message);
     }
 }

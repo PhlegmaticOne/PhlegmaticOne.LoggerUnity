@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Messages;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
@@ -30,17 +31,27 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 new LogFormatPropertyUnityTime(),
                 new LogFormatPropertyNewLine()
             };
+
+            var parameters = new object[]
+            {
+                "Test",
+                123,
+                '\n',
+                new { Value = 1 },
+                '\n',
+                new Exception("Exception")
+            };
             
-            var propertiesContainer = new LogFormatPropertiesContainerLog(formatProperties);
-            
-            var parser = new MessageFormatParser(propertiesContainer);
-            
-            var format = parser.Parse(
-                "[{Time}] {Message}{NewLine}{Stacktrace}{NewLine}{Exception}", null);
-            
-            var render = format.Render(LogMessage.Empty);
-            Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", render);
-            Debug.Log("<a href=\"Assets/Scripts/MovablePlatform.cs\" line=\"7\">Assets/Scripts/MovablePlatform.cs:7</a>");
+            // var propertiesContainer = new LogMessagePartRendererParameters(parameters);
+            //
+            // var parser = new MessageFormatParser(propertiesContainer);
+            //
+            // var format = parser.Parse(
+            //     "[{Time}] {Message}{NewLine}{Stacktrace}{NewLine}{Exception}", null);
+            //
+            // var render = format.Render(LogMessage.Empty);
+            // Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", render);
+            // Debug.Log("<a href=\"Assets/Scripts/MovablePlatform.cs\" line=\"7\">Assets/Scripts/MovablePlatform.cs:7</a>");
             
             // Log.Logger = LoggerBuilder.Create()
             //     .LogToUnityDebug(c =>

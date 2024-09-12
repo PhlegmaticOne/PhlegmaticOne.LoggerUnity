@@ -7,16 +7,16 @@ using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Container
 {
-    public class LogFormatPropertiesContainerLog : ILogFormatPropertiesContainer
+    public class LogMessagePartRendererFormatProperties : ILogMessagePartRenderer
     {
         private readonly Dictionary<string, ILogFormatProperty> _formatProperties;
 
-        public LogFormatPropertiesContainerLog(IEnumerable<ILogFormatProperty> formatProperties)
+        public LogMessagePartRendererFormatProperties(IEnumerable<ILogFormatProperty> formatProperties)
         {
             _formatProperties = formatProperties.ToDictionary(x => x.Key, x => x);
         }
         
-        public ReadOnlySpan<char> RenderMessagePart(in MessagePart messagePart, LogMessage message)
+        public ReadOnlySpan<char> Render(in MessagePart messagePart, LogMessage message)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out _);
             var property = _formatProperties.GetValueOrDefault(parameterValue.ToString());

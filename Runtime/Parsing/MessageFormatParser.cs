@@ -6,21 +6,13 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
 {
     public class MessageFormatParser : IMessageFormatParser
     {
-        private readonly ILogFormatPropertiesContainer _propertiesContainer;
-
-        public MessageFormatParser(ILogFormatPropertiesContainer propertiesContainer)
-        {
-            _propertiesContainer = propertiesContainer;
-        }
-        
-        //format: "There was name {Name} at {Time} by composed object is {Json} with number {Number} ending."
-        public MessageFormat Parse(string format, object[] parameters)
+        public MessageFormat Parse(string format, ILogMessagePartRenderer messagePartRenderer)
         {
             var parametersCount = GetParametersCount(format);
 
             if (parametersCount == 0)
             {
-                return CreateEmpty(format);
+                return CreateEmpty(format, messagePartRenderer);
             }
 
             var i = 1;
@@ -42,7 +34,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
                 openBraceIndex = nextOpenBraceIndex;
             }
             
-            return new MessageFormat(parts, _propertiesContainer);
+            return new MessageFormat(format, parts, messagePartRenderer);
         }
 
         private static void ProcessFormatPrefix(
@@ -62,14 +54,14 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
             }
         }
 
-        private MessageFormat CreateEmpty(string format)
+        private static MessageFormat CreateEmpty(string format, ILogMessagePartRenderer messagePartRenderer)
         {
             var messageParts = new MessagePart[]
             {
                 new(0, format.Length - 1, format, false)
             };
                 
-            return new MessageFormat(messageParts, _propertiesContainer);
+            return new MessageFormat(format, messageParts, messagePartRenderer);
         }
 
         private static int GetParametersCount(in ReadOnlySpan<char> format)

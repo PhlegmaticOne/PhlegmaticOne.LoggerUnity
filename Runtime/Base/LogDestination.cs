@@ -9,13 +9,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public abstract string DestinationName { get; }
         public LogConfiguration Config => Configuration;
         public bool IsEnabled { get; set; }
-
-        public void Log(LogMessage message)
-        {
-            // var enrichedMessage = EnrichMessage(message);
-            // LogMessage(enrichedMessage);
-        }
-
-        protected abstract void LogMessage(LogMessage message);
+        public abstract void Log(LogMessage message);
     }
 }

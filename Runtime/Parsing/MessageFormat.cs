@@ -6,14 +6,17 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
 {
     public class MessageFormat
     {
-        private readonly ILogFormatPropertiesContainer _propertiesContainer;
+        private readonly ILogMessagePartRenderer _messagePartRenderer;
         private readonly MessagePart[] _messageParts;
 
-        public MessageFormat(MessagePart[] messageParts, ILogFormatPropertiesContainer propertiesContainer)
+        public MessageFormat(string format, MessagePart[] messageParts, ILogMessagePartRenderer messagePartRenderer)
         {
-            _propertiesContainer = propertiesContainer;
+            Format = format;
+            _messagePartRenderer = messagePartRenderer;
             _messageParts = messageParts;
         }
+
+        public string Format { get; }
 
         public string Render(LogMessage logMessage)
         {
@@ -21,7 +24,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
 
             foreach (var messagePart in _messageParts)
             {
-                var renderMessagePart = _propertiesContainer.RenderMessagePart(messagePart, logMessage);
+                var renderMessagePart = _messagePartRenderer.Render(messagePart, logMessage);
                 logBuilder.Append(renderMessagePart);
             }
             
