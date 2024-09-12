@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime
@@ -22,7 +23,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public LoggerBuilder AddLogMessageProperty(IMessageFormatProperty formatProperty)
         {
-            _formatProperties[formatProperty.PropertyType] = formatProperty;
+            if (formatProperty is not null)
+            {
+                _formatProperties[formatProperty.PropertyType] = formatProperty;
+            }
+            
             return this;
         }
 
@@ -50,7 +55,13 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public ILogger CreateLogger()
         {
-            var logger = new Logger(_loggerDestinations, _formatProperties, _isEnabled);
+            var messageFormatParser = new MessageFormatParser();
+            
+            var logger = new Logger(_loggerDestinations, _formatProperties, messageFormatParser)
+            {
+                IsEnabled = _isEnabled
+            };
+            
             logger.Initialize();
             return logger;
         }

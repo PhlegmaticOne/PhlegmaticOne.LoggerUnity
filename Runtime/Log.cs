@@ -8,7 +8,12 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public static void Debug(string format, params object[] parameters)
         {
-            var messageFormat = Logger.ParseMessage(format, parameters);
+            if (Logger is null || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var messageFormat = Logger.ParseMessageFormat(format, parameters);
             var logMessage = new LogMessage(LogLevel.Debug, messageFormat);
             Logger.Log(logMessage);
         }

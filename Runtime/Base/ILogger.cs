@@ -4,10 +4,10 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public interface ILogger
     {
-        bool IsEnabled { get; set; }
+        bool IsEnabled { get; }
         IReadOnlyList<LogMessage> Messages { get; }
         void Initialize();
-        IMessageFormat ParseMessage(string format, params object[] parameters);
+        IMessageFormat ParseMessageFormat(string format, params object[] parameters);
         void Log(LogMessage message);
     }
 }

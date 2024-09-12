@@ -14,22 +14,28 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
             
         public IMessageFormat Parse(string format, ILogMessagePartRenderer messagePartRenderer)
         {
-            var formatSpan = format.AsSpan();
-            var parametersCount = formatSpan.CountOf(OpenBrace);
+            var parametersCount = format.CountOf(OpenBrace);
 
             if (parametersCount == 0)
             {
                 return MessageFormat.FromString(format, messagePartRenderer);
             }
 
+            return ParseMessageFormat(format, messagePartRenderer, parametersCount);
+        }
+
+        private static IMessageFormat ParseMessageFormat(
+            string format, ILogMessagePartRenderer messagePartRenderer, int parametersCount)
+        {
             var i = 1;
             var parts = new MessagePart[2 * parametersCount + 1];
+            
             ProcessFormatPrefix(format, parts, out var openBraceIndex, out var closeBraceIndex);
 
-            while (openBraceIndex != formatSpan.Length)
+            while (openBraceIndex != format.Length)
             {
                 var nextOpenBraceIndex = format.IndexOf(OpenBrace, closeBraceIndex);
-                nextOpenBraceIndex = nextOpenBraceIndex == -1 ? formatSpan.Length : nextOpenBraceIndex;
+                nextOpenBraceIndex = nextOpenBraceIndex == -1 ? format.Length : nextOpenBraceIndex;
                 
                 var parameterPart = new MessagePart(openBraceIndex + 1, closeBraceIndex, format, true);
                 var messagePart = new MessagePart(closeBraceIndex + 1, nextOpenBraceIndex, format, false);

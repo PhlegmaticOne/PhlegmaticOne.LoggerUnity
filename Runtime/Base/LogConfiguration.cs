@@ -36,7 +36,11 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 
         public LogConfiguration AddLogFormatProperty(ILogFormatProperty formatProperty)
         {
-            _formatProperties.Add(formatProperty);
+            if (formatProperty is not null)
+            {
+                _formatProperties.Add(formatProperty);
+            }
+            
             return this;
         }
 

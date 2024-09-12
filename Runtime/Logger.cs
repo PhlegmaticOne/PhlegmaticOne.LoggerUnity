@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Renderer;
@@ -18,27 +17,31 @@ namespace OpenMyGame.LoggerUnity.Runtime
         public Logger(
             IReadOnlyList<ILogDestination> loggerDestinations, 
             Dictionary<Type, IMessageFormatProperty> formatProperties,
-            bool isEnabled)
+            IMessageFormatParser messageFormatParser)
         {
-            IsEnabled = isEnabled;
             _loggerDestinations = loggerDestinations;
             _formatProperties = formatProperties;
-            _messageFormatParser = new MessageFormatParser();
+            _messageFormatParser = messageFormatParser;
             _messages = new List<LogMessage>();
         }
 
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; internal set; }
         public IReadOnlyList<LogMessage> Messages => _messages;
 
         public void Initialize()
         {
+            if (!IsEnabled)
+            {
+                return;
+            }
+            
             foreach (var loggerDestination in _loggerDestinations)
             {
                 loggerDestination.Initialize();
             }
         }
 
-        public IMessageFormat ParseMessage(string format, params object[] parameters)
+        public IMessageFormat ParseMessageFormat(string format, params object[] parameters)
         {
             var renderer = new LogMessagePartRendererMessageFormat(parameters, _formatProperties);
             return _messageFormatParser.Parse(format, renderer);
@@ -46,7 +49,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public void Log(LogMessage message)
         {
-            if (!IsEnabled)
+            if (!IsEnabled || message is null)
             {
                 return;
             }
