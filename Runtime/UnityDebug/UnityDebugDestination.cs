@@ -8,13 +8,12 @@ namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
     public class UnityDebugDestination : LogDestination<UnityDebugConfiguration>
     {
         private const string Format = "{0}";
-
         public override string DestinationName => "Debug";
 
-        public override void Log(LogMessage message)
+        protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage)
         {
-            var logType = ConvertToUnityLogType(message.LogLevel);
-            //Debug.LogFormat(logType, LogOption.NoStacktrace, null, Format, renderedMessage);
+            var logType = ConvertToUnityLogType(logMessage.LogLevel);
+            Debug.LogFormat(logType, LogOption.NoStacktrace, null, Format, renderedMessage);
         }
 
         private static LogType ConvertToUnityLogType(LogLevel logLevel)

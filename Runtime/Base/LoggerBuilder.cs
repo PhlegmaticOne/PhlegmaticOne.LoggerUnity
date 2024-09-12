@@ -11,34 +11,20 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
-        private readonly List<ILogFormatProperty> _formatProperties;
+        private readonly Dictionary<Type, ILogMessageFormatProperty> _formatProperties;
 
         private bool _isEnabled;
 
-        private LoggerBuilder()
+        public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            
-            _formatProperties = new List<ILogFormatProperty>
-            {
-                new LogFormatPropertyException(),
-                new LogFormatPropertyStacktrace(),
-                new LogFormatPropertyTime(),
-                new LogFormatPropertyLogLevel(),
-                new LogFormatPropertyUnityTime(),
-                new LogFormatPropertyNewLine(),
-                new LogFormatPropertyMessage()
-            };
-        }
-        
-        public static LoggerBuilder Create()
-        {
-            return new LoggerBuilder();
+            _formatProperties = new Dictionary<Type, ILogMessageFormatProperty>();
+            _isEnabled = true;
         }
 
-        public LoggerBuilder AddFormatProperty(ILogFormatProperty formatProperty)
+        public LoggerBuilder AddLogMessageProperty(ILogMessageFormatProperty formatProperty)
         {
-            _formatProperties.Add(formatProperty);
+            _formatProperties[formatProperty.PropertyType] = formatProperty;
             return this;
         }
 
@@ -66,9 +52,9 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 
         public ILogger CreateLogger()
         {
-            var propertiesContainer = new LogMessagePartRendererFormatProperties(_formatProperties);
-            var formatProperties = new Dictionary<Type, ILogMessageFormatProperty>();
-            return new Logger(_loggerDestinations, formatProperties, propertiesContainer, _isEnabled);
+            var logger = new Logger(_loggerDestinations, _formatProperties, _isEnabled);
+            logger.Initialize();
+            return logger;
         }
     }
 }

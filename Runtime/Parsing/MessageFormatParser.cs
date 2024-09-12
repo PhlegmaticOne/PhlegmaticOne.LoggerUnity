@@ -58,7 +58,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
         {
             var messageParts = new MessagePart[]
             {
-                new(0, format.Length - 1, format, false)
+                new(0, format.Length, format, false)
             };
                 
             return new MessageFormat(format, messageParts, messagePartRenderer);

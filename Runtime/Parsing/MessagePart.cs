@@ -42,7 +42,28 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
             return true;
         }
 
-        private ReadOnlySpan<char> GetValue()
+        public bool TryGetFormat(out ReadOnlySpan<char> format)
+        {
+            if (!IsParameter)
+            {
+                format = ReadOnlySpan<char>.Empty;
+                return false;
+            }
+
+            var value = GetValue();
+            var index = value.IndexOf(':');
+
+            if (index == -1)
+            {
+                format = ReadOnlySpan<char>.Empty;
+                return false;
+            }
+
+            format = value[index..];
+            return true;
+        }
+
+        public ReadOnlySpan<char> GetValue()
         {
             if (_startIndex == _endIndex)
             {

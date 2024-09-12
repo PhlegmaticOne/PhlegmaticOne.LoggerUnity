@@ -7,6 +7,8 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         string DestinationName { get; }
         LogConfiguration Config { get; }
         bool IsEnabled { get; set; }
-        void Log(LogMessage message);
+        void Initialize();
+        void LogMessage(LogMessage message);
+        string RenderMessage(LogMessage message);
     }
 }

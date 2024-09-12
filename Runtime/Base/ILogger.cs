@@ -8,6 +8,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
     {
         bool IsEnabled { get; set; }
         IReadOnlyList<LogMessage> Messages { get; }
+        void Initialize();
         MessageFormat ParseMessage(string format, params object[] parameters);
         void Log(LogMessage message);
     }
