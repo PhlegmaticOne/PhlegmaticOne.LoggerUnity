@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Container;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Log;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Renderer;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
@@ -28,14 +28,11 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
                 new LogFormatPropertyMessage(),
                 new LogFormatPropertyThreadId()
             };
-
-            FormatParser = new MessageFormatParser();
         }
 
         public bool IsEnabled { get; set; }
         public string LogFormat { set; get; }
         public LogLevel MinimumLogLevel { get; set; }
-        public IMessageFormatParser FormatParser { get; }
 
         public LogConfiguration AddLogFormatProperty(ILogFormatProperty formatProperty)
         {
@@ -43,7 +40,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
             return this;
         }
 
-        public MessageFormat CreateMessageFormat()
+        public IMessageFormat CreateMessageFormat()
         {
             return GetFormatParser().Parse(LogFormat, GetMessagePartRenderer());
         }
@@ -55,7 +52,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 
         protected virtual ILogMessagePartRenderer GetMessagePartRenderer()
         {
-            return new LogMessagePartRendererFormatProperties(_formatProperties);
+            return new LogMessagePartRendererLogFormat(_formatProperties);
         }
     }
 }

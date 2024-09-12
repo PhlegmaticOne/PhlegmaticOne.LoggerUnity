@@ -1,13 +1,23 @@
 ﻿using System.Text;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Container;
+using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing
+namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
 {
-    public class MessageFormat
+    public class MessageFormat : IMessageFormat
     {
         private readonly ILogMessagePartRenderer _messagePartRenderer;
         private readonly MessagePart[] _messageParts;
+
+        public static MessageFormat FromString(string value, ILogMessagePartRenderer messagePartRenderer)
+        {
+            var messageParts = new MessagePart[]
+            {
+                new(0, value.Length, value, false)
+            };
+                
+            return new MessageFormat(value, messageParts, messagePartRenderer);
+        }
 
         public MessageFormat(string format, MessagePart[] messageParts, ILogMessagePartRenderer messagePartRenderer)
         {

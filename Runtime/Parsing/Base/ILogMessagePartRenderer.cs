@@ -1,8 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
+using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Container
+namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Base
 {
     public interface ILogMessagePartRenderer
     {

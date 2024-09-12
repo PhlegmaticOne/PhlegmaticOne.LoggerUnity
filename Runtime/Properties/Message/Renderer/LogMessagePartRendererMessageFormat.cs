@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
+using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Container
+namespace OpenMyGame.LoggerUnity.Runtime.Properties.Message.Renderer
 {
-    public class LogMessagePartRendererParameters : ILogMessagePartRenderer
+    public class LogMessagePartRendererMessageFormat : ILogMessagePartRenderer
     {
         private readonly object[] _parameters;
-        private readonly Dictionary<Type, ILogMessageFormatProperty> _formatProperties;
+        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
 
         private int _currentParameterIndex;
 
-        public LogMessagePartRendererParameters(
+        public LogMessagePartRendererMessageFormat(
             object[] parameters, 
-            Dictionary<Type, ILogMessageFormatProperty> formatProperties)
+            Dictionary<Type, IMessageFormatProperty> formatProperties)
         {
             _parameters = parameters;
             _formatProperties = formatProperties;

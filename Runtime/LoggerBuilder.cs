@@ -1,28 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Container;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log;
+using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Runtime
 {
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, ILogMessageFormatProperty> _formatProperties;
+        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
 
         private bool _isEnabled;
 
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _formatProperties = new Dictionary<Type, ILogMessageFormatProperty>();
+            _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
             _isEnabled = true;
         }
 
-        public LoggerBuilder AddLogMessageProperty(ILogMessageFormatProperty formatProperty)
+        public LoggerBuilder AddLogMessageProperty(IMessageFormatProperty formatProperty)
         {
             _formatProperties[formatProperty.PropertyType] = formatProperty;
             return this;

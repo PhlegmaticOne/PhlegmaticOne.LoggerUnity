@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
+using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Container
+namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log.Renderer
 {
-    public class LogMessagePartRendererFormatProperties : ILogMessagePartRenderer
+    public class LogMessagePartRendererLogFormat : ILogMessagePartRenderer
     {
         private readonly Dictionary<string, ILogFormatProperty> _formatProperties;
 
-        public LogMessagePartRendererFormatProperties(IEnumerable<ILogFormatProperty> formatProperties)
+        public LogMessagePartRendererLogFormat(IEnumerable<ILogFormatProperty> formatProperties)
         {
             _formatProperties = formatProperties.ToDictionary(x => x.Key, x => x);
         }

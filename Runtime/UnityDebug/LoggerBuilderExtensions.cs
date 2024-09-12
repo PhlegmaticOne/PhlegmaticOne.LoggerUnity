@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
 {

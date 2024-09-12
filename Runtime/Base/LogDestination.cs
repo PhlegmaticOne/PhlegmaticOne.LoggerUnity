@@ -1,13 +1,10 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Messages;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+﻿namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public abstract class LogDestination<TConfiguration> : ILogDestination
         where TConfiguration : LogConfiguration
     {
         private TConfiguration _configuration;
-        private MessageFormat _logFormat;
+        private IMessageFormat _logFormat;
 
         internal TConfiguration Configuration
         {

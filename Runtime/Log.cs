@@ -1,6 +1,6 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Messages;
+﻿using OpenMyGame.LoggerUnity.Runtime.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Runtime
 {
     public static class Log
     {

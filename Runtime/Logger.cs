@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
+using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Container;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Renderer;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Runtime
 {
     public class Logger : ILogger
     {
         private readonly List<LogMessage> _messages;
         private readonly IReadOnlyList<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, ILogMessageFormatProperty> _formatProperties;
+        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
         private readonly IMessageFormatParser _messageFormatParser;
 
         public Logger(
             IReadOnlyList<ILogDestination> loggerDestinations, 
-            Dictionary<Type, ILogMessageFormatProperty> formatProperties,
+            Dictionary<Type, IMessageFormatProperty> formatProperties,
             bool isEnabled)
         {
             IsEnabled = isEnabled;
@@ -37,9 +38,9 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
             }
         }
 
-        public MessageFormat ParseMessage(string format, params object[] parameters)
+        public IMessageFormat ParseMessage(string format, params object[] parameters)
         {
-            var renderer = new LogMessagePartRendererParameters(parameters, _formatProperties);
+            var renderer = new LogMessagePartRendererMessageFormat(parameters, _formatProperties);
             return _messageFormatParser.Parse(format, renderer);
         }
 

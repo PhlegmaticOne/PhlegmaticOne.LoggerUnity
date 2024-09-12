@@ -1,6 +1,4 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Messages;
-
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+﻿namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public interface ILogDestination
     {

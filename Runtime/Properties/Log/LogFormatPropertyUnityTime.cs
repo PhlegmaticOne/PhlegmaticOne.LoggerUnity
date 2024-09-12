@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Messages;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Base;
+using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log

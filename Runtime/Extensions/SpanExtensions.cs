@@ -9,5 +9,20 @@ namespace OpenMyGame.LoggerUnity.Runtime.Extensions
         {
             return MemoryMarshal.CreateReadOnlySpan(ref span[0], span.Length);
         }
+
+        public static int CountOf<T>(this in ReadOnlySpan<T> span, T value) where T : IEquatable<T>
+        {
+            var count = 0;
+
+            foreach (var item in span)
+            {
+                if (item.Equals(value))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
     }
 }

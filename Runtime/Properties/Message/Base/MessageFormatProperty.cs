@@ -1,14 +1,8 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Base
+namespace OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base
 {
-    public interface ILogMessageFormatProperty
-    {
-        Type PropertyType { get; }
-        ReadOnlySpan<char> Render(object parameter, in ReadOnlySpan<char> format);
-    }
-
-    public abstract class LogMessageFormatProperty<T> : ILogMessageFormatProperty
+    public abstract class MessageFormatProperty<T> : IMessageFormatProperty
     {
         public Type PropertyType => typeof(T);
         
