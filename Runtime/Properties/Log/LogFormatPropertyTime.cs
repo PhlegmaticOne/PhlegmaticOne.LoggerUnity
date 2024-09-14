@@ -8,7 +8,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
     public class LogFormatPropertyTime : ILogFormatProperty
     {
         public string Key => "Time";
-        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message)
+        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
             return DateTime.Now.ToString("g");
         }

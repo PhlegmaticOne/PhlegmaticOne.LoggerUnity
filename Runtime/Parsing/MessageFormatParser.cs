@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Extensions;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing
@@ -11,21 +12,27 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
     {
         private const char OpenBrace = '{';
         private const char CloseBrace = '}';
-            
-        public IMessageFormat Parse(string format, ILogMessagePartRenderer messagePartRenderer)
+        
+        private readonly IMessageFormatFactory _messageFormatFactory;
+
+        public MessageFormatParser(IMessageFormatFactory messageFormatFactory)
+        {
+            _messageFormatFactory = messageFormatFactory;
+        }
+        
+        public IMessageFormat Parse(string format)
         {
             var parametersCount = format.CountOf(OpenBrace);
 
             if (parametersCount == 0)
             {
-                return MessageFormat.FromString(format, messagePartRenderer);
+                return new MessageFormatStaticValue(format);
             }
 
-            return ParseMessageFormat(format, messagePartRenderer, parametersCount);
+            return ParseMessageFormat(format, parametersCount);
         }
 
-        private static IMessageFormat ParseMessageFormat(
-            string format, ILogMessagePartRenderer messagePartRenderer, int parametersCount)
+        private IMessageFormat ParseMessageFormat(string format, int parametersCount)
         {
             var i = 1;
             var parts = new MessagePart[2 * parametersCount + 1];
@@ -46,8 +53,8 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
                 closeBraceIndex = format.IndexOf(CloseBrace, nextOpenBraceIndex);
                 openBraceIndex = nextOpenBraceIndex;
             }
-            
-            return new MessageFormat(format, parts, messagePartRenderer);
+
+            return _messageFormatFactory.CreateFormat(parts);
         }
 
         private static void ProcessFormatPrefix(

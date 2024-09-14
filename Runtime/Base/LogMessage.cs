@@ -17,9 +17,9 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public IMessageFormat Format { get; }
         public Exception Exception { get; }
 
-        public string Render()
+        public string Render(in Span<object> parameters)
         {
-            return Format?.Render(this) ?? string.Empty;
+            return Format?.Render(this, parameters) ?? string.Empty;
         }
     }
 }

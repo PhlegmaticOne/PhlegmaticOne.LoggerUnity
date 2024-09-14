@@ -2,32 +2,29 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Renderer;
+using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
 
 namespace OpenMyGame.LoggerUnity.Runtime
 {
     public class Logger : ILogger
     {
-        private readonly List<LogMessage> _messages;
         private readonly IReadOnlyList<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
         private readonly IMessageFormatParser _messageFormatParser;
+        private readonly ILogWithTagFactory _logWithTagFactory;
 
         public Logger(
             IReadOnlyList<ILogDestination> loggerDestinations, 
-            Dictionary<Type, IMessageFormatProperty> formatProperties,
-            IMessageFormatParser messageFormatParser)
+            IMessageFormatParser messageFormatParser,
+            ILogWithTagFactory logWithTagFactory)
         {
             _loggerDestinations = loggerDestinations;
-            _formatProperties = formatProperties;
             _messageFormatParser = messageFormatParser;
-            _messages = new List<LogMessage>();
+            _logWithTagFactory = logWithTagFactory;
         }
 
         public bool IsEnabled { get; internal set; }
-        public IReadOnlyList<LogMessage> Messages => _messages;
-
+        
         public void Initialize()
         {
             if (!IsEnabled)
@@ -41,30 +38,33 @@ namespace OpenMyGame.LoggerUnity.Runtime
             }
         }
 
-        public IMessageFormat ParseMessageFormat(string format, params object[] parameters)
+        public IMessageFormat ParseMessageFormat(string format)
         {
-            var renderer = new LogMessagePartRendererMessageFormat(parameters, _formatProperties);
-            return _messageFormatParser.Parse(format, renderer);
+            return _messageFormatParser.Parse(format);
         }
 
-        public void Log(LogMessage message)
+        public LogWithTag CreateLogWithTag(string tag)
+        {
+            return _logWithTagFactory.Create(tag);
+        }
+
+        public void Log(LogMessage message, in Span<object> parameters)
         {
             if (!IsEnabled || message is null)
             {
                 return;
             }
             
-            _messages.Add(message);
-            LogMessage(message);
+            LogMessage(message, parameters);
         }
         
-        private void LogMessage(LogMessage message)
+        private void LogMessage(LogMessage message, in Span<object> parameters)
         {
             foreach (var loggerDestination in _loggerDestinations)
             {
                 if (IsLogMessageToDestination(loggerDestination, message))
                 {
-                    loggerDestination.LogMessage(message);
+                    loggerDestination.LogMessage(message, parameters);
                 }
             }
         }

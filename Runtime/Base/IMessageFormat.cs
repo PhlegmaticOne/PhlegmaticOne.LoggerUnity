@@ -1,8 +1,9 @@
-﻿namespace OpenMyGame.LoggerUnity.Runtime.Base
+﻿using System;
+
+namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public interface IMessageFormat
     {
-        string Format { get; }
-        string Render(LogMessage logMessage);
+        string Render(LogMessage logMessage, in Span<object> parameters);
     }
 }

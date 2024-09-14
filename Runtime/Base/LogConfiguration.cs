@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Log;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Renderer;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
@@ -46,17 +46,13 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 
         public IMessageFormat CreateMessageFormat()
         {
-            return GetFormatParser().Parse(LogFormat, GetMessagePartRenderer());
+            return GetFormatParser().Parse(LogFormat);
         }
 
         protected virtual IMessageFormatParser GetFormatParser()
         {
-            return new MessageFormatParser();
-        }
-
-        protected virtual ILogMessagePartRenderer GetMessagePartRenderer()
-        {
-            return new LogMessagePartRendererLogFormat(_formatProperties);
+            var factory = new MessageFormatFactoryDestination(_formatProperties);
+            return new MessageFormatParser(factory);
         }
     }
 }

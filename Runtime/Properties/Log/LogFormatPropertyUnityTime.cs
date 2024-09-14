@@ -10,7 +10,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
     {
         public string Key => "UnityTime";
         
-        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message)
+        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
             return Time.realtimeSinceStartup.ToString("F1");
         }

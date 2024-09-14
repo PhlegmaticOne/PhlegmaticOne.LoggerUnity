@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using OpenMyGame.LoggerUnity.Runtime.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public interface ILogger
     {
         bool IsEnabled { get; }
-        IReadOnlyList<LogMessage> Messages { get; }
         void Initialize();
-        IMessageFormat ParseMessageFormat(string format, params object[] parameters);
-        void Log(LogMessage message);
+        IMessageFormat ParseMessageFormat(string format);
+        LogWithTag CreateLogWithTag(string tag);
+        void Log(LogMessage message, in Span<object> parameters);
     }
 }

@@ -1,4 +1,5 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Base;
+﻿using System.Reflection;
+using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.UnityDebug;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private void Start()
         {
+
+            
             // var androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
             // androidLogger.CallStatic("TestLog", "tag", "message");
 
@@ -25,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 })
                 .CreateLogger();
             
-            Log.WithTag("Test").Debug("Message {Parameter}", 1);
+            Log.Debug("Message {Parameter}", 1);
         }
         
         // private static void Test(

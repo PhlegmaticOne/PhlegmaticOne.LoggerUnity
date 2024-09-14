@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
     {
         public string Key => "LogLevel";
         
-        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message)
+        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
             return message.LogLevel.ToString();
         }

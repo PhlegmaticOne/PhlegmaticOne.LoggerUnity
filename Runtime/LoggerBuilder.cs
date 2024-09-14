@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
+using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
 
 namespace OpenMyGame.LoggerUnity.Runtime
 {
@@ -12,6 +14,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
         private readonly List<ILogDestination> _loggerDestinations;
         private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
 
+        private string _logWithTagFormat;
         private bool _isEnabled;
 
         public LoggerBuilder()
@@ -19,6 +22,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             _loggerDestinations = new List<ILogDestination>();
             _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
             _isEnabled = true;
+            _logWithTagFormat = "#{Tag}#";
         }
 
         public LoggerBuilder AddLogMessageProperty(IMessageFormatProperty formatProperty)
@@ -28,6 +32,12 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 _formatProperties[formatProperty.PropertyType] = formatProperty;
             }
             
+            return this;
+        }
+
+        public LoggerBuilder SetLogWithTagFormat(string logWithTagFormat)
+        {
+            _logWithTagFormat = logWithTagFormat;
             return this;
         }
 
@@ -55,9 +65,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public ILogger CreateLogger()
         {
-            var messageFormatParser = new MessageFormatParser();
+            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties);
+            var messageFormatParser = new MessageFormatParser(messageFormatFactory);
+            var logWithTagFactory = new LogWithTagFactory(_logWithTagFormat);
             
-            var logger = new Logger(_loggerDestinations, _formatProperties, messageFormatParser)
+            ILogger logger = new Logger(_loggerDestinations, messageFormatParser, logWithTagFactory)
             {
                 IsEnabled = _isEnabled
             };

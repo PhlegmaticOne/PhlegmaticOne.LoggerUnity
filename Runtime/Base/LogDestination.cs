@@ -1,4 +1,6 @@
-﻿namespace OpenMyGame.LoggerUnity.Runtime.Base
+﻿using System;
+
+namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public abstract class LogDestination<TConfiguration> : ILogDestination
         where TConfiguration : LogConfiguration
@@ -25,15 +27,10 @@
             _logFormat = Configuration.CreateMessageFormat();
         }
 
-        public virtual void LogMessage(LogMessage message)
+        public virtual void LogMessage(LogMessage message, in Span<object> parameters)
         {
-            var renderedMessage = RenderMessage(message);
+            var renderedMessage = _logFormat.Render(message, parameters);
             LogRenderedMessage(message, renderedMessage);
-        }
-
-        public string RenderMessage(LogMessage message)
-        {
-            return _logFormat.Render(message);
         }
 
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage);

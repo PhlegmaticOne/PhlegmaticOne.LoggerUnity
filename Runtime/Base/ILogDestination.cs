@@ -1,4 +1,6 @@
-﻿namespace OpenMyGame.LoggerUnity.Runtime.Base
+﻿using System;
+
+namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public interface ILogDestination
     {
@@ -6,7 +8,6 @@
         LogConfiguration Config { get; }
         bool IsEnabled { get; set; }
         void Initialize();
-        void LogMessage(LogMessage message);
-        string RenderMessage(LogMessage message);
+        void LogMessage(LogMessage message, in Span<object> parameters);
     }
 }

@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
     {
         public string Key => "Exception";
         
-        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message)
+        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
             return message.Exception?.ToString() ?? string.Empty;
         }
