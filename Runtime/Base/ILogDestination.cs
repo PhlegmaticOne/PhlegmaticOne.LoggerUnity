@@ -9,5 +9,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         bool IsEnabled { get; set; }
         void Initialize();
         void LogMessage(LogMessage message, in Span<object> parameters);
+        void Release();
     }
 }

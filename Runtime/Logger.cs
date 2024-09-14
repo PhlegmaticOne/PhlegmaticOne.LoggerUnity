@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
@@ -38,26 +39,33 @@ namespace OpenMyGame.LoggerUnity.Runtime
             }
         }
 
-        public IMessageFormat ParseMessageFormat(string format)
-        {
-            return _messageFormatParser.Parse(format);
-        }
-
         public LogWithTag CreateLogWithTag(string tag)
         {
             return _logWithTagFactory.Create(tag);
         }
 
-        public void Log(LogMessage message, in Span<object> parameters)
+        public void LogMessage(LogLevel logLevel, string format, in Span<object> parameters, Exception exception = null)
         {
-            if (!IsEnabled || message is null)
+            if (!IsEnabled)
             {
                 return;
             }
             
-            LogMessage(message, parameters);
+            var messageFormat = _messageFormatParser.Parse(format);
+            var logMessage = new LogMessage(logLevel, messageFormat, exception);
+            LogMessage(logMessage, parameters);
         }
-        
+
+        public void SetDestinationEnabled(string destinationName, bool isEnabled)
+        {
+            var destination = _loggerDestinations.FirstOrDefault(x => x.DestinationName == destinationName);
+
+            if (destination is not null)
+            {
+                destination.IsEnabled = isEnabled;
+            }
+        }
+
         private void LogMessage(LogMessage message, in Span<object> parameters)
         {
             foreach (var loggerDestination in _loggerDestinations)
@@ -72,6 +80,14 @@ namespace OpenMyGame.LoggerUnity.Runtime
         private static bool IsLogMessageToDestination(ILogDestination destination, LogMessage message)
         {
             return destination.IsEnabled && message.LogLevel >= destination.Config.MinimumLogLevel;
+        }
+
+        public void Dispose()
+        {
+            foreach (var loggerDestination in _loggerDestinations)
+            {
+                loggerDestination.Release();
+            }
         }
     }
 }

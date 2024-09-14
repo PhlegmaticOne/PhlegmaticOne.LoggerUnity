@@ -33,6 +33,8 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
             LogRenderedMessage(message, renderedMessage);
         }
 
+        public virtual void Release() { }
+
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage);
     }
 }

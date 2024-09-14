@@ -3,12 +3,12 @@ using OpenMyGame.LoggerUnity.Runtime.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
-    public interface ILogger
+    public interface ILogger : IDisposable
     {
         bool IsEnabled { get; }
         void Initialize();
-        IMessageFormat ParseMessageFormat(string format);
         LogWithTag CreateLogWithTag(string tag);
-        void Log(LogMessage message, in Span<object> parameters);
+        void LogMessage(LogLevel logLevel, string format, in Span<object> parameters, Exception exception = null);
+        void SetDestinationEnabled(string destinationName, bool isEnabled);
     }
 }

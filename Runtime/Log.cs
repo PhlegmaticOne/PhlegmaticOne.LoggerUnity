@@ -21,6 +21,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
             return Logger.CreateLogWithTag(tag);
         }
 
+        public static void SetDestinationEnabled(string destinationName, bool isEnabled)
+        {
+            
+        }
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Exception(Exception exception)
@@ -30,7 +35,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            LogMessage(LogLevel.Fatal, "{Exception}", Span<object>.Empty, exception);
+            Logger.LogMessage(LogLevel.Fatal, "{Exception}", Span<object>.Empty, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -42,7 +47,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            LogMessage(LogLevel.Debug, format, Span<object>.Empty, exception);
+            Logger.LogMessage(LogLevel.Debug, format, Span<object>.Empty, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -57,7 +62,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var propertiesInlineArray = new PropertyInlineArray1();
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -73,7 +78,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
             properties[1] = parameter2;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -90,7 +95,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             properties[1] = parameter2;
             properties[2] = parameter3;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -109,7 +114,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[1] = parameter2;
             properties[2] = parameter3;
             properties[3] = parameter4;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -130,7 +135,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[2] = parameter3;
             properties[3] = parameter4;
             properties[4] = parameter5;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -152,7 +157,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[3] = parameter4;
             properties[4] = parameter5;
             properties[5] = parameter6;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -175,7 +180,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[4] = parameter5;
             properties[5] = parameter6;
             properties[6] = parameter7;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -199,7 +204,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[5] = parameter6;
             properties[6] = parameter7;
             properties[7] = parameter8;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -211,7 +216,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
 
-            LogMessage(LogLevel.Debug, format, parameters, exception);
+            Logger.LogMessage(LogLevel.Debug, format, parameters, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -223,7 +228,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            LogMessage(LogLevel.Warning, format, Span<object>.Empty, exception);
+            Logger.LogMessage(LogLevel.Warning, format, Span<object>.Empty, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -238,7 +243,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var propertiesInlineArray = new PropertyInlineArray1();
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -254,7 +259,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
             properties[1] = parameter2;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -271,7 +276,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             properties[1] = parameter2;
             properties[2] = parameter3;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -290,7 +295,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[1] = parameter2;
             properties[2] = parameter3;
             properties[3] = parameter4;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -311,7 +316,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[2] = parameter3;
             properties[3] = parameter4;
             properties[4] = parameter5;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -333,7 +338,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[3] = parameter4;
             properties[4] = parameter5;
             properties[5] = parameter6;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -356,7 +361,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[4] = parameter5;
             properties[5] = parameter6;
             properties[6] = parameter7;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -380,7 +385,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[5] = parameter6;
             properties[6] = parameter7;
             properties[7] = parameter8;
-            LogMessage(LogLevel.Warning, format, properties, exception);
+            Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -392,7 +397,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            LogMessage(LogLevel.Warning, format, parameters, exception);
+            Logger.LogMessage(LogLevel.Warning, format, parameters, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -404,7 +409,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            LogMessage(LogLevel.Error, format, Span<object>.Empty, exception);
+            Logger.LogMessage(LogLevel.Error, format, Span<object>.Empty, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -419,7 +424,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var propertiesInlineArray = new PropertyInlineArray1();
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -435,7 +440,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
             properties[1] = parameter2;
-            LogMessage(LogLevel.Error, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -452,7 +457,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             properties[1] = parameter2;
             properties[2] = parameter3;
-            LogMessage(LogLevel.Error, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -471,7 +476,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[1] = parameter2;
             properties[2] = parameter3;
             properties[3] = parameter4;
-            LogMessage(LogLevel.Error, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -492,7 +497,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[2] = parameter3;
             properties[3] = parameter4;
             properties[4] = parameter5;
-            LogMessage(LogLevel.Error, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -514,7 +519,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[3] = parameter4;
             properties[4] = parameter5;
             properties[5] = parameter6;
-            LogMessage(LogLevel.Error, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -537,7 +542,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[4] = parameter5;
             properties[5] = parameter6;
             properties[6] = parameter7;
-            LogMessage(LogLevel.Error, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -561,7 +566,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[5] = parameter6;
             properties[6] = parameter7;
             properties[7] = parameter8;
-            LogMessage(LogLevel.Error, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -573,14 +578,14 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            LogMessage(LogLevel.Warning, format, parameters, exception);
+            Logger.LogMessage(LogLevel.Warning, format, parameters, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Fatal(string format, Exception exception = null)
         {
-            LogMessage(LogLevel.Fatal, format, Span<object>.Empty, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, Span<object>.Empty, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -595,7 +600,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var propertiesInlineArray = new PropertyInlineArray1();
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
-            LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -611,7 +616,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
             properties[1] = parameter2;
-            LogMessage(LogLevel.Fatal, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -628,7 +633,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             properties[1] = parameter2;
             properties[2] = parameter3;
-            LogMessage(LogLevel.Fatal, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -647,7 +652,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[1] = parameter2;
             properties[2] = parameter3;
             properties[3] = parameter4;
-            LogMessage(LogLevel.Fatal, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -668,7 +673,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[2] = parameter3;
             properties[3] = parameter4;
             properties[4] = parameter5;
-            LogMessage(LogLevel.Fatal, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -690,7 +695,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[3] = parameter4;
             properties[4] = parameter5;
             properties[5] = parameter6;
-            LogMessage(LogLevel.Fatal, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -713,7 +718,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[4] = parameter5;
             properties[5] = parameter6;
             properties[6] = parameter7;
-            LogMessage(LogLevel.Fatal, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -737,7 +742,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[5] = parameter6;
             properties[6] = parameter7;
             properties[7] = parameter8;
-            LogMessage(LogLevel.Fatal, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -749,15 +754,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            LogMessage(LogLevel.Fatal, format, parameters, exception);
-        }
-        
-        private static void LogMessage(
-            LogLevel logLevel, string format, in Span<object> parameters, Exception exception = null)
-        {
-            var messageFormat = Logger.ParseMessageFormat(format);
-            var logMessage = new LogMessage(logLevel, messageFormat, exception);
-            Logger.Log(logMessage, parameters);
+            Logger.LogMessage(LogLevel.Fatal, format, parameters, exception);
         }
     }
 }

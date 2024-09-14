@@ -10,8 +10,6 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private void Start()
         {
-
-            
             // var androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
             // androidLogger.CallStatic("TestLog", "tag", "message");
 
@@ -21,32 +19,16 @@ namespace OpenMyGame.LoggerUnity.Runtime
             // levelLogView.ToUpperInvariant(result);
             // Debug.Log(result.ToReadOnlySpan().ToString());
             
-            // Log.Logger = new LoggerBuilder()
-            //     .LogToUnityDebug(c =>
-            //     {
-            //         c.LogFormat = "[{Time}] {Message}";
-            //         c.MinimumLogLevel = LogLevel.Debug;
-            //         c.MessagePartMaxSize = 789;
-            //     })
-            //     .CreateLogger();
-            //
-            // Log.Debug("Message {Parameter}", 1);
+            Log.Logger = new LoggerBuilder()
+                .LogToUnityDebug(config =>
+                {
+                    config.LogFormat = "[{Time}] {Message}";
+                    config.MinimumLogLevel = LogLevel.Debug;
+                    config.MessagePartMaxSize = 789;
+                })
+                .CreateLogger();
             
-            T("qwertyuiopp", 5);
-        }
-
-        private void T(string renderedMessage, int max)
-        {
-            var offset = 0;
-            var messageSpan = renderedMessage.AsSpan();
-
-            while (offset < renderedMessage.Length)
-            {
-                var endIndex = offset + max >= messageSpan.Length ? messageSpan.Length : offset + max;
-                var messagePart = messageSpan[offset..endIndex];
-                Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", messagePart.ToString());
-                offset += max;
-            }
+            Log.Debug("Message {Parameter}", 1);
         }
         
         // private static void Test(
