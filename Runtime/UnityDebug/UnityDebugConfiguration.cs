@@ -4,5 +4,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
 {
     public class UnityDebugConfiguration : LogConfiguration
     {
+        public int MessagePartMaxSize { get; set; }
     }
 }

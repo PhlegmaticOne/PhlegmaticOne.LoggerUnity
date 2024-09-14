@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Runtime.UnityDebug.Extensions;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
@@ -11,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
 
         protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage)
         {
-            var logType = ConvertToUnityLogType(logMessage.LogLevel);
+            var logType = LogLevelToLogTypeConverter.Convert(logMessage.LogLevel);
             
             switch (logType)
             {
@@ -31,26 +32,40 @@ namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
             }
         }
 
-        private static void LogMessage(LogType logType, string renderedMessage)
+        private void LogMessage(LogType logType, string renderedMessage)
         {
-            Debug.LogFormat(logType, LogOption.NoStacktrace, null, Format, renderedMessage);
+            if (renderedMessage.Length <= Configuration.MessagePartMaxSize)
+            {
+                Log(logType, renderedMessage);
+                return;
+            }
+            
+            LogMessageByParts(logType, renderedMessage);
+        }
+
+        private void LogMessageByParts(LogType logType, string renderedMessage)
+        {
+            var offset = 0;
+            var maxSize = Configuration.MessagePartMaxSize;
+            var messageSpan = renderedMessage.AsSpan();
+
+            while (offset < renderedMessage.Length)
+            {
+                var endIndex = offset + maxSize >= messageSpan.Length ? messageSpan.Length : offset + maxSize;
+                var messagePart = messageSpan[offset..endIndex];
+                Log(logType, messagePart.ToString());
+                offset += maxSize;
+            }
+        }
+
+        private static void Log(LogType logType, string message)
+        {
+            Debug.LogFormat(logType, LogOption.NoStacktrace, null, Format, message);
         }
 
         private static void LogException(Exception exception)
         {
             Debug.LogException(exception);
-        }
-
-        private static LogType ConvertToUnityLogType(LogLevel logLevel)
-        {
-            return logLevel switch
-            {
-                LogLevel.Debug => LogType.Log,
-                LogLevel.Warning => LogType.Warning,
-                LogLevel.Error => LogType.Error,
-                LogLevel.Fatal => LogType.Exception,
-                _ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
-            };
         }
     }
 }

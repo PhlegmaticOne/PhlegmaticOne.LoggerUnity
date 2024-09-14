@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.UnityDebug;
 using UnityEngine;
@@ -20,15 +21,32 @@ namespace OpenMyGame.LoggerUnity.Runtime
             // levelLogView.ToUpperInvariant(result);
             // Debug.Log(result.ToReadOnlySpan().ToString());
             
-            Log.Logger = new LoggerBuilder()
-                .LogToUnityDebug(c =>
-                {
-                    c.LogFormat = "[{Time}] {Message}";
-                    c.MinimumLogLevel = LogLevel.Debug;
-                })
-                .CreateLogger();
+            // Log.Logger = new LoggerBuilder()
+            //     .LogToUnityDebug(c =>
+            //     {
+            //         c.LogFormat = "[{Time}] {Message}";
+            //         c.MinimumLogLevel = LogLevel.Debug;
+            //         c.MessagePartMaxSize = 789;
+            //     })
+            //     .CreateLogger();
+            //
+            // Log.Debug("Message {Parameter}", 1);
             
-            Log.Debug("Message {Parameter}", 1);
+            T("qwertyuiopp", 5);
+        }
+
+        private void T(string renderedMessage, int max)
+        {
+            var offset = 0;
+            var messageSpan = renderedMessage.AsSpan();
+
+            while (offset < renderedMessage.Length)
+            {
+                var endIndex = offset + max >= messageSpan.Length ? messageSpan.Length : offset + max;
+                var messagePart = messageSpan[offset..endIndex];
+                Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", messagePart.ToString());
+                offset += max;
+            }
         }
         
         // private static void Test(
