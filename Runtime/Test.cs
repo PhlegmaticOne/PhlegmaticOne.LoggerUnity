@@ -25,7 +25,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 })
                 .CreateLogger();
             
-            Log.Debug("MessageOnly");
+            Log.Fatal("Message {Parameter}", 1);
         }
         
         // private static void Test(

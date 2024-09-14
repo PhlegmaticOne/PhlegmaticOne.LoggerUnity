@@ -71,7 +71,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         private static bool IsLogMessageToDestination(ILogDestination destination, LogMessage message)
         {
-            return destination.IsEnabled && destination.Config.MinimumLogLevel >= message.LogLevel;
+            return destination.IsEnabled && message.LogLevel >= destination.Config.MinimumLogLevel;
         }
     }
 }
