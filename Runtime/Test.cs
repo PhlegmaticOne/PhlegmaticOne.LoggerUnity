@@ -22,7 +22,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             Log.Logger = new LoggerBuilder()
                 .LogToUnityDebug(config =>
                 {
-                    config.LogFormat = "[{Time}] {Message}";
+                    config.LogFormat = "[{ThreadId}] {Message}";
                     config.MinimumLogLevel = LogLevel.Debug;
                     config.MessagePartMaxSize = 789;
                 })

@@ -23,7 +23,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public static void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
-            
+            Logger.SetDestinationEnabled(destinationName, isEnabled);
         }
 
         [MessageTemplateFormatMethod("format")]

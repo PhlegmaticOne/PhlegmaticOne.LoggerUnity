@@ -58,6 +58,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
+            if (!IsEnabled)
+            {
+                return;
+            }
+            
             var destination = _loggerDestinations.FirstOrDefault(x => x.DestinationName == destinationName);
 
             if (destination is not null)
@@ -84,6 +89,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public void Dispose()
         {
+            if (!IsEnabled)
+            {
+                return;
+            }
+            
             foreach (var loggerDestination in _loggerDestinations)
             {
                 loggerDestination.Release();
