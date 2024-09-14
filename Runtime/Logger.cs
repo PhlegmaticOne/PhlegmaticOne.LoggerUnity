@@ -8,7 +8,7 @@ using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
 
 namespace OpenMyGame.LoggerUnity.Runtime
 {
-    public class Logger : ILogger
+    internal class Logger : ILogger
     {
         private readonly IReadOnlyList<ILogDestination> _loggerDestinations;
         private readonly IMessageFormatParser _messageFormatParser;

@@ -5,7 +5,7 @@ using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
 {
-    public class LogFormatPropertyException : ILogFormatProperty
+    internal class LogFormatPropertyException : ILogFormatProperty
     {
         public string Key => "Exception";
         

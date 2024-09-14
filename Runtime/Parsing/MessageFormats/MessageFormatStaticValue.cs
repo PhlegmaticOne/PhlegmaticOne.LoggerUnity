@@ -3,7 +3,7 @@ using OpenMyGame.LoggerUnity.Runtime.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
 {
-    public class MessageFormatStaticValue : IMessageFormat
+    internal class MessageFormatStaticValue : IMessageFormat
     {
         private readonly string _value;
 

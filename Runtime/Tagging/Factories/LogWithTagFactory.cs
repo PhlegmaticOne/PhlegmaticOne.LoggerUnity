@@ -1,6 +1,6 @@
 ﻿namespace OpenMyGame.LoggerUnity.Runtime.Tagging.Factories
 {
-    public class LogWithTagFactory : ILogWithTagFactory
+    internal class LogWithTagFactory : ILogWithTagFactory
     {
         private readonly string _tagFormat;
 

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Extensions
 {
-    public static class SpanExtensions
+    internal static class SpanExtensions
     {
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this in Span<T> span)
         {

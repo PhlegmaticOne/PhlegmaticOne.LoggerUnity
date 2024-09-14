@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
+namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Infrastructure
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray1
+    internal struct PropertyInlineArray1
     {
         private object Object1;
 
@@ -15,7 +15,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
     }
     
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray2
+    internal struct PropertyInlineArray2
     {
         private object Object1;
         private object Object2;
@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray3
+    internal struct PropertyInlineArray3
     {
         private object Object1;
         private object Object2;
@@ -40,7 +40,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray4
+    internal struct PropertyInlineArray4
     {
         private object Object1;
         private object Object2;
@@ -54,7 +54,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray5
+    internal struct PropertyInlineArray5
     {
         private object Object1;
         private object Object2;
@@ -69,7 +69,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray6
+    internal struct PropertyInlineArray6
     {
         private object Object1;
         private object Object2;
@@ -85,7 +85,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray7
+    internal struct PropertyInlineArray7
     {
         private object Object1;
         private object Object2;
@@ -102,7 +102,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Infrastructure
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct PropertyInlineArray8
+    internal struct PropertyInlineArray8
     {
         private object Object1;
         private object Object2;

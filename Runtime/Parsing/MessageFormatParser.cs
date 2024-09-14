@@ -8,7 +8,7 @@ using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing
 {
-    public class MessageFormatParser : IMessageFormatParser
+    internal class MessageFormatParser : IMessageFormatParser
     {
         private const char OpenBrace = '{';
         private const char CloseBrace = '}';

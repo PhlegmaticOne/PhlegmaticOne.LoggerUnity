@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using OpenMyGame.LoggerUnity.Runtime.Attributes;
 using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Infrastructure;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Infrastructure;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Runtime

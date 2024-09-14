@@ -5,7 +5,7 @@ using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
 {
-    public class LogFormatPropertyTime : ILogFormatProperty
+    internal class LogFormatPropertyTime : ILogFormatProperty
     {
         public string Key => "Time";
         public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)

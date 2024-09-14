@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
 {
-    public class LogFormatPropertyUnityTime : ILogFormatProperty
+    internal class LogFormatPropertyUnityTime : ILogFormatProperty
     {
         public string Key => "UnityTime";
         

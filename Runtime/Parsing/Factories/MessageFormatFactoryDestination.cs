@@ -8,7 +8,7 @@ using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Factories
 {
-    public class MessageFormatFactoryDestination : IMessageFormatFactory
+    internal class MessageFormatFactoryDestination : IMessageFormatFactory
     {
         private readonly Dictionary<string, ILogFormatProperty> _logFormatProperties;
 

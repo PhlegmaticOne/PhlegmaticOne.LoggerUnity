@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
 {
-    public class LogFormatPropertyStacktrace : ILogFormatProperty
+    internal class LogFormatPropertyStacktrace : ILogFormatProperty
     {
         public string Key => "Stacktrace";
         

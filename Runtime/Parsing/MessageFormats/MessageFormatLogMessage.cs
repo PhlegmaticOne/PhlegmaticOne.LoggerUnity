@@ -7,7 +7,7 @@ using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
 {
-    public class MessageFormatLogMessage : IMessageFormat
+    internal class MessageFormatLogMessage : IMessageFormat
     {
         private readonly MessagePart[] _messageParts;
         private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;

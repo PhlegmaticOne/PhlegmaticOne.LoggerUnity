@@ -1,6 +1,6 @@
 ﻿namespace OpenMyGame.LoggerUnity.Runtime.Extensions
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         public static int CountOf(this string str, char value)
         {
