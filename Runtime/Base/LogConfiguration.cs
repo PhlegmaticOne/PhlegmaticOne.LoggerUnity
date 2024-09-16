@@ -26,7 +26,8 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
                 new LogFormatPropertyUnityTime(),
                 new LogFormatPropertyNewLine(),
                 new LogFormatPropertyMessage(),
-                new LogFormatPropertyThreadId()
+                new LogFormatPropertyThreadId(),
+                new LogFormatPropertyTimeUtc()
             };
         }
 

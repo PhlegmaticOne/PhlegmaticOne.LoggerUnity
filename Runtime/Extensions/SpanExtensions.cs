@@ -10,6 +10,22 @@ namespace OpenMyGame.LoggerUnity.Runtime.Extensions
             return MemoryMarshal.CreateReadOnlySpan(ref span[0], span.Length);
         }
 
+        public static void ToUpperCase(this in Span<char> span)
+        {
+            for (var i = 0; i < span.Length; i++)
+            {
+                span[i] = char.ToUpper(span[i]);
+            }
+        }
+        
+        public static void ToLowerCase(this in Span<char> span)
+        {
+            for (var i = 0; i < span.Length; i++)
+            {
+                span[i] = char.ToLower(span[i]);
+            }
+        }
+        
         public static int CountOf<T>(this in ReadOnlySpan<T> span, T value) where T : IEquatable<T>
         {
             var count = 0;

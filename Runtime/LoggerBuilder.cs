@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
 
@@ -14,7 +15,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
         private readonly List<ILogDestination> _loggerDestinations;
         private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
 
-        private string _logWithTagFormat;
+        private string _tagFormat;
         private bool _isEnabled;
 
         public LoggerBuilder()
@@ -22,22 +23,23 @@ namespace OpenMyGame.LoggerUnity.Runtime
             _loggerDestinations = new List<ILogDestination>();
             _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
             _isEnabled = true;
-            _logWithTagFormat = "#{Tag}#";
+            _tagFormat = "#{Tag}#";
+            AddMessageFormatProperties();
         }
 
         public LoggerBuilder AddLogMessageProperty(IMessageFormatProperty formatProperty)
         {
             if (formatProperty is not null)
             {
-                _formatProperties[formatProperty.PropertyType] = formatProperty;
+                AddMessageFormatProperty(formatProperty);
             }
             
             return this;
         }
 
-        public LoggerBuilder SetLogWithTagFormat(string logWithTagFormat)
+        public LoggerBuilder SetTagFormat(string tagFormat)
         {
-            _logWithTagFormat = logWithTagFormat;
+            _tagFormat = tagFormat;
             return this;
         }
 
@@ -67,7 +69,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
         {
             var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties);
             var messageFormatParser = new MessageFormatParser(messageFormatFactory);
-            var logWithTagFactory = new LogWithTagFactory(_logWithTagFormat);
+            var logWithTagFactory = new LogWithTagFactory(_tagFormat);
             
             ILogger logger = new Logger(_loggerDestinations, messageFormatParser, logWithTagFactory)
             {
@@ -76,6 +78,17 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             logger.Initialize();
             return logger;
+        }
+
+        private void AddMessageFormatProperties()
+        {
+            AddMessageFormatProperty(new MessageFormatPropertyInt());
+            AddMessageFormatProperty(new MessageFormatPropertyString());
+        }
+        
+        private void AddMessageFormatProperty(IMessageFormatProperty formatProperty)
+        {
+            _formatProperties[formatProperty.PropertyType] = formatProperty;
         }
     }
 }
