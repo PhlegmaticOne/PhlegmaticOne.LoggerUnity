@@ -3,7 +3,6 @@ using System.Linq;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Helpers;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
@@ -39,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
                 return timeSpan.ToString(format[0].ToString());
             }
 
-            return TimeSpanParseHelper.ParseCustomFormat(timeSpan, format);
+            return timeSpan.ToString("c");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
             return message.LogLevel.ToString();
         }
 
-        public static ReadOnlySpan<char> FormatLogLevel(LogLevel logLevel, in ReadOnlySpan<char> format)
+        private static ReadOnlySpan<char> FormatLogLevel(LogLevel logLevel, in ReadOnlySpan<char> format)
         {
             var length = GetLengthFromFormat(logLevel, format);
             Span<char> buffer = stackalloc char[length];
