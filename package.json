@@ -7,6 +7,9 @@
   "keywords": [
     "Logger"
   ],
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
   "author": {
     "name": "Aleksandr Krotov",
     "email": "a.krotov@openmygame.com"

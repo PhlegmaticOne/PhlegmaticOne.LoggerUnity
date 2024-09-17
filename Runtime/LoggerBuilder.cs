@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
 using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
 
 namespace OpenMyGame.LoggerUnity.Runtime
@@ -14,6 +14,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private readonly List<ILogDestination> _loggerDestinations;
         private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
+        private readonly IMessageFormatPropertySerializer _propertySerializer;
 
         private string _tagFormat;
         private bool _isEnabled;
@@ -24,6 +25,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
             _isEnabled = true;
             _tagFormat = "#{Tag}#";
+            _propertySerializer = new MessageFormatPropertySerializer();
             AddMessageFormatProperties();
         }
 
@@ -50,7 +52,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
         }
 
         public LoggerBuilder LogTo<TDestination, TConfiguration>(
-            [CanBeNull] Action<TConfiguration> configureDestinationAction = null)
+            Action<TConfiguration> configureDestinationAction = null)
             where TConfiguration : LogConfiguration, new()
             where TDestination : LogDestination<TConfiguration>, new()
         {
@@ -67,7 +69,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public ILogger CreateLogger()
         {
-            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties);
+            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _propertySerializer);
             var messageFormatParser = new MessageFormatParser(messageFormatFactory);
             var logWithTagFactory = new LogWithTagFactory(_tagFormat);
             
@@ -82,8 +84,10 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         private void AddMessageFormatProperties()
         {
-            AddMessageFormatProperty(new MessageFormatPropertyInt());
             AddMessageFormatProperty(new MessageFormatPropertyString());
+            AddMessageFormatProperty(new MessageFormatPropertyDateTime());
+            AddMessageFormatProperty(new MessageFormatPropertyTimeSpan());
+            AddMessageFormatProperty(new MessageFormatPropertyGuid());
         }
         
         private void AddMessageFormatProperty(IMessageFormatProperty formatProperty)

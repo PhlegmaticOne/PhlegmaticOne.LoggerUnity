@@ -2,7 +2,9 @@
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Log;
 using OpenMyGame.LoggerUnity.Runtime.UnityDebug;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
+using JsonSerializerSettings = Unity.Plastic.Newtonsoft.Json.JsonSerializerSettings;
 
 namespace OpenMyGame.LoggerUnity.Runtime
 {
@@ -17,20 +19,16 @@ namespace OpenMyGame.LoggerUnity.Runtime
             //     "<a href=\"Assets/Runtime/Test.cs\" line=\"21\">Assets/Runtime/Test.cs:21</a>";
             // Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", format);
             
-            // Log.Logger = new LoggerBuilder()
-            //     .LogToUnityDebug(config =>
-            //     {
-            //         config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";
-            //         config.MinimumLogLevel = LogLevel.Debug;
-            //         config.MessagePartMaxSize = 789;
-            //     })
-            //     .CreateLogger();
-            //
-            // Log.Debug("Message {Parameter}", 1);
-
-            var s = TimeSpan.FromSeconds(40).Add(TimeSpan.FromMilliseconds(4));
-            var format = LogFormatPropertyUnityTime.FormatTime(s, "mm:ss.ms2");
-            Debug.Log(format.ToString());
+            Log.Logger = new LoggerBuilder()
+                .LogToUnityDebug(config =>
+                {
+                    config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";
+                    config.MinimumLogLevel = LogLevel.Debug;
+                    config.MessagePartMaxSize = 789;
+                })
+                .CreateLogger();
+            
+            Log.Debug("Message {Parameter}", TimeSpan.Zero);
         }
         
         // private static void Test(

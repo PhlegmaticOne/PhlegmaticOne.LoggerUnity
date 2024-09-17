@@ -4,20 +4,26 @@ using System.Text;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
 {
     internal class MessageFormatLogMessage : IMessageFormat
     {
+        private const char SerializeParameterPrefix = '@';
+        
         private readonly MessagePart[] _messageParts;
         private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
+        private readonly IMessageFormatPropertySerializer _propertySerializer;
 
         public MessageFormatLogMessage(
             MessagePart[] messageParts, 
-            Dictionary<Type, IMessageFormatProperty> formatProperties)
+            Dictionary<Type, IMessageFormatProperty> formatProperties,
+            IMessageFormatPropertySerializer propertySerializer)
         {
             _messageParts = messageParts;
             _formatProperties = formatProperties;
+            _propertySerializer = propertySerializer;
         }
         
         public string Render(LogMessage logMessage, in Span<object> parameters)
@@ -45,16 +51,22 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
             }
 
             var parameter = GetCurrentParameter(in parameters, ref currentParameterIndex);
-            return RenderParameter(parameter, format);
+            return RenderParameter(parameter, parameterValue, format);
         }
 
-        private ReadOnlySpan<char> RenderParameter(object parameter, in ReadOnlySpan<char> format)
+        private ReadOnlySpan<char> RenderParameter(
+            object parameter, in ReadOnlySpan<char> parameterValue, in ReadOnlySpan<char> format)
         {
             var type = parameter.GetType();
 
             if (_formatProperties.TryGetValue(type, out var property))
             {
                 return property.Render(parameter, in format);
+            }
+
+            if (parameterValue[0] == SerializeParameterPrefix)
+            {
+                return _propertySerializer.Serialize(parameter);
             }
             
             return parameter.ToString();
