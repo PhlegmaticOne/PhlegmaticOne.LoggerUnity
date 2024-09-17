@@ -5,7 +5,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public interface ILogger : IDisposable
     {
-        bool IsEnabled { get; }
+        bool IsEnabled { get; set; }
         void Initialize();
         LogWithTag CreateLogWithTag(string tag);
         void LogMessage(LogLevel logLevel, string format, in Span<object> parameters, Exception exception = null);

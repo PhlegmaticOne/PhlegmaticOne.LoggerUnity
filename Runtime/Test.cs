@@ -1,10 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log;
 using OpenMyGame.LoggerUnity.Runtime.UnityDebug;
-using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
-using JsonSerializerSettings = Unity.Plastic.Newtonsoft.Json.JsonSerializerSettings;
 
 namespace OpenMyGame.LoggerUnity.Runtime
 {
@@ -12,6 +9,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private void Start()
         {
+            // 1. Stacktrace
+            // 2. Unity Editor Log Window (format stacktrace)
+            // 3. Native logs
+            // 4. Testing
+            
             // var androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
             // androidLogger.CallStatic("TestLog", "tag", "message");
             
@@ -30,13 +32,5 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             Log.Debug("Message {Parameter}", TimeSpan.Zero);
         }
-        
-        // private static void Test(
-        //     [CallerFilePath] string filePath = "",
-        //     [CallerLineNumber] int lineNumber = 0)
-        // {
-        //     rider64.exe [--line <number>] [--column <number>] <path ...>
-        //     Debug.Log(filePath + lineNumber);
-        // }
     }
 }

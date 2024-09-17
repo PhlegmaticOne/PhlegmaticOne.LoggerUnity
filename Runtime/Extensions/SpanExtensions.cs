@@ -19,20 +19,5 @@ namespace OpenMyGame.LoggerUnity.Runtime.Extensions
                 span[i] = char.ToLower(span[i]);
             }
         }
-        
-        public static int CountOf<T>(this in ReadOnlySpan<T> span, T value) where T : IEquatable<T>
-        {
-            var count = 0;
-
-            foreach (var item in span)
-            {
-                if (item.Equals(value))
-                {
-                    count++;
-                }
-            }
-
-            return count;
-        }
     }
 }

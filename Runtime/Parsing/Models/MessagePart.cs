@@ -72,5 +72,10 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
             
             return _format.AsSpan()[_startIndex.._endIndex];
         }
+
+        public override string ToString()
+        {
+            return GetValue().ToString();
+        }
     }
 }

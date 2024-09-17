@@ -75,8 +75,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
         private static object GetCurrentParameter(in Span<object> parameters, ref int currentParameterIndex)
         {
             currentParameterIndex = (currentParameterIndex + 1) % parameters.Length;
-            var parameter = parameters[currentParameterIndex];
-            return parameter;
+            return parameters[currentParameterIndex];
         }
     }
 }
