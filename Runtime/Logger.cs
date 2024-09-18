@@ -68,6 +68,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var messageFormat = _messageFormatParser.Parse(format);
             var logMessage = new LogMessage(logLevel, messageFormat, exception);
             LogMessage(logMessage, parameters);
+            logMessage.Dispose();
         }
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled)

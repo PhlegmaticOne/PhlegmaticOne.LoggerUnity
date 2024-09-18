@@ -58,9 +58,10 @@ namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
             }
         }
 
-        private static void Log(LogType logType, string message)
+        private void Log(LogType logType, string message)
         {
-            Debug.LogFormat(logType, LogOption.NoStacktrace, null, Format, message);
+            var logOption = Configuration.IsUnityStacktraceEnabled ? LogOption.None : LogOption.NoStacktrace;
+            Debug.LogFormat(logType, logOption, null, Format, message);
         }
 
         private static void LogException(Exception exception)

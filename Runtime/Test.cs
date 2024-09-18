@@ -27,6 +27,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";
                     config.MinimumLogLevel = LogLevel.Debug;
                     config.MessagePartMaxSize = 789;
+                    config.IsUnityStacktraceEnabled = false;
                 })
                 .CreateLogger();
             
