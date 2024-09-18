@@ -8,11 +8,16 @@ namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
 {
     internal class LogFormatPropertyStacktrace : ILogFormatProperty
     {
+        private const string LastInformativeStacktrace = "Assets/Runtime/Log.cs";
+        
         public string Key => "Stacktrace";
         
         public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
-            return StackTraceUtility.ExtractStackTrace().AsSpan()[1352..];
+            var stacktrace = StackTraceUtility.ExtractStackTrace();
+            var index = stacktrace.LastIndexOf(LastInformativeStacktrace, StringComparison.OrdinalIgnoreCase);
+            var startIndex = index + LastInformativeStacktrace.Length + 5;
+            return stacktrace[startIndex..];
         }
     }
 }

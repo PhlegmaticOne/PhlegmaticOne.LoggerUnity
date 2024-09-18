@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
+using System.Reflection;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.UnityDebug;
+using UnityEditor;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime
@@ -9,11 +13,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private void Start()
         {
-            // 1. Stacktrace
-            // 2. Unity Editor Log Window (format stacktrace)
+            // *. Unity Editor Log Window (format stacktrace)
+            // 1. Tags window for default console + colors
+            // 2. Testing
             // 3. Native logs
-            // 4. Testing
-            
+
             // var androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
             // androidLogger.CallStatic("TestLog", "tag", "message");
             
@@ -24,14 +28,25 @@ namespace OpenMyGame.LoggerUnity.Runtime
             Log.Logger = new LoggerBuilder()
                 .LogToUnityDebug(config =>
                 {
-                    config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";
+                    config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Stacktrace}{NewLine}{Exception:ns}";
                     config.MinimumLogLevel = LogLevel.Debug;
-                    config.MessagePartMaxSize = 789;
+                    //config.MessagePartMaxSize = 789;
                     config.IsUnityStacktraceEnabled = false;
                 })
                 .CreateLogger();
             
-            Log.WithTag("Value").Debug("Message {Parameter}", TimeSpan.Zero);
+            Log.Debug("Message {Parameter}", TimeSpan.Zero);
+
+            // var consoleWindowType = Assembly.GetAssembly(typeof(Editor)).GetType("UnityEditor.ConsoleWindow");
+            //
+            // var consoleWindow = consoleWindowType
+            //     .GetField("ms_ConsoleWindow", BindingFlags.Static | BindingFlags.NonPublic)!
+            //     .GetValue(null);
+            //
+            // var setFilter = consoleWindowType
+            //     .GetMethod("SetFilter", BindingFlags.Instance | BindingFlags.NonPublic);
+            //
+            // setFilter!.Invoke(consoleWindow, new object[] { "3" });
         }
     }
 }
