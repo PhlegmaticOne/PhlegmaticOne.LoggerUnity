@@ -31,7 +31,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 })
                 .CreateLogger();
             
-            Log.Debug("Message {Parameter}", TimeSpan.Zero);
+            Log.WithTag("Value").Debug("Message {Parameter}", TimeSpan.Zero);
         }
     }
 }

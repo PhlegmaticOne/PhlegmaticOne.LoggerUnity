@@ -6,6 +6,8 @@ namespace OpenMyGame.LoggerUnity.Runtime.Tagging
 {
     public readonly struct LogWithTag
     {
+        public const string ParameterName = "Tag";
+        
         private readonly string _tag;
         private readonly string _tagFormat;
 

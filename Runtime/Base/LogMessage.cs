@@ -25,7 +25,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
             return Format?.Render(this, parameters) ?? string.Empty;
         }
 
-        public void AddContextProperty<T>(string propertyKey, T propertyValue)
+        public void AddContextProperty(string propertyKey, object propertyValue)
         {
             _contextValues ??= DictionaryPool<string, object>.Get();
             _contextValues.Add(propertyKey, propertyValue);

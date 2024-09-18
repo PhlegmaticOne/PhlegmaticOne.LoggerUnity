@@ -5,6 +5,7 @@ using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
+using OpenMyGame.LoggerUnity.Runtime.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
 {
@@ -33,7 +34,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
 
             foreach (var messagePart in _messageParts)
             {
-                var renderMessagePart = Render(messagePart, parameters, ref currentParameterIndex);
+                var renderMessagePart = Render(logMessage, messagePart, parameters, ref currentParameterIndex);
                 logBuilder.Append(renderMessagePart);
             }
             
@@ -41,7 +42,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
         }
 
         private ReadOnlySpan<char> Render(
-            in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)
+            LogMessage message, in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out var format);
             
@@ -51,6 +52,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
             }
 
             var parameter = GetCurrentParameter(in parameters, ref currentParameterIndex);
+            ProcessContextParameters(message, parameterValue, parameter);
             return RenderParameter(parameter, parameterValue, format);
         }
 
@@ -70,6 +72,15 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
             }
             
             return parameter.ToString();
+        }
+
+        private static void ProcessContextParameters(
+            LogMessage logMessage, in ReadOnlySpan<char> parameterValue, object parameter)
+        {
+            if (parameterValue.Equals(LogWithTag.ParameterName, StringComparison.OrdinalIgnoreCase))
+            {
+                logMessage.AddContextProperty(LogWithTag.ParameterName, parameter);
+            }
         }
 
         private static object GetCurrentParameter(in Span<object> parameters, ref int currentParameterIndex)
