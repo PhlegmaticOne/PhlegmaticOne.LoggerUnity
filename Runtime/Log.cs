@@ -9,8 +9,31 @@ namespace OpenMyGame.LoggerUnity.Runtime
 {
     public static class Log
     {
-        public static ILogger Logger { get; set; }
+        private static ILogger LoggerPrivate;
 
+        public static ILogger Logger
+        {
+            get => LoggerPrivate;
+            set
+            {
+                if (LoggerPrivate is not null)
+                {
+                    LoggerPrivate.MessageLogged -= OnMessageLogged;
+                    LoggerPrivate.Dispose();
+                }
+
+                LoggerPrivate = value;
+                LoggerPrivate.MessageLogged += OnMessageLogged;
+            }
+        }
+
+        private static void OnMessageLogged(LogMessage obj)
+        {
+            MessageLogged?.Invoke(obj);
+        }
+
+        public static event Action<LogMessage> MessageLogged;
+        
         public static bool IsEnabled()
         {
             return Logger is not null && Logger.IsEnabled;

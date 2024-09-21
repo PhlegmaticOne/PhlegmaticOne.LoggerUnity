@@ -77,9 +77,9 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
         private static void ProcessContextParameters(
             LogMessage logMessage, in ReadOnlySpan<char> parameterValue, object parameter)
         {
-            if (parameterValue.Equals(LogWithTag.ParameterName, StringComparison.OrdinalIgnoreCase))
+            if (parameterValue.Equals(LogWithTag.PropertyKey, StringComparison.OrdinalIgnoreCase))
             {
-                logMessage.AddContextProperty(LogWithTag.ParameterName, parameter);
+                logMessage.AddContextProperty(LogWithTag.PropertyKey, parameter);
             }
         }
 

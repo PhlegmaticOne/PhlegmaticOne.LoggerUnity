@@ -38,6 +38,8 @@ namespace OpenMyGame.LoggerUnity.Runtime
             }
         }
 
+        public event Action<LogMessage> MessageLogged;
+
         public void Initialize()
         {
             if (!IsEnabled)
@@ -68,6 +70,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var messageFormat = _messageFormatParser.Parse(format);
             var logMessage = new LogMessage(logLevel, messageFormat, exception);
             LogMessage(logMessage, parameters);
+            MessageLogged?.Invoke(logMessage);
             logMessage.Dispose();
         }
 

@@ -6,7 +6,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Tagging
 {
     public readonly struct LogWithTag
     {
-        public const string ParameterName = "Tag";
+        public const string PropertyKey = "Tag";
         
         private readonly string _tag;
         private readonly string _tagFormat;
@@ -489,9 +489,15 @@ namespace OpenMyGame.LoggerUnity.Runtime.Tagging
             Log.Fatal(AddTagToFormat(format), AddTagToParameters(_tag, parameters), exception);
         }
 
+        internal string Format()
+        {
+            var format = _tagFormat.Replace(PropertyKey, "0");
+            return string.Format(format, _tag);
+        }
+
         private string AddTagToFormat(string format)
         {
-            return string.Concat(_tagFormat, format);
+            return $"{_tagFormat} {format}";
         }
 
         private static object[] AddTagToParameters(string tag, params object[] parameters)

@@ -39,13 +39,13 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
             
             var logLevelsGroup = new HorizontalFlex(Justify.Center,
                     new LoggerWindowToggle(viewConfig.FatalToggle.Text, viewConfig.FatalToggle.Color, 
-                        e => OnLogLevelClick("Fatal", e)),
+                        (_, e) => OnLogLevelClick("Fatal", e)),
                     new LoggerWindowToggle(viewConfig.ErrorToggle.Text, viewConfig.ErrorToggle.Color, 
-                        e => OnLogLevelClick("Error", e)),
+                        (_, e) => OnLogLevelClick("Error", e)),
                     new LoggerWindowToggle(viewConfig.WarningToggle.Text, viewConfig.WarningToggle.Color,
-                        e => OnLogLevelClick("Warning", e)),
+                        (_, e) => OnLogLevelClick("Warning", e)),
                     new LoggerWindowToggle(viewConfig.DebugToggle.Text, viewConfig.DebugToggle.Color,
-                        e => OnLogLevelClick("Debug", e)))
+                        (_, e) => OnLogLevelClick("Debug", e)))
                 .WithStyle(x => x.height = LoggerWindowConstantStyles.ToolbarHeight)
                 .WithStyle(x => x.marginTop = 1);
 

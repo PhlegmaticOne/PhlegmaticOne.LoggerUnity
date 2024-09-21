@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Reflection;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.UnityDebug;
-using UnityEditor;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime
@@ -30,23 +26,12 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 {
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Stacktrace}{NewLine}{Exception:ns}";
                     config.MinimumLogLevel = LogLevel.Debug;
-                    //config.MessagePartMaxSize = 789;
                     config.IsUnityStacktraceEnabled = false;
                 })
                 .CreateLogger();
             
-            Log.Debug("Message {Parameter}", TimeSpan.Zero);
-
-            // var consoleWindowType = Assembly.GetAssembly(typeof(Editor)).GetType("UnityEditor.ConsoleWindow");
-            //
-            // var consoleWindow = consoleWindowType
-            //     .GetField("ms_ConsoleWindow", BindingFlags.Static | BindingFlags.NonPublic)!
-            //     .GetValue(null);
-            //
-            // var setFilter = consoleWindowType
-            //     .GetMethod("SetFilter", BindingFlags.Instance | BindingFlags.NonPublic);
-            //
-            // setFilter!.Invoke(consoleWindow, new object[] { "3" });
+            Log.WithTag("Tag").Debug("Message {Parameter}", TimeSpan.Zero);
+            Log.WithTag("Test").Debug("Message {Parameter}", TimeSpan.Zero);
         }
     }
 }

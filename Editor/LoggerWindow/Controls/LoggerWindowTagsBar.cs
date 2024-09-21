@@ -36,7 +36,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 
         private ToolbarToggle CreateTagElement(string tag)
         {
-            return new LoggerWindowToggle(tag, Color.white, e => OnTagClicked(tag, e))
+            return new LoggerWindowToggle(tag, Color.white, (toggle, e) => OnTagClicked(tag, e))
                 .WithStyle(x => x.AddMargin(1))
                 .WithStyle(x => x.height = LoggerWindowConstantStyles.ToolbarHeight);
         }
