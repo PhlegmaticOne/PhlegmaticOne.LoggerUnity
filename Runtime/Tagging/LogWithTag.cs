@@ -67,64 +67,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug<T1, T2, T3, T4>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Debug(AddTagToFormat(format), _tag, parameter1, parameter2, parameter3, parameter4, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug<T1, T2, T3, T4, T5>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Debug(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug<T1, T2, T3, T4, T5, T6>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Debug(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug<T1, T2, T3, T4, T5, T6, T7>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, T7 parameter7, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Debug(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, parameter7, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
         public void Debug(string format, Exception exception = null, params object[] parameters)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
@@ -181,64 +123,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Tagging
             }
             
             Log.Warning(AddTagToFormat(format), _tag, parameter1, parameter2, parameter3, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning<T1, T2, T3, T4>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Warning(AddTagToFormat(format), _tag, parameter1, parameter2, parameter3, parameter4, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning<T1, T2, T3, T4, T5>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Warning(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning<T1, T2, T3, T4, T5, T6>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Warning(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning<T1, T2, T3, T4, T5, T6, T7>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, T7 parameter7, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Warning(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, parameter7, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -303,64 +187,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error<T1, T2, T3, T4>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Error(AddTagToFormat(format), _tag, parameter1, parameter2, parameter3, parameter4, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error<T1, T2, T3, T4, T5>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Error(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error<T1, T2, T3, T4, T5, T6>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Error(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error<T1, T2, T3, T4, T5, T6, T7>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, T7 parameter7, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Error(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, parameter7, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
         public void Error(string format, Exception exception = null, params object[] parameters)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
@@ -417,64 +243,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Tagging
             }
             
             Log.Fatal(AddTagToFormat(format), _tag, parameter1, parameter2, parameter3, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal<T1, T2, T3, T4>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Fatal(AddTagToFormat(format), _tag, parameter1, parameter2, parameter3, parameter4, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal<T1, T2, T3, T4, T5>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Fatal(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal<T1, T2, T3, T4, T5, T6>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Fatal(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, exception);
-        }
-
-        [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal<T1, T2, T3, T4, T5, T6, T7>(string format, 
-            T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4, 
-            T5 parameter5, T6 parameter6, T7 parameter7, Exception exception = null)
-        {
-            if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
-            {
-                return;
-            }
-            
-            Log.Fatal(AddTagToFormat(format), _tag, 
-                parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, parameter7, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
