@@ -1,11 +1,10 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Extensions;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
-using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Factories
+namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
     public class TagControlFactory : ITagControlFactory
     {

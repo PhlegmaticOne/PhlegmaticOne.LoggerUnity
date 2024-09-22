@@ -1,8 +1,8 @@
-﻿using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Base;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
+﻿using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
 using UnityEngine.UIElements;
 
-namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Factories
+namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
     public class TagsRootContainerFactory : ITagsRootContainerFactory
     {

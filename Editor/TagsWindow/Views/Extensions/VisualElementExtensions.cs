@@ -1,8 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
 using UnityEngine.UIElements;
 
-namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components.Extensions
+namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions
 {
     public static class VisualElementExtensions
     {

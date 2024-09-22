@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls.EventData;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Styles
+namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles
 {
     internal static class LoggerWindowConstantStyles
     {

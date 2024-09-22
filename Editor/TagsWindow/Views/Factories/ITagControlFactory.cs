@@ -1,8 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
 
-namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Factories
+namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
     public interface ITagControlFactory
     {

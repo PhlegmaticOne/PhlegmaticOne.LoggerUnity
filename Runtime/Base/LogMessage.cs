@@ -8,7 +8,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
     public class LogMessage
     {
         private Dictionary<string, object> _contextValues;
-        public static LogMessage Empty => new(LogLevel.Debug, null);
         
         public LogMessage(LogLevel logLevel, IMessageFormat format, Exception exception = null)
         {

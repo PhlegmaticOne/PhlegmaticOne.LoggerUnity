@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UIElements;
 
-namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Factories
+namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
     public interface ITagsRootContainerFactory
     {

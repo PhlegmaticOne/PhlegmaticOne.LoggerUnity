@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls.EventData
+namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
 {
     public readonly struct TagClickEventArgs
     {

@@ -1,7 +1,6 @@
-﻿using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls.EventData;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Factories;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
+﻿using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories;
 using UnityEditor;
 using UnityEngine;
 
