@@ -52,7 +52,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
             }
 
             var parameter = GetCurrentParameter(in parameters, ref currentParameterIndex);
-            ProcessContextParameters(message, parameterValue, parameter);
+            ProcessTag(message, parameterValue, parameter);
             return RenderParameter(parameter, parameterValue, format);
         }
 
@@ -74,12 +74,12 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
             return parameter.ToString();
         }
 
-        private static void ProcessContextParameters(
+        private static void ProcessTag(
             LogMessage logMessage, in ReadOnlySpan<char> parameterValue, object parameter)
         {
             if (parameterValue.Equals(LogWithTag.PropertyKey, StringComparison.OrdinalIgnoreCase))
             {
-                logMessage.AddContextProperty(LogWithTag.PropertyKey, parameter);
+                logMessage.SetTag((LogTag)parameter);
             }
         }
 

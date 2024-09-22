@@ -10,20 +10,22 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components
     public sealed class LoggerWindowToggle : ToolbarToggle
     {
         public string Text { get; private set; }
+        public Color Color { get; private set; }
         
         public LoggerWindowToggle(string text, Color textColor, Action<LoggerWindowToggle, bool> valueChanged)
         {
-            ChangeText(text);
+            ChangeText(text, textColor);
             style.minWidth = LoggerWindowConstantStyles.TooltipMinWidth;
-            style.color = textColor;
             style.unityTextAlign = TextAnchor.MiddleCenter;
             SetValueWithoutNotify(false);
             this.AddBorder();
             this.RegisterValueChangedCallback(e => valueChanged(this, e.newValue));
         }
 
-        public void ChangeText(string newText)
+        public void ChangeText(string newText, in Color color)
         {
+            style.color = color;
+            Color = color;
             Text = newText;
             text = newText;
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls.EventData;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Factories;
+using OpenMyGame.LoggerUnity.Runtime.Tagging;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
@@ -23,7 +24,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             Add(_tagsBar);
         }
 
-        public void RepaintTags(ICollection<string> availableTags)
+        public void RepaintTags(ICollection<LogTag> availableTags)
         {
             _tagsBar.RepaintTags(availableTags);
         }

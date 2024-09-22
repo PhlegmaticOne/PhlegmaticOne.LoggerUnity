@@ -6,6 +6,7 @@ using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
+using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Tags;
 using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
 
 namespace OpenMyGame.LoggerUnity.Runtime
@@ -88,6 +89,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             AddMessageFormatProperty(new MessageFormatPropertyDateTime());
             AddMessageFormatProperty(new MessageFormatPropertyTimeSpan());
             AddMessageFormatProperty(new MessageFormatPropertyGuid());
+            AddMessageFormatProperty(new MessageFormatPropertyTag(new TagColorProvider()));
         }
         
         private void AddMessageFormatProperty(IMessageFormatProperty formatProperty)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls.EventData;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Factories;
+using OpenMyGame.LoggerUnity.Runtime.Tagging;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
@@ -29,7 +30,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             this.AddManipulator(new Clickable(SetAllTagsInactive));
         }
 
-        public void RepaintTags(ICollection<string> availableTags)
+        public void RepaintTags(ICollection<LogTag> availableTags)
         {
             var index = 0;
 
@@ -37,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             {
                 if (index < _tagControls.Count)
                 {
-                    _tagControls[index].ChangeText(tag);
+                    _tagControls[index].ChangeText(tag.TagValue, tag.Color);
                 }
                 else
                 {
@@ -61,10 +62,10 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
                 tagToggle.SetValueWithoutNotify(false);
             }
             
-            OnTagClicked(new TagClickEventArgs(string.Empty, false));
+            OnTagClicked(TagClickEventArgs.Empty);
         }
 
-        private void AddTag(string tag)
+        private void AddTag(LogTag tag)
         {
             var tagControl = _tagControlFactory.CreateTagControl(tag, OnTagClicked);
             _tagsRootContainer.Add(tagControl);
@@ -78,7 +79,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
                 SetOtherTagsInactive(toggle);
             }
             
-            OnTagClicked(new TagClickEventArgs(toggle.Text, isActive));
+            OnTagClicked(new TagClickEventArgs(toggle.Text, toggle.Color, isActive));
         }
 
         private void OnTagClicked(TagClickEventArgs tagClickEventArgs)

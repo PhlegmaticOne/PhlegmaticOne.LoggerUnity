@@ -31,7 +31,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 
         private void OnTagClicked(string tag, bool isActive)
         {
-            TagClicked?.Invoke(new TagClickEventArgs(tag, isActive));
+            TagClicked?.Invoke(new TagClickEventArgs(tag, Color.blue, isActive));
         }
 
         private ToolbarToggle CreateTagElement(string tag)

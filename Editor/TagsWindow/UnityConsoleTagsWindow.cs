@@ -51,8 +51,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow
 
         private static void OnTagClicked(TagClickEventArgs tagClick)
         {
-            var tag = !tagClick.IsActive ? string.Empty : tagClick.Tag;
-            TagsSource.SetTagFilter(tag);
+            TagsSource.SetTagFilter(tagClick);
         }
     }
 }

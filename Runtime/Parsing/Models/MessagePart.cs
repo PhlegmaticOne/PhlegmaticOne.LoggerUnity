@@ -8,6 +8,11 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
         private readonly int _endIndex;
         private readonly string _format;
 
+        internal static MessagePart Parameter(string formatParameter)
+        {
+            return new MessagePart(0, formatParameter.Length, formatParameter, true);
+        }
+        
         public MessagePart(int startIndex, int endIndex, string format, bool isParameter)
         {
             IsParameter = isParameter;
@@ -40,6 +45,25 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
             parameterValue = value[..index];
             format = value[index..];
             return true;
+        }
+
+        public bool HasFormat(string format)
+        {
+            if (!IsParameter)
+            {
+                return false;
+            }
+            
+            var value = GetValue();
+            var startIndex = value.IndexOf(':');
+            var endIndex = value.IndexOf('}');
+
+            if (startIndex == -1 || endIndex == -1)
+            {
+                return false;
+            }
+
+            return value[startIndex..endIndex].Contains(format, StringComparison.OrdinalIgnoreCase);
         }
 
         public bool TryGetFormat(out ReadOnlySpan<char> format)
