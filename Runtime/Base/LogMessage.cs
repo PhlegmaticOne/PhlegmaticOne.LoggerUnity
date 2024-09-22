@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
-using UnityEngine.Pool;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Base
 {
     public class LogMessage
     {
-        private Dictionary<string, object> _contextValues;
-        
         public LogMessage(LogLevel logLevel, IMessageFormat format, Exception exception = null)
         {
             LogLevel = logLevel;
@@ -29,17 +25,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public void SetTag(in LogTag logTag)
         {
             Tag = logTag;
-        }
-
-        public void Dispose()
-        {
-            if (_contextValues is null)
-            {
-                return;
-            }
-            
-            DictionaryPool<string, object>.Release(_contextValues);
-            _contextValues = null;
         }
     }
 }

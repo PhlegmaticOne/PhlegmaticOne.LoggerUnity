@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Tags;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Runtime.Tagging.Colors;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime.Properties.Message

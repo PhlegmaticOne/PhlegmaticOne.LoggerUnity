@@ -71,7 +71,6 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var logMessage = new LogMessage(logLevel, messageFormat, exception);
             LogMessage(logMessage, parameters);
             MessageLogged?.Invoke(logMessage);
-            logMessage.Dispose();
         }
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled)

@@ -22,7 +22,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             // Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", format);
             
             Log.Logger = new LoggerBuilder()
-                .SetTagFormat("#{Tag}#")
+                .SetTagFormat("#{Tag:c}#")
                 .LogToUnityDebug(config =>
                 {
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Stacktrace}{NewLine}{Exception:ns}";

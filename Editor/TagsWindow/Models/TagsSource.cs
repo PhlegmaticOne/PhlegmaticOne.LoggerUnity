@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views;
 using OpenMyGame.LoggerUnity.Runtime;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Tagging;
