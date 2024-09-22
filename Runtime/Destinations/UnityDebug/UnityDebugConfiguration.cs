@@ -1,6 +1,6 @@
 ﻿using OpenMyGame.LoggerUnity.Runtime.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug
+namespace OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug
 {
     public class UnityDebugConfiguration : LogConfiguration
     {

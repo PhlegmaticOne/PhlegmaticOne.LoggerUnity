@@ -27,18 +27,13 @@ namespace OpenMyGame.LoggerUnity.Runtime
             }
         }
 
-        private static void OnMessageLogged(LogMessage obj)
-        {
-            MessageLogged?.Invoke(obj);
-        }
-
         public static event Action<LogMessage> MessageLogged;
-        
+
         public static bool IsEnabled()
         {
             return Logger is not null && Logger.IsEnabled;
         }
-        
+
         public static LogWithTag WithTag(string tag)
         {
             return Logger.CreateLogWithTag(tag);
@@ -60,7 +55,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             Logger.LogMessage(LogLevel.Fatal, "{Exception}", Span<object>.Empty, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Debug(string format, Exception exception = null)
@@ -72,7 +67,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             Logger.LogMessage(LogLevel.Debug, format, Span<object>.Empty, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Debug<T>(string format, T parameter1, Exception exception = null)
@@ -87,7 +82,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Debug<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
@@ -151,7 +146,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
             Logger.LogMessage(LogLevel.Debug, format, parameters, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Warning(string format, Exception exception = null)
@@ -163,7 +158,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             Logger.LogMessage(LogLevel.Warning, format, Span<object>.Empty, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Warning<T>(string format, T parameter1, Exception exception = null)
@@ -178,7 +173,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Warning<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
@@ -230,7 +225,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[3] = parameter4;
             Logger.LogMessage(LogLevel.Warning, format, properties, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Warning(string format, Exception exception = null, params object[] parameters)
@@ -242,7 +237,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             Logger.LogMessage(LogLevel.Warning, format, parameters, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Error(string format, Exception exception = null)
@@ -254,7 +249,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             Logger.LogMessage(LogLevel.Error, format, Span<object>.Empty, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Error<T>(string format, T parameter1, Exception exception = null)
@@ -269,7 +264,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Error<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
@@ -321,7 +316,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[3] = parameter4;
             Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Error(string format, Exception exception = null, params object[] parameters)
@@ -333,14 +328,14 @@ namespace OpenMyGame.LoggerUnity.Runtime
             
             Logger.LogMessage(LogLevel.Warning, format, parameters, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Fatal(string format, Exception exception = null)
         {
             Logger.LogMessage(LogLevel.Fatal, format, Span<object>.Empty, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Fatal<T>(string format, T parameter1, Exception exception = null)
@@ -355,7 +350,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[0] = parameter1;
             Logger.LogMessage(LogLevel.Debug, format, properties, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Fatal<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
@@ -407,7 +402,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             properties[3] = parameter4;
             Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
-        
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Fatal(string format, Exception exception = null, params object[] parameters)
@@ -418,6 +413,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
             }
             
             Logger.LogMessage(LogLevel.Fatal, format, parameters, exception);
+        }
+
+        private static void OnMessageLogged(LogMessage obj)
+        {
+            MessageLogged?.Invoke(obj);
         }
     }
 }

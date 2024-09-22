@@ -22,9 +22,10 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public LogConfiguration Config => Configuration;
         public bool IsEnabled { get; set; }
 
-        public virtual void Initialize()
+        public void Initialize()
         {
             _logFormat = Configuration.CreateMessageFormat();
+            OnInitializing();
         }
 
         public virtual void LogMessage(LogMessage message, in Span<object> parameters)
@@ -36,6 +37,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public virtual void Release() { }
 
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage);
+        protected virtual void OnInitializing() { }
 
         public override string ToString()
         {

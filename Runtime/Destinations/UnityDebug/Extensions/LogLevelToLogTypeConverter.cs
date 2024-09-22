@@ -2,7 +2,7 @@
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.UnityDebug.Extensions
+namespace OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug.Extensions
 {
     public static class LogLevelToLogTypeConverter
     {
