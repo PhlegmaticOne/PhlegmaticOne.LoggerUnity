@@ -1,5 +1,5 @@
 {
-  "name": "com.phlegmaticone.loggerunity",
+  "name": "com.openmygame.loggerunity",
   "version": "1.0.0",
   "displayName": "Logger Unity",
   "description": "Logger for Unity",
@@ -10,6 +10,13 @@
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.1"
   },
+  "samples": [
+    {
+      "displayName": "Logger usage",
+      "description": "Contains simple usage of Logger",
+      "path": "Samples~/LoggerUsage"
+    }
+  ],
   "author": {
     "name": "Aleksandr Krotov",
     "email": "a.krotov@openmygame.com"

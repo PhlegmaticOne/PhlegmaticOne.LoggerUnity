@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug;
 using OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug.Extensions;
 using UnityEngine;
 
@@ -10,7 +9,6 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private void Start()
         {
-            // Cache formats
             // 2. Sample
             // 3. Native logs
 

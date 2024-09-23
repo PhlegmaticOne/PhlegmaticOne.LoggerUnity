@@ -262,7 +262,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var propertiesInlineArray = new PropertyInlineArray1();
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
-            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Error, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -326,7 +326,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
                 return;
             }
             
-            Logger.LogMessage(LogLevel.Warning, format, parameters, exception);
+            Logger.LogMessage(LogLevel.Error, format, parameters, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -348,7 +348,7 @@ namespace OpenMyGame.LoggerUnity.Runtime
             var propertiesInlineArray = new PropertyInlineArray1();
             var properties = propertiesInlineArray.AsSpan();
             properties[0] = parameter1;
-            Logger.LogMessage(LogLevel.Debug, format, properties, exception);
+            Logger.LogMessage(LogLevel.Fatal, format, properties, exception);
         }
 
         [MessageTemplateFormatMethod("format")]
