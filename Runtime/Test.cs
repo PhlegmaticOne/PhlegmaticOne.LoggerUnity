@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.UnityDebug;
+using OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug;
+using OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug.Extensions;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Runtime
@@ -9,18 +10,11 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private void Start()
         {
-            // *. Unity Editor Log Window (format stacktrace)
-            // 1. Tags window for default console + colors
-            // 2. Testing
+            // 1. Testing
+            // Cache formats
+            // 2. Sample
             // 3. Native logs
 
-            // var androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
-            // androidLogger.CallStatic("TestLog", "tag", "message");
-            
-            // var format =
-            //     "<a href=\"Assets/Runtime/Test.cs\" line=\"21\">Assets/Runtime/Test.cs:21</a>";
-            // Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", format);
-            
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag:c}#")
                 .LogToUnityDebug(config =>

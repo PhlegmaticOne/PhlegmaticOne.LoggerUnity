@@ -22,14 +22,24 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing
         
         public IMessageFormat Parse(string format)
         {
-            var parametersCount = format.CountOf(OpenBrace);
+            if (string.IsNullOrWhiteSpace(format))
+            {
+                throw new MessageFormatParseException("Input format cannot be empty string");
+            }
+            
+            var (countOpenBraces, countCloseBraces) = format.CountBraces();
 
-            if (parametersCount == 0)
+            if (countOpenBraces == 0 && countCloseBraces == 0)
             {
                 return new MessageFormatStaticValue(format);
             }
 
-            return ParseMessageFormat(format, parametersCount);
+            if (countOpenBraces != countCloseBraces)
+            {
+                throw new MessageFormatParseException("Format must have similar count of open and close braces");
+            }
+
+            return ParseMessageFormat(format, countOpenBraces);
         }
 
         private IMessageFormat ParseMessageFormat(string format, int parametersCount)
