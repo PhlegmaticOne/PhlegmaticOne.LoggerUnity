@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
+using OpenMyGame.LoggerUnity.Parsing.Models;
+using OpenMyGame.LoggerUnity.Properties.Message.Base;
+using OpenMyGame.LoggerUnity.Properties.Message.Serializing;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Factories
+namespace OpenMyGame.LoggerUnity.Parsing.Factories
 {
     internal class MessageFormatFactoryLogMessage : IMessageFormatFactory
     {

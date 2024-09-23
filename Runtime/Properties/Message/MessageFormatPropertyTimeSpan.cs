@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
+using OpenMyGame.LoggerUnity.Properties.Message.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Message
+namespace OpenMyGame.LoggerUnity.Properties.Message
 {
     internal class MessageFormatPropertyTimeSpan : MessageFormatProperty<TimeSpan>
     {

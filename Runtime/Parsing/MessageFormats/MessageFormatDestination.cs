@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parsing.Models;
+using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
+namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 {
     internal class MessageFormatDestination : IMessageFormat
     {

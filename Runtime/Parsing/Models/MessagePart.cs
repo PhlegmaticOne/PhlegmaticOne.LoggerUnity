@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
+namespace OpenMyGame.LoggerUnity.Parsing.Models
 {
     public readonly struct MessagePart
     {

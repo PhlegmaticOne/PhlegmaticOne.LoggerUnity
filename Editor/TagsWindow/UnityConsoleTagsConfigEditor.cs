@@ -1,5 +1,5 @@
 ﻿using OpenMyGame.LoggerUnity.Editor.ConfigsEditor;
-using OpenMyGame.LoggerUnity.Runtime.Tagging.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
 using UnityEditor;
 using Object = UnityEngine.Object;
 

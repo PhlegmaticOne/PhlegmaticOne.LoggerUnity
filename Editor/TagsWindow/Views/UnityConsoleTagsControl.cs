@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Tagging;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views

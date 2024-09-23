@@ -1,6 +1,6 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
+﻿using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Tagging.Factories
+namespace OpenMyGame.LoggerUnity.Tagging.Factories
 {
     internal class LogWithTagFactory : ILogWithTagFactory
     {

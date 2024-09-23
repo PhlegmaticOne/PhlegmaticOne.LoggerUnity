@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Tagging;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Base
 {
     public interface ILogger : IDisposable
     {

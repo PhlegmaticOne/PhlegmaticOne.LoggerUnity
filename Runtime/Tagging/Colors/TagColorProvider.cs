@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Tagging.Colors.ViewConfig;
+﻿using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Tagging.Colors
+namespace OpenMyGame.LoggerUnity.Tagging.Colors
 {
     public class TagColorProvider : ITagColorProvider
     {

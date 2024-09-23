@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Tagging.Colors.ViewConfig
+namespace OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig
 {
     [Serializable]
     public struct TagColorConfigData

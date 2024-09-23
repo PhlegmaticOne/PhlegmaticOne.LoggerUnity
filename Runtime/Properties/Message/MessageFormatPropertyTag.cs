@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
-using OpenMyGame.LoggerUnity.Runtime.Tagging.Colors;
+using OpenMyGame.LoggerUnity.Properties.Message.Base;
+using OpenMyGame.LoggerUnity.Tagging;
+using OpenMyGame.LoggerUnity.Tagging.Colors;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Message
+namespace OpenMyGame.LoggerUnity.Properties.Message
 {
     internal class MessageFormatPropertyTag : MessageFormatProperty<LogTag>
     {

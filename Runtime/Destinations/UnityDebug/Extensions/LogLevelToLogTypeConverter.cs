@@ -1,8 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Base;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug.Extensions
+namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions
 {
     public static class LogLevelToLogTypeConverter
     {

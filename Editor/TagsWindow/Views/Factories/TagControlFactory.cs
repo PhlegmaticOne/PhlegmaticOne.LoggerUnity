@@ -2,7 +2,7 @@
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {

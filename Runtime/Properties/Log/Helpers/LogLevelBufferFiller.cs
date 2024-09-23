@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log.Helpers
+namespace OpenMyGame.LoggerUnity.Properties.Log.Helpers
 {
     internal static class LogLevelBufferFiller
     {

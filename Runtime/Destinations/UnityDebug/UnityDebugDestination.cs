@@ -1,9 +1,9 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug
+namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
 {
     public class UnityDebugDestination : LogDestination<UnityDebugConfiguration>
     {

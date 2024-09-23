@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Base
 {
     public abstract class LogDestination<TConfiguration> : ILogDestination
         where TConfiguration : LogConfiguration

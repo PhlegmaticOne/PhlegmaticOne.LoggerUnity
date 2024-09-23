@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing
+namespace OpenMyGame.LoggerUnity.Properties.Message.Serializing
 {
     public class MessageFormatPropertySerializer : IMessageFormatPropertySerializer
     {

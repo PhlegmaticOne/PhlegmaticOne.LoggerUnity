@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using OpenMyGame.LoggerUnity.Runtime.Attributes;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message;
+using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Properties.Message;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Tagging
+namespace OpenMyGame.LoggerUnity.Tagging
 {
     public readonly struct LogWithTag
     {

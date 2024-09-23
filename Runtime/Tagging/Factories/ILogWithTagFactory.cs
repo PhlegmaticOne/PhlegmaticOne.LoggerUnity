@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Runtime.Tagging.Factories
+﻿namespace OpenMyGame.LoggerUnity.Tagging.Factories
 {
     public interface ILogWithTagFactory
     {

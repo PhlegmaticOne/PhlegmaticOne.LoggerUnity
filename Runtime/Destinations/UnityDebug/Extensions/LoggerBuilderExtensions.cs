@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Destinations.UnityDebug.Extensions
+namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions
 {
     public static class LoggerBuilderExtensions
     {

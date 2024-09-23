@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
+using OpenMyGame.LoggerUnity.Parsing;
+using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Parsing.Factories;
+using OpenMyGame.LoggerUnity.Properties.Log;
+using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Base
 {
     public abstract class LogConfiguration
     {

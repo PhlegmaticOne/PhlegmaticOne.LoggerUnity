@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using OpenMyGame.LoggerUnity.Runtime.Attributes;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Infrastructure;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parsing.Infrastructure;
+using OpenMyGame.LoggerUnity.Tagging;
 
-namespace OpenMyGame.LoggerUnity.Runtime
+namespace OpenMyGame.LoggerUnity
 {
     public static class Log
     {

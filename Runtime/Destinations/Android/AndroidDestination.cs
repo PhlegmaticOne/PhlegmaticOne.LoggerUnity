@@ -1,8 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Base;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Destinations.Android
+namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
     public class AndroidDestination : LogDestination<AndroidConfiguration>
     {

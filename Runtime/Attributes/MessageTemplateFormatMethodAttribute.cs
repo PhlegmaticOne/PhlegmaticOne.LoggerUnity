@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Attributes
+namespace OpenMyGame.LoggerUnity.Attributes
 {
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method)]
     public sealed class MessageTemplateFormatMethodAttribute : Attribute

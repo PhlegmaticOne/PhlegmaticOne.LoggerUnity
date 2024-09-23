@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Tagging.Colors
+namespace OpenMyGame.LoggerUnity.Tagging.Colors
 {
     public interface ITagColorProvider
     {

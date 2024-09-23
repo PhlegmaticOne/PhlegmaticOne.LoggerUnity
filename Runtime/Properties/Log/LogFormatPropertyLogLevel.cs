@@ -1,11 +1,11 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Extensions;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Helpers;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Parsing.Models;
+using OpenMyGame.LoggerUnity.Properties.Log.Base;
+using OpenMyGame.LoggerUnity.Properties.Log.Helpers;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Properties.Log
+namespace OpenMyGame.LoggerUnity.Properties.Log
 {
     internal class LogFormatPropertyLogLevel : ILogFormatProperty
     {

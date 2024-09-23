@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
+﻿using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Base
+namespace OpenMyGame.LoggerUnity.Parsing.Base
 {
     public interface IMessageFormatFactory
     {

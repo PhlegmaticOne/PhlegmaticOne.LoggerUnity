@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Destinations.Android.Extensions
+namespace OpenMyGame.LoggerUnity.Destinations.Android.Extensions
 {
     public static class LoggerBuilderExtensions
     {

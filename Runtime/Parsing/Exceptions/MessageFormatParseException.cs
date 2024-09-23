@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Exceptions
+namespace OpenMyGame.LoggerUnity.Parsing.Exceptions
 {
     public class MessageFormatParseException : Exception
     {

@@ -1,6 +1,6 @@
-﻿using OpenMyGame.LoggerUnity.Runtime.Base;
+﻿using OpenMyGame.LoggerUnity.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Destinations.Android
+namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
     public class AndroidConfiguration : LogConfiguration
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Tagging.Colors.ViewConfig
+namespace OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig
 {
     public class TagColorsViewConfig : ScriptableObject
     {

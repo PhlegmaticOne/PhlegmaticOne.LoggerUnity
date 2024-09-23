@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
+namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 {
     internal class MessageFormatStaticValue : IMessageFormat
     {

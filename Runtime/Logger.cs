@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
-using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Tagging;
+using OpenMyGame.LoggerUnity.Tagging.Factories;
 
-namespace OpenMyGame.LoggerUnity.Runtime
+namespace OpenMyGame.LoggerUnity
 {
     internal class Logger : ILogger
     {

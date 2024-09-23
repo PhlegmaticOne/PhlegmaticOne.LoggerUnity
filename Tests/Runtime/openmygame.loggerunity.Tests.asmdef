@@ -1,5 +1,5 @@
 {
-    "name": "openmygame.loggerunity.Tests",
+    "name": "OpenMyGame.LoggerUnity.Tests",
     "rootNamespace": "OpenMyGame.LoggerUnity",
     "references": [
         "GUID:27619889b8ba8c24980f49ee34dbb44a",

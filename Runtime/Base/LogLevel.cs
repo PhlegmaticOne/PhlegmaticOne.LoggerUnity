@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Runtime.Base
+﻿namespace OpenMyGame.LoggerUnity.Base
 {
     public enum LogLevel
     {
