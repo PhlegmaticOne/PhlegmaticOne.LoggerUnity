@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Runtime.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing;
+using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
 using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message;
 using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
@@ -20,12 +21,14 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         private string _tagFormat;
         private bool _isEnabled;
+        private bool _cacheFormats;
 
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
             _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
             _isEnabled = true;
+            _cacheFormats = true;
             _tagFormat = "#{Tag}#";
             _propertySerializer = new MessageFormatPropertySerializer();
             AddMessageFormatProperties();
@@ -52,6 +55,12 @@ namespace OpenMyGame.LoggerUnity.Runtime
             _isEnabled = isEnabled;
             return this;
         }
+        
+        public LoggerBuilder SetCacheFormats(bool isCacheFormats)
+        {
+            _cacheFormats = isCacheFormats;
+            return this;
+        }
 
         public LoggerBuilder LogTo<TDestination, TConfiguration>(
             Action<TConfiguration> configureDestinationAction = null)
@@ -71,17 +80,26 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public ILogger CreateLogger()
         {
-            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _propertySerializer);
-            var messageFormatParser = new MessageFormatParser(messageFormatFactory);
-            var logWithTagFactory = new LogWithTagFactory(_tagFormat);
-            
-            ILogger logger = new Logger(_loggerDestinations, messageFormatParser, logWithTagFactory)
+            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagFactory())
             {
                 IsEnabled = _isEnabled
             };
             
             logger.Initialize();
+            
             return logger;
+        }
+
+        private ILogWithTagFactory GetLogWithTagFactory()
+        {
+            return new LogWithTagFactory(_tagFormat);
+        }
+
+        private IMessageFormatParser GetParser()
+        {
+            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _propertySerializer);
+            var messageFormatParser = new MessageFormatParser(messageFormatFactory);
+            return _cacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
         }
 
         private void AddMessageFormatProperties()

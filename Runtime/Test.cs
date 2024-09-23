@@ -10,7 +10,6 @@ namespace OpenMyGame.LoggerUnity.Runtime
     {
         private void Start()
         {
-            // 1. Testing
             // Cache formats
             // 2. Sample
             // 3. Native logs

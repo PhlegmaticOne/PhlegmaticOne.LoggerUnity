@@ -50,7 +50,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
             return GetFormatParser().Parse(LogFormat);
         }
 
-        protected virtual IMessageFormatParser GetFormatParser()
+        private IMessageFormatParser GetFormatParser()
         {
             var factory = new MessageFormatFactoryDestination(_formatProperties);
             return new MessageFormatParser(factory);
