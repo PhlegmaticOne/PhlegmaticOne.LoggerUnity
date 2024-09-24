@@ -6,6 +6,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
     public class AndroidDestination : LogDestination<AndroidConfiguration>
     {
+        private const string DefaultTag = "Unity";
+        
         private AndroidJavaObject _androidLogger;
         
         public override string DestinationName => "Android";
@@ -23,7 +25,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             }
             
             var methodName = ToNativeMethodName(logMessage.LogLevel);
-            _androidLogger.CallStatic(methodName, logMessage.Tag, renderedMessage);
+            var tag = logMessage.Tag?.TagValue ?? DefaultTag;
+            _androidLogger.CallStatic(methodName, tag, renderedMessage);
         }
 
         public override void Release()
@@ -32,7 +35,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             _androidLogger = null;
             base.Release();
         }
-
+        
         private static string ToNativeMethodName(LogLevel logLevel)
         {
             return logLevel switch
