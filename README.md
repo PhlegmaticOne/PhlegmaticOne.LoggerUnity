@@ -45,10 +45,10 @@ Log.Logger = new LoggerBuilder()
 Пакет предоставляет класс ```LoggerBuilder``` для конфигурации объекта типа ```ILogger```, который сразу можно установить в это свойство
 
 Поддерживается 4 уровня логгирования ```LogLevel```: 
-- ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) ```Debug```, 
-- ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) ```Warning```, 
-- ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ```Error```, 
-- ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) ```Fatal```
+- ![#C0C0C0](https://placehold.co/15x15/C0C0C0/C0C0C0.png) ```Debug```, 
+- ![#CC9A06](https://placehold.co/15x15/CC9A06/CC9A06.png) ```Warning```, 
+- ![#CC423B](https://placehold.co/15x15/CC423B/CC423B.png) ```Error```, 
+- ![#CC423B](https://placehold.co/15x15/CC423B/CC423B.png) ```Fatal```
 
 ## Api класса ```LoggerBuilder```
 
@@ -178,11 +178,15 @@ Log.Logger = new LoggerBuilder()
 
 Пример приведен на скриншоте:
 
+![image](https://github.com/user-attachments/assets/c06ab8ae-05b1-4a76-b590-2b04336e272d)
+
 ### Теги в Android
 
 В Android теги добавляются в начало сообщения, а также в Logcat сообщения выводятся с таким же тегом, то есть в Android Studio можно фильтровать сообщения через конструкцию ```"tag:[TagName]"```
 
 Пример приведен на скриншоте:
+
+![image](https://github.com/user-attachments/assets/b3ca43f0-19d1-49fb-b445-944d2b4bec08)
 
 ## Пример логгирования сообщений
 
