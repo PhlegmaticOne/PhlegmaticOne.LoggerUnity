@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using OpenMyGame.LoggerUnity.Base;
 using UnityEngine;
 
@@ -23,10 +24,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             {
                 return;
             }
-            
-            var methodName = ToNativeMethodName(logMessage.LogLevel);
-            var tag = logMessage.Tag?.TagValue ?? DefaultTag;
-            _androidLogger.CallStatic(methodName, tag, renderedMessage);
+
+            LogMessageInMainThread(logMessage, renderedMessage).Forget();
         }
 
         public override void Release()
@@ -35,7 +34,15 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             _androidLogger = null;
             base.Release();
         }
-        
+
+        private async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)
+        {
+            var methodName = ToNativeMethodName(logMessage.LogLevel);
+            var tag = logMessage.Tag?.TagValue ?? DefaultTag;
+            await UniTask.SwitchToMainThread();
+            _androidLogger.CallStatic(methodName, tag, renderedMessage);
+        }
+
         private static string ToNativeMethodName(LogLevel logLevel)
         {
             return logLevel switch
