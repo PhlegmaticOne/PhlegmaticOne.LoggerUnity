@@ -164,6 +164,37 @@ Log.Logger = new LoggerBuilder()
 | ```Tag```       | ```c``` - тег выводится с оберткой цвета: ```<color=#color>Tag</color>``` |
 | ```TimeSpan```  | Форматы, которые поддерживает ```TimeSpan```                              |
 
+К списку существующих форматтеров объектов можно добавить свой кастомный.
+Для этого нужно создать класс, который будет наследовать класс ```MessageFormatProperty<T>```, где T - свой кастомный тип, который необходимо отформатировать.
+Например:
+
+```csharp
+internal class MessageFormatPropertyInt : MessageFormatProperty<int>
+{
+    protected override ReadOnlySpan<char> Render(int parameter, in ReadOnlySpan<char> format)
+    {
+        if (format.Equals("x2", StringComparison.OrdinalIgnoreCase))
+        {
+            return parameter * 2;
+        }
+            
+        return parameter;
+    }
+}
+```
+А затем добавить этот класс в список параметров при конфигурации логгера. Например:
+
+```csharp
+Log.Logger = new LoggerBuilder()
+    .AddLogMessageProperty(new MessageFormatPropertyInt())
+    .LogToUnityDebug(config =>
+    {
+        ...
+    })
+    .CreateLogger();
+```
+После этого все объекты с типом, который указан в параметре ```T``` созданного форматтера, будут форматироваться через созданный форматтер.
+
 ## Теги
 
 Сообщения можно выводить с тегами
