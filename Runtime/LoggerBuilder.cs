@@ -21,14 +21,14 @@ namespace OpenMyGame.LoggerUnity
 
         private string _tagFormat;
         private bool _isEnabled;
-        private bool _cacheFormats;
+        private bool _isCacheFormats;
 
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
             _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
             _isEnabled = true;
-            _cacheFormats = true;
+            _isCacheFormats = true;
             _tagFormat = "#{Tag}#";
             _propertySerializer = new MessageFormatPropertySerializer();
             AddMessageFormatProperties();
@@ -56,9 +56,9 @@ namespace OpenMyGame.LoggerUnity
             return this;
         }
         
-        public LoggerBuilder SetCacheFormats(bool isCacheFormats)
+        public LoggerBuilder SetIsCacheFormats(bool isCacheFormats)
         {
-            _cacheFormats = isCacheFormats;
+            _isCacheFormats = isCacheFormats;
             return this;
         }
 
@@ -99,7 +99,7 @@ namespace OpenMyGame.LoggerUnity
         {
             var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _propertySerializer);
             var messageFormatParser = new MessageFormatParser(messageFormatFactory);
-            return _cacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
+            return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
         }
 
         private void AddMessageFormatProperties()

@@ -45,7 +45,7 @@ namespace OpenMyGame.LoggerUnity.Base
             return this;
         }
 
-        public IMessageFormat CreateMessageFormat()
+        internal IMessageFormat CreateMessageFormat()
         {
             return GetFormatParser().Parse(LogFormat);
         }
