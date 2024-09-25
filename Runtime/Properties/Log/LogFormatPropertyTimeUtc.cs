@@ -5,7 +5,7 @@ using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Properties.Log
 {
-    public class LogFormatPropertyTimeUtc : ILogFormatProperty
+    internal class LogFormatPropertyTimeUtc : ILogFormatProperty
     {
         public string Key => "TimeUtc";
         

@@ -1,9 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("openmygame.loggerunity.Editor")]
-[assembly: InternalsVisibleTo("openmygame.loggerunity.Tests")]
-
-namespace OpenMyGame.LoggerUnity
-{
-    public class LoggerAssemblyReference { }
-}
+[assembly: InternalsVisibleTo("OpenMyGame.LoggerUnity.Editor")]
+[assembly: InternalsVisibleTo("OpenMyGame.LoggerUnity.Tests")]

@@ -4,7 +4,7 @@ using OpenMyGame.LoggerUnity.Parsing.Base;
 
 namespace OpenMyGame.LoggerUnity.Parsing
 {
-    public class MessageFormatParserCached : IMessageFormatParser
+    internal class MessageFormatParserCached : IMessageFormatParser
     {
         private readonly IMessageFormatParser _messageFormatParser;
         private readonly Hashtable _formatsCache;

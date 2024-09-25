@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tagging.Colors
 {
-    public class TagColorProvider : ITagColorProvider
+    internal class TagColorProvider : ITagColorProvider
     {
         private readonly TagColorsViewConfig _colorsViewConfig;
         
