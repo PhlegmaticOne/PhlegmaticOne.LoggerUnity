@@ -1,8 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Properties.Log;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.LoggerUsage

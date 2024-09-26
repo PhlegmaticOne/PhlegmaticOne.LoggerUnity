@@ -13,6 +13,11 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
             return new MessagePart(0, formatParameter.Length, formatParameter, true);
         }
         
+        internal static MessagePart Message(string message)
+        {
+            return new MessagePart(0, message.Length, message, false);
+        }
+        
         public MessagePart(int startIndex, int endIndex, string format, bool isParameter)
         {
             IsParameter = isParameter;
@@ -43,7 +48,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
             }
 
             parameterValue = value[..index];
-            format = value[index..];
+            format = value[(index + 1)..];
             return true;
         }
 
@@ -55,14 +60,15 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
             }
             
             var value = GetValue();
-            var startIndex = value.IndexOf(':');
+            var index = value.IndexOf(':');
             var endIndex = value.IndexOf('}');
+            var startIndex = index + 1;
 
-            if (startIndex == -1 || endIndex == -1)
+            if (index == -1 || endIndex == -1 || startIndex == endIndex)
             {
                 return false;
             }
-
+            
             return value[startIndex..endIndex].Contains(format, StringComparison.OrdinalIgnoreCase);
         }
 
@@ -76,6 +82,8 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
 
             var value = GetValue();
             var index = value.IndexOf(':');
+            var endIndex = value.IndexOf('}');
+            var startIndex = index + 1;
 
             if (index == -1)
             {
@@ -83,7 +91,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
                 return false;
             }
 
-            format = value[index..];
+            format = value[startIndex..endIndex];
             return true;
         }
 
