@@ -5,7 +5,7 @@ using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Properties.Log
 {
-    internal class LogFormatPropertyNewLine : ILogFormatProperty
+    internal class LogFormatParameterNewLine : ILogFormatParameter
     {
         public string Key => "NewLine";
         

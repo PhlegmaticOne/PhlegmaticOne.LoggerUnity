@@ -5,9 +5,9 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions
     public static class LoggerBuilderExtensions
     {
         public static LoggerBuilder LogToUnityDebug(
-            this LoggerBuilder loggerBuilder, Action<UnityDebugConfiguration> configureAction = null)
+            this LoggerBuilder loggerBuilder, Action<UnityDebugLogConfiguration> configureAction = null)
         {
-            return loggerBuilder.LogTo<UnityDebugDestination, UnityDebugConfiguration>(configureAction);
+            return loggerBuilder.LogTo<UnityDebugLogDestination, UnityDebugLogConfiguration>(configureAction);
         }
     }
 }

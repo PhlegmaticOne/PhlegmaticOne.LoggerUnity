@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
 {
-    public class UnityDebugDestination : LogDestination<UnityDebugConfiguration>
+    public class UnityDebugLogDestination : LogDestination<UnityDebugLogConfiguration>
     {
         private const string Format = "{0}";
         public override string DestinationName => "Debug";

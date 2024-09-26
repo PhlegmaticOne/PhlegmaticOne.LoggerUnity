@@ -5,18 +5,13 @@ using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Properties.Log
 {
-    internal class LogFormatPropertyTimeUtc : ILogFormatProperty
+    internal class LogFormatParameterMessage : ILogFormatParameter
     {
-        public string Key => "TimeUtc";
+        public string Key => "Message";
         
         public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
-            if (messagePart.TryGetFormat(out var format))
-            {
-                return DateTime.UtcNow.ToString(format.ToString());
-            }
-
-            return DateTime.UtcNow.ToString("G");
+            return message.Render(parameters);
         }
     }
 }

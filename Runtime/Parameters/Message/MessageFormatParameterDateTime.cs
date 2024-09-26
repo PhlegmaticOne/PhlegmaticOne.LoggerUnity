@@ -3,7 +3,7 @@ using OpenMyGame.LoggerUnity.Properties.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Properties.Message
 {
-    internal class MessageFormatPropertyDateTime : MessageFormatProperty<DateTime>
+    internal class MessageFormatParameterDateTime : MessageFormatParameter<DateTime>
     {
         protected override ReadOnlySpan<char> Render(DateTime parameter, in ReadOnlySpan<char> format)
         {

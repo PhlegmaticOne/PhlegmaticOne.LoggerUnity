@@ -6,7 +6,7 @@ using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Properties.Log
 {
-    internal class LogFormatPropertyThreadId : ILogFormatProperty
+    internal class LogFormatParameterThreadId : ILogFormatParameter
     {
         public string Key => "ThreadId";
         

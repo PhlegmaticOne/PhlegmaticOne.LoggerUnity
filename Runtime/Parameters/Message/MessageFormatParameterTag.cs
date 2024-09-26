@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Properties.Message
 {
-    internal class MessageFormatPropertyTag : MessageFormatProperty<LogTag>
+    internal class MessageFormatParameterTag : MessageFormatParameter<LogTag>
     {
         private readonly ITagColorProvider _tagColorProvider;
         private readonly Dictionary<string, Color> _tagColorsMap;
         
-        public MessageFormatPropertyTag(ITagColorProvider tagColorProvider)
+        public MessageFormatParameterTag(ITagColorProvider tagColorProvider)
         {
             _tagColorProvider = tagColorProvider;
             _tagColorsMap = new Dictionary<string, Color>();

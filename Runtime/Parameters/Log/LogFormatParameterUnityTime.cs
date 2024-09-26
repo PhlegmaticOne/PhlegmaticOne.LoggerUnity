@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Properties.Log
 {
-    internal class LogFormatPropertyUnityTime : ILogFormatProperty
+    internal class LogFormatParameterUnityTime : ILogFormatParameter
     {
         private const string Format3 = "ticks";
         

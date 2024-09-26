@@ -3,13 +3,13 @@ using OpenMyGame.LoggerUnity.Properties.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Properties.Message
 {
-    internal class MessageFormatPropertyTimeSpan : MessageFormatProperty<TimeSpan>
+    internal class MessageFormatParameterGuid : MessageFormatParameter<Guid>
     {
-        protected override ReadOnlySpan<char> Render(TimeSpan parameter, in ReadOnlySpan<char> format)
+        protected override ReadOnlySpan<char> Render(Guid parameter, in ReadOnlySpan<char> format)
         {
             if (format.IsEmpty)
             {
-                return parameter.ToString("g");
+                return parameter.ToString();
             }
 
             return parameter.ToString(format.ToString());

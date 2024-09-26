@@ -1,6 +1,6 @@
 namespace OpenMyGame.LoggerUnity.Properties.Message.Serializing
 {
-    public interface IMessageFormatPropertySerializer
+    public interface IMessageFormatParameterSerializer
     {
         string Serialize(object value);
     }

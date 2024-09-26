@@ -100,12 +100,12 @@ Log.Logger = new LoggerBuilder()
 | ```UnityTime```  | Добавляет текущее время с время запуска приложения                             |
 
 К списку существующих параметров можно добавить свой кастомный. 
-Для этого нужно создать класс, который будет реализовывать интерфейс ```ILogFormatProperty```.
+Для этого нужно создать класс, который будет реализовывать интерфейс ```ILogFormatParameter```.
 В параметры метода приходит ```MessagePart```, из которого можно получить формат параметра.
 Например:
 
 ```csharp
-public class LogFormatPropertyCustom : ILogFormatProperty
+public class LogFormatParameterCustom : ILogFormatParameter
 {
     public string Key => "Custom";
 
@@ -131,7 +131,7 @@ Log.Logger = new LoggerBuilder()
     {
         config.LogFormat = "[{Custom}] {Message}";
         ...
-        config.AddLogFormatProperty(new LogFormatPropertyCustom());
+        config.AddLogFormatParameter(new LogFormatParameterCustom());
     })
     .CreateLogger();
 ```
@@ -165,11 +165,11 @@ Log.Logger = new LoggerBuilder()
 | ```TimeSpan```  | Форматы, которые поддерживает ```TimeSpan```                              |
 
 К списку существующих форматтеров объектов можно добавить свой кастомный.
-Для этого нужно создать класс, который будет наследовать класс ```MessageFormatProperty<T>```, где T - свой кастомный тип, который необходимо отформатировать.
+Для этого нужно создать класс, который будет наследовать класс ```MessageFormatParameter<T>```, где T - свой кастомный тип, который необходимо отформатировать.
 Например:
 
 ```csharp
-internal class MessageFormatPropertyInt : MessageFormatProperty<int>
+internal class MessageFormatParameterInt : MessageFormatParameter<int>
 {
     protected override ReadOnlySpan<char> Render(int parameter, in ReadOnlySpan<char> format)
     {
@@ -186,11 +186,8 @@ internal class MessageFormatPropertyInt : MessageFormatProperty<int>
 
 ```csharp
 Log.Logger = new LoggerBuilder()
-    .AddLogMessageProperty(new MessageFormatPropertyInt())
-    .LogToUnityDebug(config =>
-    {
-        ...
-    })
+    .AddMessageFormatParameter(new MessageFormatParameterInt())
+    .LogToUnityDebug()
     .CreateLogger();
 ```
 После этого все объекты с типом, который указан в параметре ```T``` созданного форматтера, будут форматироваться через созданный форматтер.

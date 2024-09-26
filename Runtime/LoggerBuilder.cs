@@ -16,8 +16,8 @@ namespace OpenMyGame.LoggerUnity
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
-        private readonly IMessageFormatPropertySerializer _propertySerializer;
+        private readonly Dictionary<Type, IMessageFormatParameter> _formatProperties;
+        private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
         private string _tagFormat;
         private bool _isEnabled;
@@ -26,19 +26,19 @@ namespace OpenMyGame.LoggerUnity
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
+            _formatProperties = new Dictionary<Type, IMessageFormatParameter>();
             _isEnabled = true;
             _isCacheFormats = true;
             _tagFormat = "#{Tag}#";
-            _propertySerializer = new MessageFormatPropertySerializer();
+            _parameterSerializer = new MessageFormatParameterSerializer();
             AddMessageFormatProperties();
         }
 
-        public LoggerBuilder AddLogMessageProperty(IMessageFormatProperty formatProperty)
+        public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
         {
-            if (formatProperty is not null)
+            if (formatParameter is not null)
             {
-                AddMessageFormatProperty(formatProperty);
+                AddMessageFormatProperty(formatParameter);
             }
             
             return this;
@@ -97,7 +97,7 @@ namespace OpenMyGame.LoggerUnity
 
         private IMessageFormatParser GetParser()
         {
-            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _propertySerializer);
+            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _parameterSerializer);
             var messageFormatParser = new MessageFormatParser(messageFormatFactory);
             return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
         }
@@ -105,16 +105,16 @@ namespace OpenMyGame.LoggerUnity
         private void AddMessageFormatProperties()
         {
             var tagColorProvider = new TagColorProvider(TagColorsViewConfig.Load());
-            AddMessageFormatProperty(new MessageFormatPropertyString());
-            AddMessageFormatProperty(new MessageFormatPropertyDateTime());
-            AddMessageFormatProperty(new MessageFormatPropertyTimeSpan());
-            AddMessageFormatProperty(new MessageFormatPropertyGuid());
-            AddMessageFormatProperty(new MessageFormatPropertyTag(tagColorProvider));
+            AddMessageFormatProperty(new MessageFormatParameterString());
+            AddMessageFormatProperty(new MessageFormatParameterDateTime());
+            AddMessageFormatProperty(new MessageFormatParameterTimeSpan());
+            AddMessageFormatProperty(new MessageFormatParameterGuid());
+            AddMessageFormatProperty(new MessageFormatParameterTag(tagColorProvider));
         }
         
-        private void AddMessageFormatProperty(IMessageFormatProperty formatProperty)
+        private void AddMessageFormatProperty(IMessageFormatParameter formatParameter)
         {
-            _formatProperties[formatProperty.PropertyType] = formatProperty;
+            _formatProperties[formatParameter.PropertyType] = formatParameter;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace OpenMyGame.LoggerUnity.Properties.Message.Base
 {
-    public abstract class MessageFormatProperty<T> : IMessageFormatProperty
+    public abstract class MessageFormatParameter<T> : IMessageFormatParameter
     {
         public Type PropertyType => typeof(T);
         

@@ -10,14 +10,14 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
     internal class MessageFormatDestination : IMessageFormat
     {
         private readonly MessagePart[] _messageParts;
-        private readonly Dictionary<string, ILogFormatProperty> _formatProperties;
+        private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
 
         public MessageFormatDestination(
             MessagePart[] messageParts, 
-            Dictionary<string, ILogFormatProperty> formatProperties)
+            Dictionary<string, ILogFormatParameter> logFormatParameters)
         {
             _messageParts = messageParts;
-            _formatProperties = formatProperties;
+            _logFormatParameters = logFormatParameters;
         }
         
         public string Render(LogMessage logMessage, in Span<object> parameters)
@@ -36,7 +36,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
         private ReadOnlySpan<char> Render(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out _);
-            var property = _formatProperties.GetValueOrDefault(parameterValue.ToString());
+            var property = _logFormatParameters.GetValueOrDefault(parameterValue.ToString());
             return property is null ? parameterValue : property.GetValue(in messagePart, message, parameters);
         }
     }

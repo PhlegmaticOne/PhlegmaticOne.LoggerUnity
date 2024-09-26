@@ -10,16 +10,16 @@ namespace OpenMyGame.LoggerUnity.Parsing.Factories
 {
     internal class MessageFormatFactoryDestination : IMessageFormatFactory
     {
-        private readonly Dictionary<string, ILogFormatProperty> _logFormatProperties;
+        private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
 
-        public MessageFormatFactoryDestination(IEnumerable<ILogFormatProperty> logFormatProperties)
+        public MessageFormatFactoryDestination(IEnumerable<ILogFormatParameter> logFormatParameters)
         {
-            _logFormatProperties = logFormatProperties.ToDictionary(x => x.Key, x => x);
+            _logFormatParameters = logFormatParameters.ToDictionary(x => x.Key, x => x);
         }
         
         public IMessageFormat CreateFormat(MessagePart[] messageParts)
         {
-            return new MessageFormatDestination(messageParts, _logFormatProperties);
+            return new MessageFormatDestination(messageParts, _logFormatParameters);
         }
     }
 }

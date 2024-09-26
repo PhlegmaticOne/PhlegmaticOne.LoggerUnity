@@ -2,8 +2,5 @@
 
 namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
-    public class AndroidConfiguration : LogConfiguration
-    {
-        
-    }
+    public class AndroidLogConfiguration : LogConfiguration { }
 }

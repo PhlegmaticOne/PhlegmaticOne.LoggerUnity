@@ -2,11 +2,11 @@
 
 namespace OpenMyGame.LoggerUnity.Properties.Message.Serializing
 {
-    internal class MessageFormatPropertySerializer : IMessageFormatPropertySerializer
+    internal class MessageFormatParameterSerializer : IMessageFormatParameterSerializer
     {
         private readonly JsonSerializerSettings _serializerSettings;
         
-        public MessageFormatPropertySerializer()
+        public MessageFormatParameterSerializer()
         {
             _serializerSettings = new JsonSerializerSettings
             {

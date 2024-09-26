@@ -6,7 +6,7 @@ using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Properties.Log
 {
-    internal class LogFormatPropertyException : ILogFormatProperty
+    internal class LogFormatParameterException : ILogFormatParameter
     {
         private const string NoStacktraceFormat = "ns";
         

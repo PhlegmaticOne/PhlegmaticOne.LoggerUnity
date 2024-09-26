@@ -5,9 +5,9 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android.Extensions
     public static class LoggerBuilderExtensions
     {
         public static LoggerBuilder LogToAndroidLog(
-            this LoggerBuilder loggerBuilder, Action<AndroidConfiguration> configureAction = null)
+            this LoggerBuilder loggerBuilder, Action<AndroidLogConfiguration> configureAction = null)
         {
-            return loggerBuilder.LogTo<AndroidDestination, AndroidConfiguration>(x =>
+            return loggerBuilder.LogTo<AndroidLogDestination, AndroidLogConfiguration>(x =>
             {
                 configureAction?.Invoke(x);
                 x.IsEnabled = GetIsLoggerEnabled();

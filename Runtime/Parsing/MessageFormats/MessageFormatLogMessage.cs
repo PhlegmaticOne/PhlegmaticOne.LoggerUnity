@@ -14,17 +14,17 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
         private const char SerializeParameterPrefix = '@';
         
         private readonly MessagePart[] _messageParts;
-        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
-        private readonly IMessageFormatPropertySerializer _propertySerializer;
+        private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
+        private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
         public MessageFormatLogMessage(
             MessagePart[] messageParts, 
-            Dictionary<Type, IMessageFormatProperty> formatProperties,
-            IMessageFormatPropertySerializer propertySerializer)
+            Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
+            IMessageFormatParameterSerializer parameterSerializer)
         {
             _messageParts = messageParts;
-            _formatProperties = formatProperties;
-            _propertySerializer = propertySerializer;
+            _messageFormatParameters = messageFormatParameters;
+            _parameterSerializer = parameterSerializer;
         }
         
         public string Render(LogMessage logMessage, in Span<object> parameters)
@@ -61,14 +61,14 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
         {
             var type = parameter.GetType();
 
-            if (_formatProperties.TryGetValue(type, out var property))
+            if (_messageFormatParameters.TryGetValue(type, out var property))
             {
                 return property.Render(parameter, in format);
             }
 
             if (parameterValue[0] == SerializeParameterPrefix)
             {
-                return _propertySerializer.Serialize(parameter);
+                return _parameterSerializer.Serialize(parameter);
             }
             
             return parameter.ToString();

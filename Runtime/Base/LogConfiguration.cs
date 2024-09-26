@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Base
 {
     public abstract class LogConfiguration
     {
-        private readonly List<ILogFormatProperty> _formatProperties;
+        private readonly List<ILogFormatParameter> _logFormatParameters;
         
         protected LogConfiguration()
         {
@@ -17,17 +17,17 @@ namespace OpenMyGame.LoggerUnity.Base
             LogFormat = "{Message}";
             IsEnabled = true;
             
-            _formatProperties = new List<ILogFormatProperty>
+            _logFormatParameters = new List<ILogFormatParameter>
             {
-                new LogFormatPropertyException(),
-                new LogFormatPropertyStacktrace(),
-                new LogFormatPropertyTime(),
-                new LogFormatPropertyLogLevel(),
-                new LogFormatPropertyUnityTime(),
-                new LogFormatPropertyNewLine(),
-                new LogFormatPropertyMessage(),
-                new LogFormatPropertyThreadId(),
-                new LogFormatPropertyTimeUtc()
+                new LogFormatParameterException(),
+                new LogFormatParameterStacktrace(),
+                new LogFormatParameterTime(),
+                new LogFormatParameterLogLevel(),
+                new LogFormatParameterUnityTime(),
+                new LogFormatParameterNewLine(),
+                new LogFormatParameterMessage(),
+                new LogFormatParameterThreadId(),
+                new LogFormatParameterTimeUtc()
             };
         }
 
@@ -35,11 +35,11 @@ namespace OpenMyGame.LoggerUnity.Base
         public string LogFormat { set; get; }
         public LogLevel MinimumLogLevel { get; set; }
 
-        public LogConfiguration AddLogFormatProperty(ILogFormatProperty formatProperty)
+        public LogConfiguration AddLogFormatParameter(ILogFormatParameter formatParameter)
         {
-            if (formatProperty is not null)
+            if (formatParameter is not null)
             {
-                _formatProperties.Add(formatProperty);
+                _logFormatParameters.Add(formatParameter);
             }
             
             return this;
@@ -52,7 +52,7 @@ namespace OpenMyGame.LoggerUnity.Base
 
         private IMessageFormatParser GetFormatParser()
         {
-            var factory = new MessageFormatFactoryDestination(_formatProperties);
+            var factory = new MessageFormatFactoryDestination(_logFormatParameters);
             return new MessageFormatParser(factory);
         }
     }

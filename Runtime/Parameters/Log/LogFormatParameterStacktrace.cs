@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Properties.Log
 {
-    internal class LogFormatPropertyStacktrace : ILogFormatProperty
+    internal class LogFormatParameterStacktrace : ILogFormatParameter
     {
         private const string LastInformativeStacktrace = "Assets/Runtime/Log.cs";
         
