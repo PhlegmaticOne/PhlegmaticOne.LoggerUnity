@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using OpenMyGame.LoggerUnity.Attributes;
-using OpenMyGame.LoggerUnity.Properties.Message;
+using OpenMyGame.LoggerUnity.Parameters.Message;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tagging

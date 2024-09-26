@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message;
+using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Factories;
-using OpenMyGame.LoggerUnity.Properties.Message;
-using OpenMyGame.LoggerUnity.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Properties.Message.Serializing;
 using OpenMyGame.LoggerUnity.Tagging.Colors;
 using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Tagging.Factories;

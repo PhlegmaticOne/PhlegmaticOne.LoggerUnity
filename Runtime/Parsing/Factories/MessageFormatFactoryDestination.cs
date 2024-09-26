@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Parsing.Factories
 {

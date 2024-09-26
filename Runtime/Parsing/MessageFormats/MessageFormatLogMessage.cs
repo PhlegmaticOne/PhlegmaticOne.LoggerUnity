@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using OpenMyGame.LoggerUnity.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Properties.Message.Serializing;
 using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats

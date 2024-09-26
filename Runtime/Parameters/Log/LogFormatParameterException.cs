@@ -1,10 +1,10 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
-namespace OpenMyGame.LoggerUnity.Properties.Log
+namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterException : ILogFormatParameter
     {

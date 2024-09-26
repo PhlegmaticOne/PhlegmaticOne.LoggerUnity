@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using OpenMyGame.LoggerUnity.Parameters.Log;
+using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Factories;
-using OpenMyGame.LoggerUnity.Properties.Log;
-using OpenMyGame.LoggerUnity.Properties.Log.Base;
 
 namespace OpenMyGame.LoggerUnity.Base
 {

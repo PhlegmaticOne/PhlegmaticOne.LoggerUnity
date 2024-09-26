@@ -2,7 +2,7 @@
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Properties.Log.Base
+namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
 {
     public interface ILogFormatParameter
     {

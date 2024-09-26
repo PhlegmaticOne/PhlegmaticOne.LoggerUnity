@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Properties.Message.Base
+namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
 {
     public abstract class MessageFormatParameter<T> : IMessageFormatParameter
     {
