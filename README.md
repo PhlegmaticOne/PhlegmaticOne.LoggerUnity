@@ -23,7 +23,7 @@
 
 Пример: ```"Debug current time: {Time}"``` - формат с одним параметром ```Time```, в который будет подставлено любое указанное значение в процессе логгирования
 
-Соответственно логгирование будет выглядеть примерно так: ```Log.Debug("Debug current time: {Time}", DateTime.Now)```
+Соответственно логгирование будет выглядеть примерно так: ```Log.DebugMessage().Log("Debug current time: {Time}", DateTime.Now)```
 
 ## <b>Создание логгера для логгирования в ```Debug```</b>
 
@@ -110,7 +110,7 @@ public class LogFormatParameterCustom : ILogFormatParameter
 {
     public string Key => "Custom";
 
-    public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
+    public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
     {
         if (messagePart.TryGetFormat(out var format))
         {
@@ -172,7 +172,7 @@ Log.Logger = new LoggerBuilder()
 ```csharp
 internal class MessageFormatParameterInt : MessageFormatParameter<int>
 {
-    protected override ReadOnlySpan<char> Render(int parameter, in ReadOnlySpan<char> format)
+    protected override ReadOnlySpan<char> Render(int parameter, ReadOnlySpan<char> format)
     {
         if (format.Equals("x2", StringComparison.OrdinalIgnoreCase))
         {
@@ -197,7 +197,7 @@ Log.Logger = new LoggerBuilder()
 
 Сообщения можно выводить с тегами
 
-Для этого необходимо вызвать метод ```Log.WithTag("Tag")```, который возвращает структуру ```LogWithFormat``` с дублирующимися методами логгирования
+Для этого необходимо вызвать метод ```LogMessage.WithTag("Tag")```, который установит тег в сообщение
 
 При этом в финальный формат сообщения в начало добавится формат тега, который был указан при конфигурации логгера
 
@@ -220,13 +220,13 @@ Log.Logger = new LoggerBuilder()
 ## Пример логгирования сообщений
 
 ```csharp
-Log.Debug("Debug current time: {Time}", DateTime.Now);
-Log.Warning("Warning current time: {Time}", DateTime.Now);
-Log.Error("Error current time: {Time}", DateTime.Now);
-Log.Fatal("Fatal current time: {Time}", DateTime.Now);
+Log.DebugMessage().Log("Debug current time: {Time}", DateTime.Now);
+Log.WarningMessage().Log("Warning current time: {Time}", DateTime.Now);
+Log.ErrorMessage().Log("Error current time: {Time}", DateTime.Now);
+Log.FatalMessage().Log("Fatal current time: {Time}", DateTime.Now);
 
-Log.WithTag("Time").Debug("Debug current time with tag: {Time:d}", DateTime.Now);
-Log.WithTag("Time").Warning("Warning current time with tag: {Time:s}", DateTime.Now);
-Log.WithTag("Time").Error("Error current time with tag: {Time:f}", DateTime.Now);
-Log.WithTag("Time").Fatal("Fatal current time with tag: {Time:g}", DateTime.Now);
+Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", DateTime.Now);
+Log.WarningMessage().WithTag("Time").Log("Warning current time with tag: {Time}", DateTime.Now);
+Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
+Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
 ```
