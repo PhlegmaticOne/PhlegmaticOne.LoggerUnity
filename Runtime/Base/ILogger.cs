@@ -10,7 +10,7 @@ namespace OpenMyGame.LoggerUnity.Base
         event Action<LogMessage> MessageLogged;
         void Initialize();
         IMessageFormat ParseFormat(string format);
-        void LogMessage(LogMessage logMessage, in Span<object> parameters);
+        void LogMessage(LogMessage logMessage, Span<object> parameters);
         void SetDestinationEnabled(string destinationName, bool isEnabled);
     }
 }

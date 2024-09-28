@@ -28,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Base
             OnInitializing();
         }
 
-        public virtual void LogMessage(LogMessage message, in Span<object> parameters)
+        public virtual void LogMessage(LogMessage message, Span<object> parameters)
         {
             var renderedMessage = _logFormat.Render(message, parameters);
             LogRenderedMessage(message, renderedMessage);

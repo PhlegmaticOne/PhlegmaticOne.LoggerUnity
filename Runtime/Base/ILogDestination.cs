@@ -8,7 +8,7 @@ namespace OpenMyGame.LoggerUnity.Base
         LogConfiguration Config { get; }
         bool IsEnabled { get; set; }
         void Initialize();
-        void LogMessage(LogMessage message, in Span<object> parameters);
+        void LogMessage(LogMessage message, Span<object> parameters);
         void Release();
     }
 }

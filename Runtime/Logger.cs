@@ -60,14 +60,21 @@ namespace OpenMyGame.LoggerUnity
             return _messageFormatParser.Parse(format);
         }
 
-        public void LogMessage(LogMessage logMessage, in Span<object> parameters)
+        public void LogMessage(LogMessage logMessage, Span<object> parameters)
         {
             if (!IsEnabled)
             {
                 return;
             }
             
-            LogMessagePrivate(logMessage, parameters);
+            foreach (var loggerDestination in _logDestinations)
+            {
+                if (IsLogMessageToDestination(loggerDestination, logMessage))
+                {
+                    loggerDestination.LogMessage(logMessage, parameters);
+                }
+            }
+            
             MessageLogged?.Invoke(logMessage);
         }
 
@@ -110,17 +117,6 @@ namespace OpenMyGame.LoggerUnity
             else
             {
                 Dispose();
-            }
-        }
-
-        private void LogMessagePrivate(LogMessage message, in Span<object> parameters)
-        {
-            foreach (var loggerDestination in _logDestinations)
-            {
-                if (IsLogMessageToDestination(loggerDestination, message))
-                {
-                    loggerDestination.LogMessage(message, parameters);
-                }
             }
         }
 

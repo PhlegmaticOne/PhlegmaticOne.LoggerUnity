@@ -8,7 +8,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterStacktrace : ILogFormatParameter
     {
-        private const string LastInformativeStacktrace = "Assets/Runtime/Log.cs";
+        private const string LastInformativeStacktrace = "Assets/Runtime/Base/LogMessageLoggingPart.cs";
         
         public string Key => "Stacktrace";
         
