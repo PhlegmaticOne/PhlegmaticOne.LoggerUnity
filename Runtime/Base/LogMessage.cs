@@ -5,6 +5,16 @@ namespace OpenMyGame.LoggerUnity.Base
 {
     public class LogMessage
     {
+        internal LogMessage(LogLevel logLevel)
+        {
+            LogLevel = logLevel;
+        }
+
+        internal LogMessage(Exception exception)
+        {
+            Exception = exception;
+        }
+        
         public LogMessage(LogLevel logLevel, IMessageFormat format, Exception exception = null)
         {
             LogLevel = logLevel;

@@ -8,7 +8,7 @@ using OpenMyGame.LoggerUnity.Parsing.Exceptions;
 using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime
+namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
 {
     [TestFixture]
     public class MessageFormatParserTests

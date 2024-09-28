@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime
+namespace OpenMyGame.LoggerUnity.Tests.Runtime.Base
 {
     [TestFixture]
     public class MessagePartTests
@@ -68,14 +68,14 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime
             Assert.AreEqual(false, hasFormat);
         }
         
-        [TestCase("{Message:u}", "u", true)]
-        [TestCase("{Message:u}", "l", false)]
-        [TestCase("{Message}", "u", false)]
-        [TestCase("{Message}", "", false)]
-        [TestCase("{Message:u3}", "u3", true)]
-        [TestCase("{Message:u3}", "u", true)]
-        [TestCase("{Message:u3}", "3", true)]
-        [TestCase("{Message:u3}", "3u", false)]
+        [TestCase("Message:u", "u", true)]
+        [TestCase("Message:u", "l", false)]
+        [TestCase("Message", "u", false)]
+        [TestCase("Message", "", false)]
+        [TestCase("Message:u3", "u3", true)]
+        [TestCase("Message:u3", "u", true)]
+        [TestCase("Message:u3", "3", true)]
+        [TestCase("Message:u3", "3u", false)]
         public void HasFormat_ShouldReturnExpectedValue(string message, string format, bool expectedValue)
         {
             //Arrange
@@ -103,9 +103,9 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime
             Assert.AreEqual(string.Empty, format.ToString());
         }
         
-        [TestCase("{Message:u}", "u")]
-        [TestCase("{Message:u3}", "u3")]
-        [TestCase("{Message:mm:ss}", "mm:ss")]
+        [TestCase("Message:u", "u")]
+        [TestCase("Message:u3", "u3")]
+        [TestCase("Message:mm:ss", "mm:ss")]
         public void TryFormat_ShouldReturnExpectedFormat(string message, string expectedFormat)
         {
             //Arrange

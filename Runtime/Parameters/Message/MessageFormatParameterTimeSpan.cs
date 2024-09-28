@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
         {
             if (format.IsEmpty)
             {
-                return parameter.ToString("g");
+                return parameter.ToString();
             }
 
             return parameter.ToString(format.ToString());

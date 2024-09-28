@@ -267,14 +267,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
             if (!_isColorize)
             {
                 var formatString = _tagFormat.Replace(PropertyKey, "0");
-                return string.Format(formatString, _logTag.TagValue);
+                return string.Format(formatString, _logTag.Tag);
             }
             
             var split = _tagFormat.Split('{', '}');
             var result = new StringBuilder();
 
             result.Append(split[0]);
-            result.Append(MessageFormatParameterTag.ColorizeTag(_logTag.TagValue, color));
+            result.Append(MessageFormatParameterTag.ColorizeTag(_logTag.Tag, color));
             result.Append(split[2]);
             
             return result.ToString();

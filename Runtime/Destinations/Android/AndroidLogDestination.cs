@@ -38,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
         private async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)
         {
             var methodName = ToNativeMethodName(logMessage.LogLevel);
-            var tag = logMessage.Tag?.TagValue ?? DefaultTag;
+            var tag = logMessage.Tag?.Tag ?? DefaultTag;
             await UniTask.SwitchToMainThread();
             _androidLogger.CallStatic(methodName, tag, renderedMessage);
         }

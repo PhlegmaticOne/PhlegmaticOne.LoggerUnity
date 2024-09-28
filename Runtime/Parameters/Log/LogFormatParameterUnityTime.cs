@@ -26,7 +26,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
             return Time.realtimeSinceStartup.ToString("F");
         }
 
-        internal static ReadOnlySpan<char> FormatTime(in TimeSpan timeSpan, in ReadOnlySpan<char> format)
+        private static ReadOnlySpan<char> FormatTime(in TimeSpan timeSpan, in ReadOnlySpan<char> format)
         {
             if (format.Equals(Format3, StringComparison.OrdinalIgnoreCase))
             {

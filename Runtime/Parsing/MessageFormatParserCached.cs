@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Concurrent;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 
@@ -7,24 +7,17 @@ namespace OpenMyGame.LoggerUnity.Parsing
     internal class MessageFormatParserCached : IMessageFormatParser
     {
         private readonly IMessageFormatParser _messageFormatParser;
-        private readonly Hashtable _formatsCache;
+        private readonly ConcurrentDictionary<string, IMessageFormat> _formatsCache;
 
         public MessageFormatParserCached(IMessageFormatParser messageFormatParser)
         {
             _messageFormatParser = messageFormatParser;
-            _formatsCache = new Hashtable();
+            _formatsCache = new ConcurrentDictionary<string, IMessageFormat>();
         }
         
         public IMessageFormat Parse(string format)
         {
-            if (_formatsCache.ContainsKey(format))
-            {
-                return (IMessageFormat)_formatsCache[format];
-            }
-
-            var messageFormat = _messageFormatParser.Parse(format);
-            _formatsCache.Add(format, messageFormat);
-            return messageFormat;
+            return _formatsCache.GetOrAdd(format, f => _messageFormatParser.Parse(f));
         }
     }
 }

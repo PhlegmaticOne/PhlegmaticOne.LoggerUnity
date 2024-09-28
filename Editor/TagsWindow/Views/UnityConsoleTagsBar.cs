@@ -38,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             {
                 if (index < _tagControls.Count)
                 {
-                    _tagControls[index].ChangeText(tag.TagValue, tag.Color);
+                    _tagControls[index].ChangeText(tag.Tag, tag.Color);
                 }
                 else
                 {

@@ -5,13 +5,13 @@ namespace OpenMyGame.LoggerUnity.Tagging
 {
     public class LogTag : IEquatable<LogTag>
     {
-        public LogTag(string tagValue)
+        public LogTag(string tag)
         {
-            TagValue = tagValue;
+            Tag = tag;
             Color = Color.white;
         }
 
-        public string TagValue { get; }
+        public string Tag { get; }
         public Color Color { get; private set; }
 
         public void SetColor(in Color color)
@@ -23,20 +23,19 @@ namespace OpenMyGame.LoggerUnity.Tagging
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return TagValue == other.TagValue;
+            return Tag == other.Tag;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((LogTag)obj);
+            return obj.GetType() == GetType() && Equals((LogTag)obj);
         }
 
         public override int GetHashCode()
         {
-            return (TagValue != null ? TagValue.GetHashCode() : 0);
+            return Tag != null ? Tag.GetHashCode() : 0;
         }
     }
 }

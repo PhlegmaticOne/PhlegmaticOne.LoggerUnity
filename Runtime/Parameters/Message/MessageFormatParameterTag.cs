@@ -26,25 +26,25 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
 
         protected override ReadOnlySpan<char> Render(LogTag parameter, in ReadOnlySpan<char> format)
         {
-            if (format.IsEmpty)
+            if (format.IsEmpty || format[0] != 'c')
             {
-                return parameter.TagValue;
+                return parameter.Tag;
             }
 
-            if (_tagColorsMap.TryGetValue(parameter.TagValue, out var tagColor))
+            if (_tagColorsMap.TryGetValue(parameter.Tag, out var tagColor))
             {
                 return ColorizeTag(parameter, tagColor);
             }
             
-            var newTagColor = _tagColorProvider.GetTagColor(parameter.TagValue);
-            _tagColorsMap[parameter.TagValue] = newTagColor;
+            var newTagColor = _tagColorProvider.GetTagColor(parameter.Tag);
+            _tagColorsMap[parameter.Tag] = newTagColor;
             return ColorizeTag(parameter, newTagColor);
         }
 
         private static string ColorizeTag(LogTag parameter, in Color color)
         {
             parameter.SetColor(color);
-            return ColorizeTag(parameter.TagValue, color);
+            return ColorizeTag(parameter.Tag, color);
         }
     }
 }

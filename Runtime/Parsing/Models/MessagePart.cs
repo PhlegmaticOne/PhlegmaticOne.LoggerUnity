@@ -61,15 +61,13 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
             
             var value = GetValue();
             var index = value.IndexOf(':');
-            var endIndex = value.IndexOf('}');
-            var startIndex = index + 1;
 
-            if (index == -1 || endIndex == -1 || startIndex == endIndex)
+            if (index == -1)
             {
                 return false;
             }
             
-            return value[startIndex..endIndex].Contains(format, StringComparison.OrdinalIgnoreCase);
+            return value[(index + 1)..].Contains(format, StringComparison.OrdinalIgnoreCase);
         }
 
         public bool TryGetFormat(out ReadOnlySpan<char> format)
@@ -82,8 +80,6 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
 
             var value = GetValue();
             var index = value.IndexOf(':');
-            var endIndex = value.IndexOf('}');
-            var startIndex = index + 1;
 
             if (index == -1)
             {
@@ -91,7 +87,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
                 return false;
             }
 
-            format = value[startIndex..endIndex];
+            format = value[(index + 1)..];
             return true;
         }
 

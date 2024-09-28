@@ -29,6 +29,11 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
         
         public string Render(LogMessage logMessage, in Span<object> parameters)
         {
+            if (_messageParts.Length == 0)
+            {
+                return string.Empty;
+            }
+            
             var logBuilder = new StringBuilder();
             var currentParameterIndex = -1;
 
