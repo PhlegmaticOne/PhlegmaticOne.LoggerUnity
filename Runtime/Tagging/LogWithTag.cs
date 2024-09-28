@@ -38,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Debug(AddTagToFormat(format), _logTag, exception);
+            Log.Debug(exception, AddTagToFormat(format), _logTag);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -57,7 +57,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Debug(AddTagToFormat(format), _logTag, parameter1, exception);
+            Log.Debug(exception, AddTagToFormat(format), _logTag, parameter1);
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -76,7 +76,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Debug(AddTagToFormat(format), _logTag, parameter1, parameter2, exception);
+            Log.Debug(exception, AddTagToFormat(format), _logTag, parameter1, parameter2);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -95,7 +95,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Debug(AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3, exception);
+            Log.Debug(exception, AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -114,7 +114,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Debug(AddTagToFormat(format), AddTagToParameters(_logTag, parameters), exception);
+            Log.Debug(exception, AddTagToFormat(format), AddTagToParameters(_logTag, parameters));
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -133,7 +133,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Warning(AddTagToFormat(format), _logTag, exception);
+            Log.Warning(exception, AddTagToFormat(format), _logTag);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -152,7 +152,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Warning(AddTagToFormat(format), _logTag, parameter1, exception);
+            Log.Warning(exception, AddTagToFormat(format), _logTag, parameter1);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -171,7 +171,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Warning(AddTagToFormat(format), _logTag, parameter1, parameter2, exception);
+            Log.Warning(exception, AddTagToFormat(format), _logTag, parameter1, parameter2);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -190,7 +190,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Warning(AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3, exception);
+            Log.Warning(exception, AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -209,7 +209,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Warning(AddTagToFormat(format), AddTagToParameters(_logTag, parameters), exception);
+            Log.Warning(exception, AddTagToFormat(format), AddTagToParameters(_logTag, parameters));
         }
         
        [MessageTemplateFormatMethod("format")]
@@ -228,7 +228,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Error(AddTagToFormat(format), _logTag, exception);
+            Log.Error(exception, AddTagToFormat(format), _logTag);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -247,7 +247,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Error(AddTagToFormat(format), _logTag, parameter1, exception);
+            Log.Error(exception, AddTagToFormat(format), _logTag, parameter1);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -266,7 +266,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Error(AddTagToFormat(format), _logTag, parameter1, parameter2, exception);
+            Log.Error(exception, AddTagToFormat(format), _logTag, parameter1, parameter2);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -285,7 +285,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Error(AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3, exception);
+            Log.Error(exception, AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -304,7 +304,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Error(AddTagToFormat(format), AddTagToParameters(_logTag, parameters), exception);
+            Log.Error(exception, AddTagToFormat(format), AddTagToParameters(_logTag, parameters));
         }
         
         [MessageTemplateFormatMethod("format")]
@@ -323,7 +323,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Fatal(AddTagToFormat(format), _logTag, exception);
+            Log.Fatal(exception, AddTagToFormat(format), _logTag);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -342,7 +342,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Fatal(AddTagToFormat(format), _logTag, parameter1, exception);
+            Log.Fatal(exception, AddTagToFormat(format), _logTag, parameter1);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -361,7 +361,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Fatal(AddTagToFormat(format), _logTag, parameter1, parameter2, exception);
+            Log.Fatal(exception, AddTagToFormat(format), _logTag, parameter1, parameter2);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -380,7 +380,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Fatal(AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3, exception);
+            Log.Fatal(exception, AddTagToFormat(format), _logTag, parameter1, parameter2, parameter3);
         }
 
         [MessageTemplateFormatMethod("format")]
@@ -399,7 +399,7 @@ namespace OpenMyGame.LoggerUnity.Tagging
                 return;
             }
             
-            Log.Fatal(AddTagToFormat(format), AddTagToParameters(_logTag, parameters), exception);
+            Log.Fatal(exception, AddTagToFormat(format), AddTagToParameters(_logTag, parameters));
         }
 
         internal string Format(in Color color)
