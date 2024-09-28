@@ -80,7 +80,7 @@ namespace OpenMyGame.LoggerUnity
 
         public ILogger CreateLogger()
         {
-            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagFactory())
+            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagProvider())
             {
                 IsEnabled = _isEnabled
             };
@@ -90,9 +90,11 @@ namespace OpenMyGame.LoggerUnity
             return logger;
         }
 
-        private ILogWithTagFactory GetLogWithTagFactory()
+        private ILogTagProvider GetLogWithTagProvider()
         {
-            return new LogWithTagFactory(_tagFormat);
+            var viewConfig = TagColorsViewConfig.Load();
+            var tagColorProvider = new TagColorProvider(viewConfig);
+            return new LogTagProvider(_tagFormat, tagColorProvider);
         }
 
         private IMessageFormatParser GetParser()
@@ -104,12 +106,11 @@ namespace OpenMyGame.LoggerUnity
 
         private void AddMessageFormatProperties()
         {
-            var tagColorProvider = new TagColorProvider(TagColorsViewConfig.Load());
             AddMessageFormatProperty(new MessageFormatParameterString());
             AddMessageFormatProperty(new MessageFormatParameterDateTime());
             AddMessageFormatProperty(new MessageFormatParameterTimeSpan());
             AddMessageFormatProperty(new MessageFormatParameterGuid());
-            AddMessageFormatProperty(new MessageFormatParameterTag(tagColorProvider));
+            AddMessageFormatProperty(new MessageFormatParameterTag());
         }
         
         private void AddMessageFormatProperty(IMessageFormatParameter formatParameter)

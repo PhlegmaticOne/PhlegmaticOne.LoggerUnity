@@ -1,24 +1,37 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Extensions;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tagging
 {
     public class LogTag : IEquatable<LogTag>
     {
-        public LogTag(string tag)
+        public static LogTag Transparent(string tag)
         {
-            Tag = tag;
-            Color = Color.white;
+            return new LogTag(tag, false, Color.white);
         }
 
-        public string Tag { get; }
-        public Color Color { get; private set; }
-
-        public void SetColor(in Color color)
+        public static LogTag Colorized(string tag, Color color)
         {
+            return new LogTag(tag, true, color);
+        }
+
+        private LogTag(string tag, bool hasColor, Color color)
+        {
+            Tag = tag;
+            HasColor = hasColor;
             Color = color;
         }
 
+        public string Tag { get; }
+        public Color Color { get; }
+        public bool HasColor { get; }
+
+        public string Render()
+        {
+            return !HasColor ? Tag : Tag.Colorize(Color);
+        }
+        
         public bool Equals(LogTag other)
         {
             if (ReferenceEquals(null, other)) return false;

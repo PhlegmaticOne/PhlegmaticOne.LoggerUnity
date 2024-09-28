@@ -5,7 +5,6 @@ using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 {
@@ -39,15 +38,14 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 
             foreach (var messagePart in _messageParts)
             {
-                var renderMessagePart = Render(logMessage, messagePart, parameters, ref currentParameterIndex);
+                var renderMessagePart = Render(messagePart, parameters, ref currentParameterIndex);
                 logBuilder.Append(renderMessagePart);
             }
             
             return logBuilder.ToString();
         }
 
-        private ReadOnlySpan<char> Render(
-            LogMessage message, in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)
+        private ReadOnlySpan<char> Render(in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out var format);
             
@@ -57,7 +55,6 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
             }
 
             var parameter = GetCurrentParameter(in parameters, ref currentParameterIndex);
-            ProcessTag(message, parameterValue, parameter);
             return RenderParameter(parameter, parameterValue, format);
         }
 
@@ -77,15 +74,6 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
             }
             
             return parameter.ToString();
-        }
-
-        private static void ProcessTag(
-            LogMessage logMessage, in ReadOnlySpan<char> parameterValue, object parameter)
-        {
-            if (parameterValue.Equals(LogWithTag.PropertyKey, StringComparison.OrdinalIgnoreCase))
-            {
-                logMessage.SetTag((LogTag)parameter);
-            }
         }
 
         private static object GetCurrentParameter(in Span<object> parameters, ref int currentParameterIndex)

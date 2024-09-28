@@ -21,7 +21,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
         public void SetTagFilter(TagClickEventArgs tagClick)
         {
             var tag = !tagClick.IsActive ? string.Empty : tagClick.Tag;
-            var tagFilter = string.IsNullOrEmpty(tag) ? string.Empty : Log.WithTag(tag).Format(tagClick.Color);
+            var tagFilter = string.IsNullOrEmpty(tag) ? string.Empty : GetTagFilter(tag);
             _unityConsoleReflection.SetFilter(tagFilter);
         }
 
@@ -37,6 +37,12 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
             {
                 HasChanges = _availableTags.Add(logMessage.Tag);
             }
+        }
+
+        private static string GetTagFilter(string tag)
+        {
+            var logTag = Log.Logger.LogTagProvider.CreateTag(tag);
+            return logTag.Render();
         }
     }
 }

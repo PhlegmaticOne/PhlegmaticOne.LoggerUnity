@@ -1,7 +1,15 @@
-﻿namespace OpenMyGame.LoggerUnity.Extensions
+﻿using UnityEngine;
+
+namespace OpenMyGame.LoggerUnity.Extensions
 {
     internal static class StringExtensions
     {
+        public static string Colorize(this string value, in Color color)
+        {
+            var colorString = ColorUtility.ToHtmlStringRGB(color);
+            return $"<color=#{colorString}>{value}</color>";
+        }
+        
         public static (int, int) CountBraces(this string value)
         {
             var countOpenBraces = 0;

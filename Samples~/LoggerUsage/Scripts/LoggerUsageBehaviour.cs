@@ -10,7 +10,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         private void Awake()
         {
             Log.Logger = new LoggerBuilder()
-                .SetTagFormat("#{Tag:c}#")
+                .SetTagFormat("#{Tag}#")
                 .SetIsCacheFormats(true)
                 .LogToUnityDebug(config =>
                 {
@@ -24,18 +24,21 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
 
         private void Start()
         {
-            Log.Debug("Debug current time: {Time}", DateTime.Now);
-            Log.Warning("Warning current time: {Time}", DateTime.Now);
-            Log.Error("Error current time: {Time}", DateTime.Now);
-            Log.Fatal("Fatal current time: {Time}", DateTime.Now);
+            Log.DebugMessage().Log("Debug current time: {Time}", DateTime.Now);
+            Log.WarningMessage().Log("Warning current time: {Time}", DateTime.Now);
+            Log.ErrorMessage().Log("Error current time: {Time}", DateTime.Now);
+            Log.FatalMessage().Log("Fatal current time: {Time}", DateTime.Now);
             
-            Log.WithTag("Time").Debug("Debug current time with tag: {Time}", DateTime.Now);
-            Log.WithTag("Time").Warning("Warning current time with tag: {Time}", DateTime.Now);
-            Log.WithTag("Time").Error("Error current time with tag: {Time}", DateTime.Now);
-            Log.WithTag("Time").Fatal("Fatal current time with tag: {Time}", DateTime.Now);
+            Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", DateTime.Now);
+            Log.WarningMessage().WithTag("Time").Log("Warning current time with tag: {Time}", DateTime.Now);
+            Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
+            Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
 
             var systemException = new Exception("System failed");
-            Log.WithTag("System").Error(systemException, "System error: {Error}", "Something went wrong");
+            Log.DebugMessage()
+                .WithTag("System")
+                .WithException(systemException)
+                .Log("System error: {Error}", "Something went wrong");
             
             Log.Exception(new Exception("Test exception"));
 

@@ -79,7 +79,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
                 SetOtherTagsInactive(toggle);
             }
             
-            OnTagClicked(new TagClickEventArgs(toggle.Text, toggle.Color, isActive));
+            OnTagClicked(new TagClickEventArgs(toggle.Text, isActive));
         }
 
         private void OnTagClicked(TagClickEventArgs tagClickEventArgs)

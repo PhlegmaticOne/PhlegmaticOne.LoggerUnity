@@ -3,8 +3,12 @@ using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
-    public class LogMessage
+    public partial class LogMessage
     {
+        private readonly ILogger _logger;
+        
+        private string _format;
+
         internal LogMessage(LogLevel logLevel)
         {
             LogLevel = logLevel;
@@ -14,27 +18,41 @@ namespace OpenMyGame.LoggerUnity.Base
         {
             Exception = exception;
         }
-        
-        public LogMessage(LogLevel logLevel, IMessageFormat format, Exception exception = null)
+
+        public LogMessage(LogLevel logLevel, ILogger logger)
         {
             LogLevel = logLevel;
-            Format = format;
-            Exception = exception;
+            _logger = logger;
         }
-        
+
         public LogLevel LogLevel { get; }
-        public IMessageFormat Format { get; }
-        public Exception Exception { get; }
+        public Exception Exception { get; private set; }
         public LogTag Tag { get; private set; }
 
-        public string Render(in Span<object> parameters)
+        public LogMessage WithTag(string tag)
         {
-            return Format?.Render(this, parameters) ?? string.Empty;
+            if (!string.IsNullOrEmpty(tag))
+            {
+                Tag = _logger.LogTagProvider.CreateTag(tag);
+            }
+
+            return this;
         }
 
-        public void SetTag(in LogTag logTag)
+        public LogMessage WithException(Exception exception)
         {
-            Tag = logTag;
+            if (exception is not null)
+            {
+                Exception = exception;
+            }
+
+            return this;
+        }
+
+        internal string Render(in Span<object> parameters)
+        {
+            var messageFormat = _logger.ParseFormat(_format);
+            return messageFormat.Render(this, parameters) ?? string.Empty;
         }
     }
 }
