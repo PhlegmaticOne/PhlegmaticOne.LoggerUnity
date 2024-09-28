@@ -14,10 +14,27 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
         
         public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
         {
+            if (message.Exception is not null)
+            {
+                return ReadOnlySpan<char>.Empty;
+            }
+            
             var stacktrace = StackTraceUtility.ExtractStackTrace();
-            var index = stacktrace.LastIndexOf(LastInformativeStacktrace, StringComparison.OrdinalIgnoreCase);
-            var startIndex = index + LastInformativeStacktrace.Length + 5;
+            var startIndex = GetStartIndex(stacktrace);
             return stacktrace[startIndex..];
+        }
+
+        private static int GetStartIndex(string stacktrace)
+        {
+            var index = stacktrace.IndexOf(LastInformativeStacktrace, StringComparison.OrdinalIgnoreCase);
+            var startIndex = index + LastInformativeStacktrace.Length + 5;
+
+            if (stacktrace[startIndex] == '\n')
+            {
+                startIndex++;
+            }
+
+            return startIndex;
         }
     }
 }

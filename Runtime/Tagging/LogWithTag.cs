@@ -24,7 +24,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
         
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug(string format, Exception exception = null)
+        public void Debug(string format)
+        {
+            Debug(null as Exception, format);
+        }
+        
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Debug(Exception exception, string format)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -36,7 +43,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
         
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug<T>(string format, T parameter1, Exception exception = null)
+        public void Debug<T>(string format, T parameter1)
+        {
+            Debug(null as Exception, format, parameter1);
+        }
+        
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Debug<T>(Exception exception, string format, T parameter1)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -48,7 +62,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
         
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
+        public void Debug<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            Debug(null as Exception, format, parameter1, parameter2);
+        }
+        
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Debug<T1, T2>(Exception exception, string format, T1 parameter1, T2 parameter2)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -60,7 +81,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3, Exception exception = null)
+        public void Debug<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            Debug(null as Exception, format, parameter1, parameter2, parameter3);
+        }
+        
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Debug<T1, T2, T3>(Exception exception, string format, T1 parameter1, T2 parameter2, T3 parameter3)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -72,7 +100,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Debug(string format, Exception exception = null, params object[] parameters)
+        public void Debug(string format, params object[] parameters)
+        {
+            Debug(null as Exception, format, parameters);
+        }
+        
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Debug(Exception exception, string format, params object[] parameters)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -84,7 +119,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
         
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning(string format, Exception exception = null)
+        public void Warning(string format)
+        {
+            Warning(null as Exception, format);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Warning(Exception exception, string format)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -96,7 +138,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning<T>(string format, T parameter1, Exception exception = null)
+        public void Warning<T>(string format, T parameter1)
+        {
+            Warning(null as Exception, format, parameter1);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Warning<T>(Exception exception, string format, T parameter1)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -108,7 +157,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
+        public void Warning<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            Warning(null as Exception, format, parameter1, parameter2);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Warning<T1, T2>(Exception exception, string format, T1 parameter1, T2 parameter2)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -120,7 +176,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3, Exception exception = null)
+        public void Warning<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            Warning(null as Exception, format, parameter1, parameter2, parameter3);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Warning<T1, T2, T3>(Exception exception, string format, T1 parameter1, T2 parameter2, T3 parameter3)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -132,7 +195,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Warning(string format, Exception exception = null, params object[] parameters)
+        public void Warning(string format, params object[] parameters)
+        {
+            Warning(null as Exception, format, parameters);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Warning(Exception exception, string format, params object[] parameters)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -142,9 +212,16 @@ namespace OpenMyGame.LoggerUnity.Tagging
             Log.Warning(AddTagToFormat(format), AddTagToParameters(_logTag, parameters), exception);
         }
         
+       [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Error(string format)
+        {
+            Error(null as Exception, format);
+        }
+
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error(string format, Exception exception = null)
+        public void Error(Exception exception, string format)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -156,7 +233,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error<T>(string format, T parameter1, Exception exception = null)
+        public void Error<T>(string format, T parameter1)
+        {
+            Error(null as Exception, format, parameter1);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Error<T>(Exception exception, string format, T parameter1)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -168,7 +252,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
+        public void Error<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            Error(null as Exception, format, parameter1, parameter2);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Error<T1, T2>(Exception exception, string format, T1 parameter1, T2 parameter2)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -180,7 +271,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3, Exception exception = null)
+        public void Error<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            Error(null as Exception, format, parameter1, parameter2, parameter3);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Error<T1, T2, T3>(Exception exception, string format, T1 parameter1, T2 parameter2, T3 parameter3)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -192,7 +290,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Error(string format, Exception exception = null, params object[] parameters)
+        public void Error(string format, params object[] parameters)
+        {
+            Error(null as Exception, format, parameters);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Error(Exception exception, string format, params object[] parameters)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -204,7 +309,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
         
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal(string format, Exception exception = null)
+        public void Fatal(string format)
+        {
+            Fatal(null as Exception, format);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Fatal(Exception exception, string format)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -216,7 +328,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal<T>(string format, T parameter1, Exception exception = null)
+        public void Fatal<T>(string format, T parameter1)
+        {
+            Fatal(null as Exception, format, parameter1);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Fatal<T>(Exception exception, string format, T parameter1)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -228,7 +347,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal<T1, T2>(string format, T1 parameter1, T2 parameter2, Exception exception = null)
+        public void Fatal<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            Fatal(null as Exception, format, parameter1, parameter2);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Fatal<T1, T2>(Exception exception, string format, T1 parameter1, T2 parameter2)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -240,7 +366,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3, Exception exception = null)
+        public void Fatal<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            Fatal(null as Exception, format, parameter1, parameter2, parameter3);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Fatal<T1, T2, T3>(Exception exception, string format, T1 parameter1, T2 parameter2, T3 parameter3)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {
@@ -252,7 +385,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
 
         [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
-        public void Fatal(string format, Exception exception = null, params object[] parameters)
+        public void Fatal(string format, params object[] parameters)
+        {
+            Fatal(null as Exception, format, parameters);
+        }
+
+        [MessageTemplateFormatMethod("format")]
+        [Conditional("UNITY_LOGGING_ENABLED")]
+        public void Fatal(Exception exception, string format, params object[] parameters)
         {
             if (!Log.IsEnabled() || string.IsNullOrEmpty(format))
             {

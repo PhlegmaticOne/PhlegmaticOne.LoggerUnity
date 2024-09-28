@@ -35,7 +35,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.WithTag("Time").Fatal("Fatal current time with tag: {Time}", DateTime.Now);
 
             var systemException = new Exception("System failed");
-            Log.WithTag("System").Error("System error: {Error}", "Something went wrong", systemException);
+            Log.WithTag("System").Error(systemException, "System error: {Error}", "Something went wrong");
             
             Log.Exception(new Exception("Test exception"));
 
