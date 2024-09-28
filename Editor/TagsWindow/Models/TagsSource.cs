@@ -41,8 +41,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
 
         private static string GetTagFilter(string tag)
         {
-            var logTag = Log.Logger.LogTagProvider.CreateTag(tag);
-            return logTag.Render();
+            return Log.Logger.LogTagProvider.FormatTag(tag);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Tagging.Factories;
+using OpenMyGame.LoggerUnity.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity.Base
 {

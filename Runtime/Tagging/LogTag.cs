@@ -6,6 +6,8 @@ namespace OpenMyGame.LoggerUnity.Tagging
 {
     public class LogTag : IEquatable<LogTag>
     {
+        public const string TagKey = "Tag";
+        
         public static LogTag Transparent(string tag)
         {
             return new LogTag(tag, false, Color.white);

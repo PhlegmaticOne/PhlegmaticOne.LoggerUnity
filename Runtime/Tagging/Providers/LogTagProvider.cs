@@ -1,9 +1,10 @@
 ﻿using System.Collections.Concurrent;
+using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 using OpenMyGame.LoggerUnity.Tagging.Colors;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Tagging.Factories
+namespace OpenMyGame.LoggerUnity.Tagging.Providers
 {
     internal class LogTagProvider : ILogTagProvider
     {
@@ -34,6 +35,24 @@ namespace OpenMyGame.LoggerUnity.Tagging.Factories
 
             var newTagColor = _tagColorsMap.GetOrAdd(tag, t => _tagColorProvider.GetTagColor(t));
             return LogTag.Colorized(tag, newTagColor);
+        }
+
+        public string FormatTag(string tag)
+        {
+            var tagFormat = _tagFormat.Replace(LogTag.TagKey, "0");
+            
+            if (!_isColorize)
+            {
+                return string.Format(tagFormat, tag);
+            }
+            
+            if (_tagColorsMap.TryGetValue(tag, out var tagColor))
+            {
+                return string.Format(tagFormat, tag.Colorize(tagColor));
+            }
+
+            var newTagColor = _tagColorsMap.GetOrAdd(tag, t => _tagColorProvider.GetTagColor(t));
+            return string.Format(tagFormat, tag.Colorize(newTagColor));
         }
 
         public string AddTagToFormat(string format)

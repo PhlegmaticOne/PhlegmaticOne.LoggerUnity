@@ -9,7 +9,7 @@ using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Factories;
 using OpenMyGame.LoggerUnity.Tagging.Colors;
 using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
-using OpenMyGame.LoggerUnity.Tagging.Factories;
+using OpenMyGame.LoggerUnity.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity
 {
