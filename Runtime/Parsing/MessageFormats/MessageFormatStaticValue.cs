@@ -12,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
             _value = value;
         }
         
-        public string Render(LogMessage logMessage, in Span<object> parameters)
+        public string Render(LogMessage logMessage, Span<object> parameters)
         {
             return _value;
         }

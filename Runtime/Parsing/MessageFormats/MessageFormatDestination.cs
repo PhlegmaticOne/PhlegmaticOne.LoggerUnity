@@ -20,7 +20,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
             _logFormatParameters = logFormatParameters;
         }
         
-        public string Render(LogMessage logMessage, in Span<object> parameters)
+        public string Render(LogMessage logMessage, Span<object> parameters)
         {
             var logBuilder = new StringBuilder();
 
@@ -33,11 +33,11 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
             return logBuilder.ToString();
         }
         
-        private ReadOnlySpan<char> Render(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
+        private ReadOnlySpan<char> Render(MessagePart messagePart, LogMessage message, Span<object> parameters)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out _);
             var property = _logFormatParameters.GetValueOrDefault(parameterValue.ToString());
-            return property is null ? parameterValue : property.GetValue(in messagePart, message, parameters);
+            return property is null ? parameterValue : property.GetValue(messagePart, message, parameters);
         }
     }
 }

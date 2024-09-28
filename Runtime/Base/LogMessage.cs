@@ -6,8 +6,6 @@ namespace OpenMyGame.LoggerUnity.Base
     public partial class LogMessage
     {
         private readonly ILogger _logger;
-        
-        private string _format;
 
         internal LogMessage(LogLevel logLevel)
         {
@@ -25,9 +23,11 @@ namespace OpenMyGame.LoggerUnity.Base
             _logger = logger;
         }
 
+
         public LogLevel LogLevel { get; }
         public Exception Exception { get; private set; }
         public LogTag Tag { get; private set; }
+        internal string RenderedMessage { get; private set; }
 
         public LogMessage WithTag(string tag)
         {
@@ -47,12 +47,6 @@ namespace OpenMyGame.LoggerUnity.Base
             }
 
             return this;
-        }
-
-        internal string Render(in Span<object> parameters)
-        {
-            var messageFormat = _logger.ParseFormat(_format);
-            return messageFormat.Render(this, parameters) ?? string.Empty;
         }
     }
 }

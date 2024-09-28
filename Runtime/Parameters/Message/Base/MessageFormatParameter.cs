@@ -6,7 +6,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
     {
         public Type PropertyType => typeof(T);
         
-        public ReadOnlySpan<char> Render(object parameter, in ReadOnlySpan<char> format)
+        public ReadOnlySpan<char> Render(object parameter, ReadOnlySpan<char> format)
         {
             return parameter is T generic ? Render(generic, format) : ReadOnlySpan<char>.Empty;
         }

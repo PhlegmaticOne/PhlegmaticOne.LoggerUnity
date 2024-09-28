@@ -12,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
         
         public string Key => "Exception";
         
-        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
         {
             if (messagePart.TryGetFormat(out var format) && message.Exception is not null)
             {

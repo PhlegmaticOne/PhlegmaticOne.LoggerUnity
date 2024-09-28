@@ -26,7 +26,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
             _parameterSerializer = parameterSerializer;
         }
         
-        public string Render(LogMessage logMessage, in Span<object> parameters)
+        public string Render(LogMessage logMessage, Span<object> parameters)
         {
             if (_messageParts.Length == 0)
             {
@@ -65,7 +65,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 
             if (_messageFormatParameters.TryGetValue(type, out var property))
             {
-                return property.Render(parameter, in format);
+                return property.Render(parameter, format);
             }
 
             if (parameterValue[0] == SerializeParameterPrefix)

@@ -10,7 +10,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
     {
         public string Key => "ThreadId";
         
-        public ReadOnlySpan<char> GetValue(in MessagePart messagePart, LogMessage message, in Span<object> parameters)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
         {
             return Thread.CurrentThread.ManagedThreadId.ToString();
         }

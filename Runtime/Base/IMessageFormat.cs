@@ -4,6 +4,6 @@ namespace OpenMyGame.LoggerUnity.Base
 {
     public interface IMessageFormat
     {
-        string Render(LogMessage logMessage, in Span<object> parameters);
+        string Render(LogMessage logMessage, Span<object> parameters);
     }
 }
