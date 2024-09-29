@@ -1,6 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {

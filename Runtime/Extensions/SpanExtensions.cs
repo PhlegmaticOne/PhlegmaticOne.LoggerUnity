@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Extensions
+namespace OpenMyGame.LoggerUnity.Extensions
 {
     internal static class SpanExtensions
     {

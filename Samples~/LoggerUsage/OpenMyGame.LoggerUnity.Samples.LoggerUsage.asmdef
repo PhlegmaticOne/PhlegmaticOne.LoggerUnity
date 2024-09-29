@@ -1,0 +1,16 @@
+{
+    "name": "OpenMyGame.LoggerUnity.Samples.LoggerUsage",
+    "rootNamespace": "OpenMyGame.LoggerUnity.LoggerUsage",
+    "references": [
+        "GUID:9126765d0f77aa14594444aaf2fb6a20"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,22 +1,36 @@
-﻿namespace OpenMyGame.LoggerUnity.Runtime.Extensions
+﻿using UnityEngine;
+
+namespace OpenMyGame.LoggerUnity.Extensions
 {
     internal static class StringExtensions
     {
-        public static int CountOf(this string str, char value)
+        public static string Colorize(this string value, in Color color)
         {
-            var count = 0;
+            var colorString = ColorUtility.ToHtmlStringRGB(color);
+            return $"<color=#{colorString}>{value}</color>";
+        }
+        
+        public static (int, int) CountBraces(this string value)
+        {
+            var countOpenBraces = 0;
+            var countCloseBraces = 0;
 
-            for (var i = 0; i < str.Length; i++)
+            for (var i = 0; i < value.Length; i++)
             {
-                var item = str[i];
-                
-                if (item.Equals(value))
+                var item = value[i];
+
+                switch (item)
                 {
-                    count++;
+                    case '{':
+                        countOpenBraces++;
+                        break;
+                    case '}':
+                        countCloseBraces++;
+                        break;
                 }
             }
 
-            return count;
+            return (countOpenBraces, countCloseBraces);
         }
     }
 }

@@ -1,48 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
+namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 {
     internal class MessageFormatLogMessage : IMessageFormat
     {
         private const char SerializeParameterPrefix = '@';
         
         private readonly MessagePart[] _messageParts;
-        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
-        private readonly IMessageFormatPropertySerializer _propertySerializer;
+        private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
+        private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
         public MessageFormatLogMessage(
             MessagePart[] messageParts, 
-            Dictionary<Type, IMessageFormatProperty> formatProperties,
-            IMessageFormatPropertySerializer propertySerializer)
+            Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
+            IMessageFormatParameterSerializer parameterSerializer)
         {
             _messageParts = messageParts;
-            _formatProperties = formatProperties;
-            _propertySerializer = propertySerializer;
+            _messageFormatParameters = messageFormatParameters;
+            _parameterSerializer = parameterSerializer;
         }
         
-        public string Render(LogMessage logMessage, in Span<object> parameters)
+        public string Render(LogMessage logMessage, Span<object> parameters)
         {
+            if (_messageParts.Length == 0)
+            {
+                return string.Empty;
+            }
+            
             var logBuilder = new StringBuilder();
             var currentParameterIndex = -1;
 
             foreach (var messagePart in _messageParts)
             {
-                var renderMessagePart = Render(logMessage, messagePart, parameters, ref currentParameterIndex);
+                var renderMessagePart = Render(messagePart, parameters, ref currentParameterIndex);
                 logBuilder.Append(renderMessagePart);
             }
             
             return logBuilder.ToString();
         }
 
-        private ReadOnlySpan<char> Render(
-            LogMessage message, in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)
+        private ReadOnlySpan<char> Render(in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out var format);
             
@@ -52,7 +55,6 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
             }
 
             var parameter = GetCurrentParameter(in parameters, ref currentParameterIndex);
-            ProcessTag(message, parameterValue, parameter);
             return RenderParameter(parameter, parameterValue, format);
         }
 
@@ -61,26 +63,17 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
         {
             var type = parameter.GetType();
 
-            if (_formatProperties.TryGetValue(type, out var property))
-            {
-                return property.Render(parameter, in format);
-            }
-
             if (parameterValue[0] == SerializeParameterPrefix)
             {
-                return _propertySerializer.Serialize(parameter);
+                return _parameterSerializer.Serialize(parameter, format);
+            }
+            
+            if (_messageFormatParameters.TryGetValue(type, out var property))
+            {
+                return property.Render(parameter, format);
             }
             
             return parameter.ToString();
-        }
-
-        private static void ProcessTag(
-            LogMessage logMessage, in ReadOnlySpan<char> parameterValue, object parameter)
-        {
-            if (parameterValue.Equals(LogWithTag.PropertyKey, StringComparison.OrdinalIgnoreCase))
-            {
-                logMessage.SetTag((LogTag)parameter);
-            }
         }
 
         private static object GetCurrentParameter(in Span<object> parameters, ref int currentParameterIndex)

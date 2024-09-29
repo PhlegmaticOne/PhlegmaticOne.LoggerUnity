@@ -1,45 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
-using UnityEngine.Pool;
+using OpenMyGame.LoggerUnity.Tagging;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Base
 {
-    public class LogMessage
+    public partial class LogMessage
     {
-        private Dictionary<string, object> _contextValues;
-        
-        public LogMessage(LogLevel logLevel, IMessageFormat format, Exception exception = null)
+        private readonly ILogger _logger;
+
+        internal LogMessage(LogLevel logLevel)
         {
             LogLevel = logLevel;
-            Format = format;
+        }
+
+        internal LogMessage(Exception exception)
+        {
             Exception = exception;
+        }
+
+        public LogMessage(LogLevel logLevel, ILogger logger)
+        {
+            LogLevel = logLevel;
+            _logger = logger;
         }
         
         public LogLevel LogLevel { get; }
-        public IMessageFormat Format { get; }
-        public Exception Exception { get; }
+        public Exception Exception { get; private set; }
         public LogTag Tag { get; private set; }
+        internal string RenderedMessage { get; private set; }
 
-        public string Render(in Span<object> parameters)
+        public LogMessage WithTag(string tag)
         {
-            return Format?.Render(this, parameters) ?? string.Empty;
-        }
-
-        public void SetTag(in LogTag logTag)
-        {
-            Tag = logTag;
-        }
-
-        public void Dispose()
-        {
-            if (_contextValues is null)
+            if (!string.IsNullOrEmpty(tag))
             {
-                return;
+                Tag = _logger.LogTagProvider.CreateTag(tag);
             }
-            
-            DictionaryPool<string, object>.Release(_contextValues);
-            _contextValues = null;
+
+            return this;
+        }
+
+        public LogMessage WithException(Exception exception)
+        {
+            if (exception is not null)
+            {
+                Exception = exception;
+            }
+
+            return this;
         }
     }
 }

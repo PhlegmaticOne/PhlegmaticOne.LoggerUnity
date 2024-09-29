@@ -10,7 +10,6 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components
     public sealed class LoggerWindowToggle : ToolbarToggle
     {
         public string Text { get; private set; }
-        public Color Color { get; private set; }
         
         public LoggerWindowToggle(string text, Color textColor, Action<LoggerWindowToggle, bool> valueChanged)
         {
@@ -25,7 +24,6 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components
         public void ChangeText(string newText, in Color color)
         {
             style.color = color;
-            Color = color;
             Text = newText;
             text = newText;
         }

@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parameters.Log.Base;
+using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Factories
+namespace OpenMyGame.LoggerUnity.Parsing.Factories
 {
     internal class MessageFormatFactoryDestination : IMessageFormatFactory
     {
-        private readonly Dictionary<string, ILogFormatProperty> _logFormatProperties;
+        private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
 
-        public MessageFormatFactoryDestination(IEnumerable<ILogFormatProperty> logFormatProperties)
+        public MessageFormatFactoryDestination(IEnumerable<ILogFormatParameter> logFormatParameters)
         {
-            _logFormatProperties = logFormatProperties.ToDictionary(x => x.Key, x => x);
+            _logFormatParameters = logFormatParameters.ToDictionary(x => x.Key, x => x);
         }
         
         public IMessageFormat CreateFormat(MessagePart[] messageParts)
         {
-            return new MessageFormatDestination(messageParts, _logFormatProperties);
+            return new MessageFormatDestination(messageParts, _logFormatParameters);
         }
     }
 }

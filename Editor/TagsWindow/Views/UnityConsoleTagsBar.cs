@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Tagging;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
@@ -38,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             {
                 if (index < _tagControls.Count)
                 {
-                    _tagControls[index].ChangeText(tag.TagValue, tag.Color);
+                    _tagControls[index].ChangeText(tag.Tag, tag.Color);
                 }
                 else
                 {
@@ -79,7 +79,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
                 SetOtherTagsInactive(toggle);
             }
             
-            OnTagClicked(new TagClickEventArgs(toggle.Text, toggle.Color, isActive));
+            OnTagClicked(new TagClickEventArgs(toggle.Text, isActive));
         }
 
         private void OnTagClicked(TagClickEventArgs tagClickEventArgs)

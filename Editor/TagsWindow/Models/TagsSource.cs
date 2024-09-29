@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Tagging;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
 {
@@ -22,7 +21,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
         public void SetTagFilter(TagClickEventArgs tagClick)
         {
             var tag = !tagClick.IsActive ? string.Empty : tagClick.Tag;
-            var tagFilter = string.IsNullOrEmpty(tag) ? string.Empty : Log.WithTag(tag).Format(tagClick.Color);
+            var tagFilter = string.IsNullOrEmpty(tag) ? string.Empty : GetTagFilter(tag);
             _unityConsoleReflection.SetFilter(tagFilter);
         }
 
@@ -38,6 +37,11 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
             {
                 HasChanges = _availableTags.Add(logMessage.Tag);
             }
+        }
+
+        private static string GetTagFilter(string tag)
+        {
+            return Log.Logger.LogTagProvider.FormatTag(tag);
         }
     }
 }

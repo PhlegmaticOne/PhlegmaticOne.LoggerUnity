@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Runtime.Base;
+using OpenMyGame.LoggerUnity.Base;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
+namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 {
     internal class MessageFormatStaticValue : IMessageFormat
     {
@@ -12,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats
             _value = value;
         }
         
-        public string Render(LogMessage logMessage, in Span<object> parameters)
+        public string Render(LogMessage logMessage, Span<object> parameters)
         {
             return _value;
         }

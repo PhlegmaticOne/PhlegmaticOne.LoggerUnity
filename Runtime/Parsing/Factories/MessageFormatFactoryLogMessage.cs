@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.MessageFormats;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Models;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Factories
+namespace OpenMyGame.LoggerUnity.Parsing.Factories
 {
     internal class MessageFormatFactoryLogMessage : IMessageFormatFactory
     {
-        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
-        private readonly IMessageFormatPropertySerializer _propertySerializer;
+        private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
+        private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
         public MessageFormatFactoryLogMessage(
-            Dictionary<Type, IMessageFormatProperty> formatProperties,
-            IMessageFormatPropertySerializer propertySerializer)
+            Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
+            IMessageFormatParameterSerializer parameterSerializer)
         {
-            _formatProperties = formatProperties;
-            _propertySerializer = propertySerializer;
+            _messageFormatParameters = messageFormatParameters;
+            _parameterSerializer = parameterSerializer;
         }
         
         public IMessageFormat CreateFormat(MessagePart[] messageParts)
         {
-            return new MessageFormatLogMessage(messageParts, _formatProperties, _propertySerializer);
+            return new MessageFormatLogMessage(messageParts, _messageFormatParameters, _parameterSerializer);
         }
     }
 }

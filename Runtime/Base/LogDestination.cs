@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Base
 {
     public abstract class LogDestination<TConfiguration> : ILogDestination
         where TConfiguration : LogConfiguration
@@ -22,12 +22,13 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public LogConfiguration Config => Configuration;
         public bool IsEnabled { get; set; }
 
-        public virtual void Initialize()
+        public void Initialize()
         {
             _logFormat = Configuration.CreateMessageFormat();
+            OnInitializing();
         }
 
-        public virtual void LogMessage(LogMessage message, in Span<object> parameters)
+        public virtual void LogMessage(LogMessage message, Span<object> parameters)
         {
             var renderedMessage = _logFormat.Render(message, parameters);
             LogRenderedMessage(message, renderedMessage);
@@ -36,6 +37,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public virtual void Release() { }
 
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage);
+        protected virtual void OnInitializing() { }
 
         public override string ToString()
         {

@@ -21,7 +21,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow
         }
 
         [RuntimeInitializeOnLoadMethod]
-        public static void Test()
+        public static void InitializeWindowModel()
         {
             TagsSource = new TagsSource();
         }

@@ -1,40 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Base;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Serializing;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Message.Tags;
-using OpenMyGame.LoggerUnity.Runtime.Tagging.Factories;
+using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message;
+using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using OpenMyGame.LoggerUnity.Parsing;
+using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Parsing.Factories;
+using OpenMyGame.LoggerUnity.Tagging.Colors;
+using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Tagging.Providers;
 
-namespace OpenMyGame.LoggerUnity.Runtime
+namespace OpenMyGame.LoggerUnity
 {
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, IMessageFormatProperty> _formatProperties;
-        private readonly IMessageFormatPropertySerializer _propertySerializer;
+        private readonly Dictionary<Type, IMessageFormatParameter> _formatProperties;
+        private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
         private string _tagFormat;
         private bool _isEnabled;
+        private bool _isCacheFormats;
 
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _formatProperties = new Dictionary<Type, IMessageFormatProperty>();
+            _formatProperties = new Dictionary<Type, IMessageFormatParameter>();
             _isEnabled = true;
+            _isCacheFormats = true;
             _tagFormat = "#{Tag}#";
-            _propertySerializer = new MessageFormatPropertySerializer();
+            _parameterSerializer = new MessageFormatParameterSerializer();
             AddMessageFormatProperties();
         }
 
-        public LoggerBuilder AddLogMessageProperty(IMessageFormatProperty formatProperty)
+        public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
         {
-            if (formatProperty is not null)
+            if (formatParameter is not null)
             {
-                AddMessageFormatProperty(formatProperty);
+                AddMessageFormatProperty(formatParameter);
             }
             
             return this;
@@ -49,6 +53,12 @@ namespace OpenMyGame.LoggerUnity.Runtime
         public LoggerBuilder SetEnabled(bool isEnabled)
         {
             _isEnabled = isEnabled;
+            return this;
+        }
+        
+        public LoggerBuilder SetIsCacheFormats(bool isCacheFormats)
+        {
+            _isCacheFormats = isCacheFormats;
             return this;
         }
 
@@ -70,31 +80,42 @@ namespace OpenMyGame.LoggerUnity.Runtime
 
         public ILogger CreateLogger()
         {
-            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _propertySerializer);
-            var messageFormatParser = new MessageFormatParser(messageFormatFactory);
-            var logWithTagFactory = new LogWithTagFactory(_tagFormat);
-            
-            ILogger logger = new Logger(_loggerDestinations, messageFormatParser, logWithTagFactory)
+            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagProvider())
             {
                 IsEnabled = _isEnabled
             };
             
             logger.Initialize();
+            
             return logger;
+        }
+
+        private ILogTagProvider GetLogWithTagProvider()
+        {
+            var viewConfig = TagColorsViewConfig.Load();
+            var tagColorProvider = new TagColorProvider(viewConfig);
+            return new LogTagProvider(_tagFormat, tagColorProvider);
+        }
+
+        private IMessageFormatParser GetParser()
+        {
+            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _parameterSerializer);
+            var messageFormatParser = new MessageFormatParser(messageFormatFactory);
+            return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
         }
 
         private void AddMessageFormatProperties()
         {
-            AddMessageFormatProperty(new MessageFormatPropertyString());
-            AddMessageFormatProperty(new MessageFormatPropertyDateTime());
-            AddMessageFormatProperty(new MessageFormatPropertyTimeSpan());
-            AddMessageFormatProperty(new MessageFormatPropertyGuid());
-            AddMessageFormatProperty(new MessageFormatPropertyTag(new TagColorProvider()));
+            AddMessageFormatProperty(new MessageFormatParameterString());
+            AddMessageFormatProperty(new MessageFormatParameterDateTime());
+            AddMessageFormatProperty(new MessageFormatParameterTimeSpan());
+            AddMessageFormatProperty(new MessageFormatParameterGuid());
+            AddMessageFormatProperty(new MessageFormatParameterTag());
         }
         
-        private void AddMessageFormatProperty(IMessageFormatProperty formatProperty)
+        private void AddMessageFormatProperty(IMessageFormatParameter formatParameter)
         {
-            _formatProperties[formatProperty.PropertyType] = formatProperty;
+            _formatProperties[formatParameter.PropertyType] = formatParameter;
         }
     }
 }

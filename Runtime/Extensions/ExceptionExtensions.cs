@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Extensions
+namespace OpenMyGame.LoggerUnity.Extensions
 {
     internal static class ExceptionExtensions
     {

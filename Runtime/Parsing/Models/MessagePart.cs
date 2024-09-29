@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
+namespace OpenMyGame.LoggerUnity.Parsing.Models
 {
     public readonly struct MessagePart
     {
@@ -11,6 +11,11 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
         internal static MessagePart Parameter(string formatParameter)
         {
             return new MessagePart(0, formatParameter.Length, formatParameter, true);
+        }
+        
+        internal static MessagePart Message(string message)
+        {
+            return new MessagePart(0, message.Length, message, false);
         }
         
         public MessagePart(int startIndex, int endIndex, string format, bool isParameter)
@@ -43,7 +48,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
             }
 
             parameterValue = value[..index];
-            format = value[index..];
+            format = value[(index + 1)..];
             return true;
         }
 
@@ -55,15 +60,14 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
             }
             
             var value = GetValue();
-            var startIndex = value.IndexOf(':');
-            var endIndex = value.IndexOf('}');
+            var index = value.IndexOf(':');
 
-            if (startIndex == -1 || endIndex == -1)
+            if (index == -1)
             {
                 return false;
             }
-
-            return value[startIndex..endIndex].Contains(format, StringComparison.OrdinalIgnoreCase);
+            
+            return value[(index + 1)..].Contains(format, StringComparison.OrdinalIgnoreCase);
         }
 
         public bool TryGetFormat(out ReadOnlySpan<char> format)
@@ -83,7 +87,7 @@ namespace OpenMyGame.LoggerUnity.Runtime.Parsing.Models
                 return false;
             }
 
-            format = value[index..];
+            format = value[(index + 1)..];
             return true;
         }
 

@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Runtime.Parsing;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Base;
-using OpenMyGame.LoggerUnity.Runtime.Parsing.Factories;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log;
-using OpenMyGame.LoggerUnity.Runtime.Properties.Log.Base;
+using OpenMyGame.LoggerUnity.Parameters.Log;
+using OpenMyGame.LoggerUnity.Parameters.Log.Base;
+using OpenMyGame.LoggerUnity.Parsing;
+using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Parsing.Factories;
 
-namespace OpenMyGame.LoggerUnity.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Base
 {
     public abstract class LogConfiguration
     {
-        private readonly List<ILogFormatProperty> _formatProperties;
+        private readonly List<ILogFormatParameter> _logFormatParameters;
         
         protected LogConfiguration()
         {
@@ -17,17 +17,17 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
             LogFormat = "{Message}";
             IsEnabled = true;
             
-            _formatProperties = new List<ILogFormatProperty>
+            _logFormatParameters = new List<ILogFormatParameter>
             {
-                new LogFormatPropertyException(),
-                new LogFormatPropertyStacktrace(),
-                new LogFormatPropertyTime(),
-                new LogFormatPropertyLogLevel(),
-                new LogFormatPropertyUnityTime(),
-                new LogFormatPropertyNewLine(),
-                new LogFormatPropertyMessage(),
-                new LogFormatPropertyThreadId(),
-                new LogFormatPropertyTimeUtc()
+                new LogFormatParameterException(),
+                new LogFormatParameterStacktrace(),
+                new LogFormatParameterTime(),
+                new LogFormatParameterLogLevel(),
+                new LogFormatParameterUnityTime(),
+                new LogFormatParameterNewLine(),
+                new LogFormatParameterMessage(),
+                new LogFormatParameterThreadId(),
+                new LogFormatParameterTimeUtc()
             };
         }
 
@@ -35,24 +35,24 @@ namespace OpenMyGame.LoggerUnity.Runtime.Base
         public string LogFormat { set; get; }
         public LogLevel MinimumLogLevel { get; set; }
 
-        public LogConfiguration AddLogFormatProperty(ILogFormatProperty formatProperty)
+        public LogConfiguration AddLogFormatParameter(ILogFormatParameter formatParameter)
         {
-            if (formatProperty is not null)
+            if (formatParameter is not null)
             {
-                _formatProperties.Add(formatProperty);
+                _logFormatParameters.Add(formatParameter);
             }
             
             return this;
         }
 
-        public IMessageFormat CreateMessageFormat()
+        internal IMessageFormat CreateMessageFormat()
         {
             return GetFormatParser().Parse(LogFormat);
         }
 
-        protected virtual IMessageFormatParser GetFormatParser()
+        private IMessageFormatParser GetFormatParser()
         {
-            var factory = new MessageFormatFactoryDestination(_formatProperties);
+            var factory = new MessageFormatFactoryDestination(_logFormatParameters);
             return new MessageFormatParser(factory);
         }
     }
