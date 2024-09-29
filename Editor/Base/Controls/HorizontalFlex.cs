@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
+﻿using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
 using UnityEngine.UIElements;
 
-namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components
+namespace OpenMyGame.LoggerUnity.Editor.Base.Controls
 {
     public class HorizontalFlex : VisualElement
     {

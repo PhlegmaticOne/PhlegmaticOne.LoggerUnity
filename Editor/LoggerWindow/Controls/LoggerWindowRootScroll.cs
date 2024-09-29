@@ -1,4 +1,4 @@
-﻿using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
+﻿using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls

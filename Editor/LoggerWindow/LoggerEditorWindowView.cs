@@ -1,5 +1,5 @@
 ﻿using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls;
-using OpenMyGame.LoggerUnity.Editor.ViewConfig;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;

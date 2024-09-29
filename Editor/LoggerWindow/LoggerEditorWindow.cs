@@ -1,5 +1,5 @@
-﻿using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
-using OpenMyGame.LoggerUnity.Editor.ViewConfig;
+﻿using OpenMyGame.LoggerUnity.Editor.Base.Styles;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls.EventData
+﻿namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Models
 {
     public readonly struct LogLevelClickEventArgs
     {

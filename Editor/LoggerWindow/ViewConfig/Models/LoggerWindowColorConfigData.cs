@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.ViewConfig.Models
+namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig.Models
 {
     [Serializable]
     public struct LoggerWindowColorConfigData

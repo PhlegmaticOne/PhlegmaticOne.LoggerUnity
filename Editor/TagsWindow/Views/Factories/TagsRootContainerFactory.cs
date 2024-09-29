@@ -1,5 +1,5 @@
-﻿using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
+﻿using OpenMyGame.LoggerUnity.Editor.Base.Controls;
+using OpenMyGame.LoggerUnity.Editor.Base.Styles;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories

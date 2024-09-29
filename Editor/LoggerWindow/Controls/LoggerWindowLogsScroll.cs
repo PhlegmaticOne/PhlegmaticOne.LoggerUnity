@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
-using OpenMyGame.LoggerUnity.Editor.ViewConfig;
-using OpenMyGame.LoggerUnity.Editor.ViewConfig.Models;
+using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig;
+using OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig.Models;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls

@@ -1,9 +1,9 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Editor.Base.Controls;
+using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
+using OpenMyGame.LoggerUnity.Editor.Base.Styles;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;

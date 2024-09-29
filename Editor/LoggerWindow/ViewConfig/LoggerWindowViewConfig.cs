@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Editor.ViewConfig.Models;
+﻿using OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig.Models;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.ViewConfig
+namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig
 {
     [CreateAssetMenu(menuName = "Test", fileName = "LoggerWindowViewConfig")]
     public class LoggerWindowViewConfig : ScriptableObject

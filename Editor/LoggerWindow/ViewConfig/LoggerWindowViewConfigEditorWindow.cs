@@ -1,10 +1,8 @@
-﻿using OpenMyGame.LoggerUnity.Editor.ConfigsEditor;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow;
-using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
+﻿using OpenMyGame.LoggerUnity.Editor.Base.Windows;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
-namespace OpenMyGame.LoggerUnity.Editor.ViewConfig
+namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig
 {
     public class LoggerWindowViewConfigEditorWindow : ConfigEditorWindowBase
     {

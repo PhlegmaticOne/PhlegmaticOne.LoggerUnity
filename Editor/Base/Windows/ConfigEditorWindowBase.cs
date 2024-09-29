@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor
+namespace OpenMyGame.LoggerUnity.Editor.Base.Windows
 {
     public abstract class ConfigEditorWindowBase : EditorWindow
     {

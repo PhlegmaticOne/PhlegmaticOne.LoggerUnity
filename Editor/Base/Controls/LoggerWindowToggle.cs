@@ -1,11 +1,11 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
-using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
+using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
+using OpenMyGame.LoggerUnity.Editor.Base.Styles;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components
+namespace OpenMyGame.LoggerUnity.Editor.Base.Controls
 {
     public sealed class LoggerWindowToggle : ToolbarToggle
     {

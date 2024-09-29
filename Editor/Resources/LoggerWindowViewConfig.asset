@@ -12,33 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4040d0b60ae43039647d073a3e4726f, type: 3}
   m_Name: LoggerWindowViewConfig
   m_EditorClassIdentifier: 
-  _configData:
-    _debugColors: []
-    _warningColor:
-      _backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      _textColor: {r: 0, g: 0, b: 0, a: 0}
-    _errorColor:
-      _backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      _textColor: {r: 0, g: 0, b: 0, a: 0}
-    _fatalColor:
-      _backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      _textColor: {r: 0, g: 0, b: 0, a: 0}
-    _selectedLogColor:
-      _backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      _textColor: {r: 0, g: 0, b: 0, a: 0}
-    _logInspectorColor:
-      _backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      _textColor: {r: 0, g: 0, b: 0, a: 0}
-    _debugToggle:
-      _color: {r: 0, g: 0, b: 0, a: 0}
-      _text: 
-    _warningToggle:
-      _color: {r: 0, g: 0, b: 0, a: 0}
-      _text: 
-    _errorToggle:
-      _color: {r: 0, g: 0, b: 0, a: 0}
-      _text: 
-    _fatalToggle:
-      _color: {r: 0, g: 0, b: 0, a: 0}
-      _text: 
-    _selectedLogWindowSizePercent: 0
+  _debugColors:
+  - _backgroundColor: {r: 0.24705884, g: 0.24705884, b: 0.24705884, a: 1}
+    _textColor: {r: 0.7725491, g: 0.7725491, b: 0.7725491, a: 1}
+  - _backgroundColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+    _textColor: {r: 0.7725491, g: 0.7725491, b: 0.7725491, a: 1}
+  _warningColor:
+    _backgroundColor: {r: 0.2830189, g: 0.24528639, b: 0.14017445, a: 1}
+    _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _errorColor:
+    _backgroundColor: {r: 0.32156864, g: 0.19215688, b: 0.19215688, a: 1}
+    _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _fatalColor:
+    _backgroundColor: {r: 0.3207547, g: 0.19215022, b: 0.19215022, a: 1}
+    _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedLogColor:
+    _backgroundColor: {r: 0.17254902, g: 0.3647059, b: 0.5294118, a: 1}
+    _textColor: {r: 0.93725497, g: 0.95294124, b: 0.96470594, a: 1}
+  _logInspectorColor:
+    _backgroundColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+    _textColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedLogWindowSizePercent: 0.25
