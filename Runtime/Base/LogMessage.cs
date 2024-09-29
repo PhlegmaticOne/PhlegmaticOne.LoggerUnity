@@ -22,8 +22,7 @@ namespace OpenMyGame.LoggerUnity.Base
             LogLevel = logLevel;
             _logger = logger;
         }
-
-
+        
         public LogLevel LogLevel { get; }
         public Exception Exception { get; private set; }
         public LogTag Tag { get; private set; }
