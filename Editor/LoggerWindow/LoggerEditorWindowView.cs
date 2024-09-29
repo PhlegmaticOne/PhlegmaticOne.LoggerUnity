@@ -52,11 +52,17 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow
             }
             
             RecalculateLogControlHeights(windowHeight, toolBarHeight, tagsBarHeight);
+            RecalculateSearchbarWidth();
+        }
+
+        private void RecalculateSearchbarWidth()
+        {
+            _toolBar.SetSearchbarWidth(_window.position.width);
         }
 
         private void RecalculateLogControlHeights(float windowHeight, float toolBarHeight, float tagsBarHeight)
         {
-            var labelHeight = Mathf.Max(0, windowHeight * _viewConfig.ConfigData.SelectedLogWindowSizePercent);
+            var labelHeight = Mathf.Max(0, windowHeight * _viewConfig.SelectedLogWindowSizePercent);
             var height = Mathf.Max(0, windowHeight - toolBarHeight - tagsBarHeight - labelHeight);
             
             _logInspector.style.height = labelHeight;

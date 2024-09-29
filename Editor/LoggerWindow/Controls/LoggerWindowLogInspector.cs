@@ -19,7 +19,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
         {
             style.height = 100;
 
-            var logInspectorColor = viewConfig.ConfigData.LogInspectorColor;
+            var logInspectorColor = viewConfig.LogInspectorColor;
             style.color = logInspectorColor.TextColor;
             style.backgroundColor = logInspectorColor.BackgroundColor;
         }

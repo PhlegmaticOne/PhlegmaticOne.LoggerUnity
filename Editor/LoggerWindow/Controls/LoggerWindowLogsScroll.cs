@@ -38,9 +38,8 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
         
         private LoggerWindowColorConfigData GetLogColor()
         {
-            var viewConfig = _viewConfig.ConfigData;
-            var colorIndex = _logsCount % viewConfig.DebugColors.Length;
-            return _viewConfig.ConfigData.DebugColors[colorIndex];
+            var colorIndex = _logsCount % _viewConfig.DebugColors.Length;
+            return _viewConfig.DebugColors[colorIndex];
         }
     }
 }

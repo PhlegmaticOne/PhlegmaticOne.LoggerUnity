@@ -54,7 +54,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
         {
             _isSelected = isSelected;
 
-            var colorData = _isSelected ? _viewConfig.ConfigData.SelectedLogColor : _colorData;
+            var colorData = _isSelected ? _viewConfig.SelectedLogColor : _colorData;
             style.backgroundColor = colorData.BackgroundColor;
             style.color = colorData.TextColor;
         }

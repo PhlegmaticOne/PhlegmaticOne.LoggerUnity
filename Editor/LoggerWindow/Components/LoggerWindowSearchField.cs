@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components
         public LoggerWindowSearchField(Action<string> valueChanged)
         {
             style.width = LoggerWindowConstantStyles.SearchBarWidth;
-            style.marginRight = 10;
+            style.marginRight = LoggerWindowConstantStyles.SearchBarMargin;
             style.height = LoggerWindowConstantStyles.ToolbarHeight;
             tooltip = LoggerWindowConstantStyles.SearchBarTooltip;
             this.RegisterValueChangedCallback(e => valueChanged(e.newValue));

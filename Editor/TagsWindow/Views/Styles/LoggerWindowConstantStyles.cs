@@ -14,6 +14,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles
         internal static readonly Color BorderColor = new(0.13f, 0.13f, 0.13f);
 
         internal const int SearchBarWidth = 300;
+        internal const int SearchBarMargin = 10;
         internal const string SearchBarTooltip = "Search filter...";
 
         internal const string ClearButtonText = "Clear";
