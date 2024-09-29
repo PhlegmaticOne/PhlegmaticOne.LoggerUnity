@@ -63,14 +63,14 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
         {
             var type = parameter.GetType();
 
+            if (parameterValue[0] == SerializeParameterPrefix)
+            {
+                return _parameterSerializer.Serialize(parameter, format);
+            }
+            
             if (_messageFormatParameters.TryGetValue(type, out var property))
             {
                 return property.Render(parameter, format);
-            }
-
-            if (parameterValue[0] == SerializeParameterPrefix)
-            {
-                return _parameterSerializer.Serialize(parameter);
             }
             
             return parameter.ToString();

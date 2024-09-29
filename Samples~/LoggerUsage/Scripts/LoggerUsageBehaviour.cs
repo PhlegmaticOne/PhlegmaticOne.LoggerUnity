@@ -33,6 +33,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.WarningMessage().WithTag("Time").Log("Warning current time with tag: {Time}", DateTime.Now);
             Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
             Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
+            
+            Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
 
             var systemException = new Exception("System failed");
             Log.DebugMessage()

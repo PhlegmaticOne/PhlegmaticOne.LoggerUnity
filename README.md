@@ -165,6 +165,15 @@ Log.Logger = new LoggerBuilder()
 | ```Tag```       | ```c``` - тег выводится с оберткой цвета: ```<color=#color>Tag</color>``` |
 | ```TimeSpan```  | Форматы, которые поддерживает ```TimeSpan```                              |
 
+Если необходимо вывести комплексный объект в виде json-строки, то перед названием его параметра необходимо добавить ```@```, например ```{@Value}```.
+К такому параметру можно добавить следующие форматы:
+
+| Формат            | Описание                     |
+|-------------------|------------------------------|
+| Пустой            | Выводит json в одну строку   |
+| ```f``` (full)    | Выводит форматированный json |
+| ```c``` (compact) | Выводит json в одну строку   |
+
 К списку существующих форматтеров объектов можно добавить свой кастомный.
 Для этого нужно создать класс, который будет наследовать класс ```MessageFormatParameter<T>```, где T - свой кастомный тип, который необходимо отформатировать.
 Например:
@@ -229,4 +238,6 @@ Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", Da
 Log.WarningMessage().WithTag("Time").Log("Warning current time with tag: {Time}", DateTime.Now);
 Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
 Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
+
+Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
 ```
