@@ -1,9 +1,6 @@
 # unity-package-logger-unity
 ## com.openmygame.loggerunity
 
-Репозиторий пакета аттрибуции юзера
-[Ссылка на репозиторий модуля](https://github.com/PhlegmaticOne/PhlegmaticOne.LoggerUnity)
-
 ## <b>Подключение и импорт пакета</b>
 
 [Подключение к приватному репозиторию для выкачки пакетов](https://gitlab.com/openmygame/unity-modules-registry#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5)
@@ -11,6 +8,7 @@
 [Импорт пакета в Unity](https://gitlab.com/openmygame/unity-modules-registry#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D1%8E%D0%BD%D0%B8%D1%82%D0%B8)
 
 Для включения логгирования нужно прописать define: ```UNITY_LOGGING_ENABLED```
+
 ## <b>Описание</b>
 
 Пакет структурного логирования
