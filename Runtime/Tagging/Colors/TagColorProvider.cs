@@ -5,9 +5,9 @@ namespace OpenMyGame.LoggerUnity.Tagging.Colors
 {
     internal class TagColorProvider : ITagColorProvider
     {
-        private readonly TagColorsViewConfig _colorsViewConfig;
+        private readonly ITagColorsViewConfig _colorsViewConfig;
         
-        public TagColorProvider(TagColorsViewConfig colorsViewConfig)
+        public TagColorProvider(ITagColorsViewConfig colorsViewConfig)
         {
             _colorsViewConfig = colorsViewConfig;
         }

@@ -10,7 +10,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         private void Awake()
         {
             Log.Logger = new LoggerBuilder()
-                .SetTagFormat("#{Tag}#")
+                .SetTagFormat("#{Tag:c}#")
                 .SetIsCacheFormats(true)
                 .LogToUnityDebug(config =>
                 {
