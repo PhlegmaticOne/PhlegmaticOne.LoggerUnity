@@ -219,6 +219,15 @@ Log.Logger = new LoggerBuilder()
 
 ![image](https://github.com/user-attachments/assets/f130c21a-e91f-4ed4-a84b-fad990ac5801)
 
+После создания конфига его нужно указать в ```LoggerBuilder```, чтобы он использовался вместо рандомной генерации цветов, например:
+
+```csharp
+Log.Logger = new LoggerBuilder()
+    .SetTagColorsViewConfig(TagColorsViewConfig.Load())
+    .LogToUnityDebug()
+    .CreateLogger();
+```
+
 ### Теги в Editor
 
 В Editor'е теги добавляются в начало сообщения, а также в окно с тегами, которое может быть закреплено внизу окна с логами для быстрой фильтрации по одному тегу.
