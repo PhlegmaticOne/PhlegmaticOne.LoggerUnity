@@ -7,8 +7,10 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
 {
     public class UnityDebugLogDestination : LogDestination<UnityDebugLogConfiguration>
     {
+        internal const string Destination = "Debug";
+        
         private const string Format = "{0}";
-        public override string DestinationName => "Debug";
+        public override string DestinationName => Destination;
 
         protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage)
         {

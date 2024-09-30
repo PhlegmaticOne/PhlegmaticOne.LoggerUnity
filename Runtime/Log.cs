@@ -25,7 +25,7 @@ namespace OpenMyGame.LoggerUnity
             }
         }
 
-        public static event Action<LogMessage> MessageLogged;
+        public static event Action<LogMessageLoggedEventArgs> MessageLogged;
 
         public static void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
@@ -56,9 +56,9 @@ namespace OpenMyGame.LoggerUnity
             return new LogMessage(logLevel, Logger);
         }
 
-        private static void OnMessageLogged(LogMessage obj)
+        private static void OnMessageLogged(LogMessageLoggedEventArgs messageLoggedEventArgs)
         {
-            MessageLogged?.Invoke(obj);
+            MessageLogged?.Invoke(messageLoggedEventArgs);
         }
     }
 }

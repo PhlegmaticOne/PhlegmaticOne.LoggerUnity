@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.LoggerUsage
@@ -12,6 +13,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag:c}#")
                 .SetIsCacheFormats(true)
+                .SetTagColorsViewConfig(TagColorsViewConfig.Load())
                 .LogToUnityDebug(config =>
                 {
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";

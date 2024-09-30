@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug;
 using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
@@ -31,8 +32,15 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
             return _availableTags;
         }
 
-        private void HandleMessageLogged(LogMessage logMessage)
+        private void HandleMessageLogged(LogMessageLoggedEventArgs eventArgs)
         {
+            if (eventArgs.Destination != UnityDebugLogDestination.Destination)
+            {
+                return;
+            }
+            
+            var logMessage = eventArgs.Message;
+            
             if (logMessage.Tag is not null)
             {
                 HasChanges = _availableTags.Add(logMessage.Tag);

@@ -22,6 +22,7 @@ namespace OpenMyGame.LoggerUnity
         private string _tagFormat;
         private bool _isEnabled;
         private bool _isCacheFormats;
+        private ITagColorsViewConfig _tagColorsViewConfig;
 
         public LoggerBuilder()
         {
@@ -31,6 +32,7 @@ namespace OpenMyGame.LoggerUnity
             _isCacheFormats = true;
             _tagFormat = "#{Tag}#";
             _parameterSerializer = new MessageFormatParameterSerializer();
+            _tagColorsViewConfig = new TagColorsViewConfigRandom();
             AddMessageFormatProperties();
         }
 
@@ -59,6 +61,16 @@ namespace OpenMyGame.LoggerUnity
         public LoggerBuilder SetIsCacheFormats(bool isCacheFormats)
         {
             _isCacheFormats = isCacheFormats;
+            return this;
+        }
+
+        public LoggerBuilder SetTagColorsViewConfig(ITagColorsViewConfig tagColorsViewConfig)
+        {
+            if (tagColorsViewConfig is not null)
+            {
+                _tagColorsViewConfig = tagColorsViewConfig;
+            }
+
             return this;
         }
 
@@ -92,8 +104,7 @@ namespace OpenMyGame.LoggerUnity
 
         private ILogTagProvider GetLogWithTagProvider()
         {
-            var viewConfig = TagColorsViewConfig.Load();
-            var tagColorProvider = new TagColorProvider(viewConfig);
+            var tagColorProvider = new TagColorProvider(_tagColorsViewConfig);
             return new LogTagProvider(_tagFormat, tagColorProvider);
         }
 

@@ -10,10 +10,10 @@ namespace OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig
         [SerializeField] private List<TagColorConfigData> _knownTagColors;
         [SerializeField] private Color[] _unknownTagColors;
 
-        internal static ITagColorsViewConfig Load()
+        public static ITagColorsViewConfig Load()
         {
             var config = Resources.Load<TagColorsViewConfig>("LoggerUnity/TagColorsViewConfig");
-            return config == null ? CreateInstance<TagColorsViewConfig>() : new TagColorsViewConfigRandom();
+            return config == null ? new TagColorsViewConfigRandom() : config;
         }
 
         public bool TryGetKnownTagColor(string tag, out Color color)
