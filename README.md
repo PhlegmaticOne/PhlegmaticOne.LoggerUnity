@@ -216,6 +216,7 @@ Log.Logger = new LoggerBuilder()
 
 Пример конфига приведен на скриншоте:
 
+![image](https://github.com/user-attachments/assets/f130c21a-e91f-4ed4-a84b-fad990ac5801)
 
 ### Теги в Editor
 
