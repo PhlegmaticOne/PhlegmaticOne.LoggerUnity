@@ -1,9 +1,6 @@
 # unity-package-logger-unity
 ## com.openmygame.loggerunity
 
-Репозиторий пакета аттрибуции юзера
-[Ссылка на репозиторий модуля](https://github.com/PhlegmaticOne/PhlegmaticOne.LoggerUnity)
-
 ## <b>Подключение и импорт пакета</b>
 
 [Подключение к приватному репозиторию для выкачки пакетов](https://gitlab.com/openmygame/unity-modules-registry#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5)
@@ -11,6 +8,7 @@
 [Импорт пакета в Unity](https://gitlab.com/openmygame/unity-modules-registry#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D1%8E%D0%BD%D0%B8%D1%82%D0%B8)
 
 Для включения логгирования нужно прописать define: ```UNITY_LOGGING_ENABLED```
+
 ## <b>Описание</b>
 
 Пакет структурного логирования
@@ -206,9 +204,44 @@ Log.Logger = new LoggerBuilder()
 
 Сообщения можно выводить с тегами
 
-Для этого необходимо вызвать метод ```LogMessage.WithTag("Tag")```, который установит тег в сообщение
+Для этого необходимо вызвать метод ```LogMessage.WithTag("Tag")```, который установит тег в сообщение.
+Пример:
+
+```csharp
+Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", DateTime.Now);
+```
+
+Также можно создать экземпляр класса ```LogWithTag```, в конструктор которого можно передать тег, который проставится в сообщение при его создании.
+Пример:
+
+```csharp
+var logWithTag = new LogWithTag("Time");
+logWithTag
+    .DebugMessage()
+    .Log("Debug current time with log with tag: {Time}", DateTime.Now);
+```
 
 При этом в финальный формат сообщения в начало добавится формат тега, который был указан при конфигурации логгера
+
+Для окраски тегов в Editor нужно открыть окно по пути ```Logger/Show tags editor``` и сначала создать конфиг, нажав на кнопку ```Create tag colors config```.
+Если конфиг не создан, то при каждом запуске приложения для тегов будет генерироваться рандомный цвет.
+После этого можно будет редактировать конфиг с цветами тегов, который состоит из двух частей:
+
+1. <b>Known tag colors</b> - необходимо указать название тега и его цвет - используется для известных тегов, которые есть в коде или которые предположительно появятся в ходе логгирования
+2. <b>Unknown tag colors</b> - можно указать цвета для тегов, которые заранее неизвестно будут показываться или нет - будет выбран рандомный цвет из указанных (если цветов нет, будет сгенерирован рандомный цвет)
+
+Пример конфига приведен на скриншоте:
+
+![image](https://github.com/user-attachments/assets/f130c21a-e91f-4ed4-a84b-fad990ac5801)
+
+После создания конфига его нужно указать в ```LoggerBuilder```, чтобы он использовался вместо рандомной генерации цветов, например:
+
+```csharp
+Log.Logger = new LoggerBuilder()
+    .SetTagColorsViewConfig(TagColorsViewConfig.Load())
+    .LogToUnityDebug()
+    .CreateLogger();
+```
 
 ### Теги в Editor
 

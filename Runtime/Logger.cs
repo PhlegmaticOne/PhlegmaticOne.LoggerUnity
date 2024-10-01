@@ -38,7 +38,7 @@ namespace OpenMyGame.LoggerUnity
         }
 
         public ILogTagProvider LogTagProvider { get; }
-        public event Action<LogMessage> MessageLogged;
+        public event Action<LogMessageLoggedEventArgs> MessageLogged;
 
         public void Initialize()
         {
@@ -72,10 +72,9 @@ namespace OpenMyGame.LoggerUnity
                 if (IsLogMessageToDestination(loggerDestination, logMessage))
                 {
                     loggerDestination.LogMessage(logMessage, parameters);
+                    OnMessageToDestinationLogged(logMessage, loggerDestination);
                 }
             }
-            
-            MessageLogged?.Invoke(logMessage);
         }
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled)
@@ -118,6 +117,11 @@ namespace OpenMyGame.LoggerUnity
             {
                 Dispose();
             }
+        }
+
+        private void OnMessageToDestinationLogged(LogMessage logMessage, ILogDestination loggerDestination)
+        {
+            MessageLogged?.Invoke(new LogMessageLoggedEventArgs(logMessage, loggerDestination.DestinationName));
         }
 
         private static bool IsLogMessageToDestination(ILogDestination destination, LogMessage message)

@@ -7,7 +7,7 @@ namespace OpenMyGame.LoggerUnity.Base
     {
         bool IsEnabled { get; set; }
         ILogTagProvider LogTagProvider { get; }
-        event Action<LogMessage> MessageLogged;
+        event Action<LogMessageLoggedEventArgs> MessageLogged;
         void Initialize();
         IMessageFormat ParseFormat(string format);
         void LogMessage(LogMessage logMessage, Span<object> parameters);

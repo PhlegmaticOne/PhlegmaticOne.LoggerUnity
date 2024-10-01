@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Base;
 
 namespace OpenMyGame.LoggerUnity
@@ -25,7 +24,7 @@ namespace OpenMyGame.LoggerUnity
             }
         }
 
-        public static event Action<LogMessage> MessageLogged;
+        public static event Action<LogMessageLoggedEventArgs> MessageLogged;
 
         public static void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
@@ -37,7 +36,6 @@ namespace OpenMyGame.LoggerUnity
         public static LogMessage ErrorMessage() => Message(LogLevel.Error);
         public static LogMessage FatalMessage() => Message(LogLevel.Fatal);
 
-        [MessageTemplateFormatMethod("format")]
         [Conditional("UNITY_LOGGING_ENABLED")]
         public static void Exception(Exception exception)
         {
@@ -51,14 +49,11 @@ namespace OpenMyGame.LoggerUnity
                 .Log("{Exception}");
         }
 
-        private static LogMessage Message(LogLevel logLevel)
-        {
-            return new LogMessage(logLevel, Logger);
-        }
+        private static LogMessage Message(LogLevel logLevel) => new(logLevel, Logger);
 
-        private static void OnMessageLogged(LogMessage obj)
+        private static void OnMessageLogged(LogMessageLoggedEventArgs messageLoggedEventArgs)
         {
-            MessageLogged?.Invoke(obj);
+            MessageLogged?.Invoke(messageLoggedEventArgs);
         }
     }
 }

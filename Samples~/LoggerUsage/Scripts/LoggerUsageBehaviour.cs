@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.LoggerUsage
@@ -10,8 +11,9 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         private void Awake()
         {
             Log.Logger = new LoggerBuilder()
-                .SetTagFormat("#{Tag}#")
+                .SetTagFormat("#{Tag:c}#")
                 .SetIsCacheFormats(true)
+                .SetTagColorsViewConfig(TagColorsViewConfig.Load())
                 .LogToUnityDebug(config =>
                 {
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";
@@ -34,6 +36,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
             Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
             
+            LogWithTag();
+            
             Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
 
             var systemException = new Exception("System failed");
@@ -43,7 +47,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
                 .Log("System error: {Error}", "Something went wrong");
             
             Log.Exception(new Exception("Test exception"));
-
+            
             try
             {
                 throw new DivideByZeroException("Not available operation");
@@ -52,6 +56,14 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             {
                 Log.Exception(e);
             }
+        }
+
+        private static void LogWithTag()
+        {
+            var logWithTag = new LogWithTag("Time");
+            logWithTag
+                .DebugMessage()
+                .Log("Debug current time with log with tag: {Time}", DateTime.Now);
         }
     }
 }

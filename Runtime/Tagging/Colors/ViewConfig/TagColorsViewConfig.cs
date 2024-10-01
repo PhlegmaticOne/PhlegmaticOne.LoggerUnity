@@ -5,19 +5,20 @@ using Random = UnityEngine.Random;
 
 namespace OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig
 {
-    public class TagColorsViewConfig : ScriptableObject
+    public class TagColorsViewConfig : ScriptableObject, ITagColorsViewConfig
     {
-        [SerializeField] private List<TagColorConfigData> _knownTagsColors;
+        [SerializeField] private List<TagColorConfigData> _knownTagColors;
         [SerializeField] private Color[] _unknownTagColors;
 
-        internal static TagColorsViewConfig Load()
+        public static ITagColorsViewConfig Load()
         {
-            return Resources.Load<TagColorsViewConfig>("TagColorsViewConfig");
+            var config = Resources.Load<TagColorsViewConfig>("LoggerUnity/TagColorsViewConfig");
+            return config == null ? new TagColorsViewConfigRandom() : config;
         }
 
         public bool TryGetKnownTagColor(string tag, out Color color)
         {
-            var tagData = _knownTagsColors.Find(x => x.Tag.Equals(tag, StringComparison.OrdinalIgnoreCase));
+            var tagData = _knownTagColors.Find(x => x.Tag.Equals(tag, StringComparison.OrdinalIgnoreCase));
 
             if (string.IsNullOrEmpty(tagData.Tag))
             {

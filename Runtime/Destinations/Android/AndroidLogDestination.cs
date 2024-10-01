@@ -18,7 +18,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             _androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
         }
 
-        protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage)
+        protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters)
         {
             if (_androidLogger is null)
             {
