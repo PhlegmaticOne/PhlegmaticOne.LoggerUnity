@@ -31,12 +31,12 @@ namespace OpenMyGame.LoggerUnity.Base
         public virtual void LogMessage(LogMessage message, Span<object> parameters)
         {
             var renderedMessage = _logFormat.Render(message, parameters);
-            LogRenderedMessage(message, renderedMessage);
+            LogRenderedMessage(message, renderedMessage, parameters);
         }
 
         public virtual void Release() { }
 
-        protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage);
+        protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters);
         protected virtual void OnInitializing() { }
 
         public override string ToString()

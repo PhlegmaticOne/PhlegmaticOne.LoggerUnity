@@ -12,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
         private const string Format = "{0}";
         public override string DestinationName => Destination;
 
-        protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage)
+        protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters)
         {
             var logType = LogLevelToLogTypeConverter.Convert(logMessage.LogLevel);
             
