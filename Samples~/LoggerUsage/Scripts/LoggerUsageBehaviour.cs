@@ -36,6 +36,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
             Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
             
+            LogWithTag();
+            
             Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
 
             var systemException = new Exception("System failed");
@@ -45,7 +47,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
                 .Log("System error: {Error}", "Something went wrong");
             
             Log.Exception(new Exception("Test exception"));
-
+            
             try
             {
                 throw new DivideByZeroException("Not available operation");
@@ -54,6 +56,14 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             {
                 Log.Exception(e);
             }
+        }
+
+        private static void LogWithTag()
+        {
+            var logWithTag = new LogWithTag("Time");
+            logWithTag
+                .DebugMessage()
+                .Log("Debug current time with log with tag: {Time}", DateTime.Now);
         }
     }
 }

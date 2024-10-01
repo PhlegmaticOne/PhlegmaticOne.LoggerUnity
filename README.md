@@ -204,7 +204,22 @@ Log.Logger = new LoggerBuilder()
 
 Сообщения можно выводить с тегами
 
-Для этого необходимо вызвать метод ```LogMessage.WithTag("Tag")```, который установит тег в сообщение
+Для этого необходимо вызвать метод ```LogMessage.WithTag("Tag")```, который установит тег в сообщение.
+Пример:
+
+```csharp
+Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", DateTime.Now);
+```
+
+Также можно создать экземпляр класса ```LogWithTag```, в конструктор которого можно передать тег, который проставится в сообщение при его создании.
+Пример:
+
+```csharp
+var logWithTag = new LogWithTag("Time");
+logWithTag
+    .DebugMessage()
+    .Log("Debug current time with log with tag: {Time}", DateTime.Now);
+```
 
 При этом в финальный формат сообщения в начало добавится формат тега, который был указан при конфигурации логгера
 
