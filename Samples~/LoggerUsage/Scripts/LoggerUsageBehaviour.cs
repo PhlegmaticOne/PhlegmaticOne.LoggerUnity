@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.LoggerUsage
@@ -11,9 +11,9 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         private void Awake()
         {
             Log.Logger = new LoggerBuilder()
-                .SetTagFormat("#{Tag:c}#")
+                .SetTagFormat("#{Tag}#")
                 .SetIsCacheFormats(true)
-                .SetTagColorsViewConfig(TagColorsViewConfig.Load())
+                .ColorizeParameters(ParameterColorsViewConfig.Load())
                 .LogToUnityDebug(config =>
                 {
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";

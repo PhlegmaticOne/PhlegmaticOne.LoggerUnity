@@ -4,6 +4,7 @@ using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using OpenMyGame.LoggerUnity.Parameters.Processors.Colors;
 using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
@@ -30,7 +31,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing.MessageFormats
 
             var messageFormat = new MessageFormatLogMessage(messageParts,
                 new Dictionary<Type, IMessageFormatParameter>(),
-                new MessageFormatParameterSerializer());
+                new MessageFormatParameterSerializer(),
+                new ParameterPostRenderProcessor());
 
             var renderedMessage = messageFormat.Render(logMessage, parameters);
             
@@ -55,7 +57,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing.MessageFormats
 
             var messageFormat = new MessageFormatLogMessage(messageParts,
                 new Dictionary<Type, IMessageFormatParameter>(),
-                new MessageFormatParameterSerializer());
+                new MessageFormatParameterSerializer(),
+                new ParameterPostRenderProcessor());
 
             var renderedMessage = messageFormat.Render(logMessage, parameters);
             

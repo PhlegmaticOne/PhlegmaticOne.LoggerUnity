@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using OpenMyGame.LoggerUnity.Parameters.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
@@ -15,15 +17,18 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
         private readonly MessagePart[] _messageParts;
         private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
+        private readonly IParameterPostRenderProcessor _postRenderProcessor;
 
         public MessageFormatLogMessage(
             MessagePart[] messageParts, 
             Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
-            IMessageFormatParameterSerializer parameterSerializer)
+            IMessageFormatParameterSerializer parameterSerializer,
+            IParameterPostRenderProcessor postRenderProcessor)
         {
             _messageParts = messageParts;
             _messageFormatParameters = messageFormatParameters;
             _parameterSerializer = parameterSerializer;
+            _postRenderProcessor = postRenderProcessor;
         }
         
         public string Render(LogMessage logMessage, Span<object> parameters)
@@ -39,7 +44,15 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
             foreach (var messagePart in _messageParts)
             {
                 var renderMessagePart = Render(messagePart, parameters, ref currentParameterIndex);
-                logBuilder.Append(renderMessagePart);
+
+                if (!messagePart.IsParameter)
+                {
+                    logBuilder.Append(renderMessagePart);
+                }
+                else if(parameters.IndexWithinRange(currentParameterIndex))
+                {
+                    _postRenderProcessor.Process(logBuilder, renderMessagePart, parameters[currentParameterIndex]);   
+                }
             }
             
             return logBuilder.ToString();
