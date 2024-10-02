@@ -6,7 +6,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow
 {
     public class UnityConsoleParametersConfigEditor : ConfigEditorWindowBase<ParameterColorsViewConfig>
     {
-        private const string WindowDescription = "Tags editor";
+        private const string WindowDescription = "Parameter colors editor";
 
         protected override string ConfigName => "ParameterColorsViewConfig";
         protected override string CreateDescription => "Create parameter colors config";
