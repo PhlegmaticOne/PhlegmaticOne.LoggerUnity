@@ -23,7 +23,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig
         {
             if (parameter is LogTag logTag)
             {
-                return GetTagColor(logTag);
+                return logTag.HasColor ? logTag.Color : GetTagColor(logTag);
             }
 
             return GetColorByParameterType(parameter);
