@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Extensions;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tagging
@@ -7,15 +6,15 @@ namespace OpenMyGame.LoggerUnity.Tagging
     public class LogTag : IEquatable<LogTag>
     {
         public const string TagKey = "Tag";
-        
-        public static LogTag Transparent(string tag)
-        {
-            return new LogTag(tag, false, Color.white);
-        }
 
         public static LogTag Colorized(string tag, Color color)
         {
             return new LogTag(tag, true, color);
+        }
+
+        public static LogTag TagOnly(string tag)
+        {
+            return new LogTag(tag, false, Color.white);
         }
 
         private LogTag(string tag, bool hasColor, Color color)
@@ -26,12 +25,14 @@ namespace OpenMyGame.LoggerUnity.Tagging
         }
 
         public string Tag { get; }
-        public Color Color { get; }
-        public bool HasColor { get; }
+        public Color Color { get; private set; }
+        public bool HasColor { get; private set; }
 
-        public string Render()
+        public LogTag WithColor(Color color)
         {
-            return !HasColor ? Tag : Tag.Colorize(Color);
+            Color = color;
+            HasColor = true;
+            return this;
         }
         
         public bool Equals(LogTag other)

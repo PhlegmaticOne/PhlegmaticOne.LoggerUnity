@@ -39,9 +39,6 @@ namespace OpenMyGame.LoggerUnity.Base
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters);
         protected virtual void OnInitializing() { }
 
-        public override string ToString()
-        {
-            return DestinationName;
-        }
+        public override string ToString() => DestinationName;
     }
 }

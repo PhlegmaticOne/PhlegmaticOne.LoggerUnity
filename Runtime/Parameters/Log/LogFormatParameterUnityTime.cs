@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterUnityTime : ILogFormatParameter
     {
-        private const string Format3 = "ticks";
+        private const string TicksFormat = "ticks";
         
         private static readonly char[] KnownFormats = { 'c', 'g', 'G' };
 
@@ -28,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 
         private static ReadOnlySpan<char> FormatTime(in TimeSpan timeSpan, in ReadOnlySpan<char> format)
         {
-            if (format.Equals(Format3, StringComparison.OrdinalIgnoreCase))
+            if (format.Equals(TicksFormat, StringComparison.OrdinalIgnoreCase))
             {
                 return timeSpan.Ticks.ToString();
             }

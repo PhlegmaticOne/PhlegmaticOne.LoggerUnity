@@ -8,7 +8,7 @@ namespace OpenMyGame.LoggerUnity.Base
 {
     public partial class LogMessage
     {
-        [Conditional("UNITY_LOGGING_ENABLED")]
+        [Conditional(LoggerStaticData.ConditionalName)]
         public void Log(string format)
         {
             if (!CanLogMessage(format))
@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Base
         }
         
         [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
+        [Conditional(LoggerStaticData.ConditionalName)]
         public void Log<T>(string format, T parameter1)
         {
             if (!CanLogMessage(format))
@@ -45,7 +45,7 @@ namespace OpenMyGame.LoggerUnity.Base
         }
         
         [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
+        [Conditional(LoggerStaticData.ConditionalName)]
         public void Log<T1, T2>(string format, T1 parameter1, T2 parameter2)
         {
             if (!CanLogMessage(format))
@@ -63,7 +63,7 @@ namespace OpenMyGame.LoggerUnity.Base
         }
         
         [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
+        [Conditional(LoggerStaticData.ConditionalName)]
         public void Log<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
         {
             if (!CanLogMessage(format))
@@ -81,7 +81,7 @@ namespace OpenMyGame.LoggerUnity.Base
         }
         
         [MessageTemplateFormatMethod("format")]
-        [Conditional("UNITY_LOGGING_ENABLED")]
+        [Conditional(LoggerStaticData.ConditionalName)]
         public void Log(string format, params object[] parameters)
         {
             if (!CanLogMessage(format))

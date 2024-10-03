@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
@@ -13,22 +12,10 @@ namespace OpenMyGame.LoggerUnity.Base
         
         protected LogConfiguration()
         {
-            MinimumLogLevel = LogLevel.Debug;
-            LogFormat = "{Message}";
-            IsEnabled = true;
-            
-            _logFormatParameters = new List<ILogFormatParameter>
-            {
-                new LogFormatParameterException(),
-                new LogFormatParameterStacktrace(),
-                new LogFormatParameterTime(),
-                new LogFormatParameterLogLevel(),
-                new LogFormatParameterUnityTime(),
-                new LogFormatParameterNewLine(),
-                new LogFormatParameterMessage(),
-                new LogFormatParameterThreadId(),
-                new LogFormatParameterTimeUtc()
-            };
+            MinimumLogLevel = LoggerStaticData.MinimumLogLevel;
+            LogFormat = LoggerStaticData.LogFormat;
+            IsEnabled = LoggerStaticData.IsEnabled;
+            _logFormatParameters = LoggerStaticData.LogFormatParameters;
         }
 
         public bool IsEnabled { get; set; }

@@ -27,7 +27,7 @@
 
 ```csharp
 Log.Logger = new LoggerBuilder()
-    .SetTagFormat("#{Tag:c}#")
+    .SetTagFormat("#{Tag}#")
     .SetIsCacheFormats(true)
     .LogToUnityDebug(config =>
     {
@@ -55,6 +55,8 @@ Log.Logger = new LoggerBuilder()
 |-------------------------------------------|------------------------------------------------------------------------|
 | ```SetTagFormat```                        | Устанавливает формат для тегов                                         |
 | ```SetIsCacheFormats```                   | Устанавливает будет ли кэшироваться формат сообщения                   |
+| ```ColorizeParameters```                  | Все параметры логгирования окрашиваются цветом в Editor'е              |
+| ```AddMessageFormatParameter```           | Добавление кастомного форматтера объекта в логгируемом сообщении       |
 | ```LogTo<TConfiguration, TDestination>``` | Добавляет новый логгер в коллекцию логгеров (```ILoggerDestination```) |
 | ```CreateLogger```                        | Создает сконфигурированный логгер (```ILogger```)                      |
 
@@ -160,7 +162,6 @@ Log.Logger = new LoggerBuilder()
 | ```DateTime```  | Форматы, которые поддерживает ```DateTime```                              |
 | ```Guid```      | Форматы, которые поддерживает ```Guid```                                  |
 | ```string```    | ```u``` - ```ToUpper```, ```l``` - ```ToLower```                          |
-| ```Tag```       | ```c``` - тег выводится с оберткой цвета: ```<color=#color>Tag</color>``` |
 | ```TimeSpan```  | Форматы, которые поддерживает ```TimeSpan```                              |
 
 Если необходимо вывести комплексный объект в виде json-строки, то перед названием его параметра необходимо добавить ```@```, например ```{@Value}```.
@@ -179,14 +180,14 @@ Log.Logger = new LoggerBuilder()
 ```csharp
 internal class MessageFormatParameterInt : MessageFormatParameter<int>
 {
-    protected override ReadOnlySpan<char> Render(int parameter, ReadOnlySpan<char> format)
+    protected override ReadOnlySpan<char> Render(int parameter, in ReadOnlySpan<char> format)
     {
         if (format.Equals("x2", StringComparison.OrdinalIgnoreCase))
         {
-            return parameter * 2;
+            return (parameter * 2).ToString();
         }
-            
-        return parameter;
+        
+        return parameter.ToString();
     }
 }
 ```
@@ -221,24 +222,28 @@ logWithTag
     .Log("Debug current time with log with tag: {Time}", DateTime.Now);
 ```
 
-При этом в финальный формат сообщения в начало добавится формат тега, который был указан при конфигурации логгера
+При этом в финальный формат сообщения в начало добавится формат тега, который был указан при конфигурации логгера.
+Теги окрашиваются так же, как и параметры.
 
-Для окраски тегов в Editor нужно открыть окно по пути ```Logger/Show tags editor``` и сначала создать конфиг, нажав на кнопку ```Create tag colors config```.
-Если конфиг не создан, то при каждом запуске приложения для тегов будет генерироваться рандомный цвет.
-После этого можно будет редактировать конфиг с цветами тегов, который состоит из двух частей:
+## Окрашивание параметров
+
+Для окраски параметров в Editor нужно открыть окно по пути ```Logger/Show parameter colors editor``` и сначала создать конфиг, нажав на кнопку ```Create parameter colors config```.
+Если конфиг не создан, то при каждом запуске приложения для параметров будет генерироваться рандомный цвет.
+После этого можно будет редактировать конфиг с цветами параметров, который состоит из трех частей:
 
 1. <b>Known tag colors</b> - необходимо указать название тега и его цвет - используется для известных тегов, которые есть в коде или которые предположительно появятся в ходе логгирования
 2. <b>Unknown tag colors</b> - можно указать цвета для тегов, которые заранее неизвестно будут показываться или нет - будет выбран рандомный цвет из указанных (если цветов нет, будет сгенерирован рандомный цвет)
+3. <b>Parameter colors by type</b> - можно указать цвета для параметров по их типу; ключ - название типа, значение - цвет; стандартный цвет для всех остальных апраметров задается в ```Default Parameter Color```
 
 Пример конфига приведен на скриншоте:
 
-![image](https://github.com/user-attachments/assets/f130c21a-e91f-4ed4-a84b-fad990ac5801)
+![image](https://github.com/user-attachments/assets/0bd582fd-f50e-48d6-8f09-9ac9937cb73e)
 
 После создания конфига его нужно указать в ```LoggerBuilder```, чтобы он использовался вместо рандомной генерации цветов, например:
 
 ```csharp
 Log.Logger = new LoggerBuilder()
-    .SetTagColorsViewConfig(TagColorsViewConfig.Load())
+    .ColorizeParameters(ParameterColorsViewConfig.Load())
     .LogToUnityDebug()
     .CreateLogger();
 ```

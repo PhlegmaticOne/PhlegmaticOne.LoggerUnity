@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using OpenMyGame.LoggerUnity.Parameters.Processors;
+using OpenMyGame.LoggerUnity.Parameters.Processors.Colors;
+using OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Factories;
-using OpenMyGame.LoggerUnity.Tagging.Colors;
-using OpenMyGame.LoggerUnity.Tagging.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity
@@ -19,28 +19,29 @@ namespace OpenMyGame.LoggerUnity
         private readonly Dictionary<Type, IMessageFormatParameter> _formatProperties;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
+        private IParameterColorsViewConfig _parameterColorsViewConfig;
+        private IParameterPostRenderProcessor _postRenderProcessor;
+        private bool _isCacheFormats;
         private string _tagFormat;
         private bool _isEnabled;
-        private bool _isCacheFormats;
-        private ITagColorsViewConfig _tagColorsViewConfig;
 
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _formatProperties = new Dictionary<Type, IMessageFormatParameter>();
-            _isEnabled = true;
-            _isCacheFormats = true;
-            _tagFormat = "#{Tag}#";
+            _formatProperties = LoggerStaticData.MessageFormatParameters;
+            _isEnabled = LoggerStaticData.IsEnabled;
+            _isCacheFormats = LoggerStaticData.IsCacheFormats;
+            _tagFormat = LoggerStaticData.TagFormat;
             _parameterSerializer = new MessageFormatParameterSerializer();
-            _tagColorsViewConfig = new TagColorsViewConfigRandom();
-            AddMessageFormatProperties();
+            _postRenderProcessor = new ParameterPostRenderProcessor();
+            _parameterColorsViewConfig = new ParameterColorsViewConfigRandom();
         }
 
         public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
         {
             if (formatParameter is not null)
             {
-                AddMessageFormatProperty(formatParameter);
+                _formatProperties[formatParameter.PropertyType] = formatParameter;
             }
             
             return this;
@@ -64,13 +65,14 @@ namespace OpenMyGame.LoggerUnity
             return this;
         }
 
-        public LoggerBuilder SetTagColorsViewConfig(ITagColorsViewConfig tagColorsViewConfig)
+        public LoggerBuilder ColorizeParameters(IParameterColorsViewConfig parameterColorsViewConfig)
         {
-            if (tagColorsViewConfig is not null)
+            if (parameterColorsViewConfig is not null)
             {
-                _tagColorsViewConfig = tagColorsViewConfig;
+                _parameterColorsViewConfig = parameterColorsViewConfig;
+                _postRenderProcessor = new ParameterPostRenderProcessorColorize(parameterColorsViewConfig);
             }
-
+            
             return this;
         }
 
@@ -104,29 +106,15 @@ namespace OpenMyGame.LoggerUnity
 
         private ILogTagProvider GetLogWithTagProvider()
         {
-            var tagColorProvider = new TagColorProvider(_tagColorsViewConfig);
-            return new LogTagProvider(_tagFormat, tagColorProvider);
+            return new LogTagProvider(_tagFormat, _parameterColorsViewConfig);
         }
 
         private IMessageFormatParser GetParser()
         {
-            var messageFormatFactory = new MessageFormatFactoryLogMessage(_formatProperties, _parameterSerializer);
+            var messageFormatFactory = new MessageFormatFactoryLogMessage(
+                _formatProperties, _parameterSerializer, _postRenderProcessor);
             var messageFormatParser = new MessageFormatParser(messageFormatFactory);
             return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
-        }
-
-        private void AddMessageFormatProperties()
-        {
-            AddMessageFormatProperty(new MessageFormatParameterString());
-            AddMessageFormatProperty(new MessageFormatParameterDateTime());
-            AddMessageFormatProperty(new MessageFormatParameterTimeSpan());
-            AddMessageFormatProperty(new MessageFormatParameterGuid());
-            AddMessageFormatProperty(new MessageFormatParameterTag());
-        }
-        
-        private void AddMessageFormatProperty(IMessageFormatParameter formatParameter)
-        {
-            _formatProperties[formatParameter.PropertyType] = formatParameter;
         }
     }
 }

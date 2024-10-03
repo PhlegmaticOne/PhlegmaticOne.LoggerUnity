@@ -36,7 +36,7 @@ namespace OpenMyGame.LoggerUnity
         public static LogMessage ErrorMessage() => Message(LogLevel.Error);
         public static LogMessage FatalMessage() => Message(LogLevel.Fatal);
 
-        [Conditional("UNITY_LOGGING_ENABLED")]
+        [Conditional(LoggerStaticData.ConditionalName)]
         public static void Exception(Exception exception)
         {
             if (Logger is null || !Logger.IsEnabled || exception is null)
@@ -46,7 +46,7 @@ namespace OpenMyGame.LoggerUnity
 
             FatalMessage()
                 .WithException(exception)
-                .Log("{Exception}");
+                .Log(LoggerStaticData.ExceptionFormat);
         }
 
         private static LogMessage Message(LogLevel logLevel) => new(logLevel, Logger);
