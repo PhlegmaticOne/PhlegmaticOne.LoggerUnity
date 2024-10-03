@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Extensions;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tagging

@@ -13,13 +13,13 @@ namespace OpenMyGame.LoggerUnity
             _tag = tag;
         }
 
-        [Conditional("UNITY_LOGGING_ENABLED")]
+        [Conditional(LoggerStaticData.ConditionalName)]
         public void Exception(Exception exception)
         {
             Log.FatalMessage()
                 .WithTag(_tag)
                 .WithException(exception)
-                .Log("{Exception}");
+                .Log(LoggerStaticData.ExceptionFormat);
         }
         
         public LogMessage DebugMessage() => Message(LogLevel.Debug);

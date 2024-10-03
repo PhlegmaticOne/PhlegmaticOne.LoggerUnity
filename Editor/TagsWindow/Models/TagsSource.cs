@@ -34,7 +34,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
 
         private void HandleMessageLogged(LogMessageLoggedEventArgs eventArgs)
         {
-            if (eventArgs.Destination != UnityDebugLogDestination.Destination)
+            if (eventArgs.Destination != LogDestinationsSupported.Debug)
             {
                 return;
             }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parameters.Processors;
@@ -29,21 +28,20 @@ namespace OpenMyGame.LoggerUnity
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _formatProperties = new Dictionary<Type, IMessageFormatParameter>();
-            _isEnabled = true;
-            _isCacheFormats = true;
-            _tagFormat = "#{Tag}#";
+            _formatProperties = LoggerStaticData.MessageFormatParameters;
+            _isEnabled = LoggerStaticData.IsEnabled;
+            _isCacheFormats = LoggerStaticData.IsCacheFormats;
+            _tagFormat = LoggerStaticData.TagFormat;
             _parameterSerializer = new MessageFormatParameterSerializer();
             _postRenderProcessor = new ParameterPostRenderProcessor();
             _parameterColorsViewConfig = new ParameterColorsViewConfigRandom();
-            AddMessageFormatProperties();
         }
 
         public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
         {
             if (formatParameter is not null)
             {
-                AddMessageFormatProperty(formatParameter);
+                _formatProperties[formatParameter.PropertyType] = formatParameter;
             }
             
             return this;
@@ -117,20 +115,6 @@ namespace OpenMyGame.LoggerUnity
                 _formatProperties, _parameterSerializer, _postRenderProcessor);
             var messageFormatParser = new MessageFormatParser(messageFormatFactory);
             return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
-        }
-
-        private void AddMessageFormatProperties()
-        {
-            AddMessageFormatProperty(new MessageFormatParameterString());
-            AddMessageFormatProperty(new MessageFormatParameterDateTime());
-            AddMessageFormatProperty(new MessageFormatParameterTimeSpan());
-            AddMessageFormatProperty(new MessageFormatParameterGuid());
-            AddMessageFormatProperty(new MessageFormatParameterTag());
-        }
-        
-        private void AddMessageFormatProperty(IMessageFormatParameter formatParameter)
-        {
-            _formatProperties[formatParameter.PropertyType] = formatParameter;
         }
     }
 }

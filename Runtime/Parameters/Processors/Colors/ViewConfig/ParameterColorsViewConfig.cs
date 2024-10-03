@@ -15,7 +15,12 @@ namespace OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig
 
         public static IParameterColorsViewConfig Load()
         {
-            var config = Resources.Load<ParameterColorsViewConfig>("LoggerUnity/ParameterColorsViewConfig");
+            return Load("LoggerUnity/ParameterColorsViewConfig");
+        }
+        
+        public static IParameterColorsViewConfig Load(string resourcePath)
+        {
+            var config = Resources.Load<ParameterColorsViewConfig>(resourcePath);
             return config == null ? new ParameterColorsViewConfigRandom() : config;
         }
 

@@ -12,8 +12,6 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
 {
     internal class MessageFormatLogMessage : IMessageFormat
     {
-        private const char SerializeParameterPrefix = '@';
-        
         private readonly MessagePart[] _messageParts;
         private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
@@ -76,7 +74,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.MessageFormats
         {
             var type = parameter.GetType();
 
-            if (parameterValue[0] == SerializeParameterPrefix)
+            if (parameterValue[0] == LoggerStaticData.SerializeParameterPrefix)
             {
                 return _parameterSerializer.Serialize(parameter, format);
             }

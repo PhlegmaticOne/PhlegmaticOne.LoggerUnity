@@ -7,11 +7,9 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
     public class AndroidLogDestination : LogDestination<AndroidLogConfiguration>
     {
-        private const string DefaultTag = "Unity";
-        
         private AndroidJavaObject _androidLogger;
         
-        public override string DestinationName => "Android";
+        public override string DestinationName => LogDestinationsSupported.Android;
 
         protected override void OnInitializing()
         {
@@ -38,7 +36,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
         private async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)
         {
             var methodName = ToNativeMethodName(logMessage.LogLevel);
-            var tag = logMessage.Tag?.Tag ?? DefaultTag;
+            var tag = logMessage.Tag?.Tag ?? LoggerStaticData.DefaultTagValue;
             await UniTask.SwitchToMainThread();
             _androidLogger.CallStatic(methodName, tag, renderedMessage);
         }
