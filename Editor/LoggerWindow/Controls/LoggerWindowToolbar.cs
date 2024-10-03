@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
-    public class LoggerWindowToolbar : HorizontalFlexBordered
+    internal class LoggerWindowToolbar : HorizontalFlexBordered
     {
         private static readonly Color DebugColor = new(0.7686275f, 0.7686275f, 0.7686275f);
         private static readonly Color WarningColor = new(0.9058824f, 0.6980392f, 0.07058824f);

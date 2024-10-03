@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
-    public class LoggerWindowRootScroll : ScrollView
+    internal class LoggerWindowRootScroll : ScrollView
     {
         public LoggerWindowRootScroll(params VisualElement[] children) : base(ScrollViewMode.Vertical)
         {

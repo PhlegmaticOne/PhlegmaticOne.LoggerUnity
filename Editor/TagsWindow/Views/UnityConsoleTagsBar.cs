@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
 {
-    public class UnityConsoleTagsBar : ScrollView
+    internal class UnityConsoleTagsBar : ScrollView
     {
         private readonly ITagControlFactory _tagControlFactory;
         private readonly List<LoggerWindowToggle> _tagControls;

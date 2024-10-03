@@ -2,7 +2,6 @@
 using OpenMyGame.LoggerUnity.Editor.Base.Controls;
 using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
 using OpenMyGame.LoggerUnity.Editor.Base.Styles;
-using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -10,7 +9,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
-    public class LoggerWindowTagsBar : ScrollView
+    internal class LoggerWindowTagsBar : ScrollView
     {
         private readonly VisualElement _tagsBar;
 

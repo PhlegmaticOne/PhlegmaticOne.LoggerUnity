@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
-    public sealed class LoggerWindowLog : TextElement
+    internal sealed class LoggerWindowLog : TextElement
     {
         private readonly LoggerWindowColorConfigData _colorData;
         private readonly LoggerWindowViewConfig _viewConfig;

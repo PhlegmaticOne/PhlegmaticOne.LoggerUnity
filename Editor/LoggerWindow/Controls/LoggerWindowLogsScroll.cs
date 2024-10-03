@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
-    public class LoggerWindowLogsScroll : ScrollView
+    internal class LoggerWindowLogsScroll : ScrollView
     {
         private readonly LoggerWindowViewConfig _viewConfig;
 

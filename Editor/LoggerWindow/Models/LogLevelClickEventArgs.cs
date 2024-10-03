@@ -1,6 +1,6 @@
 ﻿namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Models
 {
-    public readonly struct LogLevelClickEventArgs
+    internal readonly struct LogLevelClickEventArgs
     {
         public LogLevelClickEventArgs(string logLevel, bool isActive)
         {

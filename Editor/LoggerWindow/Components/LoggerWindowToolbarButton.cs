@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components
 {
-    public sealed class LoggerWindowToolbarButton : Button
+    internal sealed class LoggerWindowToolbarButton : Button
     {
         public LoggerWindowToolbarButton(string text, Action onClick) : base(onClick)
         {

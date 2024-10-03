@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
 {
-    public sealed class LoggerWindowLogInspector : TextElement
+    internal sealed class LoggerWindowLogInspector : TextElement
     {
         public LoggerWindowLogInspector(LoggerWindowViewConfig viewConfig)
         {

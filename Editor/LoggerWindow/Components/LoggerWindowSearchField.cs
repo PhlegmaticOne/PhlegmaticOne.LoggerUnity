@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components
 {
-    public class LoggerWindowSearchField : TextField
+    internal class LoggerWindowSearchField : TextField
     {
         public LoggerWindowSearchField(Action<string> valueChanged)
         {

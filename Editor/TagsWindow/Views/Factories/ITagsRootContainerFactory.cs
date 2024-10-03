@@ -2,7 +2,7 @@
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
-    public interface ITagsRootContainerFactory
+    internal interface ITagsRootContainerFactory
     {
         VisualElement CreateRootContainer();
     }

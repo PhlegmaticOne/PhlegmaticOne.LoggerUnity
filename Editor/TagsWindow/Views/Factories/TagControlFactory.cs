@@ -6,7 +6,7 @@ using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
-    public class TagControlFactory : ITagControlFactory
+    internal class TagControlFactory : ITagControlFactory
     {
         public LoggerWindowToggle CreateTagControl(LogTag tag, Action<LoggerWindowToggle, bool> onClick)
         {

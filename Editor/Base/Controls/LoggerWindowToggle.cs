@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.Base.Controls
 {
-    public sealed class LoggerWindowToggle : ToolbarToggle
+    internal sealed class LoggerWindowToggle : ToolbarToggle
     {
         public string Text { get; private set; }
         

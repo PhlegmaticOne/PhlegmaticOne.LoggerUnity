@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug;
 using OpenMyGame.LoggerUnity.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
 {
-    public class TagsSource : ITagsSource
+    internal class TagsSource : ITagsSource
     {
         private readonly UnityConsoleReflection _unityConsoleReflection;
         private readonly HashSet<LogTag> _availableTags;
