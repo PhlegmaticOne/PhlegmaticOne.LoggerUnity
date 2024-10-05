@@ -8,7 +8,8 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterThreadId : ILogFormatParameter
     {
-        public string Key => "ThreadId";
+        public const string KeyParameter = "ThreadId";
+        public string Key => KeyParameter;
         
         public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {

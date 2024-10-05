@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor
             return Resources.Load<T>(path);
         }
         
-        public static T CreateConfig<T>(string configName) where T : ScriptableObject
+        public static T CreateConfig<T>(string configName, Action<T> onCreating) where T : ScriptableObject
         {
             var path = Path.Combine(Application.dataPath, ResourcesFolder);
 
@@ -32,6 +33,7 @@ namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor
             }
                 
             var config = ScriptableObject.CreateInstance<T>();
+            onCreating(config);
             AssetDatabase.CreateAsset(config, $"Assets/{ResourcesFolder}/{LoggerUnityFolder}/{configName}.asset");
             return config;
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig
 {
@@ -6,6 +7,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig
     {
         Color GetTagColor(string tag);
         Color GetMessageParameterColor(object parameter);
-        Color GetLogParameterColor(string parameterKey);
+        Color GetLogParameterColor(string parameterKey, in ReadOnlySpan<char> renderedValue);
     }
 }

@@ -11,6 +11,8 @@ namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor
         
         protected abstract string ConfigName { get; }
         protected abstract string CreateDescription { get; }
+
+        protected abstract void OnConfigCreating(T config);
         
         private void CreateGUI()
         {
@@ -55,7 +57,7 @@ namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor
         {
             if (GUILayout.Button(CreateDescription))
             {
-                var config = ConfigEditorWindowHelper.CreateConfig<T>(ConfigName);
+                var config = ConfigEditorWindowHelper.CreateConfig<T>(ConfigName, OnConfigCreating);
                 CreateConfigEditor(config);
             }
         }

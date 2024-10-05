@@ -8,7 +8,8 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterException : ILogFormatParameter
     {
-        public string Key => "Exception";
+        public const string KeyParameter = "Exception";
+        public string Key => KeyParameter;
         
         public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {

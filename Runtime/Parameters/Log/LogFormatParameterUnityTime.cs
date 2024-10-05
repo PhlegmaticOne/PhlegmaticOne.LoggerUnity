@@ -11,9 +11,11 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
     {
         private const string TicksFormat = "ticks";
         
+        public const string KeyParameter = "UnityTime";
+
         private static readonly char[] KnownFormats = { 'c', 'g', 'G' };
 
-        public string Key => "UnityTime";
+        public string Key => KeyParameter;
         
         public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {

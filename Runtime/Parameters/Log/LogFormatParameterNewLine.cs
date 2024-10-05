@@ -7,7 +7,8 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterNewLine : ILogFormatParameter
     {
-        public string Key => "NewLine";
+        public const string KeyParameter = "NewLine";
+        public string Key => KeyParameter;
         
         public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {

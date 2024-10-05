@@ -8,7 +8,8 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterLogLevel : ILogFormatParameter
     {
-        public string Key => "LogLevel";
+        public const string KeyParameter = "LogLevel";
+        public string Key => KeyParameter;
         
         public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {

@@ -10,6 +10,11 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow
 
         protected override string ConfigName => "ParameterColorsViewConfig";
         protected override string CreateDescription => "Create parameter colors config";
+        
+        protected override void OnConfigCreating(ParameterColorsViewConfig config)
+        {
+            config.SetupDefaults();
+        }
 
         [MenuItem("Logger/Show parameter colors editor")]
         public static void Open()

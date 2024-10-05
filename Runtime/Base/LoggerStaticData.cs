@@ -9,6 +9,7 @@ using OpenMyGame.LoggerUnity.Parameters.Message;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
@@ -21,9 +22,8 @@ namespace OpenMyGame.LoggerUnity.Base
         public const char SerializeParameterPrefix = '@';
         public const string DefaultTagValue = "Unity";
         public const string LogFormat = "{Message}";
-        public const string MessageKey = "Message";
-        public const string NewLineKey = "NewLine";
         public const string TagFormat = "#{Tag}#";
+        public static readonly Color DefaultLogTextColor = Color.white;
 
         public const bool IsExtractStacktrace = false;
         public const bool IsCacheFormats = true;

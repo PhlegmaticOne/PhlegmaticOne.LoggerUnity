@@ -7,7 +7,8 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
     internal class LogFormatParameterTime : ILogFormatParameter
     {
-        public string Key => "Time";
+        public const string KeyParameter = "Time";
+        public string Key => KeyParameter;
         
         public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {

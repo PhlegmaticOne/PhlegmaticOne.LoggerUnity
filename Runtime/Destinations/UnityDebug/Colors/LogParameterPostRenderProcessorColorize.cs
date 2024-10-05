@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
@@ -27,18 +27,18 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
                 return;
             }
             
-            var color = _colorsViewConfig.GetLogParameterColor(value.ToString());
+            var color = _colorsViewConfig.GetLogParameterColor(value.ToString(), renderedValue);
             UnityDebugColorWrapper.Wrap(destination, in renderedValue, color);
         }
 
         private static bool ValueIsNewLine(in ReadOnlySpan<char> messagePart)
         {
-            return messagePart.Equals(LoggerStaticData.NewLineKey, StringComparison.OrdinalIgnoreCase);
+            return messagePart.Equals(LogFormatParameterNewLine.KeyParameter, StringComparison.OrdinalIgnoreCase);
         }
         
         private static bool ValueIsMessage(in ReadOnlySpan<char> messagePart)
         {
-            return messagePart.Equals(LoggerStaticData.MessageKey, StringComparison.OrdinalIgnoreCase);
+            return messagePart.Equals(LogFormatParameterMessage.KeyParameter, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

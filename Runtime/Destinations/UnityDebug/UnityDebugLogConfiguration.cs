@@ -11,7 +11,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
 
         public void ColorizeParameters()
         {
-            ColorizeParameters(new ParameterColorsViewConfigStaticWhite());
+            ColorizeParameters(new ParameterColorsViewConfigDefault());
         }
         
         public void ColorizeParameters(IParameterColorsViewConfig colorsViewConfig)
