@@ -16,16 +16,15 @@ namespace OpenMyGame.LoggerUnity
             {
                 if (LoggerPrivate is not null)
                 {
-                    LoggerPrivate.MessageLogged -= OnMessageLogged;
-                    LoggerPrivate.Dispose();
+                    DisposeCurrentLogger();
                 }
 
-                LoggerPrivate = value;
-                LoggerPrivate.MessageLogged += OnMessageLogged;
+                SetNewLogger(value);
             }
         }
 
-        public static event Action<LogMessageLoggedEventArgs> MessageLogged;
+        public static event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
+        public static event Action<LogMessage> MessageLogged;
 
         public static void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
@@ -50,9 +49,28 @@ namespace OpenMyGame.LoggerUnity
                 .Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
 
-        private static void OnMessageLogged(LogMessageLoggedEventArgs messageLoggedEventArgs)
+        private static void SetNewLogger(ILogger logger)
         {
-            MessageLogged?.Invoke(messageLoggedEventArgs);
+            LoggerPrivate = logger;
+            LoggerPrivate.MessageToDestinationLogged += OnMessageToDestinationLogged;
+            LoggerPrivate.MessageLogged += OnMessageLogged;
+        }
+
+        private static void DisposeCurrentLogger()
+        {
+            LoggerPrivate.MessageToDestinationLogged -= OnMessageToDestinationLogged;
+            LoggerPrivate.MessageLogged -= OnMessageLogged;
+            LoggerPrivate.Dispose();
+        }
+
+        private static void OnMessageLogged(LogMessage logMessage)
+        {
+            MessageLogged?.Invoke(logMessage);
+        }
+
+        private static void OnMessageToDestinationLogged(LogMessageDestinationLoggedEventArgs messageDestinationLoggedEventArgs)
+        {
+            MessageToDestinationLogged?.Invoke(messageDestinationLoggedEventArgs);
         }
     }
 }

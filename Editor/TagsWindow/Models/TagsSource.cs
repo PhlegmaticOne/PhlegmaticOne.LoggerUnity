@@ -11,7 +11,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
         
         public TagsSource()
         {
-            Log.MessageLogged += HandleMessageLogged;
+            Log.MessageToDestinationLogged += HandleMessageLogged;
             _unityConsoleReflection = new UnityConsoleReflection();
             _availableTags = new HashSet<TagViewModel>();
         }
@@ -31,7 +31,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
             return _availableTags;
         }
 
-        private void HandleMessageLogged(LogMessageLoggedEventArgs eventArgs)
+        private void HandleMessageLogged(LogMessageDestinationLoggedEventArgs eventArgs)
         {
             if (eventArgs.Destination != LogDestinationsSupported.Debug)
             {

@@ -2,9 +2,9 @@
 
 namespace OpenMyGame.LoggerUnity.Base
 {
-    public readonly struct LogMessageLoggedEventArgs
+    public readonly struct LogMessageDestinationLoggedEventArgs
     {
-        public LogMessageLoggedEventArgs(LogMessage message, string destination)
+        public LogMessageDestinationLoggedEventArgs(LogMessage message, string destination)
         {
             Message = message;
             Destination = destination;

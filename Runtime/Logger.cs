@@ -51,7 +51,8 @@ namespace OpenMyGame.LoggerUnity
             return _messageFactory.CreateMessage(logLevel, stacktraceDepthLevel);
         }
 
-        public event Action<LogMessageLoggedEventArgs> MessageLogged;
+        public event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
+        public event Action<LogMessage> MessageLogged;
 
         public void Initialize()
         {
@@ -85,6 +86,8 @@ namespace OpenMyGame.LoggerUnity
                     OnMessageToDestinationLogged(logMessage, loggerDestination);
                 }
             }
+            
+            MessageLogged?.Invoke(logMessage);
         }
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled)
@@ -131,7 +134,7 @@ namespace OpenMyGame.LoggerUnity
 
         private void OnMessageToDestinationLogged(LogMessage logMessage, ILogDestination loggerDestination)
         {
-            MessageLogged?.Invoke(new LogMessageLoggedEventArgs(logMessage, loggerDestination.DestinationName));
+            MessageToDestinationLogged?.Invoke(new LogMessageDestinationLoggedEventArgs(logMessage, loggerDestination.DestinationName));
         }
 
         private static bool IsLogMessageToDestination(ILogDestination destination, LogMessage message)
