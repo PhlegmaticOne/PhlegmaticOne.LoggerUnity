@@ -51,6 +51,7 @@ namespace OpenMyGame.LoggerUnity.Base
                 AddLogFormatProperty(result, new LogFormatParameterMessage());
                 AddLogFormatProperty(result, new LogFormatParameterThreadId());
                 AddLogFormatProperty(result, new LogFormatParameterTimeUtc());
+                AddLogFormatProperty(result, new LogFormatParameterMessageId());
                 return result;
             }
         }

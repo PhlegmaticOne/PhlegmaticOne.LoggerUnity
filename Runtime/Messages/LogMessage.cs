@@ -18,13 +18,15 @@ namespace OpenMyGame.LoggerUnity.Messages
             Exception = exception;
         }
 
-        public LogMessage(LogLevel logLevel, LogStacktrace stacktrace, ILogger logger)
+        public LogMessage(int id, LogLevel logLevel, LogStacktrace stacktrace, ILogger logger)
         {
+            Id = id;
             LogLevel = logLevel;
             Stacktrace = stacktrace;
             _logger = logger;
         }
         
+        public int Id { get; }
         public LogLevel LogLevel { get; }
         public LogStacktrace Stacktrace { get; }
         public Exception Exception { get; private set; }

@@ -16,7 +16,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Static
             { LogFormatParameterThreadId.KeyParameter, new Color(0f, 1f, 1f) },
             { LogFormatParameterTime.KeyParameter, DefaultTimeColor },
             { LogFormatParameterTimeUtc.KeyParameter, DefaultTimeColor },
-            { LogFormatParameterUnityTime.KeyParameter, DefaultTimeColor}
+            { LogFormatParameterUnityTime.KeyParameter, DefaultTimeColor},
+            { LogFormatParameterMessageId.KeyParameter, new Color(0.9882353f, 0.9254902f, 0.3215686f)}
         };
 
         public static Dictionary<string, Color> MessageParameterColorsMap => new()

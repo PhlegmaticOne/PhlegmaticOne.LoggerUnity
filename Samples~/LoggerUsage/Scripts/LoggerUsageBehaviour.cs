@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
@@ -12,14 +13,12 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
                 .SetIsCacheFormats(true)
-                .ExtractStackTracesToMessages()
                 .LogToUnityDebug(config =>
                 {
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception}";
                     config.MinimumLogLevel = LogLevel.Debug;
                     config.IsUnityStacktraceEnabled = false;
-                    config.MessagePartMaxSize = 4000;
-                    config.ColorizeParameters();
+                    config.MessagePartMaxSize = 400;
                 })
                 .CreateLogger();
         }

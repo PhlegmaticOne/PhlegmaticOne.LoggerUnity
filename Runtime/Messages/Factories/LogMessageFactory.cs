@@ -1,4 +1,5 @@
-﻿using OpenMyGame.LoggerUnity.Extensions;
+﻿using System.Threading;
+using OpenMyGame.LoggerUnity.Extensions;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Messages.Factories
@@ -7,6 +8,8 @@ namespace OpenMyGame.LoggerUnity.Messages.Factories
     {
         private const int StacktraceDepthLevelDefault = 5;
         
+        private static int CurrentMessageId = -1;
+
         private readonly bool _isExtractStacktrace;
 
         public LogMessageFactory(bool isExtractStacktrace)
@@ -16,7 +19,11 @@ namespace OpenMyGame.LoggerUnity.Messages.Factories
         
         public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel)
         {
-            return new LogMessage(logLevel, CreateStacktrace(stacktraceDepthLevel), Log.Logger);
+            return new LogMessage(
+                Interlocked.Increment(ref CurrentMessageId), 
+                logLevel, 
+                CreateStacktrace(stacktraceDepthLevel), 
+                Log.Logger);
         }
 
         private LogStacktrace CreateStacktrace(int stacktraceDepthLevel)
