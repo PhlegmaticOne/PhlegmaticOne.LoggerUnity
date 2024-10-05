@@ -1,30 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Moq;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Parsing;
-using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Exceptions;
-using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
-using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
 {
     [TestFixture]
     public class MessageFormatParserTests
     {
-        private static class Mocks
-        {
-            public static IMessageFormatFactory FactoryStatic()
-            {
-                var factoryMock = new Mock<IMessageFormatFactory>();
-                factoryMock
-                    .Setup(x => x.CreateFormat(It.IsAny<MessagePart[]>()))
-                    .Returns(new MessageFormatStaticValue("Test"));
-                return factoryMock.Object;
-            }
-        }
-        
         [TestCase("{Test")]
         [TestCase("Test}")]
         [TestCase("{Test}}")]
@@ -32,8 +15,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
         public void Parse_ShouldThrowException_WhenCountOnOpenBracesNotEqualToCountOfCloseBraces(string format)
         {
             //Arrange
-            var factoryMock = Mocks.FactoryStatic();
-            var parser = new MessageFormatParser(factoryMock);
+            var parser = new MessageFormatParser();
             
             //Act
             //Assert
@@ -46,8 +28,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
         public void Parse_ShouldThrowException_WhenInputFormatIsEmptyString(string format)
         {
             //Arrange
-            var factoryMock = Mocks.FactoryStatic();
-            var parser = new MessageFormatParser(factoryMock);
+            var parser = new MessageFormatParser();
             
             //Act
             //Assert
@@ -56,18 +37,17 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
 
         [TestCase("Test")]
         [TestCase("Test string")]
-        public void Parse_ShouldReturnStaticValueFormat_WhenInputFormatHasNoParameters(string format)
+        public void Parse_ShouldReturnOneMessagePart_WhenInputFormatHasNoParameters(string format)
         {
             //Arrange
-            var factoryMock = Mocks.FactoryStatic();
-            var parser = new MessageFormatParser(factoryMock);
+            var parser = new MessageFormatParser();
             
             //Act
             var messageFormat = parser.Parse(format);
             
             //Assert
-            Assert.IsAssignableFrom<MessageFormatStaticValue>(messageFormat);
-            Assert.AreEqual(format, messageFormat.Render(null, Span<object>.Empty));
+            Assert.AreEqual(1, messageFormat.Length);
+            Assert.IsFalse(messageFormat[0].IsParameter);
         }
 
         [TestCase("}}}{{{")]
@@ -75,8 +55,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
         public void Parse_ShouldThrowException_WhenFormatDoesNotHaveFollowingCloseBrace(string format)
         {
             //Arrange
-            var factoryMock = Mocks.FactoryStatic();
-            var parser = new MessageFormatParser(factoryMock);
+            var parser = new MessageFormatParser();
             
             //Act
             //Assert
@@ -91,16 +70,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
         public void Parse_ShouldCreateMessagePartsCount2xPlus1FromParametersCount(string format, int expected)
         {
             //Arrange
-            var factoryMock = new Mock<IMessageFormatFactory>();
-            MessagePart[] messageParts = null!;
-            factoryMock
-                .Setup(x => x.CreateFormat(It.IsAny<MessagePart[]>()))
-                .Callback<MessagePart[]>(x => messageParts = x);
-
-            var parser = new MessageFormatParser(factoryMock.Object);
+            var parser = new MessageFormatParser();
             
             //Act
-            parser.Parse(format);
+            var messageParts = parser.Parse(format);
             
             //Assert
             Assert.AreEqual(expected, messageParts.Length);
@@ -110,16 +83,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
         public void Parse_ShouldCreateSpecifiedMessageParts(FormatSourceTestCase testCase)
         {
             //Arrange
-            var factoryMock = new Mock<IMessageFormatFactory>();
-            MessagePart[] messageParts = null!;
-            factoryMock
-                .Setup(x => x.CreateFormat(It.IsAny<MessagePart[]>()))
-                .Callback<MessagePart[]>(x => messageParts = x);
-
-            var parser = new MessageFormatParser(factoryMock.Object);
+            var parser = new MessageFormatParser();
             
             //Act
-            parser.Parse(testCase.Format);
+            var messageParts = parser.Parse(testCase.Format);
             
             //Assert
             for (var i = 0; i < messageParts.Length; i++)

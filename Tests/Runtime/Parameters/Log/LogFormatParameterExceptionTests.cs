@@ -24,7 +24,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
                 var expected = exception.ToString();
                 
                 var logMessage = new LogMessage(exception);
-                var actual = parameter.GetValue(messagePart, logMessage, Span<object>.Empty).ToString();
+                var actual = parameter.GetValue(messagePart, logMessage, "").ToString();
                 
                 Assert.AreEqual(expected, actual);
             }
@@ -44,7 +44,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             catch (Exception exception)
             {
                 var logMessage = new LogMessage(exception);
-                var actual = parameter.GetValue(messagePart, logMessage, Span<object>.Empty).ToString();
+                var actual = parameter.GetValue(messagePart, logMessage, "").ToString();
                 
                 Assert.AreEqual(expected, actual);
             }

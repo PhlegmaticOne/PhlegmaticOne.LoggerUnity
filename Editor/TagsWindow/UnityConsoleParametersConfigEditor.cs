@@ -1,5 +1,5 @@
-﻿using OpenMyGame.LoggerUnity.Editor.ConfigsEditor;
-using OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig;
+﻿using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Editor.ConfigsEditor;
 using UnityEditor;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Formats;
+using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
-using OpenMyGame.LoggerUnity.Parameters.Processors.Colors;
-using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing.MessageFormats
@@ -29,12 +29,12 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing.MessageFormats
 
             var logMessage = new LogMessage(LogLevel.Debug);
 
-            var messageFormat = new MessageFormatLogMessage(messageParts,
+            var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new ParameterPostRenderProcessor());
+                new MessageParameterPostRenderProcessor());
 
-            var renderedMessage = messageFormat.Render(logMessage, parameters);
+            var renderedMessage = messageFormat.Render(logMessage, messageParts, parameters);
             
             Assert.AreEqual("Test Value", renderedMessage);
         }
@@ -55,12 +55,12 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing.MessageFormats
 
             var logMessage = new LogMessage(LogLevel.Debug);
 
-            var messageFormat = new MessageFormatLogMessage(messageParts,
+            var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new ParameterPostRenderProcessor());
+                new MessageParameterPostRenderProcessor());
 
-            var renderedMessage = messageFormat.Render(logMessage, parameters);
+            var renderedMessage = messageFormat.Render(logMessage, messageParts, parameters);
             
             Assert.AreEqual("Test {\"Value\":5,\"Name\":\"Name\"}", renderedMessage);
         }

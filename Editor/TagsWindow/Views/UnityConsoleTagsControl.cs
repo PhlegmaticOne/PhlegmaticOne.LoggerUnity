@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories;
-using OpenMyGame.LoggerUnity.Tagging;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
 {
-    public class UnityConsoleTagsControl : ScrollView
+    internal class UnityConsoleTagsControl : ScrollView
     {
         private readonly UnityConsoleTagsBar _tagsBar;
 
@@ -24,7 +23,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             Add(_tagsBar);
         }
 
-        public void RepaintTags(ICollection<LogTag> availableTags)
+        public void RepaintTags(ICollection<TagViewModel> availableTags)
         {
             _tagsBar.RepaintTags(availableTags);
         }

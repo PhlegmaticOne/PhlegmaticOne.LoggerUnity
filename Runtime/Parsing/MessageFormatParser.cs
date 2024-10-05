@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Exceptions;
-using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parsing
@@ -13,14 +11,7 @@ namespace OpenMyGame.LoggerUnity.Parsing
         private const char OpenBrace = '{';
         private const char CloseBrace = '}';
         
-        private readonly IMessageFormatFactory _messageFormatFactory;
-
-        public MessageFormatParser(IMessageFormatFactory messageFormatFactory)
-        {
-            _messageFormatFactory = messageFormatFactory;
-        }
-        
-        public IMessageFormat Parse(string format)
+        public MessagePart[] Parse(string format)
         {
             if (string.IsNullOrWhiteSpace(format))
             {
@@ -31,7 +22,7 @@ namespace OpenMyGame.LoggerUnity.Parsing
 
             if (countOpenBraces == 0 && countCloseBraces == 0)
             {
-                return new MessageFormatStaticValue(format);
+                return new[] { MessagePart.Message(format) };
             }
 
             if (countOpenBraces != countCloseBraces)
@@ -42,7 +33,7 @@ namespace OpenMyGame.LoggerUnity.Parsing
             return ParseMessageFormat(format, countOpenBraces);
         }
 
-        private IMessageFormat ParseMessageFormat(string format, int parametersCount)
+        private static MessagePart[] ParseMessageFormat(string format, int parametersCount)
         {
             var i = 1;
             var partsCount = 2 * parametersCount + 1;
@@ -71,7 +62,7 @@ namespace OpenMyGame.LoggerUnity.Parsing
                 openBraceIndex = nextOpenBraceIndex;
             }
 
-            return _messageFormatFactory.CreateFormat(parts);
+            return parts;
         }
 
         private static void ProcessFormatPrefix(

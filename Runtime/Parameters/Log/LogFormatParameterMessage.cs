@@ -9,9 +9,9 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
     {
         public string Key => "Message";
         
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {
-            return message.RenderedMessage;
+            return renderedMessage;
         }
     }
 }

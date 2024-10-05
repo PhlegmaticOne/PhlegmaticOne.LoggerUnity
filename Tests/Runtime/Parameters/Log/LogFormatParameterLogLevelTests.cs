@@ -19,7 +19,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var messagePart = MessagePart.Parameter("LogLevel");
             var logMessage = new LogMessage(logLevel);
             
-            var result = parameter.GetValue(messagePart, logMessage, Span<object>.Empty).ToString();
+            var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
             Assert.AreEqual(logLevel.ToString(), result);
         }
@@ -34,7 +34,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var messagePart = MessagePart.Parameter("LogLevel:3");
             var logMessage = new LogMessage(logLevel);
             
-            var result = parameter.GetValue(messagePart, logMessage, Span<object>.Empty).ToString();
+            var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
             Assert.AreEqual(expected, result);
         }
@@ -49,7 +49,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var messagePart = MessagePart.Parameter("LogLevel:1");
             var logMessage = new LogMessage(logLevel);
             
-            var result = parameter.GetValue(messagePart, logMessage, Span<object>.Empty).ToString();
+            var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
             Assert.AreEqual(expected, result);
         }
@@ -64,7 +64,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var messagePart = MessagePart.Parameter("LogLevel:u3");
             var logMessage = new LogMessage(logLevel);
             
-            var result = parameter.GetValue(messagePart, logMessage, Span<object>.Empty).ToString();
+            var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
             Assert.AreEqual(expected, result);
         }
@@ -79,7 +79,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var messagePart = MessagePart.Parameter("LogLevel:l3");
             var logMessage = new LogMessage(logLevel);
             
-            var result = parameter.GetValue(messagePart, logMessage, Span<object>.Empty).ToString();
+            var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
             Assert.AreEqual(expected, result);
         }

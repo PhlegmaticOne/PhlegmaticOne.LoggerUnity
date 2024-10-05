@@ -12,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
         
         public string Key => "Stacktrace";
         
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {
             if (message.Exception is not null)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Styles;
 using UnityEditor.UIElements;
@@ -7,13 +8,14 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components
 {
-    public sealed class LoggerWindowToggle : ToolbarToggle
+    internal sealed class LoggerWindowToggle : ToolbarToggle
     {
-        public string Text { get; private set; }
+        public TagViewModel ViewModel { get; }
         
-        public LoggerWindowToggle(string text, Color textColor, Action<LoggerWindowToggle, bool> valueChanged)
+        public LoggerWindowToggle(TagViewModel viewModel, Action<LoggerWindowToggle, bool> valueChanged)
         {
-            ChangeText(text, textColor);
+            ViewModel = viewModel;
+            ChangeText(viewModel.Tag, viewModel.Color);
             style.minWidth = LoggerWindowConstantStyles.TooltipMinWidth;
             style.unityTextAlign = TextAnchor.MiddleCenter;
             SetValueWithoutNotify(false);
@@ -24,7 +26,6 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components
         public void ChangeText(string newText, in Color color)
         {
             style.color = color;
-            Text = newText;
             text = newText;
         }
     }

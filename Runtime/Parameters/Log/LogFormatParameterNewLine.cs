@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
     {
         public string Key => "NewLine";
         
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {
             return Environment.NewLine;
         }

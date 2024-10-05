@@ -7,6 +7,6 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
     public interface ILogFormatParameter
     {
         string Key { get; }
-        ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters);
+        ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage);
     }
 }

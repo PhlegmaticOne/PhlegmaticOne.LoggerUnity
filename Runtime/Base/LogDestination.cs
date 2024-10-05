@@ -1,4 +1,7 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Parameters.Log.Formats;
+using OpenMyGame.LoggerUnity.Parameters.Message.Formats;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
@@ -6,7 +9,8 @@ namespace OpenMyGame.LoggerUnity.Base
         where TConfiguration : LogConfiguration
     {
         private TConfiguration _configuration;
-        private IMessageFormat _logFormat;
+        private ILogFormat _logFormat;
+        private IMessageFormat _messageFormat;
 
         internal TConfiguration Configuration
         {
@@ -22,19 +26,21 @@ namespace OpenMyGame.LoggerUnity.Base
         public LogConfiguration Config => Configuration;
         public bool IsEnabled { get; set; }
 
-        public void Initialize()
+        public void Initialize(LoggerDependencies dependencies)
         {
-            _logFormat = Configuration.CreateMessageFormat();
+            _logFormat = Configuration.CreateLogFormat();
+            _messageFormat = Configuration.CreateMessageFormat(dependencies);
             OnInitializing();
         }
 
-        public virtual void LogMessage(LogMessage message, Span<object> parameters)
+        public virtual void LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters)
         {
-            var renderedMessage = _logFormat.Render(message, parameters);
-            LogRenderedMessage(message, renderedMessage, parameters);
+            var renderedMessage = _messageFormat.Render(message, messageParts, parameters);
+            var renderedLogMessage = _logFormat.Render(message, renderedMessage);
+            LogRenderedMessage(message, renderedLogMessage, parameters);
         }
 
-        public virtual void Release() { }
+        public virtual void Dispose() { }
 
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters);
         protected virtual void OnInitializing() { }

@@ -1,46 +1,71 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
+using OpenMyGame.LoggerUnity.Parameters.Log.Formats;
+using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
+using OpenMyGame.LoggerUnity.Parameters.Message.Formats;
+using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parsing;
-using OpenMyGame.LoggerUnity.Parsing.Base;
-using OpenMyGame.LoggerUnity.Parsing.Factories;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
     public abstract class LogConfiguration
     {
-        private readonly List<ILogFormatParameter> _logFormatParameters;
+        private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
         
+        private ILogParameterPostRenderProcessor _logParameterPostRenderProcessor;
+        private IMessageParameterPostRenderProcessor _messageParameterPostRenderProcessor;
+
         protected LogConfiguration()
         {
-            MinimumLogLevel = LoggerStaticData.MinimumLogLevel;
             LogFormat = LoggerStaticData.LogFormat;
             IsEnabled = LoggerStaticData.IsEnabled;
+            MinimumLogLevel = LoggerStaticData.MinimumLogLevel;
             _logFormatParameters = LoggerStaticData.LogFormatParameters;
+            _logParameterPostRenderProcessor = LoggerStaticData.LogParameterPostRenderProcessor;
+            _messageParameterPostRenderProcessor = LoggerStaticData.MessageParameterPostRenderProcessor;
         }
 
         public bool IsEnabled { get; set; }
         public string LogFormat { set; get; }
         public LogLevel MinimumLogLevel { get; set; }
 
-        public LogConfiguration AddLogFormatParameter(ILogFormatParameter formatParameter)
+        public void AddLogFormatParameter(ILogFormatParameter formatParameter)
         {
             if (formatParameter is not null)
             {
-                _logFormatParameters.Add(formatParameter);
+                _logFormatParameters[formatParameter.Key] = formatParameter;
             }
-            
-            return this;
         }
 
-        internal IMessageFormat CreateMessageFormat()
+        public void SetMessageParameterPostRenderProcessor(IMessageParameterPostRenderProcessor postRenderProcessor)
         {
-            return GetFormatParser().Parse(LogFormat);
+            if (postRenderProcessor is not null)
+            {
+                _messageParameterPostRenderProcessor = postRenderProcessor;
+            }
+        }
+        
+        public void SetLogParameterPostRenderProcessor(ILogParameterPostRenderProcessor postRenderProcessor)
+        {
+            if (postRenderProcessor is not null)
+            {
+                _logParameterPostRenderProcessor = postRenderProcessor;
+            }
         }
 
-        private IMessageFormatParser GetFormatParser()
+        public ILogFormat CreateLogFormat()
         {
-            var factory = new MessageFormatFactoryDestination(_logFormatParameters);
-            return new MessageFormatParser(factory);
+            var parser = new MessageFormatParser();
+
+            return new LogFormat(
+                parser.Parse(LogFormat), _logFormatParameters, _logParameterPostRenderProcessor);
+        }
+
+        public IMessageFormat CreateMessageFormat(LoggerDependencies dependencies)
+        {
+            return new MessageFormat(
+                dependencies.FormatProperties, dependencies.ParameterSerializer, _messageParameterPostRenderProcessor);
         }
     }
 }

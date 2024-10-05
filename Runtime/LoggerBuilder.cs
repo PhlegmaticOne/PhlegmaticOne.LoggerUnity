@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
-using OpenMyGame.LoggerUnity.Parameters.Processors;
-using OpenMyGame.LoggerUnity.Parameters.Processors.Colors;
-using OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
-using OpenMyGame.LoggerUnity.Parsing.Factories;
 using OpenMyGame.LoggerUnity.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity
@@ -19,8 +16,6 @@ namespace OpenMyGame.LoggerUnity
         private readonly Dictionary<Type, IMessageFormatParameter> _formatProperties;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
-        private IParameterColorsViewConfig _parameterColorsViewConfig;
-        private IParameterPostRenderProcessor _postRenderProcessor;
         private bool _isCacheFormats;
         private string _tagFormat;
         private bool _isEnabled;
@@ -33,8 +28,6 @@ namespace OpenMyGame.LoggerUnity
             _isCacheFormats = LoggerStaticData.IsCacheFormats;
             _tagFormat = LoggerStaticData.TagFormat;
             _parameterSerializer = new MessageFormatParameterSerializer();
-            _postRenderProcessor = new ParameterPostRenderProcessor();
-            _parameterColorsViewConfig = new ParameterColorsViewConfigRandom();
         }
 
         public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
@@ -65,17 +58,6 @@ namespace OpenMyGame.LoggerUnity
             return this;
         }
 
-        public LoggerBuilder ColorizeParameters(IParameterColorsViewConfig parameterColorsViewConfig)
-        {
-            if (parameterColorsViewConfig is not null)
-            {
-                _parameterColorsViewConfig = parameterColorsViewConfig;
-                _postRenderProcessor = new ParameterPostRenderProcessorColorize(parameterColorsViewConfig);
-            }
-            
-            return this;
-        }
-
         public LoggerBuilder LogTo<TDestination, TConfiguration>(
             Action<TConfiguration> configureDestinationAction = null)
             where TConfiguration : LogConfiguration, new()
@@ -94,7 +76,9 @@ namespace OpenMyGame.LoggerUnity
 
         public ILogger CreateLogger()
         {
-            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagProvider())
+            var dependencies = new LoggerDependencies(_formatProperties, _parameterSerializer);
+            
+            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagProvider(), dependencies)
             {
                 IsEnabled = _isEnabled
             };
@@ -106,14 +90,12 @@ namespace OpenMyGame.LoggerUnity
 
         private ILogTagProvider GetLogWithTagProvider()
         {
-            return new LogTagProvider(_tagFormat, _parameterColorsViewConfig);
+            return new LogTagProvider(_tagFormat);
         }
 
         private IMessageFormatParser GetParser()
         {
-            var messageFormatFactory = new MessageFormatFactoryLogMessage(
-                _formatProperties, _parameterSerializer, _postRenderProcessor);
-            var messageFormatParser = new MessageFormatParser(messageFormatFactory);
+            var messageFormatParser = new MessageFormatParser();
             return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
         }
     }

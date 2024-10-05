@@ -26,11 +26,11 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             LogMessageInMainThread(logMessage, renderedMessage).Forget();
         }
 
-        public override void Release()
+        public override void Dispose()
         {
             _androidLogger.Dispose();
             _androidLogger = null;
-            base.Release();
+            base.Dispose();
         }
 
         private async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)

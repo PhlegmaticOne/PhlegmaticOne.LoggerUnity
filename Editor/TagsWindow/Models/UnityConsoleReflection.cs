@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
 {
-    public class UnityConsoleReflection
+    internal class UnityConsoleReflection
     {
         private readonly object _consoleWindowInstance;
         private readonly MethodInfo _setFilterMethod;

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
+using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
@@ -18,34 +20,53 @@ namespace OpenMyGame.LoggerUnity.Base
         public const bool IsCacheFormats = true;
         public const string DefaultTagValue = "Unity";
         public const string ExceptionFormat = "{Exception}";
+        public const string MessageKey = "Message";
 
-        public static List<ILogFormatParameter> LogFormatParameters => new()
+        public static ILogParameterPostRenderProcessor LogParameterPostRenderProcessor =>
+            new LogParameterPostRenderProcessor();
+
+        public static IMessageParameterPostRenderProcessor MessageParameterPostRenderProcessor =>
+            new MessageParameterPostRenderProcessor();
+
+        public static Dictionary<string, ILogFormatParameter> LogFormatParameters
         {
-            new LogFormatParameterException(),
-            new LogFormatParameterStacktrace(),
-            new LogFormatParameterTime(),
-            new LogFormatParameterLogLevel(),
-            new LogFormatParameterUnityTime(),
-            new LogFormatParameterNewLine(),
-            new LogFormatParameterMessage(),
-            new LogFormatParameterThreadId(),
-            new LogFormatParameterTimeUtc()
-        };
+            get
+            {
+                var result = new Dictionary<string, ILogFormatParameter>();
+                AddLogFormatProperty(result, new LogFormatParameterException());
+                AddLogFormatProperty(result, new LogFormatParameterStacktrace());
+                AddLogFormatProperty(result, new LogFormatParameterTime());
+                AddLogFormatProperty(result, new LogFormatParameterLogLevel());
+                AddLogFormatProperty(result, new LogFormatParameterUnityTime());
+                AddLogFormatProperty(result, new LogFormatParameterNewLine());
+                AddLogFormatProperty(result, new LogFormatParameterMessage());
+                AddLogFormatProperty(result, new LogFormatParameterThreadId());
+                AddLogFormatProperty(result, new LogFormatParameterTimeUtc());
+                return result;
+            }
+        }
 
         public static Dictionary<Type, IMessageFormatParameter> MessageFormatParameters
         {
             get
             {
-                var formatParameters = new Dictionary<Type, IMessageFormatParameter>();
-                AddMessageFormatProperty(formatParameters, new MessageFormatParameterString());
-                AddMessageFormatProperty(formatParameters, new MessageFormatParameterDateTime());
-                AddMessageFormatProperty(formatParameters, new MessageFormatParameterTimeSpan());
-                AddMessageFormatProperty(formatParameters, new MessageFormatParameterGuid());
-                AddMessageFormatProperty(formatParameters, new MessageFormatParameterTag());
-                return formatParameters;
+                var result = new Dictionary<Type, IMessageFormatParameter>();
+                AddMessageFormatProperty(result, new MessageFormatParameterString());
+                AddMessageFormatProperty(result, new MessageFormatParameterDateTime());
+                AddMessageFormatProperty(result, new MessageFormatParameterTimeSpan());
+                AddMessageFormatProperty(result, new MessageFormatParameterGuid());
+                AddMessageFormatProperty(result, new MessageFormatParameterTag());
+                return result;
             }
         }
 
+        private static void AddLogFormatProperty(
+            IDictionary<string, ILogFormatParameter> formatParameters, 
+            ILogFormatParameter formatParameter)
+        {
+            formatParameters[formatParameter.Key] = formatParameter;
+            
+        }
         private static void AddMessageFormatProperty(
             IDictionary<Type, IMessageFormatParameter> formatParameters, 
             IMessageFormatParameter formatParameter)
