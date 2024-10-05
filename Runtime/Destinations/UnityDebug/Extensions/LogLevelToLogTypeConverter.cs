@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions

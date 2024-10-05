@@ -19,21 +19,26 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
         
         public void Process(StringBuilder destination, in MessagePart messagePart, in ReadOnlySpan<char> renderedValue)
         {
-            if (ParameterIsMessage(messagePart))
+            var value = messagePart.GetValue();
+            
+            if (renderedValue.IsEmpty || ValueIsMessage(value) || ValueIsNewLine(value))
             {
                 destination.Append(renderedValue);
                 return;
             }
             
-            var color = _colorsViewConfig.GetLogParameterColor(messagePart.GetValueAsString());
+            var color = _colorsViewConfig.GetLogParameterColor(value.ToString());
             UnityDebugColorWrapper.Wrap(destination, in renderedValue, color);
         }
 
-        private static bool ParameterIsMessage(in MessagePart messagePart)
+        private static bool ValueIsNewLine(in ReadOnlySpan<char> messagePart)
         {
-            return messagePart
-                .GetValue()
-                .Equals(LoggerStaticData.MessageKey, StringComparison.OrdinalIgnoreCase);
+            return messagePart.Equals(LoggerStaticData.NewLineKey, StringComparison.OrdinalIgnoreCase);
+        }
+        
+        private static bool ValueIsMessage(in ReadOnlySpan<char> messagePart)
+        {
+            return messagePart.Equals(LoggerStaticData.MessageKey, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.Android

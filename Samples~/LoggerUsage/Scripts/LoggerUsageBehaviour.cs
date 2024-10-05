@@ -1,6 +1,6 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.LoggerUsage
@@ -12,12 +12,13 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
                 .SetIsCacheFormats(true)
+                .ExtractStackTracesToMessages()
                 .LogToUnityDebug(config =>
                 {
-                    config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";
+                    config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception}";
                     config.MinimumLogLevel = LogLevel.Debug;
-                    config.IsUnityStacktraceEnabled = true;
-                    config.MessagePartMaxSize = 400;
+                    config.IsUnityStacktraceEnabled = false;
+                    config.MessagePartMaxSize = 4000;
                     config.ColorizeParameters();
                 })
                 .CreateLogger();
@@ -40,7 +41,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
 
             var systemException = new Exception("System failed");
-            Log.DebugMessage()
+            Log.FatalMessage()
                 .WithTag("System")
                 .WithException(systemException)
                 .Log("System error: {Error}", "Something went wrong");
@@ -60,9 +61,12 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         private static void LogWithTag()
         {
             var logWithTag = new LogWithTag("Time");
+            
             logWithTag
                 .DebugMessage()
                 .Log("Debug current time with log with tag: {Time}", DateTime.Now);
+            
+            logWithTag.Exception(new Exception("LogWithTag exception"));
         }
     }
 }

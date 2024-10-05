@@ -1,6 +1,8 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Messages;
+using OpenMyGame.LoggerUnity.Messages.Exceptions;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
@@ -16,10 +18,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
             
             switch (logType)
             {
-                case LogType.Exception when logMessage.Exception is not null:
-                    LogException(logMessage.Exception);
-                    break;
-                case LogType.Exception when logMessage.Exception is null:
+                case LogType.Exception:
                     LogException(new LogException(renderedMessage));
                     break;
                 case LogType.Error:

@@ -1,4 +1,4 @@
-﻿using OpenMyGame.LoggerUnity.Base;
+﻿using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Formats
 {

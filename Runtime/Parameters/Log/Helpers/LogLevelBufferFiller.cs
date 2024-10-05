@@ -1,6 +1,6 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Helpers
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Helpers;
 using OpenMyGame.LoggerUnity.Parsing.Models;

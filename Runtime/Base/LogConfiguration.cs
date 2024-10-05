@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Formats;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
@@ -25,6 +25,8 @@ namespace OpenMyGame.LoggerUnity.Base
             _logParameterPostRenderProcessor = LoggerStaticData.LogParameterPostRenderProcessor;
             _messageParameterPostRenderProcessor = LoggerStaticData.MessageParameterPostRenderProcessor;
         }
+
+        protected virtual bool AppendStacktraceToRenderingMessage => false;
 
         public bool IsEnabled { get; set; }
         public string LogFormat { set; get; }
@@ -58,14 +60,15 @@ namespace OpenMyGame.LoggerUnity.Base
         {
             var parser = new MessageFormatParser();
 
-            return new LogFormat(
+            return new LogFormat(AppendStacktraceToRenderingMessage,
                 parser.Parse(LogFormat), _logFormatParameters, _logParameterPostRenderProcessor);
         }
 
-        public IMessageFormat CreateMessageFormat(LoggerDependencies dependencies)
+        public IMessageFormat CreateMessageFormat(LoggerConfigurationParameters configurationParameters)
         {
             return new MessageFormat(
-                dependencies.FormatProperties, dependencies.ParameterSerializer, _messageParameterPostRenderProcessor);
+                configurationParameters.FormatProperties, configurationParameters.ParameterSerializer,
+                _messageParameterPostRenderProcessor);
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Tagging;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace OpenMyGame.LoggerUnity.Messages
 {
     public partial class LogMessage
     {
@@ -17,16 +18,28 @@ namespace OpenMyGame.LoggerUnity.Base
             Exception = exception;
         }
 
-        public LogMessage(LogLevel logLevel, ILogger logger)
+        public LogMessage(LogLevel logLevel, LogStacktrace stacktrace, ILogger logger)
         {
             LogLevel = logLevel;
+            Stacktrace = stacktrace;
             _logger = logger;
         }
         
         public LogLevel LogLevel { get; }
+        public LogStacktrace Stacktrace { get; }
         public Exception Exception { get; private set; }
         public LogTag Tag { get; private set; }
         public string Format { get; private set; }
+
+        public bool HasTag()
+        {
+            return Tag is not null;
+        }
+
+        public bool HasStacktrace()
+        {
+            return Stacktrace.HasValue();
+        }
 
         public LogMessage WithTag(string tag)
         {

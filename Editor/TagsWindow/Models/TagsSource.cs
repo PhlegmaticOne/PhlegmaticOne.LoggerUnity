@@ -40,9 +40,10 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
             
             var logMessage = eventArgs.Message;
             
-            if (logMessage.Tag is not null)
+            if (logMessage.HasTag())
             {
-                HasChanges = _availableTags.Add(TagViewModel.FromTag(logMessage.Tag));
+                var tagViewModel = TagViewModel.FromTag(logMessage.Tag);
+                HasChanges = _availableTags.Add(tagViewModel);
             }
         }
 

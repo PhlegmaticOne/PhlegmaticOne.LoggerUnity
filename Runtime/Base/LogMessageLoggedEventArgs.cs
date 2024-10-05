@@ -1,4 +1,6 @@
-﻿namespace OpenMyGame.LoggerUnity.Base
+﻿using OpenMyGame.LoggerUnity.Messages;
+
+namespace OpenMyGame.LoggerUnity.Base
 {
     public readonly struct LogMessageLoggedEventArgs
     {

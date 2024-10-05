@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using OpenMyGame.LoggerUnity.Messages;
+using OpenMyGame.LoggerUnity.Messages.Exceptions;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
+using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
@@ -13,15 +16,22 @@ namespace OpenMyGame.LoggerUnity.Base
     {
         public const string ConditionalName = "UNITY_LOGGING_ENABLED";
         public const LogLevel MinimumLogLevel = LogLevel.Debug;
-        public const string LogFormat = "{Message}";
-        public const string TagFormat = "#{Tag}#";
-        public const bool IsEnabled = true;
+        public const string ExceptionPlaceholderFormat = "{Placeholder}";
+        public static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
         public const char SerializeParameterPrefix = '@';
-        public const bool IsCacheFormats = true;
         public const string DefaultTagValue = "Unity";
-        public const string ExceptionFormat = "{Exception}";
+        public const string LogFormat = "{Message}";
         public const string MessageKey = "Message";
+        public const string NewLineKey = "NewLine";
+        public const string TagFormat = "#{Tag}#";
 
+        public const bool IsExtractStacktrace = false;
+        public const bool IsCacheFormats = true;
+        public const bool IsEnabled = true;
+
+        public static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>
+            new MessageFormatParameterSerializer();
+        
         public static ILogParameterPostRenderProcessor LogParameterPostRenderProcessor =>
             new LogParameterPostRenderProcessor();
 
@@ -34,7 +44,6 @@ namespace OpenMyGame.LoggerUnity.Base
             {
                 var result = new Dictionary<string, ILogFormatParameter>();
                 AddLogFormatProperty(result, new LogFormatParameterException());
-                AddLogFormatProperty(result, new LogFormatParameterStacktrace());
                 AddLogFormatProperty(result, new LogFormatParameterTime());
                 AddLogFormatProperty(result, new LogFormatParameterLogLevel());
                 AddLogFormatProperty(result, new LogFormatParameterUnityTime());
@@ -56,6 +65,7 @@ namespace OpenMyGame.LoggerUnity.Base
                 AddMessageFormatProperty(result, new MessageFormatParameterTimeSpan());
                 AddMessageFormatProperty(result, new MessageFormatParameterGuid());
                 AddMessageFormatProperty(result, new MessageFormatParameterTag());
+                AddMessageFormatProperty(result, new MessageFormatParameterExceptionPlaceholder());
                 return result;
             }
         }

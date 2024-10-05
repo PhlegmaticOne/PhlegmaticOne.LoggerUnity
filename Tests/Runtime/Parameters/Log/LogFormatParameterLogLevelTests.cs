@@ -1,6 +1,5 @@
-﻿using System;
-using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Base;
+﻿using NUnit.Framework;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 

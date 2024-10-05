@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Messages.Factories;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing;
@@ -13,9 +13,10 @@ namespace OpenMyGame.LoggerUnity
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, IMessageFormatParameter> _formatProperties;
+        private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
+        private bool _isExtractStacktrace;
         private bool _isCacheFormats;
         private string _tagFormat;
         private bool _isEnabled;
@@ -23,18 +24,19 @@ namespace OpenMyGame.LoggerUnity
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _formatProperties = LoggerStaticData.MessageFormatParameters;
+            _tagFormat = LoggerStaticData.TagFormat;
             _isEnabled = LoggerStaticData.IsEnabled;
             _isCacheFormats = LoggerStaticData.IsCacheFormats;
-            _tagFormat = LoggerStaticData.TagFormat;
-            _parameterSerializer = new MessageFormatParameterSerializer();
+            _isExtractStacktrace = LoggerStaticData.IsExtractStacktrace;
+            _formatParameters = LoggerStaticData.MessageFormatParameters;
+            _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
         }
 
         public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
         {
             if (formatParameter is not null)
             {
-                _formatProperties[formatParameter.PropertyType] = formatParameter;
+                _formatParameters[formatParameter.PropertyType] = formatParameter;
             }
             
             return this;
@@ -49,6 +51,12 @@ namespace OpenMyGame.LoggerUnity
         public LoggerBuilder SetEnabled(bool isEnabled)
         {
             _isEnabled = isEnabled;
+            return this;
+        }
+
+        public LoggerBuilder ExtractStackTracesToMessages()
+        {
+            _isExtractStacktrace = true;
             return this;
         }
         
@@ -76,19 +84,17 @@ namespace OpenMyGame.LoggerUnity
 
         public ILogger CreateLogger()
         {
-            var dependencies = new LoggerDependencies(_formatProperties, _parameterSerializer);
+            ILogger logger = new Logger(
+                _loggerDestinations, GetParser(), GetLogTagProvider(), GetConfigurationParameters(), GetMessageFactory());
             
-            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagProvider(), dependencies)
-            {
-                IsEnabled = _isEnabled
-            };
+            logger.IsEnabled = _isEnabled;
             
             logger.Initialize();
             
             return logger;
         }
 
-        private ILogTagProvider GetLogWithTagProvider()
+        private ILogTagProvider GetLogTagProvider()
         {
             return new LogTagProvider(_tagFormat);
         }
@@ -97,6 +103,16 @@ namespace OpenMyGame.LoggerUnity
         {
             var messageFormatParser = new MessageFormatParser();
             return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
+        }
+
+        private LoggerConfigurationParameters GetConfigurationParameters()
+        {
+            return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer);
+        }
+
+        private ILogMessageFactory GetMessageFactory()
+        {
+            return new LogMessageFactory(_isExtractStacktrace);
         }
     }
 }

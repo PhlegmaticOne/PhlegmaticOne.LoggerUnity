@@ -1,15 +1,7 @@
-﻿using UnityEngine;
-
-namespace OpenMyGame.LoggerUnity.Extensions
+﻿namespace OpenMyGame.LoggerUnity.Extensions
 {
     internal static class StringExtensions
     {
-        public static string Colorize(this string value, in Color color)
-        {
-            var colorString = ColorUtility.ToHtmlStringRGB(color);
-            return $"<color=#{colorString}>{value}</color>";
-        }
-        
         public static (int, int) CountBraces(this string value)
         {
             var countOpenBraces = 0;
@@ -31,6 +23,26 @@ namespace OpenMyGame.LoggerUnity.Extensions
             }
 
             return (countOpenBraces, countCloseBraces);
+        }
+
+        public static int IndexOfChar(this string str, char value, int indexNumber)
+        {
+            var currentIndex = 0;
+            var currentPosition = 0;
+
+            while (currentIndex < indexNumber)
+            {
+                currentPosition = str.IndexOf(value, currentPosition) + 1;
+
+                if (currentPosition == -1)
+                {
+                    return -1;
+                }
+
+                currentIndex++;
+            }
+
+            return currentPosition;
         }
     }
 }

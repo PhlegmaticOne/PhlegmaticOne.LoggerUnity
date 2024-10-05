@@ -5,9 +5,9 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 
 namespace OpenMyGame.LoggerUnity
 {
-    public class LoggerDependencies
+    public class LoggerConfigurationParameters
     {
-        public LoggerDependencies(
+        public LoggerConfigurationParameters(
             Dictionary<Type, IMessageFormatParameter> formatProperties, 
             IMessageFormatParameterSerializer parameterSerializer)
         {

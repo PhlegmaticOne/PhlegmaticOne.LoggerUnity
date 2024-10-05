@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Messages;
+using OpenMyGame.LoggerUnity.Messages.Factories;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Tagging.Providers;
 
@@ -11,7 +13,8 @@ namespace OpenMyGame.LoggerUnity
     {
         private readonly IReadOnlyList<ILogDestination> _logDestinations;
         private readonly IMessageFormatParser _messageFormatParser;
-        private readonly LoggerDependencies _loggerDependencies;
+        private readonly LoggerConfigurationParameters _configurationParameters;
+        private readonly ILogMessageFactory _messageFactory;
         private readonly ILogTagProvider _logTagProvider;
 
         private bool _isEnabled;
@@ -21,11 +24,13 @@ namespace OpenMyGame.LoggerUnity
             IReadOnlyList<ILogDestination> logDestinations, 
             IMessageFormatParser messageFormatParser,
             ILogTagProvider logTagProvider,
-            LoggerDependencies loggerDependencies)
+            LoggerConfigurationParameters configurationParameters,
+            ILogMessageFactory messageFactory)
         {
             _logDestinations = logDestinations;
             _messageFormatParser = messageFormatParser;
-            _loggerDependencies = loggerDependencies;
+            _configurationParameters = configurationParameters;
+            _messageFactory = messageFactory;
             LogTagProvider = logTagProvider;
             _isDisposed = true;
         }
@@ -41,6 +46,11 @@ namespace OpenMyGame.LoggerUnity
         }
 
         public ILogTagProvider LogTagProvider { get; }
+        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel)
+        {
+            return _messageFactory.CreateMessage(logLevel, stacktraceDepthLevel);
+        }
+
         public event Action<LogMessageLoggedEventArgs> MessageLogged;
 
         public void Initialize()
@@ -52,7 +62,7 @@ namespace OpenMyGame.LoggerUnity
             
             foreach (var loggerDestination in _logDestinations)
             {
-                loggerDestination.Initialize(_loggerDependencies);
+                loggerDestination.Initialize(_configurationParameters);
             }
 
             _isDisposed = false;

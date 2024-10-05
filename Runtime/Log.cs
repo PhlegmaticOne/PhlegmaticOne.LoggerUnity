@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity
 {
@@ -31,10 +32,10 @@ namespace OpenMyGame.LoggerUnity
             Logger.SetDestinationEnabled(destinationName, isEnabled);
         }
 
-        public static LogMessage DebugMessage() => Message(LogLevel.Debug);
-        public static LogMessage WarningMessage() => Message(LogLevel.Warning);
-        public static LogMessage ErrorMessage() => Message(LogLevel.Error);
-        public static LogMessage FatalMessage() => Message(LogLevel.Fatal);
+        public static LogMessage DebugMessage() => Logger.CreateMessage(LogLevel.Debug, stacktraceDepthLevel: 0);
+        public static LogMessage WarningMessage() => Logger.CreateMessage(LogLevel.Warning, stacktraceDepthLevel: 0);
+        public static LogMessage ErrorMessage() => Logger.CreateMessage(LogLevel.Error, stacktraceDepthLevel: 0);
+        public static LogMessage FatalMessage() => Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 0);
 
         [Conditional(LoggerStaticData.ConditionalName)]
         public static void Exception(Exception exception)
@@ -44,12 +45,10 @@ namespace OpenMyGame.LoggerUnity
                 return;
             }
 
-            FatalMessage()
+            Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 0)
                 .WithException(exception)
-                .Log(LoggerStaticData.ExceptionFormat);
+                .Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
-
-        private static LogMessage Message(LogLevel logLevel) => new(logLevel, Logger);
 
         private static void OnMessageLogged(LogMessageLoggedEventArgs messageLoggedEventArgs)
         {

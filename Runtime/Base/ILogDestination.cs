@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Base
@@ -8,7 +9,7 @@ namespace OpenMyGame.LoggerUnity.Base
         string DestinationName { get; }
         LogConfiguration Config { get; }
         bool IsEnabled { get; set; }
-        void Initialize(LoggerDependencies dependencies);
+        void Initialize(LoggerConfigurationParameters configurationParameters);
         void LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters);
     }
 }

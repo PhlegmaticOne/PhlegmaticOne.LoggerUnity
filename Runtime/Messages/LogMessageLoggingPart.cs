@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Parameters.Infrastructure;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace OpenMyGame.LoggerUnity.Messages
 {
     public partial class LogMessage
     {

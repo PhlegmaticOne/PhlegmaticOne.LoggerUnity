@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Formats;
 using OpenMyGame.LoggerUnity.Parameters.Message.Formats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
@@ -26,10 +27,10 @@ namespace OpenMyGame.LoggerUnity.Base
         public LogConfiguration Config => Configuration;
         public bool IsEnabled { get; set; }
 
-        public void Initialize(LoggerDependencies dependencies)
+        public void Initialize(LoggerConfigurationParameters configurationParameters)
         {
             _logFormat = Configuration.CreateLogFormat();
-            _messageFormat = Configuration.CreateMessageFormat(dependencies);
+            _messageFormat = Configuration.CreateMessageFormat(configurationParameters);
             OnInitializing();
         }
 
