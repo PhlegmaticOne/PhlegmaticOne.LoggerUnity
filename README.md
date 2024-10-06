@@ -254,7 +254,7 @@ logWithTag
 
 Пример конфига приведен на скриншоте:
 
-![image](https://github.com/user-attachments/assets/0bd582fd-f50e-48d6-8f09-9ac9937cb73e)
+![image](https://github.com/user-attachments/assets/ea410d32-dbd0-4f23-96af-d6cdca6159f9)
 
 После создания конфига его нужно указать в ```LoggerBuilder```, чтобы он использовался вместо дефолтного конфига, например:
 
