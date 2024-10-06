@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Static;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using UnityEngine;
 
@@ -27,6 +28,11 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig
 
         public Color GetMessageParameterColor(object parameter)
         {
+            if (parameter is null)
+            {
+                return LoggerStaticData.DefaultLogTextColor;
+            }
+            
             var parameterName = parameter.GetType().Name;
             
             return _messageParameterColorsMap
@@ -35,6 +41,11 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig
 
         public Color GetLogParameterColor(string parameterKey, in ReadOnlySpan<char> renderedValue)
         {
+            if (string.IsNullOrEmpty(parameterKey))
+            {
+                return LoggerStaticData.DefaultLogTextColor;
+            }
+            
             if (parameterKey == LogFormatParameterLogLevel.KeyParameter)
             {
                 return GetLogLevelColor(renderedValue);

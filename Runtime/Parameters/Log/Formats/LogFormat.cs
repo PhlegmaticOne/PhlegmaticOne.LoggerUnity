@@ -55,7 +55,6 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log.Formats
         private void TryAppendStacktrace(StringBuilder destination, LogMessage logMessage)
         {
             if (_appendStacktraceToRenderingMessage && 
-                logMessage.HasStacktrace() &&
                 logMessage.Stacktrace.TryGetUserCodeStacktrace(out var userCodeStacktrace))
             {
                 if (destination[^1] != '\n')

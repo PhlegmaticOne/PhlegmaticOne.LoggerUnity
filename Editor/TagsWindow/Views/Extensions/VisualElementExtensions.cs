@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Extensions
 {
-    public static class VisualElementExtensions
+    internal static class VisualElementExtensions
     {
         public static T AddBorder<T>(this T element, int borderWidth = 1) where T : VisualElement
         {

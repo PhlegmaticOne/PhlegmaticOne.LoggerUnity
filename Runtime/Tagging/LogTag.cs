@@ -28,11 +28,10 @@ namespace OpenMyGame.LoggerUnity.Tagging
         public Color Color { get; private set; }
         public bool HasColor { get; private set; }
 
-        public LogTag WithColor(Color color)
+        public void SetColor(Color color)
         {
             Color = color;
             HasColor = true;
-            return this;
         }
         
         public bool Equals(LogTag other)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Static;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Models;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using UnityEngine;

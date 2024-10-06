@@ -6,21 +6,21 @@ namespace OpenMyGame.LoggerUnity.Messages.Factories
 {
     public class LogMessageFactory : ILogMessageFactory
     {
-        private const int StacktraceDepthLevelDefault = 5;
-        
-        private static int CurrentMessageId = -1;
-
         private readonly bool _isExtractStacktrace;
+        private readonly int _startStacktraceDepthLevel;
 
-        public LogMessageFactory(bool isExtractStacktrace)
+        private int _currentMessageId = -1;
+
+        public LogMessageFactory(bool isExtractStacktrace, int startStacktraceDepthLevel)
         {
             _isExtractStacktrace = isExtractStacktrace;
+            _startStacktraceDepthLevel = startStacktraceDepthLevel;
         }
         
         public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel)
         {
             return new LogMessage(
-                Interlocked.Increment(ref CurrentMessageId), 
+                Interlocked.Increment(ref _currentMessageId), 
                 logLevel, 
                 CreateStacktrace(stacktraceDepthLevel), 
                 Log.Logger);
@@ -34,7 +34,7 @@ namespace OpenMyGame.LoggerUnity.Messages.Factories
             }
 
             var stacktrace = StackTraceUtility.ExtractStackTrace();
-            var userCodeStartPosition = stacktrace.IndexOfChar('\n', StacktraceDepthLevelDefault + stacktraceDepthLevel);
+            var userCodeStartPosition = stacktrace.IndexOfChar('\n', _startStacktraceDepthLevel + stacktraceDepthLevel);
             return new LogStacktrace(stacktrace, userCodeStartPosition);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
 {

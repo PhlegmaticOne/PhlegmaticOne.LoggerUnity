@@ -22,6 +22,12 @@ namespace OpenMyGame.LoggerUnity.Messages
 
         public bool TryGetUserCodeStacktrace(out ReadOnlySpan<char> userCodeStacktrace)
         {
+            if (!HasValue())
+            {
+                userCodeStacktrace = ReadOnlySpan<char>.Empty;
+                return false;
+            }
+            
             userCodeStacktrace = Stacktrace.AsSpan()[UserCodeStacktraceStartPosition..];
             return true;
         }

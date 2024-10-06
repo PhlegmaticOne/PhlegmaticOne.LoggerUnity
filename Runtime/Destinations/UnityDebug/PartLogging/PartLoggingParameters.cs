@@ -12,11 +12,11 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
 
         private readonly Dictionary<string, object> _parameters;
         
-        public PartLoggingParameters(LogMessage logMessage, int partsCount)
+        public PartLoggingParameters(int messageId, int partsCount)
         {
             _parameters = new Dictionary<string, object>
             {
-                { MessageId, logMessage.Id },
+                { MessageId, messageId },
                 { MessagePart, string.Empty },
                 { PartIndex, 0 },
                 { PartsCount, partsCount }

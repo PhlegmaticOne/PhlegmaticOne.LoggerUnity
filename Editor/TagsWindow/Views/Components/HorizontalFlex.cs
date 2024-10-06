@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components
 {
-    public class HorizontalFlex : VisualElement
+    internal class HorizontalFlex : VisualElement
     {
         public HorizontalFlex(Justify justify, params VisualElement[] elements)
         {

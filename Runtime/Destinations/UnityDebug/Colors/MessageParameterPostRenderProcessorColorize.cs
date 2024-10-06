@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Tagging;
 using UnityEngine;
@@ -23,13 +23,13 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
                 ? GetTagColor(logTag) 
                 : _colorsViewConfig.GetMessageParameterColor(parameter);
             
-            UnityDebugColorWrapper.Wrap(destination, in renderedParameter, color);
+            UnityDebugStringColorizer.ColorizeNonHeapAlloc(destination, in renderedParameter, color);
         }
 
         private Color GetTagColor(LogTag logTag)
         {
             var color = _colorsViewConfig.GetTagColor(logTag.Tag);
-            logTag.WithColor(color);
+            logTag.SetColor(color);
             return color;
         }
     }

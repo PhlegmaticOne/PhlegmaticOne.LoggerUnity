@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Base
+namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing.Models
 {
     [TestFixture]
     public class MessagePartTests

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig
+namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Models
 {
     [Serializable]
     public struct KeyColorConfigData

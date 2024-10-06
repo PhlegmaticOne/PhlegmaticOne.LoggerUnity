@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
@@ -28,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
             }
             
             var color = _colorsViewConfig.GetLogParameterColor(value.ToString(), renderedValue);
-            UnityDebugColorWrapper.Wrap(destination, in renderedValue, color);
+            UnityDebugStringColorizer.ColorizeNonHeapAlloc(destination, in renderedValue, color);
         }
 
         private static bool ValueIsNewLine(in ReadOnlySpan<char> messagePart)

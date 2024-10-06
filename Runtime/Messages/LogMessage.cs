@@ -8,14 +8,9 @@ namespace OpenMyGame.LoggerUnity.Messages
     {
         private readonly ILogger _logger;
 
-        internal LogMessage(LogLevel logLevel)
+        internal LogMessage(LogLevel logLevel = LogLevel.Debug)
         {
             LogLevel = logLevel;
-        }
-
-        internal LogMessage(Exception exception)
-        {
-            Exception = exception;
         }
 
         public LogMessage(int id, LogLevel logLevel, LogStacktrace stacktrace, ILogger logger)

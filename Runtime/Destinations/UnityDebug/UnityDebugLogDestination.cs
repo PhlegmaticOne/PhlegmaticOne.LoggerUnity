@@ -57,7 +57,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
             var maxSize = Configuration.MessagePartMaxSize;
             var messageSpan = renderedMessage.AsSpan();
             var partsCount = Mathf.CeilToInt((float)renderedMessage.Length / maxSize);
-            var parameters = new PartLoggingParameters(logMessage, partsCount);
+            var parameters = new PartLoggingParameters(logMessage.Id, partsCount);
 
             while (offset < renderedMessage.Length)
             {

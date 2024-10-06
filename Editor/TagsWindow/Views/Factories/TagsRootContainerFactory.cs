@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
-    public class TagsRootContainerFactory : ITagsRootContainerFactory
+    internal class TagsRootContainerFactory : ITagsRootContainerFactory
     {
         public VisualElement CreateRootContainer()
         {

@@ -14,12 +14,15 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
         [TestCase(LogLevel.Fatal)]
         public void GetValue_ShouldReturnFullLogLevelName_WhenFormatHasNoLength(LogLevel logLevel)
         {
+            //Arrange
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel");
             var logMessage = new LogMessage(logLevel);
             
+            //Act
             var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
+            //Assert
             Assert.AreEqual(logLevel.ToString(), result);
         }
         
@@ -29,12 +32,15 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
         [TestCase(LogLevel.Fatal, "Ftl")]
         public void GetValue_ShouldReturnLevelNameWith3Length_WhenFormatHas3Length(LogLevel logLevel, string expected)
         {
+            //Arrange
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel:3");
             var logMessage = new LogMessage(logLevel);
             
+            //Act
             var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
+            //Assert
             Assert.AreEqual(expected, result);
         }
         
@@ -44,12 +50,15 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
         [TestCase(LogLevel.Fatal, "F")]
         public void GetValue_ShouldReturnLevelNameWith1Length_WhenFormatHas3Length(LogLevel logLevel, string expected)
         {
+            //Arrange
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel:1");
             var logMessage = new LogMessage(logLevel);
             
+            //Act
             var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
+            //Assert
             Assert.AreEqual(expected, result);
         }
         
@@ -59,12 +68,15 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
         [TestCase(LogLevel.Fatal, "FTL")]
         public void GetValue_ShouldReturnLevelNameUppercase_WhenFormatHasU(LogLevel logLevel, string expected)
         {
+            //Arrange
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel:u3");
             var logMessage = new LogMessage(logLevel);
             
+            //Act
             var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
+            //Assert
             Assert.AreEqual(expected, result);
         }
         
@@ -74,12 +86,15 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
         [TestCase(LogLevel.Fatal, "ftl")]
         public void GetValue_ShouldReturnLevelNameLowercase_WhenFormatHasL(LogLevel logLevel, string expected)
         {
+            //Arrange
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel:l3");
             var logMessage = new LogMessage(logLevel);
             
+            //Act
             var result = parameter.GetValue(messagePart, logMessage, "").ToString();
             
+            //Assert
             Assert.AreEqual(expected, result);
         }
     }

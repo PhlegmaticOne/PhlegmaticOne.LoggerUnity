@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers
 {
-    internal static class UnityDebugColorWrapper
+    internal static class UnityDebugStringColorizer
     {
         private const int ColorWrapLength = 23;
 
-        public static string Colorize(string value, in Color color)
+        public static string ColorizeString(string value, in Color color)
         {
             var colorString = ColorUtility.ToHtmlStringRGB(color);
             return $"<color=#{colorString}>{value}</color>";
         }
         
-        public static void Wrap(StringBuilder destination, in ReadOnlySpan<char> renderedValue, in Color color)
+        public static void ColorizeNonHeapAlloc(StringBuilder destination, in ReadOnlySpan<char> renderedValue, in Color color)
         {
             var offset = 0;
             var colorString = ColorUtility.ToHtmlStringRGB(color);

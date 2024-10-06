@@ -112,7 +112,7 @@ namespace OpenMyGame.LoggerUnity
 
         private ILogMessageFactory GetMessageFactory()
         {
-            return new LogMessageFactory(_isExtractStacktrace);
+            return new LogMessageFactory(_isExtractStacktrace, 5);
         }
     }
 }

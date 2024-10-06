@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
             _postRenderProcessor = postRenderProcessor;
         }
 
-        public string Render(LogMessage logMessage, MessagePart[] messageParts, Span<object> parameters)
+        public string Render(MessagePart[] messageParts, Span<object> parameters)
         {
             if (messageParts.Length == 0)
             {
