@@ -9,7 +9,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Formats
 {
-    public class LogFormat : ILogFormat
+    internal class LogFormat : ILogFormat
     {
         private readonly bool _appendStacktraceToRenderingMessage;
         private readonly MessagePart[] _messageParts;

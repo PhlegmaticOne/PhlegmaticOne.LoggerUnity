@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Messages.Factories;
+using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
-using OpenMyGame.LoggerUnity.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity
 {
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
+        private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
 
         private bool _isExtractStacktrace;
         private bool _isPoolingEnabled;

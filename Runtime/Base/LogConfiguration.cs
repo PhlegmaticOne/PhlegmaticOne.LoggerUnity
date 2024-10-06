@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Formats;
@@ -16,6 +17,8 @@ namespace OpenMyGame.LoggerUnity.Base
         private ILogParameterPostRenderProcessor _logParameterPostRenderProcessor;
         private IMessageParameterPostRenderProcessor _messageParameterPostRenderProcessor;
 
+        private string _logFormat;
+
         protected LogConfiguration()
         {
             LogFormat = LoggerStaticData.LogFormat;
@@ -29,7 +32,21 @@ namespace OpenMyGame.LoggerUnity.Base
         protected virtual bool AppendStacktraceToRenderingMessage => false;
 
         public bool IsEnabled { get; set; }
-        public string LogFormat { set; get; }
+
+        public string LogFormat
+        {
+            get => _logFormat;
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Log format cannot be an empty string", nameof(LogFormat));
+                }
+
+                _logFormat = value;
+            }
+        }
+        
         public LogLevel MinimumLogLevel { get; set; }
 
         public void AddLogFormatParameter(ILogFormatParameter formatParameter)
@@ -67,7 +84,7 @@ namespace OpenMyGame.LoggerUnity.Base
         public IMessageFormat CreateMessageFormat(LoggerConfigurationParameters configurationParameters)
         {
             return new MessageFormat(
-                configurationParameters.FormatProperties, configurationParameters.ParameterSerializer,
+                configurationParameters.FormatParameters, configurationParameters.ParameterSerializer,
                 _messageParameterPostRenderProcessor, configurationParameters.PoolProvider);
         }
     }

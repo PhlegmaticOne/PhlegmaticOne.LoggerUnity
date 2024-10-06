@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig
 {
-    public class ParameterColorsViewConfigDefault : IParameterColorsViewConfig
+    internal class ParameterColorsViewConfigDefault : IParameterColorsViewConfig
     {
         private readonly Dictionary<string, Color> _logParameterColorsMap;
         private readonly Dictionary<string, Color> _messageParameterColorsMap;

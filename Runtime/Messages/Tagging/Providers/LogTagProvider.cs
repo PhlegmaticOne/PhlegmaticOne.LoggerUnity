@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Tagging.Providers
+﻿namespace OpenMyGame.LoggerUnity.Messages.Tagging.Providers
 {
     internal class LogTagProvider : ILogTagProvider
     {

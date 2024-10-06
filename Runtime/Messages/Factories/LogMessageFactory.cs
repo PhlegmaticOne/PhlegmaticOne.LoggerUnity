@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Messages.Factories
 {
-    public class LogMessageFactory : ILogMessageFactory
+    internal class LogMessageFactory : ILogMessageFactory
     {
         private readonly bool _isExtractStacktrace;
         private readonly int _startStacktraceDepthLevel;

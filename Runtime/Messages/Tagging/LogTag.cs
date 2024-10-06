@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Tagging
+namespace OpenMyGame.LoggerUnity.Messages.Tagging
 {
     public class LogTag : IEquatable<LogTag>
     {

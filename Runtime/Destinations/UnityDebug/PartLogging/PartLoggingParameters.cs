@@ -14,13 +14,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
         
         public PartLoggingParameters()
         {
-            _parameters = new Dictionary<string, object>
-            {
-                { MessageId, 0 },
-                { MessagePart, string.Empty },
-                { PartIndex, 0 },
-                { PartsCount, 0 }
-            };
+            _parameters = new Dictionary<string, object>();
+            Release();
         }
 
         public void SetMessageId(int messageId)

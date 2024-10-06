@@ -1,6 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Tagging;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {

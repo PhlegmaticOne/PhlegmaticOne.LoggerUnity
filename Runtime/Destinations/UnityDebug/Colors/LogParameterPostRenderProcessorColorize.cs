@@ -8,7 +8,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {
-    public class LogParameterPostRenderProcessorColorize : ILogParameterPostRenderProcessor
+    internal class LogParameterPostRenderProcessorColorize : ILogParameterPostRenderProcessor
     {
         private readonly IParameterColorsViewConfig _colorsViewConfig;
 

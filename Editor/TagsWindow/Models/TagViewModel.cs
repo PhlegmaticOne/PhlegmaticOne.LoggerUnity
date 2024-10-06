@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Tagging;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models

@@ -1,6 +1,6 @@
 ﻿namespace OpenMyGame.LoggerUnity.Messages.Factories
 {
-    public interface ILogMessageFactory
+    internal interface ILogMessageFactory
     {
         LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel);
     }

@@ -11,7 +11,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
 {
-    public class MessageFormat : IMessageFormat
+    internal class MessageFormat : IMessageFormat
     {
         private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;

@@ -4,8 +4,8 @@ using System.Linq;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Factories;
+using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
 using OpenMyGame.LoggerUnity.Parsing.Base;
-using OpenMyGame.LoggerUnity.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity
 {

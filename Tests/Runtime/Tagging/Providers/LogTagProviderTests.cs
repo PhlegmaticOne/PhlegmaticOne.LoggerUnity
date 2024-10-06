@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Tagging.Providers;
+using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Tagging.Providers
 {

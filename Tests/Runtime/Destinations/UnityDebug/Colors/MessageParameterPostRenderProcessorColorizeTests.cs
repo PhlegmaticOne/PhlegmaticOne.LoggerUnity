@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
-using OpenMyGame.LoggerUnity.Tagging;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
