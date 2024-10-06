@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
@@ -6,12 +7,22 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
 {
     internal class PartLoggingMessageFormat
     {
+        private readonly IPoolProvider _poolProvider;
         private readonly MessagePart[] _messageParts;
         
-        public PartLoggingMessageFormat(string format)
+        public PartLoggingMessageFormat(string format, IPoolProvider poolProvider)
         {
+            _poolProvider = poolProvider;
             var parser = new MessageFormatParser();
             _messageParts = parser.Parse(format);
+        }
+
+        public PartLoggingParameters CreateParameters(int messageId, int partsCount)
+        {
+            var parameters = _poolProvider.Get<PartLoggingParameters>();
+            parameters.SetMessageId(messageId);
+            parameters.SetPartsCount(partsCount);
+            return parameters;
         }
 
         public string CreatePart(PartLoggingParameters parameters)
@@ -33,6 +44,11 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
             }
             
             return builder.ToString();
+        }
+
+        public void ReturnParameters(PartLoggingParameters parameters)
+        {
+            _poolProvider.Return(parameters);
         }
     }
 }

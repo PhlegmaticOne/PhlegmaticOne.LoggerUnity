@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Formats;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
@@ -17,7 +18,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log.Formats
             var format = new MessageFormatParser().Parse("[Thread: {ThreadId}, Id: {MessageId}] {Message}");
             var logFormat = new LogFormat(
                 false, format, LoggerStaticData.LogFormatParameters,
-                new LogParameterPostRenderProcessor());
+                new LogParameterPostRenderProcessor(),
+                new PoolProvider(false));
             var logMessage = new LogMessage(69, LogLevel.Fatal, LogStacktrace.Empty, null);
             
             //Act

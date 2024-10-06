@@ -29,9 +29,9 @@ namespace OpenMyGame.LoggerUnity.Base
 
         public void Initialize(LoggerConfigurationParameters configurationParameters)
         {
-            _logFormat = Configuration.CreateLogFormat();
+            _logFormat = Configuration.CreateLogFormat(configurationParameters);
             _messageFormat = Configuration.CreateMessageFormat(configurationParameters);
-            OnInitializing();
+            OnInitializing(configurationParameters);
         }
 
         public virtual void LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters)
@@ -44,7 +44,7 @@ namespace OpenMyGame.LoggerUnity.Base
         public virtual void Dispose() { }
 
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters);
-        protected virtual void OnInitializing() { }
+        protected virtual void OnInitializing(LoggerConfigurationParameters configurationParameters) { }
 
         public override string ToString() => DestinationName;
     }

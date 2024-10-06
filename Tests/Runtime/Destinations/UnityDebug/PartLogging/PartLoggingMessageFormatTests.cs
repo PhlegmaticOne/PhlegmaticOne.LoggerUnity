@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.PartLogging
 {
@@ -12,8 +13,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.PartLoggi
         {
             //Arrange
             const string format = "[Id: {TestId}, Part: {PartIndex}/{PartsCount}";
-            var messageFormat = new PartLoggingMessageFormat(format);
-            var parameters = new PartLoggingParameters(0, 5);
+            var messageFormat = new PartLoggingMessageFormat(format, new PoolProvider(false));
+            var parameters = new PartLoggingParameters();
 
             //Act
             //Assert
@@ -25,8 +26,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.PartLoggi
         {
             //Arrange
             const string format = "[Id: {MessageId}, Part: {PartIndex}/{PartsCount}] {MessagePart}";
-            var messageFormat = new PartLoggingMessageFormat(format);
-            var parameters = new PartLoggingParameters(messageId: 42, partsCount: 69);
+            var messageFormat = new PartLoggingMessageFormat(format, new PoolProvider(false));
+            var parameters = messageFormat.CreateParameters(messageId: 42, partsCount: 69);
             parameters.UpdateMessage("Test message");
             
             //Act

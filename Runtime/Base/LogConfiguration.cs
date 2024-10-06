@@ -56,19 +56,19 @@ namespace OpenMyGame.LoggerUnity.Base
             }
         }
 
-        public ILogFormat CreateLogFormat()
+        public ILogFormat CreateLogFormat(LoggerConfigurationParameters configurationParameters)
         {
             var parser = new MessageFormatParser();
 
-            return new LogFormat(AppendStacktraceToRenderingMessage,
-                parser.Parse(LogFormat), _logFormatParameters, _logParameterPostRenderProcessor);
+            return new LogFormat(AppendStacktraceToRenderingMessage, parser.Parse(LogFormat), 
+                _logFormatParameters, _logParameterPostRenderProcessor, configurationParameters.PoolProvider);
         }
 
         public IMessageFormat CreateMessageFormat(LoggerConfigurationParameters configurationParameters)
         {
             return new MessageFormat(
                 configurationParameters.FormatProperties, configurationParameters.ParameterSerializer,
-                _messageParameterPostRenderProcessor);
+                _messageParameterPostRenderProcessor, configurationParameters.PoolProvider);
         }
     }
 }

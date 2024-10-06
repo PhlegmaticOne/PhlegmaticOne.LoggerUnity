@@ -15,23 +15,24 @@ namespace OpenMyGame.LoggerUnity.Base
 {
     internal static class LoggerStaticData
     {
+        public static readonly Color DefaultLogTextColor = Color.white;
         public const string ConditionalName = "UNITY_LOGGING_ENABLED";
         public const LogLevel MinimumLogLevel = LogLevel.Debug;
         public const string ExceptionPlaceholderFormat = "{Placeholder}";
         public static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
         public const char SerializeParameterPrefix = '@';
         public const string DefaultTagValue = "Unity";
-        public const string LogFormat = "{Message}";
+        public const string LogFormat = "{Message}{NewLine}{Exception}";
         public const string TagFormat = "#{Tag}#";
-        public static readonly Color DefaultLogTextColor = Color.white;
 
         public const bool IsExtractStacktrace = false;
+        public const bool IsPoolingEnabled = false;
         public const bool IsCacheFormats = true;
         public const bool IsEnabled = true;
-
+        
         public static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>
             new MessageFormatParameterSerializer();
-        
+
         public static ILogParameterPostRenderProcessor LogParameterPostRenderProcessor =>
             new LogParameterPostRenderProcessor();
 
@@ -78,6 +79,7 @@ namespace OpenMyGame.LoggerUnity.Base
             formatParameters[formatParameter.Key] = formatParameter;
             
         }
+        
         private static void AddMessageFormatProperty(
             IDictionary<Type, IMessageFormatParameter> formatParameters, 
             IMessageFormatParameter formatParameter)

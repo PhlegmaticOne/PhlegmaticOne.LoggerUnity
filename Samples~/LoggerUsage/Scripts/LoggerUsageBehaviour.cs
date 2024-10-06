@@ -13,6 +13,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
                 .SetIsCacheFormats(true)
+                .SetIsPoolingEnabled(true)
                 .LogToUnityDebug(config =>
                 {
                     config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception}";

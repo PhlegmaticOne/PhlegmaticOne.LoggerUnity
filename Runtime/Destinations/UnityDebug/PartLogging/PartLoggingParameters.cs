@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Messages;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Base;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
 {
-    internal class PartLoggingParameters
+    internal class PartLoggingParameters : IPoolable
     {
         private const string MessageId = "MessageId";
         private const string MessagePart = "MessagePart";
@@ -12,15 +12,25 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
 
         private readonly Dictionary<string, object> _parameters;
         
-        public PartLoggingParameters(int messageId, int partsCount)
+        public PartLoggingParameters()
         {
             _parameters = new Dictionary<string, object>
             {
-                { MessageId, messageId },
+                { MessageId, 0 },
                 { MessagePart, string.Empty },
                 { PartIndex, 0 },
-                { PartsCount, partsCount }
+                { PartsCount, 0 }
             };
+        }
+
+        public void SetMessageId(int messageId)
+        {
+            _parameters[MessageId] = messageId;
+        }
+
+        public void SetPartsCount(int partsCount)
+        {
+            _parameters[PartsCount] = partsCount;
         }
 
         public void IncrementPartIndex()
@@ -37,6 +47,14 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
         public object GetParameter(string parameterKey)
         {
             return _parameters[parameterKey];
+        }
+
+        public void Release()
+        {
+            _parameters[MessageId] = 0;
+            _parameters[MessagePart] = string.Empty;
+            _parameters[PartIndex] = 0;
+            _parameters[PartsCount] = 0;
         }
     }
 }

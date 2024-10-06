@@ -3,7 +3,7 @@ using System.Diagnostics;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
-using OpenMyGame.LoggerUnity.Parameters.Infrastructure;
+using OpenMyGame.LoggerUnity.Infrastructure.InlineArrays;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {

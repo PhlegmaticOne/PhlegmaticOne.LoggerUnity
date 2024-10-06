@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Formats;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
@@ -27,7 +28,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor());
+                new MessageParameterPostRenderProcessor(),
+                new PoolProvider(false));
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);
@@ -54,7 +56,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor());
+                new MessageParameterPostRenderProcessor(),
+                new PoolProvider(false));
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);
@@ -81,7 +84,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 LoggerStaticData.MessageFormatParameters,
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor());
+                new MessageParameterPostRenderProcessor(),
+                new PoolProvider(false));
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);
@@ -108,7 +112,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor());
+                new MessageParameterPostRenderProcessor(),
+                new PoolProvider(false));
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);

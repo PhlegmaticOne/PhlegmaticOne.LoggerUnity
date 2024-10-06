@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
-using OpenMyGame.LoggerUnity.Messages;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.PoolableTypes;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
@@ -16,15 +16,18 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
         private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
         private readonly IMessageParameterPostRenderProcessor _postRenderProcessor;
+        private readonly IPoolProvider _poolProvider;
 
         public MessageFormat(
             Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
             IMessageFormatParameterSerializer parameterSerializer,
-            IMessageParameterPostRenderProcessor postRenderProcessor)
+            IMessageParameterPostRenderProcessor postRenderProcessor,
+            IPoolProvider poolProvider)
         {
             _messageFormatParameters = messageFormatParameters;
             _parameterSerializer = parameterSerializer;
             _postRenderProcessor = postRenderProcessor;
+            _poolProvider = poolProvider;
         }
 
         public string Render(MessagePart[] messageParts, Span<object> parameters)
@@ -34,7 +37,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
                 return string.Empty;
             }
             
-            var logBuilder = new StringBuilder();
+            var destination = _poolProvider.Get<StringBuilderPoolable>();
             var currentParameterIndex = -1;
 
             foreach (var messagePart in messageParts)
@@ -43,15 +46,17 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
 
                 if (!messagePart.IsParameter)
                 {
-                    logBuilder.Append(renderMessagePart);
+                    destination.Value.Append(renderMessagePart);
                 }
                 else if(parameters.IndexWithinRange(currentParameterIndex))
                 {
-                    _postRenderProcessor.Process(logBuilder, renderMessagePart, parameters[currentParameterIndex]);   
+                    _postRenderProcessor.Process(destination.Value, renderMessagePart, parameters[currentParameterIndex]);   
                 }
             }
-            
-            return logBuilder.ToString();
+
+            var result = destination.ToStringResult();
+            _poolProvider.Return(destination);
+            return result;
         }
 
         private ReadOnlySpan<char> Render(in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)

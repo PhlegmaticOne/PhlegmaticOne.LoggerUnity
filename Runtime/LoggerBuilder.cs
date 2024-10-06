@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Messages.Factories;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
@@ -17,6 +18,7 @@ namespace OpenMyGame.LoggerUnity
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
 
         private bool _isExtractStacktrace;
+        private bool _isPoolingEnabled;
         private bool _isCacheFormats;
         private string _tagFormat;
         private bool _isEnabled;
@@ -27,6 +29,7 @@ namespace OpenMyGame.LoggerUnity
             _tagFormat = LoggerStaticData.TagFormat;
             _isEnabled = LoggerStaticData.IsEnabled;
             _isCacheFormats = LoggerStaticData.IsCacheFormats;
+            _isPoolingEnabled = LoggerStaticData.IsPoolingEnabled;
             _isExtractStacktrace = LoggerStaticData.IsExtractStacktrace;
             _formatParameters = LoggerStaticData.MessageFormatParameters;
             _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
@@ -63,6 +66,12 @@ namespace OpenMyGame.LoggerUnity
         public LoggerBuilder SetIsCacheFormats(bool isCacheFormats)
         {
             _isCacheFormats = isCacheFormats;
+            return this;
+        }
+
+        public LoggerBuilder SetIsPoolingEnabled(bool isPoolingEnabled)
+        {
+            _isPoolingEnabled = isPoolingEnabled;
             return this;
         }
 
@@ -107,12 +116,13 @@ namespace OpenMyGame.LoggerUnity
 
         private LoggerConfigurationParameters GetConfigurationParameters()
         {
-            return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer);
+            var poolProvider = new PoolProvider(_isPoolingEnabled);
+            return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer, poolProvider);
         }
 
         private ILogMessageFactory GetMessageFactory()
         {
-            return new LogMessageFactory(_isExtractStacktrace, 5);
+            return new LogMessageFactory(_isExtractStacktrace, startStacktraceDepthLevel: 5);
         }
     }
 }

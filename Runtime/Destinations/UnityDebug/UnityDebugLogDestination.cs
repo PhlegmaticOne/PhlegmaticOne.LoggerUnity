@@ -16,9 +16,10 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
         
         public override string DestinationName => LogDestinationsSupported.Debug;
         
-        protected override void OnInitializing()
+        protected override void OnInitializing(LoggerConfigurationParameters configurationParameters)
         {
-            _partLoggingMessageFormat = new PartLoggingMessageFormat(Configuration.MessagePartFormat);
+            _partLoggingMessageFormat = new PartLoggingMessageFormat(
+                Configuration.MessagePartFormat, configurationParameters.PoolProvider);
         }
 
         protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters)
@@ -57,8 +58,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
             var maxSize = Configuration.MessagePartMaxSize;
             var messageSpan = renderedMessage.AsSpan();
             var partsCount = Mathf.CeilToInt((float)renderedMessage.Length / maxSize);
-            var parameters = new PartLoggingParameters(logMessage.Id, partsCount);
-
+            var parameters = _partLoggingMessageFormat.CreateParameters(logMessage.Id, partsCount);
+            
             while (offset < renderedMessage.Length)
             {
                 var endIndex = offset + maxSize >= messageSpan.Length ? messageSpan.Length : offset + maxSize;
@@ -72,6 +73,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
                 
                 offset += maxSize;
             }
+            
+            _partLoggingMessageFormat.ReturnParameters(parameters);
         }
 
         private void Log(LogType logType, string message)
