@@ -57,9 +57,9 @@ namespace OpenMyGame.LoggerUnity
             return this;
         }
 
-        public LoggerBuilder ExtractStackTracesToMessages()
+        public LoggerBuilder SetIsExtractStackTracesToMessage(bool isExtractStacktraceToMessages)
         {
-            _isExtractStacktrace = true;
+            _isExtractStacktrace = isExtractStacktraceToMessages;
             return this;
         }
         
