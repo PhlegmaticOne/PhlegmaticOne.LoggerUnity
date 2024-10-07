@@ -50,8 +50,12 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
         private static string GetTagFilter(in TagClickEventArgs tagClick)
         {
             var viewModel = tagClick.ViewModel;
-            var tagColorized = UnityDebugStringColorizer.ColorizeString(viewModel.Tag, viewModel.Color);
-            return Log.Logger.LogTagProvider.FormatTag(tagColorized);
+
+            var tagWrapped = viewModel.HasColor
+                ? UnityDebugStringColorizer.ColorizeString(viewModel.Tag, viewModel.Color)
+                : viewModel.Tag;
+            
+            return Log.Logger.LogTagProvider.FormatTag(tagWrapped);
         }
     }
 }
