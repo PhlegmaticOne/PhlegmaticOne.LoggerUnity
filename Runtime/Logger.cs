@@ -20,6 +20,9 @@ namespace OpenMyGame.LoggerUnity
         private bool _isEnabled;
         private bool _isDisposed;
 
+        public event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
+        public event Action<LogMessage> MessageLogged;
+        
         public Logger(
             IReadOnlyList<ILogDestination> logDestinations, 
             IMessageFormatParser messageFormatParser,
@@ -35,6 +38,8 @@ namespace OpenMyGame.LoggerUnity
             _isDisposed = true;
         }
 
+        public ILogTagProvider LogTagProvider { get; }
+
         public bool IsEnabled
         {
             get => _isEnabled;
@@ -44,15 +49,6 @@ namespace OpenMyGame.LoggerUnity
                 HandleLoggerEnabledUpdated();
             }
         }
-
-        public ILogTagProvider LogTagProvider { get; }
-        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel)
-        {
-            return _messageFactory.CreateMessage(logLevel, stacktraceDepthLevel);
-        }
-
-        public event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
-        public event Action<LogMessage> MessageLogged;
 
         public void Initialize()
         {
@@ -69,6 +65,11 @@ namespace OpenMyGame.LoggerUnity
             _isDisposed = false;
         }
 
+        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel)
+        {
+            return _messageFactory.CreateMessage(logLevel, stacktraceDepthLevel);
+        }
+
         public void LogMessage(LogMessage logMessage, Span<object> parameters)
         {
             if (!IsEnabled)
@@ -78,12 +79,12 @@ namespace OpenMyGame.LoggerUnity
 
             var messageParts = _messageFormatParser.Parse(logMessage.Format);
             
-            foreach (var loggerDestination in _logDestinations)
+            foreach (var logDestination in _logDestinations)
             {
-                if (IsLogMessageToDestination(loggerDestination, logMessage))
+                if (logDestination.CanLogMessage(logMessage))
                 {
-                    loggerDestination.LogMessage(logMessage, messageParts, parameters);
-                    OnMessageToDestinationLogged(logMessage, loggerDestination);
+                    var renderedLogMessage = logDestination.LogMessage(logMessage, messageParts, parameters);
+                    OnMessageToDestinationLogged(logMessage, renderedLogMessage, logDestination);
                 }
             }
             
@@ -132,14 +133,13 @@ namespace OpenMyGame.LoggerUnity
             }
         }
 
-        private void OnMessageToDestinationLogged(LogMessage logMessage, ILogDestination loggerDestination)
+        private void OnMessageToDestinationLogged(
+            LogMessage logMessage, string renderedMessage, ILogDestination loggerDestination)
         {
-            MessageToDestinationLogged?.Invoke(new LogMessageDestinationLoggedEventArgs(logMessage, loggerDestination.DestinationName));
-        }
-
-        private static bool IsLogMessageToDestination(ILogDestination destination, LogMessage message)
-        {
-            return destination.IsEnabled && message.LogLevel >= destination.Config.MinimumLogLevel;
+            var args = new LogMessageDestinationLoggedEventArgs(
+                logMessage, renderedMessage, loggerDestination.DestinationName);
+            
+            MessageToDestinationLogged?.Invoke(args);
         }
     }
 }

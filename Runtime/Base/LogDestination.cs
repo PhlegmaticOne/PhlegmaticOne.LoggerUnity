@@ -6,8 +6,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
-    public abstract class LogDestination<TConfiguration> : ILogDestination
-        where TConfiguration : LogConfiguration
+    public abstract class LogDestination<TConfiguration> : ILogDestination where TConfiguration : LogConfiguration
     {
         private TConfiguration _configuration;
         private ILogFormat _logFormat;
@@ -23,9 +22,13 @@ namespace OpenMyGame.LoggerUnity.Base
             }
         }
 
-        public abstract string DestinationName { get; }
-        public LogConfiguration Config => Configuration;
         public bool IsEnabled { get; set; }
+        public abstract string DestinationName { get; }
+
+        public bool CanLogMessage(LogMessage logMessage)
+        {
+            return IsEnabled && logMessage.LogLevel >= _configuration.MinimumLogLevel;
+        }
 
         public void Initialize(LoggerConfigurationParameters configurationParameters)
         {
@@ -34,11 +37,12 @@ namespace OpenMyGame.LoggerUnity.Base
             OnInitializing(configurationParameters);
         }
 
-        public virtual void LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters)
+        public virtual string LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters)
         {
             var renderedMessage = _messageFormat.Render(messageParts, parameters);
             var renderedLogMessage = _logFormat.Render(message, renderedMessage);
             LogRenderedMessage(message, renderedLogMessage, parameters);
+            return renderedLogMessage;
         }
 
         public virtual void Dispose() { }
