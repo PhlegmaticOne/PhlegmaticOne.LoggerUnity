@@ -1,32 +1,41 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
+#if UNITY_ANDROID && !UNITY_EDITOR
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+#endif
 
 namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
     public class AndroidLogDestination : LogDestination<AndroidLogConfiguration>
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
         private AndroidJavaObject _androidLogger;
+#endif
         
         public override string DestinationName => LogDestinationsSupported.Android;
 
         protected override void OnInitializing(LoggerConfigurationParameters configurationParameters)
         {
+#if UNITY_ANDROID && !UNITY_EDITOR
             _androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
+#endif
         }
 
         protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters)
         {
+#if UNITY_ANDROID && !UNITY_EDITOR
             if (_androidLogger is null)
             {
                 return;
             }
 
             LogMessageInMainThread(logMessage, renderedMessage).Forget();
+#endif
         }
 
+#if UNITY_ANDROID && !UNITY_EDITOR
         public override void Dispose()
         {
             _androidLogger.Dispose();
@@ -53,5 +62,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
                 _ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
             };
         }
+#endif
     }
 }
