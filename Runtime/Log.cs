@@ -9,6 +9,9 @@ namespace OpenMyGame.LoggerUnity
     {
         private static ILogger LoggerPrivate;
 
+        /// <summary>
+        /// Реализация логгера
+        /// </summary>
         public static ILogger Logger
         {
             get => LoggerPrivate;
@@ -23,19 +26,49 @@ namespace OpenMyGame.LoggerUnity
             }
         }
 
+        /// <summary>
+        /// Событие вызывается после логгирования сообщения в каждый из получателей (Destination)
+        /// </summary>
         public static event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
+        
+        /// <summary>
+        /// Событие вызывается после логгирования сообщения во все получатели (Destination)
+        /// </summary>
         public static event Action<LogMessage> MessageLogged;
 
+        /// <summary>
+        /// Устанавливает активность получателя (Destination) логов по ключу
+        /// </summary>
+        /// <param name="destinationName">Название получатеся логов</param>
+        /// <param name="isEnabled">Активность</param>
         public static void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
             Logger.SetDestinationEnabled(destinationName, isEnabled);
         }
 
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Debug</code>
+        /// </summary>
         public static LogMessage DebugMessage() => Logger.CreateMessage(LogLevel.Debug, stacktraceDepthLevel: 0);
+        
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Warning</code>
+        /// </summary>
         public static LogMessage WarningMessage() => Logger.CreateMessage(LogLevel.Warning, stacktraceDepthLevel: 0);
+        
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Error</code>
+        /// </summary>
         public static LogMessage ErrorMessage() => Logger.CreateMessage(LogLevel.Error, stacktraceDepthLevel: 0);
+        
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Fatal</code>
+        /// </summary>
         public static LogMessage FatalMessage() => Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 0);
-
+        
+        /// <summary>
+        /// Логгирует исключение
+        /// </summary>
         [Conditional(LoggerStaticData.ConditionalName)]
         public static void Exception(Exception exception)
         {

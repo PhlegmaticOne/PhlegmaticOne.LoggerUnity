@@ -5,6 +5,9 @@ using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity
 {
+    /// <summary>
+    /// Класс предназначен для логгирования сообщения с заданным тегом
+    /// </summary>
     public class LogWithTag
     {
         private readonly string _tag;
@@ -14,6 +17,10 @@ namespace OpenMyGame.LoggerUnity
             _tag = tag;
         }
 
+        /// <summary>
+        /// Логгирует исключение с заданным тегом
+        /// </summary>
+        /// <param name="exception">Исключение</param>
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Exception(Exception exception)
         {
@@ -23,6 +30,9 @@ namespace OpenMyGame.LoggerUnity
                 .Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
         
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Debug</code> и заданным тегом
+        /// </summary>
         public LogMessage DebugMessage()
         {
             return Log.Logger
@@ -30,6 +40,9 @@ namespace OpenMyGame.LoggerUnity
                 .WithTag(_tag);
         }
 
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Warning</code> и заданным тегом
+        /// </summary>
         public LogMessage WarningMessage()
         {
             return Log.Logger
@@ -37,6 +50,9 @@ namespace OpenMyGame.LoggerUnity
                 .WithTag(_tag);
         }
 
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Error</code> и заданным тегом
+        /// </summary>
         public LogMessage ErrorMessage()
         {
             return Log.Logger
@@ -44,6 +60,9 @@ namespace OpenMyGame.LoggerUnity
                 .WithTag(_tag);
         }
 
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <code>Fatal</code> и заданным тегом
+        /// </summary>
         public LogMessage FatalMessage()
         {
             return Log.Logger
