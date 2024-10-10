@@ -4,7 +4,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Processors
 {
-    public interface ILogParameterPostRenderProcessor
+    public interface ILogParameterPostRenderer
     {
         void Process(StringBuilder destination, in MessagePart messagePart, in ReadOnlySpan<char> renderedValue);
     }

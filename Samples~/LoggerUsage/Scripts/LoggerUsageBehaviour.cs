@@ -16,10 +16,10 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
                 .SetIsPoolingEnabled(true)
                 .LogToUnityDebug(config =>
                 {
-                    config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception}";
+                    config.RenderAs.Json("{ThreadId}{LogLevel}{MessageId}{Message}{Exception}");
                     config.MinimumLogLevel = LogLevel.Debug;
                     config.IsUnityStacktraceEnabled = false;
-                    config.MessagePartMaxSize = 400;
+                    config.MessagePartMaxSize = 4000;
                 })
                 .CreateLogger();
         }

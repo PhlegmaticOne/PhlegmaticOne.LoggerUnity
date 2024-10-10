@@ -10,7 +10,7 @@ using UnityEngine;
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
 {
     [TestFixture]
-    public class LogParameterPostRenderProcessorColorizeTests
+    public class LogParameterPostRendererColorizeTests
     {
         private static class Mocks
         {
@@ -41,7 +41,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
         {
             //Arrange
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
-            var processor = new LogParameterPostRenderProcessorColorize(viewConfig);
+            var processor = new LogParameterPostRendererColorize(viewConfig);
             var destination = new StringBuilder();
             var messagePart = MessagePart.Message("Test");
             
@@ -58,7 +58,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             //Arrange
             const string renderedValue = "Rendered message";
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
-            var processor = new LogParameterPostRenderProcessorColorize(viewConfig);
+            var processor = new LogParameterPostRendererColorize(viewConfig);
             var destination = new StringBuilder();
             var messagePart = MessagePart.Parameter(LogFormatParameterMessage.KeyParameter);
             
@@ -75,7 +75,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             //Arrange
             const string renderedValue = "\n";
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
-            var processor = new LogParameterPostRenderProcessorColorize(viewConfig);
+            var processor = new LogParameterPostRendererColorize(viewConfig);
             var destination = new StringBuilder();
             var messagePart = MessagePart.Parameter(LogFormatParameterNewLine.KeyParameter);
             
@@ -92,7 +92,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             //Arrange
             const string renderedValue = "Parameter value";
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
-            var processor = new LogParameterPostRenderProcessorColorize(viewConfig);
+            var processor = new LogParameterPostRendererColorize(viewConfig);
             var destination = new StringBuilder();
             var messagePart = MessagePart.Parameter(LogFormatParameterTime.KeyParameter);
             

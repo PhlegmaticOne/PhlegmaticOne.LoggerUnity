@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Formats.Message;
 using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message.Formats;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
+namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
 {
     [TestFixture]
     public class MessageFormatTests
@@ -28,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor(),
+                new MessageParameterPostRenderer(),
                 new PoolProvider(false));
 
             //Act
@@ -56,7 +56,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor(),
+                new MessageParameterPostRenderer(),
                 new PoolProvider(false));
 
             //Act
@@ -84,7 +84,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 LoggerStaticData.MessageFormatParameters,
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor(),
+                new MessageParameterPostRenderer(),
                 new PoolProvider(false));
 
             //Act
@@ -112,7 +112,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message.Formats
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderProcessor(),
+                new MessageParameterPostRenderer(),
                 new PoolProvider(false));
 
             //Act

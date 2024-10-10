@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
         }
 
         public bool IsParameter { get; }
-
+        
         public bool SplitParameterToValueAndFormat(out ReadOnlySpan<char> parameterValue, out ReadOnlySpan<char> format)
         {
             if (!IsParameter)
@@ -88,6 +88,21 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
             }
 
             format = value[(index + 1)..];
+            return true;
+        }
+
+        public bool TryGetParameter(out ReadOnlySpan<char> parameter)
+        {
+            if (!IsParameter)
+            {
+                parameter = ReadOnlySpan<char>.Empty;
+                return false;
+            }
+            
+            var value = GetValue();
+            var index = value.IndexOf(':');
+
+            parameter = index == -1 ? value : value[..index];
             return true;
         }
 

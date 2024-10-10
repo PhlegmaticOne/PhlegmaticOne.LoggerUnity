@@ -8,7 +8,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
     {
         protected override ReadOnlySpan<char> Render(LogTag parameter, in ReadOnlySpan<char> format)
         {
-            return parameter.Tag;
+            return parameter.Value;
         }
     }
 }

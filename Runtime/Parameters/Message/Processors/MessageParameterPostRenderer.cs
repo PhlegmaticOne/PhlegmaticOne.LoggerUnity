@@ -3,7 +3,7 @@ using System.Text;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Processors
 {
-    internal class MessageParameterPostRenderProcessor : IMessageParameterPostRenderProcessor
+    internal class MessageParameterPostRenderer : IMessageParameterPostRenderer
     {
         public void Process(StringBuilder destination, in ReadOnlySpan<char> renderedParameter, object parameter)
         {

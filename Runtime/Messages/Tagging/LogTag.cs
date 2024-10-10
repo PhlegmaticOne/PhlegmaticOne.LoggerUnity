@@ -1,8 +1,10 @@
 ﻿using System;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Messages.Tagging
 {
+    [Serializable]
     public class LogTag : IEquatable<LogTag>
     {
         public const string TagKey = "Tag";
@@ -17,16 +19,16 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
             return new LogTag(tag, false, Color.white);
         }
 
-        private LogTag(string tag, bool hasColor, Color color)
+        private LogTag(string value, bool hasColor, Color color)
         {
-            Tag = tag;
+            Value = value;
             HasColor = hasColor;
             Color = color;
         }
 
-        public string Tag { get; }
-        public Color Color { get; private set; }
-        public bool HasColor { get; private set; }
+        [JsonProperty(nameof(Value))] public string Value { get; }
+        [JsonIgnore] public Color Color { get; private set; }
+        [JsonIgnore] public bool HasColor { get; private set; }
 
         public void SetColor(Color color)
         {
@@ -38,7 +40,7 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Tag == other.Tag;
+            return Value == other.Value;
         }
 
         public override bool Equals(object obj)
@@ -50,7 +52,7 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
 
         public override int GetHashCode()
         {
-            return Tag != null ? Tag.GetHashCode() : 0;
+            return Value != null ? Value.GetHashCode() : 0;
         }
     }
 }

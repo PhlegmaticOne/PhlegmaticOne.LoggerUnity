@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {
-    internal class MessageParameterPostRenderProcessorColorize : IMessageParameterPostRenderProcessor
+    internal class MessageParameterPostRendererColorize : IMessageParameterPostRenderer
     {
         private readonly IParameterColorsViewConfig _colorsViewConfig;
 
-        public MessageParameterPostRenderProcessorColorize(IParameterColorsViewConfig colorsViewConfig)
+        public MessageParameterPostRendererColorize(IParameterColorsViewConfig colorsViewConfig)
         {
             _colorsViewConfig = colorsViewConfig;
         }
@@ -28,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 
         private Color GetTagColor(LogTag logTag)
         {
-            var color = _colorsViewConfig.GetTagColor(logTag.Tag);
+            var color = _colorsViewConfig.GetTagColor(logTag.Value);
             logTag.SetColor(color);
             return color;
         }

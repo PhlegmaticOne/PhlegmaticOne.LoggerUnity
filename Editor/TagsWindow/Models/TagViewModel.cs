@@ -12,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Models
 
         public static TagViewModel FromTag(LogTag logTag)
         {
-            return new TagViewModel(logTag.Tag, logTag.HasColor, logTag.Color);
+            return new TagViewModel(logTag.Value, logTag.HasColor, logTag.Color);
         }
 
         public TagViewModel(string tag, bool hasColor, Color color)

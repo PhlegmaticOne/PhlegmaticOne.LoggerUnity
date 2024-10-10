@@ -55,8 +55,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
         
         public void ColorizeParameters(IParameterColorsViewConfig colorsViewConfig)
         {
-            SetLogParameterPostRenderProcessor(new LogParameterPostRenderProcessorColorize(colorsViewConfig));
-            SetMessageParameterPostRenderProcessor(new MessageParameterPostRenderProcessorColorize(colorsViewConfig));
+            SetMessageParameterPostRenderer(new MessageParameterPostRendererColorize(colorsViewConfig));
+            SetLogParameterPostRenderer(new LogParameterPostRendererColorize(colorsViewConfig));
         }
     }
 }

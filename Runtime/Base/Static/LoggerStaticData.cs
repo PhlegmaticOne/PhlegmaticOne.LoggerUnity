@@ -21,7 +21,6 @@ namespace OpenMyGame.LoggerUnity.Base
         public const string ExceptionPlaceholderFormat = "{Placeholder}";
         public static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
         public const char SerializeParameterPrefix = '@';
-        public const string DefaultTagValue = "Unity";
         public const string LogFormat = "{Message}{NewLine}{Exception}";
         public const string TagFormat = "#{Tag}#";
 
@@ -33,11 +32,11 @@ namespace OpenMyGame.LoggerUnity.Base
         public static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>
             new MessageFormatParameterSerializer();
 
-        public static ILogParameterPostRenderProcessor LogParameterPostRenderProcessor =>
-            new LogParameterPostRenderProcessor();
+        public static ILogParameterPostRenderer LogParameterPostRenderer =>
+            new LogParameterPostRenderer();
 
-        public static IMessageParameterPostRenderProcessor MessageParameterPostRenderProcessor =>
-            new MessageParameterPostRenderProcessor();
+        public static IMessageParameterPostRenderer MessageParameterPostRenderer =>
+            new MessageParameterPostRenderer();
 
         public static Dictionary<string, ILogFormatParameter> LogFormatParameters
         {
@@ -77,7 +76,6 @@ namespace OpenMyGame.LoggerUnity.Base
             ILogFormatParameter formatParameter)
         {
             formatParameters[formatParameter.Key] = formatParameter;
-            
         }
         
         private static void AddMessageFormatProperty(

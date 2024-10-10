@@ -9,24 +9,24 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
+namespace OpenMyGame.LoggerUnity.Formats.Message
 {
     internal class MessageFormat : IMessageFormat
     {
         private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
-        private readonly IMessageParameterPostRenderProcessor _postRenderProcessor;
+        private readonly IMessageParameterPostRenderer _postRenderer;
         private readonly IPoolProvider _poolProvider;
 
         public MessageFormat(
             Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
             IMessageFormatParameterSerializer parameterSerializer,
-            IMessageParameterPostRenderProcessor postRenderProcessor,
+            IMessageParameterPostRenderer postRenderer,
             IPoolProvider poolProvider)
         {
             _messageFormatParameters = messageFormatParameters;
             _parameterSerializer = parameterSerializer;
-            _postRenderProcessor = postRenderProcessor;
+            _postRenderer = postRenderer;
             _poolProvider = poolProvider;
         }
 
@@ -50,7 +50,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
                 }
                 else if(parameters.IndexWithinRange(currentParameterIndex))
                 {
-                    _postRenderProcessor.Process(destination.Value, renderMessagePart, parameters[currentParameterIndex]);   
+                    _postRenderer.Process(destination.Value, renderMessagePart, parameters[currentParameterIndex]);   
                 }
             }
 

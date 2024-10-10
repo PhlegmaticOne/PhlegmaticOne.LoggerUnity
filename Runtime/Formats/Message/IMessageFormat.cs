@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Message.Formats
+namespace OpenMyGame.LoggerUnity.Formats.Message
 {
     public interface IMessageFormat
     {

@@ -7,31 +7,31 @@ using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Log.Formats
+namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
 {
-    internal class LogFormat : ILogFormat
+    internal class LogFormatPlainText : ILogFormat
     {
         private readonly bool _appendStacktraceToRenderingMessage;
         private readonly MessagePart[] _messageParts;
         private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
-        private readonly ILogParameterPostRenderProcessor _postRenderProcessor;
+        private readonly ILogParameterPostRenderer _postRenderer;
         private readonly IPoolProvider _poolProvider;
 
-        public LogFormat(
+        public LogFormatPlainText(
+            MessagePart[] messageParts,
             bool appendStacktraceToRenderingMessage, 
-            MessagePart[] messageParts, 
             Dictionary<string, ILogFormatParameter> logFormatParameters,
-            ILogParameterPostRenderProcessor postRenderProcessor,
+            ILogParameterPostRenderer postRenderer,
             IPoolProvider poolProvider)
         {
             _appendStacktraceToRenderingMessage = appendStacktraceToRenderingMessage;
             _messageParts = messageParts;
             _logFormatParameters = logFormatParameters;
-            _postRenderProcessor = postRenderProcessor;
+            _postRenderer = postRenderer;
             _poolProvider = poolProvider;
         }
         
-        public string Render(LogMessage logMessage, string renderedMessage)
+        public string Render(LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters)
         {
             var destination = _poolProvider.Get<StringBuilderPoolable>();
             RenderLogMessage(logMessage, renderedMessage, destination);
@@ -49,7 +49,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log.Formats
 
                 if (messagePart.IsParameter)
                 {
-                    _postRenderProcessor.Process(logBuilder.Value, messagePart, renderMessagePart);
+                    _postRenderer.Process(logBuilder.Value, messagePart, renderMessagePart);
                 }
                 else
                 {

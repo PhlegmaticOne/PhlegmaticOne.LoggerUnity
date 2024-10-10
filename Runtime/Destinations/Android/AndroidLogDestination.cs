@@ -11,6 +11,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
     public class AndroidLogDestination : LogDestination<AndroidLogConfiguration>
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
+        private const string DefaultTagValue = "Unity";
+
         private AndroidJavaObject _androidLogger;
 #endif
         
@@ -46,7 +48,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
         private async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)
         {
             var methodName = ToNativeMethodName(logMessage.LogLevel);
-            var tag = logMessage.Tag?.Tag ?? LoggerStaticData.DefaultTagValue;
+            var tag = logMessage.Tag?.Tag ?? DefaultTagValue;
             await UniTask.SwitchToMainThread();
             _androidLogger.CallStatic(methodName, tag, renderedMessage);
         }

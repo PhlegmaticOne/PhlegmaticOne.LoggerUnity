@@ -1,12 +1,13 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Formats.Log;
+using OpenMyGame.LoggerUnity.Formats.Message;
 using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parameters.Log.Formats;
-using OpenMyGame.LoggerUnity.Parameters.Message.Formats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
-    public abstract class LogDestination<TConfiguration> : ILogDestination where TConfiguration : LogConfiguration
+    public abstract class LogDestination<TConfiguration> : ILogDestination 
+        where TConfiguration : LogConfiguration
     {
         private TConfiguration _configuration;
         private ILogFormat _logFormat;
@@ -40,7 +41,7 @@ namespace OpenMyGame.LoggerUnity.Base
         public virtual string LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters)
         {
             var renderedMessage = _messageFormat.Render(messageParts, parameters);
-            var renderedLogMessage = _logFormat.Render(message, renderedMessage);
+            var renderedLogMessage = _logFormat.Render(message, renderedMessage, messageParts, parameters);
             LogRenderedMessage(message, renderedLogMessage, parameters);
             return renderedLogMessage;
         }

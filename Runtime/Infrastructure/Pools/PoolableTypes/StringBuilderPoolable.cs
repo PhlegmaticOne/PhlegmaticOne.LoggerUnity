@@ -16,10 +16,15 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.Pools.PoolableTypes
         {
             return Value.ToString();
         }
+
+        public void Clear()
+        {
+            Value.Clear();
+        }
         
         public void Release()
         {
-            Value.Clear();
+            Clear();
         }
     }
 }
