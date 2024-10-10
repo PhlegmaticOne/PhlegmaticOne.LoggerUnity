@@ -18,8 +18,6 @@ namespace OpenMyGame.LoggerUnity
         private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
 
         private bool _isExtractStacktrace;
-        private bool _isPoolingEnabled;
-        private bool _isCacheFormats;
         private string _tagFormat;
         private bool _isEnabled;
 
@@ -28,8 +26,6 @@ namespace OpenMyGame.LoggerUnity
             _loggerDestinations = new List<ILogDestination>();
             _tagFormat = LoggerStaticData.TagFormat;
             _isEnabled = LoggerStaticData.IsEnabled;
-            _isCacheFormats = LoggerStaticData.IsCacheFormats;
-            _isPoolingEnabled = LoggerStaticData.IsPoolingEnabled;
             _isExtractStacktrace = LoggerStaticData.IsExtractStacktrace;
             _formatParameters = LoggerStaticData.MessageFormatParameters;
             _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
@@ -77,27 +73,6 @@ namespace OpenMyGame.LoggerUnity
             _isExtractStacktrace = isExtractStacktraceToMessages;
             return this;
         }
-        
-        /// <summary>
-        /// Устанавливает будет ли кэшироваться формат сообщения после его парсинга
-        /// </summary>
-        /// <param name="isCacheFormats">Активность кэширования; дефолтный параметр - <b>true</b></param>
-        public LoggerBuilder SetIsCacheFormats(bool isCacheFormats)
-        {
-            _isCacheFormats = isCacheFormats;
-            return this;
-        }
-
-        /// <summary>
-        /// Устанавливает будут ли переиспользоваться некоторые объекты при логгировании
-        /// </summary>
-        /// <param name="isPoolingEnabled">Активность переиспользования; дефолтный параметр - <b>false</b></param>
-        /// <returns></returns>
-        public LoggerBuilder SetIsPoolingEnabled(bool isPoolingEnabled)
-        {
-            _isPoolingEnabled = isPoolingEnabled;
-            return this;
-        }
 
         /// <summary>
         /// Добавляет новый логгер в коллекцию логгеров (<see cref="ILogDestination"/>)
@@ -139,15 +114,15 @@ namespace OpenMyGame.LoggerUnity
             return new LogTagProvider(_tagFormat);
         }
 
-        private IMessageFormatParser GetParser()
+        private static IMessageFormatParser GetParser()
         {
             var messageFormatParser = new MessageFormatParser();
-            return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
+            return new MessageFormatParserCached(messageFormatParser);
         }
 
         private LoggerConfigurationParameters GetConfigurationParameters()
         {
-            var poolProvider = new PoolProvider(_isPoolingEnabled);
+            var poolProvider = new PoolProvider(true);
             return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer, poolProvider);
         }
 

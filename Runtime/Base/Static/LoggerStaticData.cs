@@ -25,8 +25,6 @@ namespace OpenMyGame.LoggerUnity.Base
         public const string TagFormat = "#{Tag}#";
 
         public const bool IsExtractStacktrace = false;
-        public const bool IsPoolingEnabled = false;
-        public const bool IsCacheFormats = true;
         public const bool IsEnabled = true;
         
         public static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>

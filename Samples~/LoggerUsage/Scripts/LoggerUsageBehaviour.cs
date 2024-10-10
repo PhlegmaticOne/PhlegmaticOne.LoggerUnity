@@ -12,8 +12,6 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         {
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
-                .SetIsCacheFormats(true)
-                .SetIsPoolingEnabled(true)
                 .LogToUnityDebug(config =>
                 {
                     config.RenderAs.Json("{ThreadId}{LogLevel}{MessageId}{Message}{Exception}");
