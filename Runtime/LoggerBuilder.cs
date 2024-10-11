@@ -17,7 +17,7 @@ namespace OpenMyGame.LoggerUnity
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
         private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
 
-        private bool _isExtractStacktrace;
+        private bool _isExtractStacktraceToMessages;
         private string _tagFormat;
         private bool _isEnabled;
 
@@ -26,21 +26,18 @@ namespace OpenMyGame.LoggerUnity
             _loggerDestinations = new List<ILogDestination>();
             _tagFormat = LoggerStaticData.TagFormat;
             _isEnabled = LoggerStaticData.IsEnabled;
-            _isExtractStacktrace = LoggerStaticData.IsExtractStacktrace;
+            _isExtractStacktraceToMessages = LoggerStaticData.IsExtractStacktrace;
             _formatParameters = LoggerStaticData.MessageFormatParameters;
             _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
         }
 
         /// <summary>
-        /// Добавляет кастомный форматтер объекта в логгируемом сообщении
+        /// Устанавливает будет ли происходить логгирование или нет
         /// </summary>
-        public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
+        /// <param name="isEnabled">Активность; дефолтный параметр - <b>true</b></param>
+        public LoggerBuilder SetEnabled(bool isEnabled)
         {
-            if (formatParameter is not null)
-            {
-                _formatParameters[formatParameter.PropertyType] = formatParameter;
-            }
-            
+            _isEnabled = isEnabled;
             return this;
         }
 
@@ -55,22 +52,25 @@ namespace OpenMyGame.LoggerUnity
         }
 
         /// <summary>
-        /// Устанавливает будет ли происходить логгирование или нет
-        /// </summary>
-        /// <param name="isEnabled">Активность; дефолтный параметр - <b>true</b></param>
-        public LoggerBuilder SetEnabled(bool isEnabled)
-        {
-            _isEnabled = isEnabled;
-            return this;
-        }
-
-        /// <summary>
         /// Устанавливает будет ли формироваться стектрейс для сообщения
         /// </summary>
         /// <param name="isExtractStacktraceToMessages">Активность формирования стектрейса; дефолтный параметр - <b>false</b></param>
         public LoggerBuilder SetIsExtractStackTracesToMessage(bool isExtractStacktraceToMessages)
         {
-            _isExtractStacktrace = isExtractStacktraceToMessages;
+            _isExtractStacktraceToMessages = isExtractStacktraceToMessages;
+            return this;
+        }
+
+        /// <summary>
+        /// Добавляет кастомный форматтер объекта в логгируемом сообщении
+        /// </summary>
+        public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
+        {
+            if (formatParameter is not null)
+            {
+                _formatParameters[formatParameter.PropertyType] = formatParameter;
+            }
+            
             return this;
         }
 
@@ -116,8 +116,7 @@ namespace OpenMyGame.LoggerUnity
 
         private static IMessageFormatParser GetParser()
         {
-            var messageFormatParser = new MessageFormatParser();
-            return new MessageFormatParserCached(messageFormatParser);
+            return new MessageFormatParserCached(new MessageFormatParser());
         }
 
         private LoggerConfigurationParameters GetConfigurationParameters()
@@ -128,7 +127,7 @@ namespace OpenMyGame.LoggerUnity
 
         private ILogMessageFactory GetMessageFactory()
         {
-            return new LogMessageFactory(_isExtractStacktrace, startStacktraceDepthLevel: 5);
+            return new LogMessageFactory(_isExtractStacktraceToMessages, startStacktraceDepthLevel: 5);
         }
     }
 }

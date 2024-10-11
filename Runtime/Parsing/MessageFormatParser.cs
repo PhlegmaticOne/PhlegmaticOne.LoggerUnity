@@ -6,11 +6,20 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parsing
 {
+    /// <summary>
+    /// Класс для парсинга форматов сообщений
+    /// </summary>
     internal class MessageFormatParser : IMessageFormatParser
     {
         private const char OpenBrace = '{';
         private const char CloseBrace = '}';
         
+        /// <summary>
+        /// Парсит строку с форматом в формат с параметрами и частями сообщений
+        /// </summary>
+        /// <param name="format">Формат в виде строки</param>
+        /// <example>[{ThreadId}] {Message}{NewLine}{Exception}</example>
+        /// <exception cref="MessageFormatParseException">Формат пустой; в формате разное количество '{' и '}'</exception>
         public MessagePart[] Parse(string format)
         {
             if (string.IsNullOrWhiteSpace(format))

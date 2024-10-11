@@ -28,12 +28,26 @@ namespace OpenMyGame.LoggerUnity.Base
             _messageParameterPostRenderer = LoggerStaticData.MessageParameterPostRenderer;
         }
 
-        protected virtual bool AppendStacktraceToRenderingMessage => false;
+        protected virtual bool CanAppendStacktrace => false;
         
+        /// <summary>
+        /// Включает или выключает применик логов на старте
+        /// </summary>
         public bool IsEnabled { get; set; }
+        
+        /// <summary>
+        /// Устанавливает минимальный уровень логгирования сообщений
+        /// </summary>
         public LogLevel MinimumLogLevel { get; set; }
+        
+        /// <summary>
+        /// Кофнигурирует результирующий вид сообщения
+        /// </summary>
         public RenderMessageOptions RenderAs { get; }
 
+        /// <summary>
+        /// Добавляет новый параметр, используемый при формировании результирующего сообщения
+        /// </summary>
         public void AddLogFormatParameter(ILogFormatParameter formatParameter)
         {
             if (formatParameter is not null)
@@ -42,7 +56,7 @@ namespace OpenMyGame.LoggerUnity.Base
             }
         }
 
-        public void SetMessageParameterPostRenderer(IMessageParameterPostRenderer postRenderer)
+        protected void SetMessageParameterPostRenderer(IMessageParameterPostRenderer postRenderer)
         {
             if (postRenderer is not null)
             {
@@ -50,7 +64,7 @@ namespace OpenMyGame.LoggerUnity.Base
             }
         }
 
-        public void SetLogParameterPostRenderer(ILogParameterPostRenderer postRenderer)
+        protected void SetLogParameterPostRenderer(ILogParameterPostRenderer postRenderer)
         {
             if (postRenderer is not null)
             {
@@ -65,13 +79,13 @@ namespace OpenMyGame.LoggerUnity.Base
 
         internal ILogFormat CreateLogFormat(LoggerConfigurationParameters configurationParameters)
         {
-            return _logFormatFactory.CreateLogFormat(new MessageFormatsFactoryData
+            return _logFormatFactory.CreateLogFormat(new LogFormatFactoryData
             {
                 LogFormatParameters = _logFormatParameters,
                 LogParameterPostRenderer = _logParameterPostRenderer,
                 MessageParameterPostRenderer = _messageParameterPostRenderer,
                 ConfigurationParameters = configurationParameters,
-                AppendStackTraceToRenderingMessage = AppendStacktraceToRenderingMessage
+                CanAppendStacktrace = CanAppendStacktrace
             });
         }
 

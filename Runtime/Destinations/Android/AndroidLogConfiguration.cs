@@ -4,6 +4,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
     public class AndroidLogConfiguration : LogConfiguration
     {
-        protected override bool AppendStacktraceToRenderingMessage => true;
+        protected override bool CanAppendStacktrace => true;
     }
 }

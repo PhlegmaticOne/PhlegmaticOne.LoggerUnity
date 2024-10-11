@@ -6,6 +6,9 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 
 namespace OpenMyGame.LoggerUnity
 {
+    /// <summary>
+    /// Сконфигурированные данные в <see cref="LoggerBuilder"/>, используемые при настройке приемников логов
+    /// </summary>
     public class LoggerConfigurationParameters
     {
         public LoggerConfigurationParameters(
@@ -18,8 +21,19 @@ namespace OpenMyGame.LoggerUnity
             PoolProvider = poolProvider;
         }
 
+        /// <summary>
+        /// Кастомные типы параметров в сообщениях
+        /// </summary>
         public Dictionary<Type, IMessageFormatParameter> FormatParameters { get; }
+        
+        /// <summary>
+        /// Сериализотор, используемый для парметров с префиксом @
+        /// </summary>
         public IMessageFormatParameterSerializer ParameterSerializer { get; }
+        
+        /// <summary>
+        /// Пулы для переиспользуемых объектов
+        /// </summary>
         public IPoolProvider PoolProvider { get; }
     }
 }

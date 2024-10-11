@@ -1,5 +1,4 @@
 ﻿using OpenMyGame.LoggerUnity.Formats.Log.Factory;
-using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
@@ -8,16 +7,19 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
     {
         private readonly MessagePart[] _messageParts;
 
-        public LogFormatFactoryPlainText(string format)
+        public LogFormatFactoryPlainText(MessagePart[] messageParts)
         {
-            var parser = new MessageFormatParser();
-            _messageParts = parser.Parse(format);
+            _messageParts = messageParts;
         }
         
-        public ILogFormat CreateLogFormat(MessageFormatsFactoryData factoryData)
+        /// <summary>
+        /// Создает формат для формирования результирующего сообщения в виде простого текста
+        /// </summary>
+        /// <param name="factoryData">Данные добавленные при конфигурации логгера</param>
+        public ILogFormat CreateLogFormat(LogFormatFactoryData factoryData)
         {
             return new LogFormatPlainText(_messageParts,
-                factoryData.AppendStackTraceToRenderingMessage, 
+                factoryData.CanAppendStacktrace, 
                 factoryData.LogFormatParameters, 
                 factoryData.LogParameterPostRenderer, 
                 factoryData.ConfigurationParameters.PoolProvider);

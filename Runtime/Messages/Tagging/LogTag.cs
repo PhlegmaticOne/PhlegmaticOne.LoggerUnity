@@ -26,7 +26,7 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
             Color = color;
         }
 
-        [JsonProperty(nameof(Value))] public string Value { get; }
+        [JsonProperty("Value")] public string Value { get; }
         [JsonIgnore] public Color Color { get; private set; }
         [JsonIgnore] public bool HasColor { get; private set; }
 
@@ -53,6 +53,11 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
         public override int GetHashCode()
         {
             return Value != null ? Value.GetHashCode() : 0;
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 }

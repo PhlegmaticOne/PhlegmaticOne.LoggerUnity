@@ -12,6 +12,10 @@ namespace OpenMyGame.LoggerUnity
     {
         private readonly string _tag;
 
+        /// <summary>
+        /// Создает объект для логгирования с заданным тегом
+        /// </summary>
+        /// <param name="tag">Тег</param>
         public LogWithTag(string tag)
         {
             _tag = tag;

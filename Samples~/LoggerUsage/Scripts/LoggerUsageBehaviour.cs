@@ -1,6 +1,9 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Formats.Log.Json;
+using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
@@ -14,10 +17,11 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
                 .SetTagFormat("#{Tag}#")
                 .LogToUnityDebug(config =>
                 {
-                    config.RenderAs.Json("{ThreadId}{LogLevel}{MessageId}{Message}{Exception}");
+                    config.RenderAs.PlainText();
                     config.MinimumLogLevel = LogLevel.Debug;
                     config.IsUnityStacktraceEnabled = false;
                     config.MessagePartMaxSize = 4000;
+                    config.ColorizeParameters();
                 })
                 .CreateLogger();
         }

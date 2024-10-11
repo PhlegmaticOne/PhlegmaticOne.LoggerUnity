@@ -31,5 +31,10 @@ namespace OpenMyGame.LoggerUnity.Messages
             userCodeStacktrace = Stacktrace.AsSpan()[UserCodeStacktraceStartPosition..];
             return true;
         }
+
+        public override string ToString()
+        {
+            return Stacktrace;
+        }
     }
 }

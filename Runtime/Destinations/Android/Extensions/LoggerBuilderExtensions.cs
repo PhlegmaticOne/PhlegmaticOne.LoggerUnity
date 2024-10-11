@@ -4,6 +4,9 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android.Extensions
 {
     public static class LoggerBuilderExtensions
     {
+        /// <summary>
+        /// Конфигурирует логгирование сообщений в Android
+        /// </summary>
         public static LoggerBuilder LogToAndroidLog(
             this LoggerBuilder loggerBuilder, Action<AndroidLogConfiguration> configureAction = null)
         {

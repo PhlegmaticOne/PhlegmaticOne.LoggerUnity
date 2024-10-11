@@ -2,6 +2,10 @@
 {
     public interface ILogFormatFactory
     {
-        ILogFormat CreateLogFormat(MessageFormatsFactoryData factoryData);
+        /// <summary>
+        /// Создает формат для формирования результирующего сообщения
+        /// </summary>
+        /// <param name="factoryData">Данные добавленные при конфигурации логгера</param>
+        ILogFormat CreateLogFormat(LogFormatFactoryData factoryData);
     }
 }

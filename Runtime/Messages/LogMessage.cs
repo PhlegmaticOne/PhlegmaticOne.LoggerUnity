@@ -94,5 +94,10 @@ namespace OpenMyGame.LoggerUnity.Messages
 
             return this;
         }
+
+        public override string ToString()
+        {
+            return Format;
+        }
     }
 }
