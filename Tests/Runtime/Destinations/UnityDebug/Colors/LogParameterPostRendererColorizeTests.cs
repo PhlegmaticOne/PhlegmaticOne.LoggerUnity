@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using NUnit.Framework;
+using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 using UnityEngine;

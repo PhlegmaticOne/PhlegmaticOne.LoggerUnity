@@ -9,10 +9,9 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.Json
             parametersBuilder.Parameter(LogFormatParameterThreadId.KeyParameter);
         }
 
-        public static void LogLevel(this JsonIncludeParametersBuilder parametersBuilder, string format = null)
+        public static void LogLevel(this JsonIncludeParametersBuilder parametersBuilder)
         {
-            parametersBuilder.Parameter(
-                CreateParameterValue(LogFormatParameterLogLevel.KeyParameter, format));
+            parametersBuilder.Parameter(LogFormatParameterLogLevel.KeyParameter);
         }
 
         public static void MessageId(this JsonIncludeParametersBuilder parametersBuilder)
@@ -20,27 +19,19 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.Json
             parametersBuilder.Parameter(LogFormatParameterMessageId.KeyParameter);
         }
 
-        public static void Time(this JsonIncludeParametersBuilder parametersBuilder, string format = null)
+        public static void Time(this JsonIncludeParametersBuilder parametersBuilder)
         {
-            parametersBuilder.Parameter(
-                CreateParameterValue(LogFormatParameterTime.KeyParameter, format));
+            parametersBuilder.Parameter(LogFormatParameterTime.KeyParameter);
         }
         
-        public static void TimeUtc(this JsonIncludeParametersBuilder parametersBuilder, string format = null)
+        public static void TimeUtc(this JsonIncludeParametersBuilder parametersBuilder)
         {
-            parametersBuilder.Parameter(
-                CreateParameterValue(LogFormatParameterTimeUtc.KeyParameter, format));
+            parametersBuilder.Parameter(LogFormatParameterTimeUtc.KeyParameter);
         }
 
-        public static void UnityTime(this JsonIncludeParametersBuilder parametersBuilder, string format = null)
+        public static void UnityTime(this JsonIncludeParametersBuilder parametersBuilder)
         {
-            parametersBuilder.Parameter(
-                CreateParameterValue(LogFormatParameterUnityTime.KeyParameter, format));
-        }
-
-        private static string CreateParameterValue(string parameterKey, string format)
-        {
-            return string.IsNullOrEmpty(format) ? parameterKey : string.Concat(parameterKey, ":", format);
+            parametersBuilder.Parameter(LogFormatParameterUnityTime.KeyParameter);
         }
     }
 }

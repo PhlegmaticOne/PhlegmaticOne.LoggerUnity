@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration.Logger;
 using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Messages.Factories;
 using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
@@ -29,6 +30,16 @@ namespace OpenMyGame.LoggerUnity
             _isExtractStacktraceToMessages = LoggerStaticData.IsExtractStacktrace;
             _formatParameters = LoggerStaticData.MessageFormatParameters;
             _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
+        }
+
+        /// <summary>
+        /// Создает логгер, используя конфигурацию
+        /// </summary>
+        public static ILogger FromConfig(LoggerConfig loggerConfig)
+        {
+            var builder = new LoggerBuilder();
+            loggerConfig.Build(builder);
+            return builder.CreateLogger();
         }
 
         /// <summary>

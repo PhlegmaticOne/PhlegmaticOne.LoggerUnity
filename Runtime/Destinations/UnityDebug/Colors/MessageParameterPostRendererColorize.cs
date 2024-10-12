@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
+using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig.Base;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using UnityEngine;

@@ -22,9 +22,9 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.Json
         /// Добавляет новый параметр с список
         /// </summary>
         /// <example>LogLevel:u3</example>
-        public void Parameter(string parameterWithFormat)
+        public void Parameter(string parameterValue)
         {
-            var parameter = MessagePart.Parameter(parameterWithFormat);
+            var parameter = MessagePart.Parameter(parameterValue);
             _parameters.Add(parameter);
         }
 

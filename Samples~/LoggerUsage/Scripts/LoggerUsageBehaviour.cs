@@ -1,8 +1,5 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Formats.Log.Json;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;

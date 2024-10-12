@@ -1,10 +1,12 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
+    [SerializeReferenceDropdownName(KeyParameter)]
     internal class LogFormatParameterMessage : ILogFormatParameter
     {
         public const string KeyParameter = "Message";

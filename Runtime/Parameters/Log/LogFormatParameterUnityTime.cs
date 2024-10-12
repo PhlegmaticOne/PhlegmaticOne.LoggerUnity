@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
@@ -7,6 +8,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
+    [SerializeReferenceDropdownName(KeyParameter)]
     internal class LogFormatParameterUnityTime : ILogFormatParameter
     {
         private const string TicksFormat = "ticks";

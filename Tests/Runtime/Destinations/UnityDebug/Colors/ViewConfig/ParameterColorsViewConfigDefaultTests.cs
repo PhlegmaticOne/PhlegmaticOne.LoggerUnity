@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Configuration.Colors;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.ViewConfig

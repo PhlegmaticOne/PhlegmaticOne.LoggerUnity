@@ -11,7 +11,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Formats.Log.Json
 {
-    public class LogFormatJson : ILogFormat
+    internal class LogFormatJson : ILogFormat
     {
         private const string ParametersKey = "Parameters";
         private const string StacktraceKey = "Stacktrace";

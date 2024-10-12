@@ -2,6 +2,7 @@
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
 {
+    [Serializable]
     public abstract class MessageFormatParameter<T> : IMessageFormatParameter
     {
         public Type PropertyType => typeof(T);
