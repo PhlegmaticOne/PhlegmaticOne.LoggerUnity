@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Editor;
+using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers;
 using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Models;
 using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Views;
 using UnityEditor;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors
+namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor
 {
     public class LoggerConfigsEditorWindow : EditorWindow
     {
@@ -27,7 +27,6 @@ namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors
         private void CreateGUI()
         {
             _configs = AssetHelper.GetConfigs();
-            
             _configNameView = new ConfigNameView();
             _configSeparatorLineView = new ConfigSeparatorLineView();
         }

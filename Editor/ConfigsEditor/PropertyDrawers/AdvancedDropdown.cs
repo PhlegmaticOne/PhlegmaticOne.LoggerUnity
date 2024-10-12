@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor.IMGUI.Controls;
 
-namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors.PropertyDrawers
+namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.PropertyDrawers
 {
     internal class AdvancedDropdown : UnityEditor.IMGUI.Controls.AdvancedDropdown
     {

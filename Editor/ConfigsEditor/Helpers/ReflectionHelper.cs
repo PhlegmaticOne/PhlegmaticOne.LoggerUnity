@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assembly = System.Reflection.Assembly;
 
-namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors.PropertyDrawers
+namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers
 {
-    internal static class TypeUtils
+    internal static class ReflectionHelper
     {
         public static Type ExtractTypeFromString(string typeName)
         {
@@ -25,10 +27,21 @@ namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors.PropertyDrawers
             var targetType = assembly.GetType(subStringTypeName);
             return targetType;
         }
-
-        public static bool IsFinalAssignableType(Type type)
+        
+        public static IEnumerable<Type> GetImplementations<T>()
         {
-            return type.IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface;
+            var assembly = Assembly.GetAssembly(typeof(T));
+
+            return assembly.GetTypes()
+                .Where(type => typeof(T).IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface);
+        }
+
+        public static bool IsFinalNonUnityType(Type type)
+        {
+            return type.IsAssignableFrom(type) && 
+                   !type.IsAbstract && 
+                   !type.IsInterface &&
+                   !type.IsSubclassOf(typeof(UnityEngine.Object));
         }
     }
 }

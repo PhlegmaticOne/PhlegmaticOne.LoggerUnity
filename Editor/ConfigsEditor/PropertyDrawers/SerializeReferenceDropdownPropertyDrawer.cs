@@ -5,11 +5,12 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Configuration.Base;
+using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors.PropertyDrawers
+namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(SerializeReferenceDropdownAttribute))]
     internal class SerializeReferenceDropdownPropertyDrawer : PropertyDrawer
@@ -43,7 +44,7 @@ namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors.PropertyDrawers
         
         private void DrawImplementationsDropdown(Rect rect, SerializedProperty property, GUIContent label)
         {
-            var referenceType = TypeUtils.ExtractTypeFromString(property.managedReferenceFullTypename);
+            var referenceType = ReflectionHelper.ExtractTypeFromString(property.managedReferenceFullTypename);
             var dropdownRect = GetDropdownRect(rect);
 
             EditorGUI.EndDisabledGroup();
@@ -59,17 +60,6 @@ namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors.PropertyDrawers
             }
 
             EditorGUI.PropertyField(rect, property, label, true);
-            return;
-
-            Rect GetDropdownRect(Rect mainRect)
-            {
-                var dropdownOffset = EditorGUIUtility.labelWidth;
-                var resultRect = new Rect(mainRect);
-                resultRect.width -= dropdownOffset;
-                resultRect.x += dropdownOffset;
-                resultRect.height = EditorGUIUtility.singleLineHeight;
-                return resultRect;
-            }
         }
 
         private static string GetTypeName(Type type)
@@ -92,16 +82,21 @@ namespace OpenMyGame.LoggerUnity.ConfigsEditor.Editors.PropertyDrawers
         
         private static List<Type> GetAssignableTypes(SerializedProperty property)
         {
-            var propertyType = TypeUtils.ExtractTypeFromString(property.managedReferenceFieldTypename);
+            var propertyType = ReflectionHelper.ExtractTypeFromString(property.managedReferenceFieldTypename);
             var derivedTypes = TypeCache.GetTypesDerivedFrom(propertyType);
-            var nonUnityTypes = derivedTypes.Where(IsAssignableNonUnityType).ToList();
+            var nonUnityTypes = derivedTypes.Where(ReflectionHelper.IsFinalNonUnityType).ToList();
             nonUnityTypes.Insert(0, null);
             return nonUnityTypes;
+        }
 
-            bool IsAssignableNonUnityType(Type type)
-            {
-                return TypeUtils.IsFinalAssignableType(type) && !type.IsSubclassOf(typeof(UnityEngine.Object));
-            }
+        private static Rect GetDropdownRect(Rect mainRect)
+        {
+            var dropdownOffset = EditorGUIUtility.labelWidth;
+            var resultRect = new Rect(mainRect);
+            resultRect.width -= dropdownOffset;
+            resultRect.x += dropdownOffset;
+            resultRect.height = EditorGUIUtility.singleLineHeight;
+            return resultRect;
         }
 
         private void WriteNewInstanceByIndexType(int typeIndex, SerializedProperty property)

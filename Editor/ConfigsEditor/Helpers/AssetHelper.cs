@@ -8,39 +8,16 @@ using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Models;
 using UnityEditor;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor
+namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers
 {
     internal static class AssetHelper
     {
         private const string ResourcesFolder = "Resources";
         private const string LoggerUnityFolder = "LoggerUnity";
 
-        public static TBase CreateInstance<TBase>(Type derivedType)
-        {
-            return (TBase)Activator.CreateInstance(derivedType);
-        }
-        
-        public static object CreateInstance(Type derivedType)
-        {
-            return Activator.CreateInstance(derivedType);
-        }
-        
-        public static IEnumerable<Type> GetImplementations<T>()
-        {
-            return GetImplementations(typeof(T));
-        }
-        
-        public static IEnumerable<Type> GetImplementations(Type implementationType)
-        {
-            var assembly = Assembly.GetAssembly(typeof(Log));
-
-            return assembly.GetTypes()
-                .Where(type => implementationType.IsAssignableFrom(type) && !type.IsAbstract);
-        }
-        
         public static List<LoggerConfigViewModel> GetConfigs()
         {
-            return GetImplementations<LoggerConfigBase>()
+            return ReflectionHelper.GetImplementations<LoggerConfigBase>()
                 .Select(configType =>
                 {
                     var configAttribute = configType.GetCustomAttribute<LoggerConfigMetadataAttribute>();
@@ -50,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Editor
                 .OrderBy(x => x.OrderInEditor)
                 .ToList();
         }
-        
+
         public static LoggerConfigBase CreateConfig(string configName, Type configType)
         {
             var path = Path.Combine(Application.dataPath, ResourcesFolder);
