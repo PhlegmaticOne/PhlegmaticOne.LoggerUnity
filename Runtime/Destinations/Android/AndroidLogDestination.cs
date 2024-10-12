@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.Android
 {
-    public class AndroidLogDestination : LogDestination<AndroidLogConfiguration>
+    internal class AndroidLogDestination : LogDestination<AndroidLogConfiguration>
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
         private const string DefaultTagValue = "Unity";

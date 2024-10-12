@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
 {
-    public class UnityDebugLogDestination : LogDestination<UnityDebugLogConfiguration>
+    internal class UnityDebugLogDestination : LogDestination<UnityDebugLogConfiguration>
     {
         private const string Format = "{0}";
 

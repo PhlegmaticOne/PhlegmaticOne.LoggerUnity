@@ -1,9 +1,13 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Messages.Stacktrace;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {
+    /// <summary>
+    /// Класс сообщения, используемый при логгировании
+    /// </summary>
     public partial class LogMessage
     {
         private readonly ILogger _logger;

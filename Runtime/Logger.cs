@@ -9,6 +9,9 @@ using OpenMyGame.LoggerUnity.Parsing.Base;
 
 namespace OpenMyGame.LoggerUnity
 {
+    /// <summary>
+    /// Стандартная реализация логгера
+    /// </summary>
     internal class Logger : ILogger
     {
         private readonly IReadOnlyList<ILogDestination> _logDestinations;

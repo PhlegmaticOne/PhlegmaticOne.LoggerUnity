@@ -3,7 +3,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
 {
-    public class LogFormatFactoryPlainText : ILogFormatFactory
+    internal class LogFormatFactoryPlainText : ILogFormatFactory
     {
         private readonly MessagePart[] _messageParts;
 

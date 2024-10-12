@@ -5,6 +5,7 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
+    [Serializable]
     [SerializeReferenceDropdownName("ExceptionPlaceholder")]
     internal class MessageFormatParameterExceptionPlaceholder : MessageFormatParameter<LogExceptionPlaceholder>
     {

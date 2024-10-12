@@ -38,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger
         public void Build(LoggerBuilder loggerBuilder)
         {
             loggerBuilder.SetEnabled(_isEnabled);
-            loggerBuilder.SetIsExtractStackTracesToMessage(_isExtractStacktraces);
+            loggerBuilder.SetIsExtractStackTraces(_isExtractStacktraces);
             loggerBuilder.SetTagFormat(_tagFormat);
             AddMessageParameters(loggerBuilder);
             BuildDestinations(loggerBuilder);

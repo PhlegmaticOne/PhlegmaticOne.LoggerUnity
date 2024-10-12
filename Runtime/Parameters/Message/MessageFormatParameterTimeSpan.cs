@@ -4,6 +4,7 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
+    [Serializable]
     [SerializeReferenceDropdownName("TimeSpan")]
     internal class MessageFormatParameterTimeSpan : MessageFormatParameter<TimeSpan>
     {

@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity
         public Dictionary<Type, IMessageFormatParameter> FormatParameters { get; }
         
         /// <summary>
-        /// Сериализотор, используемый для парметров с префиксом @
+        /// Сериализатор, используемый для парметров с префиксом <b>@</b>
         /// </summary>
         public IMessageFormatParameterSerializer ParameterSerializer { get; }
         

@@ -4,6 +4,7 @@ using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Messages;
+using OpenMyGame.LoggerUnity.Messages.Stacktrace;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Models;

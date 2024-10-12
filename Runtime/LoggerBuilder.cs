@@ -12,13 +12,16 @@ using OpenMyGame.LoggerUnity.Parsing.Base;
 
 namespace OpenMyGame.LoggerUnity
 {
+    /// <summary>
+    /// Конфигурирует создаваемый логгер
+    /// </summary>
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
         private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
 
-        private bool _isExtractStacktraceToMessages;
+        private bool _isExtractStackTraces;
         private string _tagFormat;
         private bool _isEnabled;
 
@@ -27,7 +30,7 @@ namespace OpenMyGame.LoggerUnity
             _loggerDestinations = new List<ILogDestination>();
             _tagFormat = LoggerStaticData.TagFormat;
             _isEnabled = LoggerStaticData.IsEnabled;
-            _isExtractStacktraceToMessages = LoggerStaticData.IsExtractStacktrace;
+            _isExtractStackTraces = LoggerStaticData.IsExtractStacktrace;
             _formatParameters = LoggerStaticData.MessageFormatParameters;
             _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
         }
@@ -45,7 +48,8 @@ namespace OpenMyGame.LoggerUnity
         /// <summary>
         /// Устанавливает будет ли происходить логгирование или нет
         /// </summary>
-        /// <param name="isEnabled">Активность; дефолтный параметр - <b>true</b></param>
+        /// <remarks>Дефолтный параметр - <b>true</b></remarks>
+        /// <param name="isEnabled">Активность логгирования</param>
         public LoggerBuilder SetEnabled(bool isEnabled)
         {
             _isEnabled = isEnabled;
@@ -55,7 +59,8 @@ namespace OpenMyGame.LoggerUnity
         /// <summary>
         /// Устанавливает формат для тегов (необходимо чтобы тег имел параметр <b>{Tag}</b>)
         /// </summary>
-        /// <param name="tagFormat">Формат для тегов; дефолтный формат - <b>#{Tag}#</b></param>
+        /// <remarks>Дефолтный параметр - <b>#{Tag}#</b></remarks>
+        /// <param name="tagFormat">Формат для тегов</param>
         public LoggerBuilder SetTagFormat(string tagFormat)
         {
             _tagFormat = tagFormat;
@@ -65,10 +70,11 @@ namespace OpenMyGame.LoggerUnity
         /// <summary>
         /// Устанавливает будет ли формироваться стектрейс для сообщения
         /// </summary>
-        /// <param name="isExtractStacktraceToMessages">Активность формирования стектрейса; дефолтный параметр - <b>false</b></param>
-        public LoggerBuilder SetIsExtractStackTracesToMessage(bool isExtractStacktraceToMessages)
+        /// <remarks>Дефолтный параметр - <b>false</b></remarks>
+        /// <param name="isExtractStackTraces">Активность формирования стектрейса</param>
+        public LoggerBuilder SetIsExtractStackTraces(bool isExtractStackTraces)
         {
-            _isExtractStacktraceToMessages = isExtractStacktraceToMessages;
+            _isExtractStackTraces = isExtractStackTraces;
             return this;
         }
 
@@ -88,7 +94,7 @@ namespace OpenMyGame.LoggerUnity
         /// <summary>
         /// Добавляет новый логгер в коллекцию логгеров (<see cref="ILogDestination"/>)
         /// </summary>
-        /// <param name="configureDestinationAction">Метод для настройки конфигурации логгера</param>
+        /// <param name="configureDestinationAction">Метод для конфигурации приемника логов</param>
         public LoggerBuilder LogTo<TDestination, TConfiguration>(
             Action<TConfiguration> configureDestinationAction = null)
             where TConfiguration : LogConfiguration, new()
@@ -138,7 +144,7 @@ namespace OpenMyGame.LoggerUnity
 
         private ILogMessageFactory GetMessageFactory()
         {
-            return new LogMessageFactory(_isExtractStacktraceToMessages, startStacktraceDepthLevel: 5);
+            return new LogMessageFactory(_isExtractStackTraces, startStacktraceDepthLevel: 5);
         }
     }
 }

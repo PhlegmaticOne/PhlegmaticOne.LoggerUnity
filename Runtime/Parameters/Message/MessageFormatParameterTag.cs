@@ -5,6 +5,7 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
+    [Serializable]
     [SerializeReferenceDropdownName("Tag")]
     internal class MessageFormatParameterTag : MessageFormatParameter<LogTag>
     {

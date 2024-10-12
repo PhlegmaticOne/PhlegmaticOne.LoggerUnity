@@ -13,7 +13,7 @@ namespace OpenMyGame.LoggerUnity.Formats
             _logConfiguration = logConfiguration;
             this.PlainText(LoggerStaticData.LogFormat);
         }
-
+        
         public void FromFactory(ILogFormatFactory logFormatFactory)
         {
             if (logFormatFactory is not null)

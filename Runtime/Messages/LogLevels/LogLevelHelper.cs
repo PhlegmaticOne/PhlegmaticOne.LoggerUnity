@@ -2,14 +2,6 @@
 
 namespace OpenMyGame.LoggerUnity.Messages
 {
-    public enum LogLevel
-    {
-        Debug = 0,
-        Warning = 1,
-        Error = 2,
-        Fatal = 3
-    }
-
     internal static class LogLevelHelper
     {
         public static LogLevel ParseFromSpan(in ReadOnlySpan<char> value)

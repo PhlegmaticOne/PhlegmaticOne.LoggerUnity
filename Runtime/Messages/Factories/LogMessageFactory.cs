@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Messages.Stacktrace;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Messages.Factories
