@@ -3,6 +3,7 @@ using System.Linq;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Base;
+using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Configuration.Logger.Rendering;
 using OpenMyGame.LoggerUnity.Configuration.Logger.Rendering.PlainText;
 using OpenMyGame.LoggerUnity.Messages;
@@ -15,6 +16,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
     public abstract class LoggerDestinationBuilder : IDefaultSetup
     {
         [SerializeField] private bool _isEnabled = LoggerStaticData.IsEnabled;
+        [SerializeField] private LoggerPlatform _platform;
         [SerializeField] private LogLevel _minimumLogLevel = LoggerStaticData.MinimumLogLevel;
 
         [SerializeReference, SerializeReferenceDropdown] 
@@ -22,6 +24,14 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
 
         [SerializeReference, SerializeReferenceDropdown]
         private ILogFormatParameter[] _logFormatParameters;
+
+        protected abstract LoggerPlatform Platform { get; }
+        
+        public bool CanBuild()
+        {
+            var currentPlatform = LoggerPlatformProvider.GetPlatform();
+            return _platform.HasFlag(currentPlatform);
+        }
         
         public abstract void Build(LoggerBuilder loggerBuilder);
 
@@ -30,8 +40,10 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
             _logFormatParameters = LoggerStaticData.LogFormatParameters
                 .Select(x => x.Value)
                 .ToArray();
-        }
 
+            _platform = Platform;
+        }
+        
         protected void SetupConfigurationBase(LogConfiguration config)
         {
             config.IsEnabled = _isEnabled;

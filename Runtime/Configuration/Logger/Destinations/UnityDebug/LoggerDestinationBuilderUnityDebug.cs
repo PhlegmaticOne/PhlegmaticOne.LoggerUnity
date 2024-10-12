@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Configuration.Colors;
+using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using UnityEngine;
@@ -19,7 +20,9 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.UnityDebug
         [SerializeField] private bool _isColorizeParameters;
         [Tooltip("Если конфиг не указан, то используется дефолтный конфиг")]
         [SerializeField] private ParameterColorsViewConfig _customViewConfig;
-        
+
+        protected override LoggerPlatform Platform => LoggerPlatform.Editor;
+
         public override void Build(LoggerBuilder loggerBuilder)
         {
             loggerBuilder.LogToUnityDebug(config =>

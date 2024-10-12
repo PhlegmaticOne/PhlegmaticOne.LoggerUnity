@@ -55,7 +55,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger
 
         private void BuildDestinations(LoggerBuilder loggerBuilder)
         {
-            foreach (var destinationBuilder in _destinationBuilders)
+            foreach (var destinationBuilder in _destinationBuilders.Where(x => x.CanBuild()))
             {
                 destinationBuilder.Build(loggerBuilder);
             }
