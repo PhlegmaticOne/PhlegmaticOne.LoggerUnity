@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Configuration.Logger;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;
@@ -10,6 +11,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
     {
         private void Awake()
         {
+            //Log.Logger = LoggerBuilder.FromConfig(LoggerConfig.Load());
+            
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
                 .LogToUnityDebug(config =>
