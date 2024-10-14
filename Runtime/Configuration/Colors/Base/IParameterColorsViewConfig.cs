@@ -7,6 +7,6 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors.Base
     {
         Color GetTagColor(string tag);
         Color GetMessageParameterColor(object parameter);
-        Color GetLogParameterColor(string parameterKey, in ReadOnlySpan<char> renderedValue);
+        Color GetLogParameterColor(in ReadOnlySpan<char> parameterKey, in ReadOnlySpan<char> renderedValue);
     }
 }

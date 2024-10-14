@@ -1,27 +1,31 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Configuration.Colors.Models
 {
     [Serializable]
-    public struct LogLevelColorConfigData
+    public struct TagColorConfigData
     {
-        [SerializeField] private LogLevel _logLevel;
+        [SerializeField] private string _tag;
         [SerializeField] private Color _color;
 
-        public LogLevelColorConfigData(LogLevel logLevel, Color color)
+        public TagColorConfigData(string tag, Color color)
         {
-            _logLevel = logLevel;
+            _tag = tag;
             _color = color;
         }
 
-        public LogLevel LogLevel => _logLevel;
+        public string Tag => _tag;
         public Color Color => _color;
+
+        public bool ContainsData()
+        {
+            return !string.IsNullOrEmpty(_tag);
+        }
 
         public override string ToString()
         {
-            return _logLevel.ToString();
+            return _tag;
         }
     }
 }

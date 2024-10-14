@@ -26,8 +26,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
                 public Color GetTagColor(string tag) => throw new NotImplementedException();
 
                 public Color GetMessageParameterColor(object parameter) => throw new NotImplementedException();
-
-                public Color GetLogParameterColor(string parameterKey, in ReadOnlySpan<char> renderedValue) => _logParameterColor;
+                public Color GetLogParameterColor(in ReadOnlySpan<char> parameterKey, in ReadOnlySpan<char> renderedValue)
+                {
+                    return _logParameterColor;
+                }
             }
             
             public static IParameterColorsViewConfig ConfigWithLogParameterColor(Color color)

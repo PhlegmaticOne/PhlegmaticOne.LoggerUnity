@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Messages.Exceptions;
+﻿using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Parameters.Log;
+using OpenMyGame.LoggerUnity.Parameters.Log.Base;
+using OpenMyGame.LoggerUnity.Parameters.Message;
+using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Configuration.Colors.Static
@@ -10,23 +11,23 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors.Static
     {
         private static readonly Color DefaultTimeColor = new(0.1254902f, 0.6470588f, 0.2862745f);
         
-        public static Dictionary<string, Color> LogParameterColorsMap => new()
+        public static Dictionary<ILogFormatParameter, Color> LogParameterColorsMap => new()
         {
-            { LogFormatParameterException.KeyParameter, new Color(1f, 0.3254902f, 0.2901961f) },
-            { LogFormatParameterThreadId.KeyParameter, new Color(0f, 1f, 1f) },
-            { LogFormatParameterTime.KeyParameter, DefaultTimeColor },
-            { LogFormatParameterTimeUtc.KeyParameter, DefaultTimeColor },
-            { LogFormatParameterUnityTime.KeyParameter, DefaultTimeColor},
-            { LogFormatParameterMessageId.KeyParameter, new Color(0.9882353f, 0.9254902f, 0.3215686f)}
+            { new LogFormatParameterException(), new Color(1f, 0.3254902f, 0.2901961f) },
+            { new LogFormatParameterThreadId(), new Color(0f, 1f, 1f) },
+            { new LogFormatParameterTime(), DefaultTimeColor },
+            { new LogFormatParameterTimeUtc(), DefaultTimeColor },
+            { new LogFormatParameterUnityTime(), DefaultTimeColor},
+            { new LogFormatParameterMessageId(), new Color(0.9882353f, 0.9254902f, 0.3215686f)}
         };
 
-        public static Dictionary<string, Color> MessageParameterColorsMap => new()
+        public static Dictionary<IMessageFormatParameter, Color> MessageParameterColorsMap => new()
         {
-            { nameof(String), new Color(0.9607844f, 0.8745099f, 0.7098039f) },
-            { nameof(DateTime), DefaultTimeColor },
-            { nameof(TimeSpan), DefaultTimeColor },
-            { nameof(Guid), new Color(0.03137255f, 0.5764706f, 0.03137255f) },
-            { nameof(LogExceptionPlaceholder), new Color(0.7894118f, 0.09019608f, 0.07058824f) }
+            { new MessageFormatParameterString(), new Color(0.9607844f, 0.8745099f, 0.7098039f) },
+            { new MessageFormatParameterDateTime(), DefaultTimeColor },
+            { new MessageFormatParameterTimeSpan(), DefaultTimeColor },
+            { new MessageFormatParameterGuid(), new Color(0.03137255f, 0.5764706f, 0.03137255f) },
+            { new MessageFormatParameterExceptionPlaceholder(), new Color(0.7894118f, 0.09019608f, 0.07058824f) }
         };
 
         public static Dictionary<string, Color> LogLevelColorsMap => new()

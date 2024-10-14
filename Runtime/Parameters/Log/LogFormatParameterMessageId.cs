@@ -6,6 +6,7 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
+    [Serializable]
     [SerializeReferenceDropdownName(KeyParameter)]
     internal class LogFormatParameterMessageId : ILogFormatParameter
     {

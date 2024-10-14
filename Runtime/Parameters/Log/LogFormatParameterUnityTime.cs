@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
+    [Serializable]
     [SerializeReferenceDropdownName(KeyParameter)]
     internal class LogFormatParameterUnityTime : ILogFormatParameter
     {
