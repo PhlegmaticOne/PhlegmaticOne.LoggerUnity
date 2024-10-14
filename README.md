@@ -256,7 +256,7 @@ logWithTag
 Для конфигурации логгера в Editor нужно открыть окно по пути ```Logger/Show configs editor``` и создать конфиги, нажав на соответствующие кнопки.
 В окне можно редактировать сразу два конфига: конфиг логгера и конфиг цветов для параметров - изменения сохраняются в соответствующих ```ScriptableObject```'ах.
 
-![image](https://github.com/user-attachments/assets/fb749d75-9611-4671-a465-c8788db2df44)
+![image](https://github.com/user-attachments/assets/befa0897-02ed-4b54-9bb4-67988c69f2da)
 
 ### Конфигурация логгера
 
@@ -276,8 +276,8 @@ Log.Logger = LoggerBuilder.FromConfig(LoggerConfig.Load());
 
 Конфиг цветов состоит из 4-ех частей и редактируется в том же окне, что и конфиг логгера:
 
-1. <b>Log parameter colors</b> - необходимо указать название глобального параметра и его цвет
-2. <b>Parameter colors by type</b> - необходимо указать название типа параметра и его цвет
+1. <b>Log parameter colors</b> - необходимо указать глобальный параметр и его цвет
+2. <b>Message parameter colors</b> - необходимо указать параметр сообщения и его цвет
 3. <b>Log level colors</b> - необходимо указать тип уровня логгирования и его цвет
 4. <b>Tag colors</b> - необходимо указать название тега и его цвет
 
@@ -285,7 +285,7 @@ Log.Logger = LoggerBuilder.FromConfig(LoggerConfig.Load());
 
 Пример конфига приведен на скриншоте:
 
-![image](https://github.com/user-attachments/assets/f35e8484-de23-4e38-b4bf-2db3a8b2ed4a)
+![image](https://github.com/user-attachments/assets/4fe1ed3b-3d74-4e84-8cfd-e99aaacea4a7)
 
 После настройки конфига его нужно указать в ```LoggerBuilder```, чтобы он использовался вместо дефолтного конфига, либо проставить его в поле ```Custom View Config``` в конфиге приемника Unity Debug в окне:
 
