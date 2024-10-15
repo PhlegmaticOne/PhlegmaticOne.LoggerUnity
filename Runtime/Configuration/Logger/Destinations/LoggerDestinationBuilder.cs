@@ -48,6 +48,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
         {
             config.IsEnabled = _isEnabled;
             config.MinimumLogLevel = _minimumLogLevel;
+            config.Platform = _platform;
             _renderBuilder.Build(config.RenderAs);
             AddLogFormatParameters(config);
         }

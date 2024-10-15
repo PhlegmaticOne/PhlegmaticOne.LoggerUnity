@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Formats;
 using OpenMyGame.LoggerUnity.Formats.Log;
 using OpenMyGame.LoggerUnity.Formats.Log.Factory;
@@ -34,6 +35,11 @@ namespace OpenMyGame.LoggerUnity.Base
         /// Включает или выключает применик логов на старте
         /// </summary>
         public bool IsEnabled { get; set; }
+        
+        /// <summary>
+        /// Платформа/ы, на которых работает логгер с такой конфигурацией
+        /// </summary>
+        public LoggerPlatform Platform { get; set; }
         
         /// <summary>
         /// Устанавливает минимальный уровень логгирования сообщений

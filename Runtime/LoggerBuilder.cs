@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Logger;
+using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Messages.Factories;
 using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
@@ -102,6 +103,11 @@ namespace OpenMyGame.LoggerUnity
         {
             var configuration = new TConfiguration();
             configureDestinationAction?.Invoke(configuration);
+            
+            if (!configuration.Platform.HasFlag(LoggerPlatformProvider.GetPlatform()))
+            {
+                return this;
+            }
             
             _loggerDestinations.Add(new TDestination
             {
