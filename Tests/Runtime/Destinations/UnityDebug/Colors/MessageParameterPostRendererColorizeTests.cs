@@ -1,5 +1,5 @@
-﻿using System.Text;
-using Moq;
+﻿using System;
+using System.Text;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
@@ -13,18 +13,30 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
     {
         private static class Mocks
         {
+            private class ParameterColorsViewConfigColor : IParameterColorsViewConfig
+            {
+                private readonly Color _color;
+
+                public ParameterColorsViewConfigColor(Color color)
+                {
+                    _color = color;
+                }
+                
+                public Color GetTagColor(string tag) => _color;
+
+                public Color GetMessageParameterColor(object parameter) => _color;
+
+                public Color GetLogParameterColor(in ReadOnlySpan<char> parameterKey, in ReadOnlySpan<char> renderedValue) => _color;
+            }
+            
             public static IParameterColorsViewConfig ConfigWithMessageParameterColor(Color color)
             {
-                var mock = new Mock<IParameterColorsViewConfig>();
-                mock.Setup(x => x.GetMessageParameterColor(It.IsAny<object>())).Returns(color);
-                return mock.Object;
+                return new ParameterColorsViewConfigColor(color);
             }
             
             public static IParameterColorsViewConfig ConfigWithTagColor(Color color)
             {
-                var mock = new Mock<IParameterColorsViewConfig>();
-                mock.Setup(x => x.GetTagColor(It.IsAny<string>())).Returns(color);
-                return mock.Object;
+                return new ParameterColorsViewConfigColor(color);
             }
         }
         
