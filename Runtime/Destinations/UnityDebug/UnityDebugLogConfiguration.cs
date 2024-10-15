@@ -2,6 +2,7 @@
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
+using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
@@ -16,6 +17,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
             MessagePartMaxSize = UnityDebugLogStaticData.MessagePartMaxSize;
             MessagePartFormat = UnityDebugLogStaticData.MessagePartFormat;
             IsUnityStacktraceEnabled = UnityDebugLogStaticData.IsUnityStacktraceEnabled;
+            Platform = LoggerPlatform.Editor | LoggerPlatform.Android | LoggerPlatform.Ios;
         }
 
         /// <summary>
