@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Diagnostics;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity
 {
+    /// <summary>
+    /// Класс для взаимодействия с логгером
+    /// </summary>
     public static class Log
     {
         private static ILogger LoggerPrivate;
 
+        /// <summary>
+        /// Реализация логгера
+        /// </summary>
         public static ILogger Logger
         {
             get => LoggerPrivate;
@@ -15,27 +22,56 @@ namespace OpenMyGame.LoggerUnity
             {
                 if (LoggerPrivate is not null)
                 {
-                    LoggerPrivate.MessageLogged -= OnMessageLogged;
-                    LoggerPrivate.Dispose();
+                    DisposeCurrentLogger();
                 }
 
-                LoggerPrivate = value;
-                LoggerPrivate.MessageLogged += OnMessageLogged;
+                SetNewLogger(value);
             }
         }
 
-        public static event Action<LogMessageLoggedEventArgs> MessageLogged;
+        /// <summary>
+        /// Событие вызывается после логгирования сообщения в каждый из приемников логов
+        /// </summary>
+        public static event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
+        
+        /// <summary>
+        /// Событие вызывается после логгирования сообщения во все приеменики логов
+        /// </summary>
+        public static event Action<LogMessage> MessageLogged;
 
+        /// <summary>
+        /// Устанавливает активность приемника логов по ключу
+        /// </summary>
+        /// <param name="destinationName">Название приемника логов</param>
+        /// <param name="isEnabled">Активность</param>
         public static void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
             Logger.SetDestinationEnabled(destinationName, isEnabled);
         }
 
-        public static LogMessage DebugMessage() => Message(LogLevel.Debug);
-        public static LogMessage WarningMessage() => Message(LogLevel.Warning);
-        public static LogMessage ErrorMessage() => Message(LogLevel.Error);
-        public static LogMessage FatalMessage() => Message(LogLevel.Fatal);
-
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <b>Debug</b>
+        /// </summary>
+        public static LogMessage DebugMessage() => Logger.CreateMessage(LogLevel.Debug, stacktraceDepthLevel: 0);
+        
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <b>Warning</b>
+        /// </summary>
+        public static LogMessage WarningMessage() => Logger.CreateMessage(LogLevel.Warning, stacktraceDepthLevel: 0);
+        
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <b>Error</b>
+        /// </summary>
+        public static LogMessage ErrorMessage() => Logger.CreateMessage(LogLevel.Error, stacktraceDepthLevel: 0);
+        
+        /// <summary>
+        /// Создает сообщение с уровнем логгирования <b>Fatal</b>
+        /// </summary>
+        public static LogMessage FatalMessage() => Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 0);
+        
+        /// <summary>
+        /// Логгирует исключение
+        /// </summary>
         [Conditional(LoggerStaticData.ConditionalName)]
         public static void Exception(Exception exception)
         {
@@ -44,16 +80,33 @@ namespace OpenMyGame.LoggerUnity
                 return;
             }
 
-            FatalMessage()
+            Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 0)
                 .WithException(exception)
-                .Log(LoggerStaticData.ExceptionFormat);
+                .Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
 
-        private static LogMessage Message(LogLevel logLevel) => new(logLevel, Logger);
-
-        private static void OnMessageLogged(LogMessageLoggedEventArgs messageLoggedEventArgs)
+        private static void SetNewLogger(ILogger logger)
         {
-            MessageLogged?.Invoke(messageLoggedEventArgs);
+            LoggerPrivate = logger;
+            LoggerPrivate.MessageToDestinationLogged += OnMessageToDestinationLogged;
+            LoggerPrivate.MessageLogged += OnMessageLogged;
+        }
+
+        private static void DisposeCurrentLogger()
+        {
+            LoggerPrivate.MessageToDestinationLogged -= OnMessageToDestinationLogged;
+            LoggerPrivate.MessageLogged -= OnMessageLogged;
+            LoggerPrivate.Dispose();
+        }
+
+        private static void OnMessageLogged(LogMessage logMessage)
+        {
+            MessageLogged?.Invoke(logMessage);
+        }
+
+        private static void OnMessageToDestinationLogged(LogMessageDestinationLoggedEventArgs messageDestinationLoggedEventArgs)
+        {
+            MessageToDestinationLogged?.Invoke(messageDestinationLoggedEventArgs);
         }
     }
 }

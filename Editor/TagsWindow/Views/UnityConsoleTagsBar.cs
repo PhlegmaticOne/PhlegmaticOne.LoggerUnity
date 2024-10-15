@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Editor.Base.Controls;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories;
-using OpenMyGame.LoggerUnity.Tagging;
 using UnityEngine.UIElements;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
@@ -30,7 +29,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             this.AddManipulator(new Clickable(SetAllTagsInactive));
         }
 
-        public void RepaintTags(ICollection<LogTag> availableTags)
+        public void RepaintTags(ICollection<TagViewModel> availableTags)
         {
             var index = 0;
 
@@ -65,7 +64,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
             OnTagClicked(TagClickEventArgs.Empty);
         }
 
-        private void AddTag(LogTag tag)
+        private void AddTag(TagViewModel tag)
         {
             var tagControl = _tagControlFactory.CreateTagControl(tag, OnTagClicked);
             _tagsRootContainer.Add(tagControl);
@@ -79,7 +78,7 @@ namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views
                 SetOtherTagsInactive(toggle);
             }
             
-            OnTagClicked(new TagClickEventArgs(toggle.Text, isActive));
+            OnTagClicked(new TagClickEventArgs(toggle.ViewModel, isActive));
         }
 
         private void OnTagClicked(TagClickEventArgs tagClickEventArgs)

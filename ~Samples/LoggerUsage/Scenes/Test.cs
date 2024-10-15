@@ -2,6 +2,7 @@
 using OpenMyGame.LoggerUnity;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
 namespace _Samples.LoggerUsage.Scenes
@@ -12,10 +13,8 @@ namespace _Samples.LoggerUsage.Scenes
         {
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag:c}#")
-                .SetIsCacheFormats(true)
                 .LogToUnityDebug(config =>
                 {
-                    config.LogFormat = "[{ThreadId}] {Message}";
                     config.MinimumLogLevel = LogLevel.Debug;
                     config.IsUnityStacktraceEnabled = true;
                     config.MessagePartMaxSize = 40000;

@@ -1,12 +1,17 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Formats.Log;
+using OpenMyGame.LoggerUnity.Formats.Message;
+using OpenMyGame.LoggerUnity.Messages;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
-    public abstract class LogDestination<TConfiguration> : ILogDestination
+    public abstract class LogDestination<TConfiguration> : ILogDestination 
         where TConfiguration : LogConfiguration
     {
         private TConfiguration _configuration;
-        private IMessageFormat _logFormat;
+        private ILogFormat _logFormat;
+        private IMessageFormat _messageFormat;
 
         internal TConfiguration Configuration
         {
@@ -18,26 +23,33 @@ namespace OpenMyGame.LoggerUnity.Base
             }
         }
 
-        public abstract string DestinationName { get; }
-        public LogConfiguration Config => Configuration;
         public bool IsEnabled { get; set; }
+        public abstract string DestinationName { get; }
 
-        public void Initialize()
+        public bool CanLogMessage(LogMessage logMessage)
         {
-            _logFormat = Configuration.CreateMessageFormat();
-            OnInitializing();
+            return IsEnabled && logMessage.LogLevel >= _configuration.MinimumLogLevel;
         }
 
-        public virtual void LogMessage(LogMessage message, Span<object> parameters)
+        public void Initialize(LoggerConfigurationParameters configurationParameters)
         {
-            var renderedMessage = _logFormat.Render(message, parameters);
-            LogRenderedMessage(message, renderedMessage, parameters);
+            _logFormat = Configuration.CreateLogFormat(configurationParameters);
+            _messageFormat = Configuration.CreateMessageFormat(configurationParameters);
+            OnInitializing(configurationParameters);
         }
 
-        public virtual void Release() { }
+        public virtual string LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters)
+        {
+            var renderedMessage = _messageFormat.Render(messageParts, parameters);
+            var renderedLogMessage = _logFormat.Render(message, renderedMessage, messageParts, parameters);
+            LogRenderedMessage(message, renderedLogMessage, parameters);
+            return renderedLogMessage;
+        }
+
+        public virtual void Dispose() { }
 
         protected abstract void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters);
-        protected virtual void OnInitializing() { }
+        protected virtual void OnInitializing(LoggerConfigurationParameters configurationParameters) { }
 
         public override string ToString() => DestinationName;
     }

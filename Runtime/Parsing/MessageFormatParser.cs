@@ -1,26 +1,26 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Exceptions;
-using OpenMyGame.LoggerUnity.Parsing.MessageFormats;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parsing
 {
+    /// <summary>
+    /// Класс для парсинга форматов сообщений
+    /// </summary>
     internal class MessageFormatParser : IMessageFormatParser
     {
         private const char OpenBrace = '{';
         private const char CloseBrace = '}';
         
-        private readonly IMessageFormatFactory _messageFormatFactory;
-
-        public MessageFormatParser(IMessageFormatFactory messageFormatFactory)
-        {
-            _messageFormatFactory = messageFormatFactory;
-        }
-        
-        public IMessageFormat Parse(string format)
+        /// <summary>
+        /// Парсит строку с форматом в формат с параметрами и частями сообщений
+        /// </summary>
+        /// <param name="format">Формат в виде строки</param>
+        /// <example>[{ThreadId}] {Message}{NewLine}{Exception}</example>
+        /// <exception cref="MessageFormatParseException">Формат пустой; в формате разное количество '{' и '}'</exception>
+        public MessagePart[] Parse(string format)
         {
             if (string.IsNullOrWhiteSpace(format))
             {
@@ -31,7 +31,7 @@ namespace OpenMyGame.LoggerUnity.Parsing
 
             if (countOpenBraces == 0 && countCloseBraces == 0)
             {
-                return new MessageFormatStaticValue(format);
+                return new[] { MessagePart.Message(format) };
             }
 
             if (countOpenBraces != countCloseBraces)
@@ -42,7 +42,7 @@ namespace OpenMyGame.LoggerUnity.Parsing
             return ParseMessageFormat(format, countOpenBraces);
         }
 
-        private IMessageFormat ParseMessageFormat(string format, int parametersCount)
+        private static MessagePart[] ParseMessageFormat(string format, int parametersCount)
         {
             var i = 1;
             var partsCount = 2 * parametersCount + 1;
@@ -71,7 +71,7 @@ namespace OpenMyGame.LoggerUnity.Parsing
                 openBraceIndex = nextOpenBraceIndex;
             }
 
-            return _messageFormatFactory.CreateFormat(parts);
+            return parts;
         }
 
         private static void ProcessFormatPrefix(

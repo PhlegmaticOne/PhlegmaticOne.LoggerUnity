@@ -1,7 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration.Logger;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig;
+using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
+using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.LoggerUsage
@@ -10,16 +11,17 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
     {
         private void Awake()
         {
+            //Log.Logger = LoggerBuilder.FromConfig(LoggerConfig.Load());
+            
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
-                .SetIsCacheFormats(true)
-                .ColorizeParameters(ParameterColorsViewConfig.Load())
                 .LogToUnityDebug(config =>
                 {
-                    config.LogFormat = "[{ThreadId}] {Message}{NewLine}{Exception:ns}";
+                    config.RenderAs.PlainText();
                     config.MinimumLogLevel = LogLevel.Debug;
-                    config.IsUnityStacktraceEnabled = true;
-                    config.MessagePartMaxSize = 400;
+                    config.IsUnityStacktraceEnabled = false;
+                    config.MessagePartMaxSize = 4000;
+                    config.ColorizeParameters();
                 })
                 .CreateLogger();
         }
@@ -41,7 +43,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
 
             var systemException = new Exception("System failed");
-            Log.DebugMessage()
+            Log.FatalMessage()
                 .WithTag("System")
                 .WithException(systemException)
                 .Log("System error: {Error}", "Something went wrong");
@@ -61,9 +63,12 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         private static void LogWithTag()
         {
             var logWithTag = new LogWithTag("Time");
+            
             logWithTag
                 .DebugMessage()
                 .Log("Debug current time with log with tag: {Time}", DateTime.Now);
+            
+            logWithTag.Exception(new Exception("LogWithTag exception"));
         }
     }
 }

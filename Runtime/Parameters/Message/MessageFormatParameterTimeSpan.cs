@@ -1,8 +1,11 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
+    [Serializable]
+    [SerializeReferenceDropdownName("TimeSpan")]
     internal class MessageFormatParameterTimeSpan : MessageFormatParameter<TimeSpan>
     {
         protected override ReadOnlySpan<char> Render(TimeSpan parameter, in ReadOnlySpan<char> format)

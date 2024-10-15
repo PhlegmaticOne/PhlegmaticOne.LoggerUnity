@@ -1,15 +1,19 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
+    [Serializable]
+    [SerializeReferenceDropdownName(KeyParameter)]
     internal class LogFormatParameterTimeUtc : ILogFormatParameter
     {
-        public string Key => "TimeUtc";
+        public const string KeyParameter = "TimeUtc";
+        public string Key => KeyParameter;
         
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {
             if (messagePart.TryGetFormat(out var format))
             {

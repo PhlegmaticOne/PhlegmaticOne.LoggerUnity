@@ -1,9 +1,9 @@
-﻿using OpenMyGame.LoggerUnity.Base;
+﻿using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parsing.Base
 {
     public interface IMessageFormatParser
     {
-        IMessageFormat Parse(string format);
+        MessagePart[] Parse(string format);
     }
 }

@@ -15,12 +15,15 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
         [TestCase("")]
         public void Render_ShouldReturnCorrectFormattedDateTimeString(string format)
         {
+            //Arrange
             var dateTime = DateTime.Now;
             var parameter = new MessageFormatParameterDateTime();
-
             var expected = dateTime.ToString(format);
+            
+            //Act
             var actual = parameter.Render(dateTime, format).ToString();
             
+            //Assert
             Assert.AreEqual(expected, actual);
         }
     }

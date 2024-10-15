@@ -5,6 +5,8 @@ using OpenMyGame.LoggerUnity.Editor.Base.Styles;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Components;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.Models;
 using OpenMyGame.LoggerUnity.Editor.LoggerWindow.ViewConfig;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -45,13 +47,13 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
             _searchField = new LoggerWindowSearchField(SearchFilterChanged);
             
             var logLevelsGroup = new HorizontalFlex(Justify.Center,
-                    new LoggerWindowToggle("Fatal", FatalColor, 
+                    new LoggerWindowToggle(TagViewModel.Colorized("Fatal", FatalColor), 
                         (_, e) => OnLogLevelClick("Fatal", e)),
-                    new LoggerWindowToggle("Error", ErrorColor, 
+                    new LoggerWindowToggle(TagViewModel.Colorized("Error", ErrorColor), 
                         (_, e) => OnLogLevelClick("Error", e)),
-                    new LoggerWindowToggle("Warning", WarningColor,
+                    new LoggerWindowToggle(TagViewModel.Colorized("Warning", WarningColor),
                         (_, e) => OnLogLevelClick("Warning", e)),
-                    new LoggerWindowToggle("Debug", DebugColor,
+                    new LoggerWindowToggle(TagViewModel.Colorized("Debug", DebugColor),
                         (_, e) => OnLogLevelClick("Debug", e)))
                 .WithStyle(x => x.height = LoggerWindowConstantStyles.ToolbarHeight)
                 .WithStyle(x => x.marginTop = 1);

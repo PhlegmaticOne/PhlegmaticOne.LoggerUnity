@@ -1,11 +1,11 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Editor.Base.Controls;
-using OpenMyGame.LoggerUnity.Tagging;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
     internal interface ITagControlFactory
     {
-        LoggerWindowToggle CreateTagControl(LogTag tag, Action<LoggerWindowToggle, bool> onClick);
+        LoggerWindowToggle CreateTagControl(TagViewModel tag, Action<LoggerWindowToggle, bool> onClick);
     }
 }

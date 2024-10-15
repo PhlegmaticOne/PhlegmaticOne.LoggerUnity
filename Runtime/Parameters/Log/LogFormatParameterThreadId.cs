@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Threading;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
+    [Serializable]
+    [SerializeReferenceDropdownName(KeyParameter)]
     internal class LogFormatParameterThreadId : ILogFormatParameter
     {
-        public string Key => "ThreadId";
+        public const string KeyParameter = "ThreadId";
+        public string Key => KeyParameter;
         
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, Span<object> parameters)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
         {
             return Thread.CurrentThread.ManagedThreadId.ToString();
         }

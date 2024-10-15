@@ -2,15 +2,15 @@
 {
     internal readonly struct TagClickEventArgs
     {
-        public static TagClickEventArgs Empty => new(string.Empty, false);
+        public static TagClickEventArgs Empty => new(null, false);
         
-        public TagClickEventArgs(string tag, bool isActive)
+        public TagClickEventArgs(TagViewModel viewModel, bool isActive)
         {
-            Tag = tag;
+            ViewModel = viewModel;
             IsActive = isActive;
         }
 
-        public string Tag { get; }
+        public TagViewModel ViewModel { get; }
         public bool IsActive { get; }
     }
 }

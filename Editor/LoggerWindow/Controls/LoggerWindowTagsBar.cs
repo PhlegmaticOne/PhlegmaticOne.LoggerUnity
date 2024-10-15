@@ -3,6 +3,7 @@ using OpenMyGame.LoggerUnity.Editor.Base.Controls;
 using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
 using OpenMyGame.LoggerUnity.Editor.Base.Styles;
 using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -28,14 +29,14 @@ namespace OpenMyGame.LoggerUnity.Editor.LoggerWindow.Controls
             _tagsBar.Add(CreateTagElement(tag));
         }
 
-        private void OnTagClicked(string tag, bool isActive)
+        private void OnTagClicked(TagViewModel tag, bool isActive)
         {
             TagClicked?.Invoke(new TagClickEventArgs(tag, isActive));
         }
 
         private ToolbarToggle CreateTagElement(string tag)
         {
-            return new LoggerWindowToggle(tag, Color.white, (toggle, e) => OnTagClicked(tag, e))
+            return new LoggerWindowToggle(TagViewModel.Colorized(tag, Color.white), (toggle, e) => OnTagClicked(toggle.ViewModel, e))
                 .WithStyle(x => x.AddMargin(1))
                 .WithStyle(x => x.height = LoggerWindowConstantStyles.ToolbarHeight);
         }

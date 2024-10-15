@@ -1,81 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration.Logger;
+using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
+using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
+using OpenMyGame.LoggerUnity.Messages.Factories;
+using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
-using OpenMyGame.LoggerUnity.Parameters.Processors;
-using OpenMyGame.LoggerUnity.Parameters.Processors.Colors;
-using OpenMyGame.LoggerUnity.Parameters.Processors.Colors.ViewConfig;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
-using OpenMyGame.LoggerUnity.Parsing.Factories;
-using OpenMyGame.LoggerUnity.Tagging.Providers;
 
 namespace OpenMyGame.LoggerUnity
 {
+    /// <summary>
+    /// Конфигурирует создаваемый логгер
+    /// </summary>
     public class LoggerBuilder
     {
         private readonly List<ILogDestination> _loggerDestinations;
-        private readonly Dictionary<Type, IMessageFormatParameter> _formatProperties;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
+        private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
 
-        private IParameterColorsViewConfig _parameterColorsViewConfig;
-        private IParameterPostRenderProcessor _postRenderProcessor;
-        private bool _isCacheFormats;
+        private bool _isExtractStackTraces;
         private string _tagFormat;
         private bool _isEnabled;
 
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _formatProperties = LoggerStaticData.MessageFormatParameters;
-            _isEnabled = LoggerStaticData.IsEnabled;
-            _isCacheFormats = LoggerStaticData.IsCacheFormats;
             _tagFormat = LoggerStaticData.TagFormat;
-            _parameterSerializer = new MessageFormatParameterSerializer();
-            _postRenderProcessor = new ParameterPostRenderProcessor();
-            _parameterColorsViewConfig = new ParameterColorsViewConfigRandom();
+            _isEnabled = LoggerStaticData.IsEnabled;
+            _isExtractStackTraces = LoggerStaticData.IsExtractStacktrace;
+            _formatParameters = LoggerStaticData.MessageFormatParameters;
+            _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
         }
 
-        public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
+        /// <summary>
+        /// Создает логгер, используя конфигурацию
+        /// </summary>
+        public static ILogger FromConfig(LoggerConfig loggerConfig)
         {
-            if (formatParameter is not null)
-            {
-                _formatProperties[formatParameter.PropertyType] = formatParameter;
-            }
-            
+            var builder = new LoggerBuilder();
+            loggerConfig.Build(builder);
+            return builder.CreateLogger();
+        }
+
+        /// <summary>
+        /// Устанавливает будет ли происходить логгирование или нет
+        /// </summary>
+        /// <remarks>Дефолтный параметр - <b>true</b></remarks>
+        /// <param name="isEnabled">Активность логгирования</param>
+        public LoggerBuilder SetEnabled(bool isEnabled)
+        {
+            _isEnabled = isEnabled;
             return this;
         }
 
+        /// <summary>
+        /// Устанавливает формат для тегов (необходимо чтобы тег имел параметр <b>{Tag}</b>)
+        /// </summary>
+        /// <remarks>Дефолтный параметр - <b>#{Tag}#</b></remarks>
+        /// <param name="tagFormat">Формат для тегов</param>
         public LoggerBuilder SetTagFormat(string tagFormat)
         {
             _tagFormat = tagFormat;
             return this;
         }
 
-        public LoggerBuilder SetEnabled(bool isEnabled)
+        /// <summary>
+        /// Устанавливает будет ли формироваться стектрейс для сообщения
+        /// </summary>
+        /// <remarks>Дефолтный параметр - <b>false</b></remarks>
+        /// <param name="isExtractStackTraces">Активность формирования стектрейса</param>
+        public LoggerBuilder SetIsExtractStackTraces(bool isExtractStackTraces)
         {
-            _isEnabled = isEnabled;
-            return this;
-        }
-        
-        public LoggerBuilder SetIsCacheFormats(bool isCacheFormats)
-        {
-            _isCacheFormats = isCacheFormats;
+            _isExtractStackTraces = isExtractStackTraces;
             return this;
         }
 
-        public LoggerBuilder ColorizeParameters(IParameterColorsViewConfig parameterColorsViewConfig)
+        /// <summary>
+        /// Добавляет кастомный форматтер объекта в логгируемом сообщении
+        /// </summary>
+        public LoggerBuilder AddMessageFormatParameter(IMessageFormatParameter formatParameter)
         {
-            if (parameterColorsViewConfig is not null)
+            if (formatParameter is not null)
             {
-                _parameterColorsViewConfig = parameterColorsViewConfig;
-                _postRenderProcessor = new ParameterPostRenderProcessorColorize(parameterColorsViewConfig);
+                _formatParameters[formatParameter.PropertyType] = formatParameter;
             }
             
             return this;
         }
 
+        /// <summary>
+        /// Добавляет новый логгер в коллекцию логгеров (<see cref="ILogDestination"/>)
+        /// </summary>
+        /// <param name="configureDestinationAction">Метод для конфигурации приемника логов</param>
         public LoggerBuilder LogTo<TDestination, TConfiguration>(
             Action<TConfiguration> configureDestinationAction = null)
             where TConfiguration : LogConfiguration, new()
@@ -83,6 +103,11 @@ namespace OpenMyGame.LoggerUnity
         {
             var configuration = new TConfiguration();
             configureDestinationAction?.Invoke(configuration);
+            
+            if (!configuration.Platform.HasFlag(LoggerPlatformProvider.GetPlatform()))
+            {
+                return this;
+            }
             
             _loggerDestinations.Add(new TDestination
             {
@@ -92,29 +117,40 @@ namespace OpenMyGame.LoggerUnity
             return this;
         }
 
+        /// <summary>
+        /// Создает сконфигурированный логгер (<see cref="ILogger"/>)
+        /// </summary>
         public ILogger CreateLogger()
         {
-            ILogger logger = new Logger(_loggerDestinations, GetParser(), GetLogWithTagProvider())
-            {
-                IsEnabled = _isEnabled
-            };
+            ILogger logger = new Logger(
+                _loggerDestinations, GetParser(), GetLogTagProvider(), GetConfigurationParameters(), GetMessageFactory());
+            
+            logger.IsEnabled = _isEnabled;
             
             logger.Initialize();
             
             return logger;
         }
 
-        private ILogTagProvider GetLogWithTagProvider()
+        private ILogTagProvider GetLogTagProvider()
         {
-            return new LogTagProvider(_tagFormat, _parameterColorsViewConfig);
+            return new LogTagProvider(_tagFormat);
         }
 
-        private IMessageFormatParser GetParser()
+        private static IMessageFormatParser GetParser()
         {
-            var messageFormatFactory = new MessageFormatFactoryLogMessage(
-                _formatProperties, _parameterSerializer, _postRenderProcessor);
-            var messageFormatParser = new MessageFormatParser(messageFormatFactory);
-            return _isCacheFormats ? new MessageFormatParserCached(messageFormatParser) : messageFormatParser;
+            return new MessageFormatParserCached(new MessageFormatParser());
+        }
+
+        private LoggerConfigurationParameters GetConfigurationParameters()
+        {
+            var poolProvider = new PoolProvider(true);
+            return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer, poolProvider);
+        }
+
+        private ILogMessageFactory GetMessageFactory()
+        {
+            return new LogMessageFactory(_isExtractStackTraces, startStacktraceDepthLevel: 5);
         }
     }
 }

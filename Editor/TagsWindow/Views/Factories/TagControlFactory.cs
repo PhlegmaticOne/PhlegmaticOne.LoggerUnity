@@ -1,16 +1,16 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Editor.Base.Controls;
 using OpenMyGame.LoggerUnity.Editor.Base.Extensions;
 using OpenMyGame.LoggerUnity.Editor.Base.Styles;
-using OpenMyGame.LoggerUnity.Tagging;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Models;
+using OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Components;
 
 namespace OpenMyGame.LoggerUnity.Editor.TagsWindow.Views.Factories
 {
     internal class TagControlFactory : ITagControlFactory
     {
-        public LoggerWindowToggle CreateTagControl(LogTag tag, Action<LoggerWindowToggle, bool> onClick)
+        public LoggerWindowToggle CreateTagControl(TagViewModel tag, Action<LoggerWindowToggle, bool> onClick)
         {
-            return new LoggerWindowToggle(tag.Tag, tag.Color, onClick)
+            return new LoggerWindowToggle(tag, onClick)
                 .WithStyle(x => x.AddMargin(1))
                 .WithStyle(x => x.height = LoggerWindowConstantStyles.ToolbarHeight);
         }
