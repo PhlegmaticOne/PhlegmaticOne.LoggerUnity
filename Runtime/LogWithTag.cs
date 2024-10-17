@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Diagnostics;
+using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity
 {
-    /// <summary>
-    /// Класс предназначен для логгирования сообщения с заданным тегом
-    /// </summary>
-    public class LogWithTag
+    public readonly struct LogWithTag
     {
+        private const string FormatParameterName = "format";
+        
         private readonly string _tag;
 
-        /// <summary>
-        /// Создает объект для логгирования с заданным тегом
-        /// </summary>
         public LogWithTag(string tag)
         {
             _tag = tag;
         }
 
-        /// <summary>
-        /// Логгирует исключение с заданным тегом
-        /// </summary>
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Exception(Exception exception)
         {
@@ -32,9 +26,142 @@ namespace OpenMyGame.LoggerUnity
                 .Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
         
-        /// <summary>
-        /// Создает сообщение с уровнем логгирования <b>Debug</b> и заданным тегом
-        /// </summary>
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Debug(string message)
+        {
+            DebugMessage().Log(message);
+        }
+        
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Debug<T>(string format, T parameter1)
+        {
+            DebugMessage().Log(format, parameter1);
+        }
+        
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Debug<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            DebugMessage().Log(format, parameter1, parameter2);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Debug<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            DebugMessage().Log(format, parameter1, parameter2, parameter3);
+        }
+        
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Debug(string format, params object[] parameters)
+        {
+            DebugMessage().Log(format, parameters);
+        }
+        
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Warning(string message)
+        {
+            WarningMessage().Log(message);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Warning<T>(string format, T parameter1)
+        {
+            WarningMessage().Log(format, parameter1);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Warning<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            WarningMessage().Log(format, parameter1, parameter2);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Warning<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            WarningMessage().Log(format, parameter1, parameter2, parameter3);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Warning(string format, params object[] parameters)
+        {
+            WarningMessage().Log(format, parameters);
+        }
+        
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Error(string message)
+        {
+            ErrorMessage().Log(message);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Error<T>(string format, T parameter1)
+        {
+            ErrorMessage().Log(format, parameter1);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Error<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            ErrorMessage().Log(format, parameter1, parameter2);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Error<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            ErrorMessage().Log(format, parameter1, parameter2, parameter3);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Error(string format, params object[] parameters)
+        {
+            ErrorMessage().Log(format, parameters);
+        }
+        
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Fatal(string message)
+        {
+            FatalMessage().Log(message);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Fatal<T>(string format, T parameter1)
+        {
+            FatalMessage().Log(format, parameter1);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Fatal<T1, T2>(string format, T1 parameter1, T2 parameter2)
+        {
+            FatalMessage().Log(format, parameter1, parameter2);
+        }
+
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Fatal<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
+        {
+            FatalMessage().Log(format, parameter1, parameter2, parameter3);
+        }
+        
+        [MessageTemplateFormatMethod(FormatParameterName)]
+        [Conditional(LoggerStaticData.ConditionalName)]
+        public void Fatal(string format, params object[] parameters)
+        {
+            ErrorMessage().Log(format, parameters);
+        }
+
         public LogMessage DebugMessage()
         {
             return Log.Logger
@@ -42,9 +169,6 @@ namespace OpenMyGame.LoggerUnity
                 .WithTag(_tag);
         }
 
-        /// <summary>
-        /// Создает сообщение с уровнем логгирования <b>Warning</b> и заданным тегом
-        /// </summary>
         public LogMessage WarningMessage()
         {
             return Log.Logger
@@ -52,9 +176,6 @@ namespace OpenMyGame.LoggerUnity
                 .WithTag(_tag);
         }
 
-        /// <summary>
-        /// Создает сообщение с уровнем логгирования <b>Error</b> и заданным тегом
-        /// </summary>
         public LogMessage ErrorMessage()
         {
             return Log.Logger
@@ -62,9 +183,6 @@ namespace OpenMyGame.LoggerUnity
                 .WithTag(_tag);
         }
 
-        /// <summary>
-        /// Создает сообщение с уровнем логгирования <b>Fatal</b> и заданным тегом
-        /// </summary>
         public LogMessage FatalMessage()
         {
             return Log.Logger

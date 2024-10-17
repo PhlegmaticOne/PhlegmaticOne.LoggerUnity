@@ -8,13 +8,19 @@ namespace OpenMyGame.LoggerUnity.Messages
     /// <summary>
     /// Класс сообщения, используемый при логгировании
     /// </summary>
-    public partial class LogMessage
+    public partial struct LogMessage
     {
         private readonly ILogger _logger;
 
         internal LogMessage(LogLevel logLevel = LogLevel.Debug)
         {
             LogLevel = logLevel;
+            _logger = null;
+            Id = 0;
+            Stacktrace = null;
+            Exception = null;
+            Format = null;
+            Tag = null;
         }
 
         public LogMessage(int id, LogLevel logLevel, LogStacktrace stacktrace, ILogger logger)
@@ -23,6 +29,9 @@ namespace OpenMyGame.LoggerUnity.Messages
             LogLevel = logLevel;
             Stacktrace = stacktrace;
             _logger = logger;
+            Exception = null;
+            Format = null;
+            Tag = null;
         }
         
         /// <summary>

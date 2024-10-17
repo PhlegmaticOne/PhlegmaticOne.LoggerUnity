@@ -28,19 +28,19 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
 
         private void Start()
         {
-            Log.DebugMessage().Log("Debug current time: {Time}", DateTime.Now);
-            Log.WarningMessage().Log("Warning current time: {Time}", DateTime.Now);
-            Log.ErrorMessage().Log("Error current time: {Time}", DateTime.Now);
-            Log.FatalMessage().Log("Fatal current time: {Time}", DateTime.Now);
+            Log.Debug("Debug current time: {Time}", DateTime.Now);
+            Log.Warning("Warning current time: {Time}", DateTime.Now);
+            Log.Error("Error current time: {Time}", DateTime.Now);
+            Log.Fatal("Fatal current time: {Time}", DateTime.Now);
             
-            Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", DateTime.Now);
-            Log.WarningMessage().WithTag("Time").Log("Warning current time with tag: {Time}", DateTime.Now);
-            Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
-            Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
+            Log.WithTag("Time").Debug("Debug current time with tag: {Time}", DateTime.Now);
+            Log.WithTag("Time").Warning("Warning current time with tag: {Time}", DateTime.Now);
+            Log.WithTag("Time").Error("Error current time with tag: {Time}", DateTime.Now);
+            Log.WithTag("Time").Fatal("Fatal current time with tag: {Time}", DateTime.Now);
             
             LogWithTag();
             
-            Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
+            Log.Debug("Debug complex object: {@Value}", new { Value = 5 });
 
             var systemException = new Exception("System failed");
             Log.FatalMessage()
@@ -63,11 +63,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
         private static void LogWithTag()
         {
             var logWithTag = new LogWithTag("Time");
-            
-            logWithTag
-                .DebugMessage()
-                .Log("Debug current time with log with tag: {Time}", DateTime.Now);
-            
+            logWithTag.Debug("Debug current time with log with tag: {Time}", DateTime.Now);
             logWithTag.Exception(new Exception("LogWithTag exception"));
         }
     }

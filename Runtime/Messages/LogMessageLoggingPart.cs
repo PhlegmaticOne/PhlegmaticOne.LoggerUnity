@@ -7,7 +7,7 @@ using OpenMyGame.LoggerUnity.Infrastructure.InlineArrays;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {
-    public partial class LogMessage
+    public partial struct LogMessage
     {
         private const string FormatParameterName = "format";
         
