@@ -14,7 +14,7 @@ namespace OpenMyGame.LoggerUnity
     /// </summary>
     internal class Logger : ILogger
     {
-        private readonly IReadOnlyList<ILogDestination> _logDestinations;
+        private readonly List<ILogDestination> _logDestinations;
         private readonly IMessageFormatParser _messageFormatParser;
         private readonly LoggerConfigurationParameters _configurationParameters;
         private readonly ILogMessageFactory _messageFactory;
@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity
         public event Action<LogMessage> MessageLogged;
         
         public Logger(
-            IReadOnlyList<ILogDestination> logDestinations, 
+            List<ILogDestination> logDestinations, 
             IMessageFormatParser messageFormatParser,
             ILogTagProvider logTagProvider,
             LoggerConfigurationParameters configurationParameters,
