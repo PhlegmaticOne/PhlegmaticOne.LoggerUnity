@@ -22,7 +22,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
                 Configuration.MessagePartFormat, configurationParameters.PoolProvider);
         }
 
-        protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters)
+        protected override void LogRenderedMessage(in LogMessage logMessage, string renderedMessage, Span<object> parameters)
         {
             var logType = LogLevelToLogTypeConverter.Convert(logMessage.LogLevel);
             

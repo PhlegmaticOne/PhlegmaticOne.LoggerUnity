@@ -13,7 +13,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
         public const string KeyParameter = "NewLine";
         public string Key => KeyParameter;
         
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage)
+        public ReadOnlySpan<char> GetValue(MessagePart messagePart, in LogMessage message, string renderedMessage)
         {
             return Environment.NewLine;
         }

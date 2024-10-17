@@ -8,8 +8,8 @@ namespace OpenMyGame.LoggerUnity.Base
     {
         bool IsEnabled { get; set; }
         string DestinationName { get; }
-        bool CanLogMessage(LogMessage logMessage);
+        bool CanLogMessage(in LogMessage logMessage);
         void Initialize(LoggerConfigurationParameters configurationParameters);
-        string LogMessage(LogMessage message, MessagePart[] messageParts, Span<object> parameters);
+        string LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters);
     }
 }

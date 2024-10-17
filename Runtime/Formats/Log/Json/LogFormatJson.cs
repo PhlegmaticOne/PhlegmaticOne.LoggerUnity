@@ -36,7 +36,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.Json
             _logFormatParameters = logFormatParameters;
         }
         
-        public string Render(LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters)
+        public string Render(in LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters)
         {
             var resultObject = new JObject();
             RenderLogMessage(logMessage, renderedMessage, resultObject);
@@ -45,7 +45,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.Json
             return resultObject.ToString();
         }
         
-        private void RenderLogMessage(LogMessage logMessage, string renderedMessage, JObject resultObject)
+        private void RenderLogMessage(in LogMessage logMessage, string renderedMessage, JObject resultObject)
         {
             var destination = _poolProvider.Get<StringBuilderPoolable>();
             
@@ -71,7 +71,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.Json
             _poolProvider.Return(destination);
         }
 
-        private void RenderStacktrace(LogMessage logMessage, JObject resultObject)
+        private void RenderStacktrace(in LogMessage logMessage, JObject resultObject)
         {
             if (_appendStacktraceToRenderingMessage && 
                 logMessage.Stacktrace.TryGetUserCodeStacktrace(out var userCodeStacktrace))

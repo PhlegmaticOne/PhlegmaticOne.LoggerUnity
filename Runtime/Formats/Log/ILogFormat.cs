@@ -13,6 +13,6 @@ namespace OpenMyGame.LoggerUnity.Formats.Log
         /// <param name="renderedMessage">Отрендеренное сообщение</param>
         /// <param name="messageParts">Части сообщения</param>
         /// <param name="parameters">Параметры для подстановки</param>
-        string Render(LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters);
+        string Render(in LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters);
     }
 }

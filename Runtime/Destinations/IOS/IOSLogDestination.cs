@@ -29,7 +29,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
         public override string DestinationName => LogDestinationsSupported.IOS;
 
         protected override void LogRenderedMessage(
-            LogMessage logMessage, string renderedMessage, Span<object> parameters)
+            in LogMessage logMessage, string renderedMessage, Span<object> parameters)
         {
 #if UNITY_IOS && !UNITY_EDITOR
             LogMessageInMainThread(logMessage, renderedMessage).Forget();

@@ -12,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Base
         ILogTagProvider LogTagProvider { get; }
         void Initialize();
         LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel);
-        void LogMessage(LogMessage logMessage, Span<object> parameters);
+        void LogMessage(in LogMessage logMessage, in Span<object> parameters);
         void SetDestinationEnabled(string destinationName, bool isEnabled);
     }
 }

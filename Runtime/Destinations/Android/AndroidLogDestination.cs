@@ -25,7 +25,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
 #endif
         }
 
-        protected override void LogRenderedMessage(LogMessage logMessage, string renderedMessage, Span<object> parameters)
+        protected override void LogRenderedMessage(in LogMessage logMessage, string renderedMessage, Span<object> parameters)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             if (_androidLogger is null)

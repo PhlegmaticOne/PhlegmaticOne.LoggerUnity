@@ -20,6 +20,6 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
         /// <param name="messagePart">Часть сообщения с названием параметра и форматом</param>
         /// <param name="message">Объект логгируемого сообщение</param>
         /// <param name="renderedMessage">Отрендеренное сообщение</param>
-        ReadOnlySpan<char> GetValue(MessagePart messagePart, LogMessage message, string renderedMessage);
+        ReadOnlySpan<char> GetValue(MessagePart messagePart, in LogMessage message, string renderedMessage);
     }
 }

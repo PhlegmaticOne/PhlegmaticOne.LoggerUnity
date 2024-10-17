@@ -31,7 +31,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             _poolProvider = poolProvider;
         }
         
-        public string Render(LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters)
+        public string Render(in LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters)
         {
             var destination = _poolProvider.Get<StringBuilderPoolable>();
             RenderLogMessage(logMessage, renderedMessage, destination);
@@ -41,7 +41,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             return result;
         }
 
-        private void RenderLogMessage(LogMessage logMessage, string renderedMessage, StringBuilderPoolable logBuilder)
+        private void RenderLogMessage(in LogMessage logMessage, string renderedMessage, StringBuilderPoolable logBuilder)
         {
             foreach (var messagePart in _messageParts)
             {
@@ -58,7 +58,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             }
         }
 
-        private void TryAppendStacktrace(StringBuilderPoolable destination, LogMessage logMessage)
+        private void TryAppendStacktrace(StringBuilderPoolable destination, in LogMessage logMessage)
         {
             if (_appendStacktraceToRenderingMessage && 
                 logMessage.Stacktrace.TryGetUserCodeStacktrace(out var userCodeStacktrace))
@@ -72,7 +72,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             }
         }
 
-        private ReadOnlySpan<char> Render(MessagePart messagePart, LogMessage message, string renderedMessage)
+        private ReadOnlySpan<char> Render(in MessagePart messagePart, in LogMessage message, string renderedMessage)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out _);
             var property = _logFormatParameters.GetValueOrDefault(parameterValue.ToString());

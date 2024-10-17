@@ -73,7 +73,7 @@ namespace OpenMyGame.LoggerUnity
             return _messageFactory.CreateMessage(logLevel, stacktraceDepthLevel);
         }
 
-        public void LogMessage(LogMessage logMessage, Span<object> parameters)
+        public void LogMessage(in LogMessage logMessage, in Span<object> parameters)
         {
             if (!IsEnabled)
             {
@@ -137,7 +137,7 @@ namespace OpenMyGame.LoggerUnity
         }
 
         private void OnMessageToDestinationLogged(
-            LogMessage logMessage, string renderedMessage, ILogDestination loggerDestination)
+            in LogMessage logMessage, string renderedMessage, ILogDestination loggerDestination)
         {
             var args = new LogMessageDestinationLoggedEventArgs(
                 logMessage, renderedMessage, loggerDestination.DestinationName);
