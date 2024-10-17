@@ -21,7 +21,7 @@
 
 Пример: ```"Debug current time: {Time}"``` - формат с одним параметром ```Time```, в который будет подставлено любое указанное значение в процессе логгирования
 
-Соответственно логгирование будет выглядеть примерно так: ```Log.DebugMessage().Log("Debug current time: {Time}", DateTime.Now)```
+Соответственно логгирование будет выглядеть примерно так: ```Log.Debug("Debug current time: {Time}", DateTime.Now)```
 
 ## <b>Самое простое создание логгера для логгирования в ```Debug```</b>
 
@@ -221,11 +221,11 @@ Log.Logger = new LoggerBuilder()
 
 Сообщения можно выводить с тегами
 
-Для этого необходимо вызвать метод ```LogMessage.WithTag("Tag")```, который установит тег в сообщение.
+Для этого необходимо вызвать метод ```Log.WithTag("Tag")```, который установит тег в сообщение.
 Пример:
 
 ```csharp
-Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", DateTime.Now);
+Log.WithTag("Time").Debug("Debug current time with tag: {Time}", DateTime.Now);
 ```
 
 Также можно создать экземпляр класса ```LogWithTag```, в конструктор которого можно передать тег, который проставится в сообщение при его создании.
@@ -233,9 +233,7 @@ Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", Da
 
 ```csharp
 var logWithTag = new LogWithTag("Time");
-logWithTag
-    .DebugMessage()
-    .Log("Debug current time with log with tag: {Time}", DateTime.Now);
+logWithTag.Debug("Debug current time with log with tag: {Time}", DateTime.Now);
 ```
 
 При этом в финальный формат сообщения в начало добавится формат тега, который был указан при конфигурации логгера.
@@ -243,7 +241,7 @@ logWithTag
 
 ### Теги в Editor
 
-В Editor'е теги добавляются в начало сообщения, а также в окно с тегами, которое может быть закреплено внизу окна с логами для быстрой фильтрации по одному тегу.
+В Editor'е теги добавляются в начало сообщения.
 
 Пример приведен на скриншоте:
 
@@ -317,15 +315,15 @@ Log.Logger = new LoggerBuilder()
 ## Пример логгирования сообщений
 
 ```csharp
-Log.DebugMessage().Log("Debug current time: {Time}", DateTime.Now);
-Log.WarningMessage().Log("Warning current time: {Time}", DateTime.Now);
-Log.ErrorMessage().Log("Error current time: {Time}", DateTime.Now);
-Log.FatalMessage().Log("Fatal current time: {Time}", DateTime.Now);
+Log.Debug("Debug current time: {Time}", DateTime.Now);
+Log.Warning("Warning current time: {Time}", DateTime.Now);
+Log.Error("Error current time: {Time}", DateTime.Now);
+Log.Fatal("Fatal current time: {Time}", DateTime.Now);
 
-Log.DebugMessage().WithTag("Time").Log("Debug current time with tag: {Time}", DateTime.Now);
-Log.WarningMessage().WithTag("Time").Log("Warning current time with tag: {Time}", DateTime.Now);
-Log.ErrorMessage().WithTag("Time").Log("Error current time with tag: {Time}", DateTime.Now);
-Log.FatalMessage().WithTag("Time").Log("Fatal current time with tag: {Time}", DateTime.Now);
+Log.WithTag("Time").Debug("Debug current time with tag: {Time}", DateTime.Now);
+Log.WithTag("Time").Warning("Warning current time with tag: {Time}", DateTime.Now);
+Log.WithTag("Time").Error("Error current time with tag: {Time}", DateTime.Now);
+Log.WithTag("Time").Fatal("Fatal current time with tag: {Time}", DateTime.Now);
 
-Log.DebugMessage().Log("Debug complex object: {@Value}", new { Value = 5 });
+Log.Debug("Debug complex object: {@Value}", new { Value = 5 });
 ```
