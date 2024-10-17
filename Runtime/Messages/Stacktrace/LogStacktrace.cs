@@ -5,7 +5,7 @@ namespace OpenMyGame.LoggerUnity.Messages.Stacktrace
     /// <summary>
     /// Обертка над стектрейсом сообщения
     /// </summary>
-    public class LogStacktrace
+    public readonly struct LogStacktrace
     {
         private readonly string _stacktrace;
         private readonly int _userCodeStacktraceStartPosition;

@@ -22,7 +22,7 @@ namespace OpenMyGame.LoggerUnity.Messages
                 return;
             }
             
-            if (Tag is null)
+            if (!Tag.HasValue())
             {
                 Format = format;
                 _logger.LogMessage(this, Span<object>.Empty);
@@ -44,7 +44,7 @@ namespace OpenMyGame.LoggerUnity.Messages
                 return;
             }
             
-            if (Tag is null)
+            if (!Tag.HasValue())
             {
                 LogPrivate(format, parameter1);
                 return;
@@ -65,7 +65,7 @@ namespace OpenMyGame.LoggerUnity.Messages
                 return;
             }
             
-            if (Tag is null)
+            if (!Tag.HasValue())
             {
                 LogPrivate(format, parameter1, parameter2);
                 return;
@@ -86,7 +86,7 @@ namespace OpenMyGame.LoggerUnity.Messages
                 return;
             }
             
-            if (Tag is null)
+            if (!Tag.HasValue())
             {
                 LogPrivate(format, parameter1, parameter2, parameter3);
                 return;
@@ -107,7 +107,7 @@ namespace OpenMyGame.LoggerUnity.Messages
                 return;
             }
             
-            if (Tag is null)
+            if (!Tag.HasValue())
             {
                 Format = format;
                 _logger.LogMessage(this, parameters);

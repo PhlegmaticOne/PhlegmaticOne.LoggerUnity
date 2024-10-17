@@ -5,10 +5,12 @@ using UnityEngine;
 namespace OpenMyGame.LoggerUnity.Messages.Tagging
 {
     [Serializable]
-    public class LogTag : IEquatable<LogTag>
+    public struct LogTag : IEquatable<LogTag>
     {
         public const string TagKey = "Tag";
 
+        public static LogTag Empty => new(string.Empty, false, Color.white);
+        
         public static LogTag Colorized(string tag, Color color)
         {
             return new LogTag(tag, true, color);
@@ -35,18 +37,20 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
             Color = color;
             HasColor = true;
         }
+
+        public bool HasValue()
+        {
+            return !string.IsNullOrEmpty(Value);
+        }
         
         public bool Equals(LogTag other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
             return Value == other.Value;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
             return obj.GetType() == GetType() && Equals((LogTag)obj);
         }
 

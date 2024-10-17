@@ -17,10 +17,10 @@ namespace OpenMyGame.LoggerUnity.Messages
             LogLevel = logLevel;
             _logger = null;
             Id = 0;
-            Stacktrace = null;
+            Stacktrace = LogStacktrace.Empty;
             Exception = null;
             Format = null;
-            Tag = null;
+            Tag = LogTag.Empty;
         }
 
         public LogMessage(int id, LogLevel logLevel, LogStacktrace stacktrace, ILogger logger)
@@ -31,7 +31,7 @@ namespace OpenMyGame.LoggerUnity.Messages
             _logger = logger;
             Exception = null;
             Format = null;
-            Tag = null;
+            Tag = LogTag.Empty;
         }
         
         /// <summary>
@@ -70,7 +70,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         /// <returns><b>true</b> - тег есть, <b>false</b> - нет</returns>
         public bool HasTag()
         {
-            return Tag is not null;
+            return Tag.HasValue();
         }
 
         /// <summary>
