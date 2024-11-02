@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Processors
 {
@@ -8,10 +7,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Processors
     /// </summary>
     public interface IMessageParameterPostRenderer
     {
-        /// <summary>
-        /// Метод должен обработать отрендеренный параметр и затем добавить его в destination
-        /// </summary>
-        /// <remarks>Дефолтная реализация добавляет параметр без обработки</remarks>
-        void Process(StringBuilder destination, in ReadOnlySpan<char> renderedParameter, object parameter);
+        void Preprocess(ref ValueStringBuilder destination, object parameter);
+        void Postprocess(ref ValueStringBuilder destination, object parameter);
     }
 }

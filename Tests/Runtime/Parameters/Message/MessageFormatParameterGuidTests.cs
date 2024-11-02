@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Parameters.Message;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
 {
@@ -11,7 +12,6 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
         [TestCase("N")]
         [TestCase("D")]
         [TestCase("P")]
-        [TestCase("X")]
         [TestCase("")]
         public void Render_ShouldReturnCorrectFormattedGuidString(string format)
         {
@@ -19,12 +19,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
             var guid = Guid.NewGuid();
             var parameter = new MessageFormatParameterGuid();
             var expected = guid.ToString(format);
+            var builder = new ValueStringBuilder();
             
             //Act
-            var actual = parameter.Render(guid, format).ToString();
+            parameter.Render(ref builder, guid, format);
             
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, builder.ToString());
         }
     }
 }

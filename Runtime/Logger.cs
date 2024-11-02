@@ -13,7 +13,7 @@ namespace OpenMyGame.LoggerUnity
     /// </summary>
     internal class Logger : ILogger
     {
-        private readonly List<ILogDestination> _logDestinations;
+        private readonly ILogDestination[] _logDestinations;
         private readonly IMessageFormatParser _messageFormatParser;
         private readonly LoggerConfigurationParameters _configurationParameters;
         private readonly ILogMessageFactory _messageFactory;
@@ -24,7 +24,7 @@ namespace OpenMyGame.LoggerUnity
         public event Action<LogMessage> MessageLogged;
         
         public Logger(
-            List<ILogDestination> logDestinations, 
+            ILogDestination[] logDestinations, 
             IMessageFormatParser messageFormatParser,
             LoggerConfigurationParameters configurationParameters,
             ILogMessageFactory messageFactory)
@@ -53,7 +53,7 @@ namespace OpenMyGame.LoggerUnity
                 return;
             }
             
-            foreach (var loggerDestination in _logDestinations)
+            foreach (var loggerDestination in _logDestinations.AsSpan())
             {
                 loggerDestination.Initialize(_configurationParameters);
             }
@@ -75,7 +75,7 @@ namespace OpenMyGame.LoggerUnity
 
             var messageParts = _messageFormatParser.Parse(logMessage.Format);
             
-            foreach (var logDestination in _logDestinations)
+            foreach (var logDestination in _logDestinations.AsSpan())
             {
                 if (logDestination.CanLogMessage(logMessage))
                 {
@@ -93,7 +93,7 @@ namespace OpenMyGame.LoggerUnity
                 return;
             }
             
-            var destination = _logDestinations.FirstOrDefault(x => x.DestinationName == destinationName);
+            var destination = Array.Find(_logDestinations, x => x.DestinationName == destinationName);
 
             if (destination is not null)
             {
@@ -108,7 +108,7 @@ namespace OpenMyGame.LoggerUnity
                 return;
             }
             
-            foreach (var loggerDestination in _logDestinations)
+            foreach (var loggerDestination in _logDestinations.AsSpan())
             {
                 loggerDestination.Dispose();
             }

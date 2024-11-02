@@ -3,6 +3,7 @@ using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
@@ -12,15 +13,17 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
     {
         public const string KeyParameter = "Time";
         public string Key => KeyParameter;
-        
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, in LogMessage message, string renderedMessage)
+
+        public void Render(ref ValueStringBuilder destination, ref ValueStringBuilder renderedMessage, in MessagePart messagePart,
+            in LogMessage message)
         {
             if (messagePart.TryGetFormat(out var format))
             {
-                return DateTime.Now.ToString(format.ToString());
+                destination.Append(DateTime.Now, format);
+                return;
             }
 
-            return DateTime.Now.ToString("G");
+            destination.Append(DateTime.Now);
         }
     }
 }

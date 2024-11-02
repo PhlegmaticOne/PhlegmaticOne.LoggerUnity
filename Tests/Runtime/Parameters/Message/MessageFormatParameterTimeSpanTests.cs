@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Parameters.Message;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
 {
@@ -17,12 +18,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
             var time = TimeSpan.Zero;
             var parameter = new MessageFormatParameterTimeSpan();
             var expected = time.ToString(format);
+            var builder = new ValueStringBuilder();
             
             //Act
-            var actual = parameter.Render(time, format).ToString();
+            parameter.Render(ref builder, time, format);
             
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, builder.ToString());
         }
     }
 }

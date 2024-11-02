@@ -1,10 +1,8 @@
-﻿using System;
-using System.Text;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers;
+﻿using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
-using UnityEngine;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {
@@ -16,22 +14,30 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
         {
             _colorsViewConfig = colorsViewConfig;
         }
-        
-        public void Process(StringBuilder destination, in ReadOnlySpan<char> renderedParameter, object parameter)
+
+        public void Preprocess(ref ValueStringBuilder destination, object parameter)
         {
-            if (parameter is LogTag logTag)
+            if (parameter is LogTag tag)
             {
-                var color = _colorsViewConfig.GetTagColor(logTag.Value);
-                
-                UnityDebugStringColorizer.ColorizeNonHeapAlloc(
-                    destination, in renderedParameter, color,
-                    LogTag.Format.Prefix, LogTag.Format.Postfix);
+                var color = _colorsViewConfig.GetTagColor(tag.Value);
+                destination.AppendColorPrefix(color);
+                destination.Append(LogTag.Format.Prefix);
             }
             else
             {
                 var color = _colorsViewConfig.GetMessageParameterColor(parameter);
-                UnityDebugStringColorizer.ColorizeNonHeapAlloc(destination, in renderedParameter, color);
+                destination.AppendColorPrefix(color);
             }
+        }
+
+        public void Postprocess(ref ValueStringBuilder destination, object parameter)
+        {
+            if (parameter is LogTag)
+            {
+                destination.Append(LogTag.Format.Postfix);
+            }
+            
+            destination.AppendColorPostfix();
         }
     }
 }

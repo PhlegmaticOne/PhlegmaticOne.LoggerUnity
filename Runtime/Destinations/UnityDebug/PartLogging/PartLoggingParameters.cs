@@ -1,55 +1,35 @@
-﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.Base;
+﻿using System;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
 {
-    internal class PartLoggingParameters : IPoolable
+    internal struct PartLoggingParameters
     {
-        private const string MessageId = "MessageId";
-        private const string MessagePart = "MessagePart";
-        private const string PartIndex = "PartIndex";
-        private const string PartsCount = "PartsCount";
+        public const string MessageIdKey = "MessageId";
+        public const string MessagePartKey = "MessagePart";
+        public const string PartIndexKey = "PartIndex";
+        public const string PartsCountKey = "PartsCount";
 
-        private readonly Dictionary<string, object> _parameters;
-        
-        public PartLoggingParameters()
-        {
-            _parameters = new Dictionary<string, object>();
-            Release();
-        }
+        public int MessageId { get; }
+        public int PartsCount { get; }
+        public int PartIndex { get; private set; }
+        public ReadOnlyMemory<char> MessagePart { get; private set; }
 
-        public void SetMessageId(int messageId)
+        public PartLoggingParameters(int messageId, int partsCount)
         {
-            _parameters[MessageId] = messageId;
-        }
-
-        public void SetPartsCount(int partsCount)
-        {
-            _parameters[PartsCount] = partsCount;
+            MessageId = messageId;
+            PartsCount = partsCount;
+            MessagePart = ReadOnlyMemory<char>.Empty;
+            PartIndex = 0;
         }
 
         public void IncrementPartIndex()
         {
-            var partIndex = (int)_parameters[PartIndex];
-            _parameters[PartIndex] = ++partIndex;
+            ++PartIndex;
         }
 
-        public void UpdateMessage(string message)
+        public void UpdateMessage(ReadOnlyMemory<char> message)
         {
-            _parameters[MessagePart] = message;
-        }
-
-        public object GetParameter(string parameterKey)
-        {
-            return _parameters[parameterKey];
-        }
-
-        public void Release()
-        {
-            _parameters[MessageId] = 0;
-            _parameters[MessagePart] = string.Empty;
-            _parameters[PartIndex] = 0;
-            _parameters[PartsCount] = 0;
+            MessagePart = message;
         }
     }
 }

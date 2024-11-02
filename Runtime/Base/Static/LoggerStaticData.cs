@@ -65,6 +65,20 @@ namespace OpenMyGame.LoggerUnity.Base
                 AddMessageFormatProperty(result, new MessageFormatParameterGuid());
                 AddMessageFormatProperty(result, new MessageFormatParameterTag());
                 AddMessageFormatProperty(result, new MessageFormatParameterExceptionPlaceholder());
+                AddMessageFormatProperty(result, new MessageFormatParameterBool());
+                AddMessageFormatProperty(result, new MessageFormatParameterByte());
+                AddMessageFormatProperty(result, new MessageFormatParameterChar());
+                AddMessageFormatProperty(result, new MessageFormatParameterDecimal());
+                AddMessageFormatProperty(result, new MessageFormatParameterDouble());
+                AddMessageFormatProperty(result, new MessageFormatParameterFloat());
+                AddMessageFormatProperty(result, new MessageFormatParameterInt());
+                AddMessageFormatProperty(result, new MessageFormatParameterLong());
+                AddMessageFormatProperty(result, new MessageFormatParameterSByte());
+                AddMessageFormatProperty(result, new MessageFormatParameterShort());
+                AddMessageFormatProperty(result, new MessageFormatParameterTag());
+                AddMessageFormatProperty(result, new MessageFormatParameterUInt());
+                AddMessageFormatProperty(result, new MessageFormatParameterULong());
+                AddMessageFormatProperty(result, new MessageFormatParameterUShort());
                 return result;
             }
         }

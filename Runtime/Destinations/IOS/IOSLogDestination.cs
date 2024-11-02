@@ -1,6 +1,6 @@
-﻿using System;
-using OpenMyGame.LoggerUnity.Base;
+﻿using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
+using SpanUtilities.StringBuilders;
 #if UNITY_IOS && !UNITY_EDITOR
 using Cysharp.Threading.Tasks;
 using System.Runtime.InteropServices;
@@ -28,11 +28,10 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
 
         public override string DestinationName => LogDestinationsSupported.IOS;
 
-        protected override void LogRenderedMessage(
-            in LogMessage logMessage, string renderedMessage, Span<object> parameters)
+        protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {
 #if UNITY_IOS && !UNITY_EDITOR
-            LogMessageInMainThread(logMessage, renderedMessage).Forget();
+            LogMessageInMainThread(logMessage, renderedMessage.ToString()).Forget();
 #endif
         }
         

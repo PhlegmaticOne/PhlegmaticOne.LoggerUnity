@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Formats.Message;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
@@ -28,14 +27,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer(),
-                new PoolProvider(false));
+                new MessageParameterPostRenderer());
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);
             
             //Assert
-            Assert.AreEqual(string.Empty, renderedMessage);
+            Assert.AreEqual(string.Empty, renderedMessage.ToString());
         }
         
         [Test]
@@ -56,14 +54,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer(),
-                new PoolProvider(false));
+                new MessageParameterPostRenderer());
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);
             
             //Assert
-            Assert.AreEqual("Test Value", renderedMessage);
+            Assert.AreEqual("Test Value", renderedMessage.ToString());
         }
         
         [Test]
@@ -84,14 +81,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 LoggerStaticData.MessageFormatParameters,
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer(),
-                new PoolProvider(false));
+                new MessageParameterPostRenderer());
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);
             
             //Assert
-            Assert.AreEqual("Test VALUE", renderedMessage);
+            Assert.AreEqual("Test VALUE", renderedMessage.ToString());
         }
         
         [Test]
@@ -112,14 +108,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer(),
-                new PoolProvider(false));
+                new MessageParameterPostRenderer());
 
             //Act
             var renderedMessage = messageFormat.Render(messageParts, parameters);
             
             //Assert
-            Assert.AreEqual("Test {\"Value\":5,\"Name\":\"Name\"}", renderedMessage);
+            Assert.AreEqual("Test {\"Value\":5,\"Name\":\"Name\"}", renderedMessage.ToString());
         }
     }
 }

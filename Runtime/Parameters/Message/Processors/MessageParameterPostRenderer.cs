@@ -1,13 +1,10 @@
-﻿using System;
-using System.Text;
+﻿using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Processors
 {
     internal class MessageParameterPostRenderer : IMessageParameterPostRenderer
     {
-        public void Process(StringBuilder destination, in ReadOnlySpan<char> renderedParameter, object parameter)
-        {
-            destination.Append(renderedParameter);
-        }
+        public void Preprocess(ref ValueStringBuilder destination, object parameter) { }
+        public void Postprocess(ref ValueStringBuilder destination, object parameter) { }
     }
 }

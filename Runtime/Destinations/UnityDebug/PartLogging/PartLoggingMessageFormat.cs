@@ -1,54 +1,59 @@
-﻿using System.Text;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
+﻿using System;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
 {
     internal class PartLoggingMessageFormat
     {
-        private readonly IPoolProvider _poolProvider;
         private readonly MessagePart[] _messageParts;
         
-        public PartLoggingMessageFormat(string format, IPoolProvider poolProvider)
+        public PartLoggingMessageFormat(string format)
         {
-            _poolProvider = poolProvider;
             var parser = new MessageFormatParser();
             _messageParts = parser.Parse(format);
         }
-
-        public PartLoggingParameters CreateParameters(int messageId, int partsCount)
+        
+        public ValueStringBuilder CreatePart(ref PartLoggingParameters parameters)
         {
-            var parameters = _poolProvider.Get<PartLoggingParameters>();
-            parameters.SetMessageId(messageId);
-            parameters.SetPartsCount(partsCount);
-            return parameters;
-        }
-
-        public string CreatePart(PartLoggingParameters parameters)
-        {
-            var builder = new StringBuilder();
+            var builder = new ValueStringBuilder();
 
             foreach (var messagePart in _messageParts)
             {
+                var value = messagePart.GetValue();
+                
                 if (!messagePart.IsParameter)
                 {
-                    builder.Append(messagePart.GetValue());
+                    builder.Append(value);
+                    continue;
                 }
-                else
+
+                if (value.SequenceEqual(PartLoggingParameters.MessageIdKey))
                 {
-                    var parameterName = messagePart.GetValueAsString();
-                    var parameter = parameters.GetParameter(parameterName);
-                    builder.Append(parameter);
+                    builder.Append(parameters.MessageId);
+                    continue;
+                }
+                
+                if (value.SequenceEqual(PartLoggingParameters.MessagePartKey))
+                {
+                    builder.Append(parameters.MessagePart);
+                    continue;
+                }
+                
+                if (value.SequenceEqual(PartLoggingParameters.PartIndexKey))
+                {
+                    builder.Append(parameters.PartIndex);
+                    continue;
+                }
+                
+                if (value.SequenceEqual(PartLoggingParameters.PartsCountKey))
+                {
+                    builder.Append(parameters.PartsCount);
                 }
             }
             
-            return builder.ToString();
-        }
-
-        public void ReturnParameters(PartLoggingParameters parameters)
-        {
-            _poolProvider.Return(parameters);
+            return builder;
         }
     }
 }

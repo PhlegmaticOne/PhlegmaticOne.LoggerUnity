@@ -2,6 +2,7 @@
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
@@ -9,9 +10,9 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
     [SerializeReferenceDropdownName("Tag")]
     internal class MessageFormatParameterTag : MessageFormatParameter<LogTag>
     {
-        protected override ReadOnlySpan<char> Render(LogTag parameter, in ReadOnlySpan<char> format)
+        protected override void Render(ref ValueStringBuilder destination, LogTag parameter, in ReadOnlySpan<char> format)
         {
-            return parameter.Value;
+            destination.Append(parameter.Value);
         }
     }
 }

@@ -100,8 +100,7 @@ namespace OpenMyGame.LoggerUnity.Base
             return new MessageFormat(
                 configurationParameters.FormatParameters, 
                 configurationParameters.ParameterSerializer,
-                _messageParameterPostRenderer, 
-                configurationParameters.PoolProvider);
+                _messageParameterPostRenderer);
         }
     }
 }

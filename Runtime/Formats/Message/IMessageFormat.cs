@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Formats.Message
 {
@@ -10,6 +11,6 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
         /// </summary>
         /// <param name="messageParts">Части сообщения</param>
         /// <param name="parameters">Параметры для подстановки</param>
-        string Render(MessagePart[] messageParts, Span<object> parameters);
+        ValueStringBuilder Render(MessagePart[] messageParts, Span<object> parameters);
     }
 }

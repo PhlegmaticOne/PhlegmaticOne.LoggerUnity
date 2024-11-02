@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
@@ -8,14 +9,9 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
     [SerializeReferenceDropdownName("DateTime")]
     internal class MessageFormatParameterDateTime : MessageFormatParameter<DateTime>
     {
-        protected override ReadOnlySpan<char> Render(DateTime parameter, in ReadOnlySpan<char> format)
+        protected override void Render(ref ValueStringBuilder destination, DateTime parameter, in ReadOnlySpan<char> format)
         {
-            if (format.IsEmpty)
-            {
-                return parameter.ToString("G");
-            }
-            
-            return parameter.ToString(format.ToString());
+            destination.Append(parameter, format);
         }
     }
 }

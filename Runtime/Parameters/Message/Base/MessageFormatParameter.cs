@@ -1,4 +1,5 @@
 ﻿using System;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
 {
@@ -7,11 +8,14 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
     {
         public Type PropertyType => typeof(T);
         
-        public ReadOnlySpan<char> Render(object parameter, ReadOnlySpan<char> format)
+        public void Render(ref ValueStringBuilder destination, object parameter, ReadOnlySpan<char> format)
         {
-            return parameter is T generic ? Render(generic, format) : ReadOnlySpan<char>.Empty;
+            if (parameter is T generic)
+            {
+                Render(ref destination, generic, format);
+            }
         }
 
-        protected abstract ReadOnlySpan<char> Render(T parameter, in ReadOnlySpan<char> format);
+        protected abstract void Render(ref ValueStringBuilder destination, T parameter, in ReadOnlySpan<char> format);
     }
 }

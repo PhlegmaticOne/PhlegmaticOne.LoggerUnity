@@ -21,8 +21,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             return new LogFormatPlainText(_messageParts,
                 factoryData.CanAppendStacktrace, 
                 factoryData.LogFormatParameters, 
-                factoryData.LogParameterPostRenderer, 
-                factoryData.ConfigurationParameters.PoolProvider);
+                factoryData.LogParameterPostRenderer);
         }
     }
 }
