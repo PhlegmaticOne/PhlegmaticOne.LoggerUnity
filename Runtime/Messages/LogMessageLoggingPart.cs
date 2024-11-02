@@ -4,6 +4,7 @@ using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Infrastructure.InlineArrays;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {
@@ -159,15 +160,15 @@ namespace OpenMyGame.LoggerUnity.Messages
             parameters[3] = parameter4;
             _logger.LogMessage(this, parameters);
         }
-        
-        private string AddTagToFormat(string format)
-        {
-            return _logger.LogTagProvider.AddTagToFormat(format);
-        }
 
         private bool CanLogMessage(string format)
         {
             return _logger is not null && _logger.IsEnabled && !string.IsNullOrEmpty(format);
+        }
+
+        private static string AddTagToFormat(string format)
+        {
+            return LogTag.Format.AddTagToFormat(format);
         }
     }
 }

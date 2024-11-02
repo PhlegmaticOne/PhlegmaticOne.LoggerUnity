@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Helpers
@@ -38,6 +39,21 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.He
             
             //Assert
             Assert.AreEqual(expected, builder.ToString());
+        }
+        
+        [Test]
+        public void ColorizeNonHeapAlloc_ShouldAppendStringWithColorRichTextWrapperToStringBuilderWithPrefixAndPostfix()
+        {
+            //Arrange
+            const string value = "Test";
+            ColorUtility.TryParseHtmlString("#FFFFFF", out var color);
+            var builder = new StringBuilder();
+
+            //Act
+            UnityDebugStringColorizer.ColorizeNonHeapAlloc(builder, value, color, "[#", "#]");
+            
+            //Assert
+            Assert.AreEqual("<color=#FFFFFF>[#Test#]</color>", builder.ToString());
         }
     }
 }

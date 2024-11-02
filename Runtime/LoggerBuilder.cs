@@ -5,7 +5,7 @@ using OpenMyGame.LoggerUnity.Configuration.Logger;
 using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Messages.Factories;
-using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing;
@@ -122,8 +122,10 @@ namespace OpenMyGame.LoggerUnity
         /// </summary>
         public ILogger CreateLogger()
         {
+            LogTag.Format.UpdateFormat(_tagFormat);
+            
             ILogger logger = new Logger(
-                _loggerDestinations, GetParser(), GetLogTagProvider(), GetConfigurationParameters(), GetMessageFactory());
+                _loggerDestinations, GetParser(), GetConfigurationParameters(), GetMessageFactory());
             
             logger.IsEnabled = _isEnabled;
             
@@ -131,12 +133,7 @@ namespace OpenMyGame.LoggerUnity
             
             return logger;
         }
-
-        private ILogTagProvider GetLogTagProvider()
-        {
-            return new LogTagProvider(_tagFormat);
-        }
-
+        
         private static IMessageFormatParser GetParser()
         {
             return new MessageFormatParserCached(new MessageFormatParser());

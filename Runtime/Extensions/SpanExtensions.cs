@@ -6,6 +6,11 @@ namespace OpenMyGame.LoggerUnity.Extensions
     {
         public static void FillString(this in Span<char> span, string value, ref int offset)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                return;
+            }
+            
             var endIndex = offset + value.Length;
             
             for (int i = offset, j = 0; i < endIndex; i++, j++)

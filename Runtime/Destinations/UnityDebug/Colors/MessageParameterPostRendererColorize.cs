@@ -19,11 +19,19 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
         
         public void Process(StringBuilder destination, in ReadOnlySpan<char> renderedParameter, object parameter)
         {
-            var color = parameter is LogTag logTag 
-                ? _colorsViewConfig.GetTagColor(logTag.Value)
-                : _colorsViewConfig.GetMessageParameterColor(parameter);
-            
-            UnityDebugStringColorizer.ColorizeNonHeapAlloc(destination, in renderedParameter, color);
+            if (parameter is LogTag logTag)
+            {
+                var color = _colorsViewConfig.GetTagColor(logTag.Value);
+                
+                UnityDebugStringColorizer.ColorizeNonHeapAlloc(
+                    destination, in renderedParameter, color,
+                    LogTag.Format.Prefix, LogTag.Format.Postfix);
+            }
+            else
+            {
+                var color = _colorsViewConfig.GetMessageParameterColor(parameter);
+                UnityDebugStringColorizer.ColorizeNonHeapAlloc(destination, in renderedParameter, color);
+            }
         }
     }
 }

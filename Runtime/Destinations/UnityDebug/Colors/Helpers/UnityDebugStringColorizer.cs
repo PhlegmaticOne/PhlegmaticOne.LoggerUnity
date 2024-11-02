@@ -30,5 +30,24 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers
 
             destination.Append(result);
         }
+        
+        public static void ColorizeNonHeapAlloc(
+            StringBuilder destination, in ReadOnlySpan<char> renderedValue, in Color color, string prefix, string postfix)
+        {
+            var offset = 0;
+            var colorString = ColorUtility.ToHtmlStringRGB(color);
+            
+            Span<char> result = stackalloc char[renderedValue.Length + ColorWrapLength + prefix.Length + postfix.Length];
+
+            result.FillString("<color=#", ref offset);
+            result.FillString(colorString, ref offset);
+            result.FillChar('>', ref offset);
+            result.FillString(prefix, ref offset);
+            result.FillSpan(renderedValue, ref offset);
+            result.FillString(postfix, ref offset);
+            result.FillString("</color>", ref offset);
+
+            destination.Append(result);
+        }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using System;
 using Newtonsoft.Json;
+using OpenMyGame.LoggerUnity.Base;
 
 namespace OpenMyGame.LoggerUnity.Messages.Tagging
 {
     [Serializable]
     public struct LogTag : IEquatable<LogTag>
     {
-        public const string TagKey = "Tag";
-
+        public static LogTagFormat Format { get; } = new(LoggerStaticData.TagFormat);
+        
         public static LogTag Empty => new(string.Empty);
         
         public LogTag(string value)

@@ -4,7 +4,6 @@ using System.Linq;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Factories;
-using OpenMyGame.LoggerUnity.Messages.Tagging.Providers;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 
 namespace OpenMyGame.LoggerUnity
@@ -18,7 +17,6 @@ namespace OpenMyGame.LoggerUnity
         private readonly IMessageFormatParser _messageFormatParser;
         private readonly LoggerConfigurationParameters _configurationParameters;
         private readonly ILogMessageFactory _messageFactory;
-        private readonly ILogTagProvider _logTagProvider;
 
         private bool _isEnabled;
         private bool _isDisposed;
@@ -29,7 +27,6 @@ namespace OpenMyGame.LoggerUnity
         public Logger(
             List<ILogDestination> logDestinations, 
             IMessageFormatParser messageFormatParser,
-            ILogTagProvider logTagProvider,
             LoggerConfigurationParameters configurationParameters,
             ILogMessageFactory messageFactory)
         {
@@ -37,11 +34,8 @@ namespace OpenMyGame.LoggerUnity
             _messageFormatParser = messageFormatParser;
             _configurationParameters = configurationParameters;
             _messageFactory = messageFactory;
-            LogTagProvider = logTagProvider;
             _isDisposed = true;
         }
-
-        public ILogTagProvider LogTagProvider { get; }
 
         public bool IsEnabled
         {
