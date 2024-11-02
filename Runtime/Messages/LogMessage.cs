@@ -89,7 +89,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         {
             if (!string.IsNullOrEmpty(tag))
             {
-                Tag = LogTag.TagOnly(tag);
+                Tag = new LogTag(tag);
             }
 
             return this;

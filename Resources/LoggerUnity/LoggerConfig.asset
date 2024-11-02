@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d637738e0a4d098a940853868463c7, type: 3}
+  m_Name: LoggerConfig
+  m_EditorClassIdentifier: 
+  _isEnabled: 1
+  _isExtractStacktraces: 0
+  _tagFormat: '#{Tag}#'
+  _messageFormatParameters:
+  - rid: 315059837121593417
+  - rid: 315059837121593418
+  - rid: 315059837121593419
+  - rid: 315059837121593420
+  - rid: 315059837121593421
+  - rid: 315059837121593422
+  _destinationBuilders:
+  - rid: 315059837121593434
+  references:
+    version: 2
+    RefIds:
+    - rid: 315059837121593417
+      type: {class: MessageFormatParameterString, ns: OpenMyGame.LoggerUnity.Parameters.Message, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593418
+      type: {class: MessageFormatParameterDateTime, ns: OpenMyGame.LoggerUnity.Parameters.Message, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593419
+      type: {class: MessageFormatParameterTimeSpan, ns: OpenMyGame.LoggerUnity.Parameters.Message, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593420
+      type: {class: MessageFormatParameterGuid, ns: OpenMyGame.LoggerUnity.Parameters.Message, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593421
+      type: {class: MessageFormatParameterTag, ns: OpenMyGame.LoggerUnity.Parameters.Message, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593422
+      type: {class: MessageFormatParameterExceptionPlaceholder, ns: OpenMyGame.LoggerUnity.Parameters.Message, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593434
+      type: {class: LoggerDestinationBuilderUnityDebug, ns: OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.UnityDebug, asm: OpenMyGame.LoggerUnity}
+      data:
+        _isEnabled: 1
+        _platform: 1
+        _minimumLogLevel: 0
+        _renderBuilder:
+          rid: 315059837121593460
+        _logFormatParameters:
+        - rid: 315059837121593436
+        - rid: 315059837121593437
+        - rid: 315059837121593438
+        - rid: 315059837121593439
+        - rid: 315059837121593440
+        - rid: 315059837121593441
+        - rid: 315059837121593442
+        - rid: 315059837121593443
+        - rid: 315059837121593444
+        _maxMessagePartSize: 100000000
+        _messagePartFormat: '[Id: {MessageId}, Part: {PartIndex}/{PartsCount}] {MessagePart}'
+        _isUnityStacktraceEnabled: 1
+        _isColorizeParameters: 0
+        _customViewConfig: {fileID: 0}
+    - rid: 315059837121593436
+      type: {class: LogFormatParameterException, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593437
+      type: {class: LogFormatParameterTime, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593438
+      type: {class: LogFormatParameterLogLevel, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593439
+      type: {class: LogFormatParameterUnityTime, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593440
+      type: {class: LogFormatParameterNewLine, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593441
+      type: {class: LogFormatParameterMessage, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593442
+      type: {class: LogFormatParameterThreadId, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593443
+      type: {class: LogFormatParameterTimeUtc, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593444
+      type: {class: LogFormatParameterMessageId, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593460
+      type: {class: LogMessageRenderBuilderJson, ns: OpenMyGame.LoggerUnity.Configuration.Logger.Rendering.Json, asm: OpenMyGame.LoggerUnity}
+      data:
+        _includeLogParameters:
+        - rid: 315059837121593461
+        - rid: 315059837121593462
+        - rid: 315059837121593463
+        - rid: 315059837121593464
+    - rid: 315059837121593461
+      type: {class: LogFormatParameterMessage, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593462
+      type: {class: LogFormatParameterException, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593463
+      type: {class: LogFormatParameterTime, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 
+    - rid: 315059837121593464
+      type: {class: LogFormatParameterLogLevel, ns: OpenMyGame.LoggerUnity.Parameters.Log, asm: OpenMyGame.LoggerUnity}
+      data: 

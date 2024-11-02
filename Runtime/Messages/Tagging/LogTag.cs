@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Messages.Tagging
 {
@@ -9,34 +8,14 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
     {
         public const string TagKey = "Tag";
 
-        public static LogTag Empty => new(string.Empty, false, Color.white);
+        public static LogTag Empty => new(string.Empty);
         
-        public static LogTag Colorized(string tag, Color color)
-        {
-            return new LogTag(tag, true, color);
-        }
-
-        public static LogTag TagOnly(string tag)
-        {
-            return new LogTag(tag, false, Color.white);
-        }
-
-        private LogTag(string value, bool hasColor, Color color)
+        public LogTag(string value)
         {
             Value = value;
-            HasColor = hasColor;
-            Color = color;
         }
 
         [JsonProperty("Value")] public string Value { get; }
-        [JsonIgnore] public Color Color { get; private set; }
-        [JsonIgnore] public bool HasColor { get; private set; }
-
-        public void SetColor(Color color)
-        {
-            Color = color;
-            HasColor = true;
-        }
 
         public bool HasValue()
         {

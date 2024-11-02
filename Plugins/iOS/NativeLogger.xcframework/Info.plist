@@ -39,23 +39,6 @@
 			<key>SupportedPlatformVariant</key>
 			<string>simulator</string>
 		</dict>
-		<dict>
-			<key>BinaryPath</key>
-			<string>NativeLogger.framework/Versions/A/NativeLogger</string>
-			<key>DebugSymbolsPath</key>
-			<string>dSYMs</string>
-			<key>LibraryIdentifier</key>
-			<string>macos-arm64_x86_64</string>
-			<key>LibraryPath</key>
-			<string>NativeLogger.framework</string>
-			<key>SupportedArchitectures</key>
-			<array>
-				<string>arm64</string>
-				<string>x86_64</string>
-			</array>
-			<key>SupportedPlatform</key>
-			<string>macos</string>
-		</dict>
 	</array>
 	<key>CFBundlePackageType</key>
 	<string>XFWK</string>

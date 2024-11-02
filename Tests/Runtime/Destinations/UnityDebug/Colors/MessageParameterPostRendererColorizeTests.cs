@@ -69,7 +69,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             ColorUtility.TryParseHtmlString(colorString, out var color);
             var viewConfig = Mocks.ConfigWithTagColor(color);
             var builder = new StringBuilder();
-            var logTag = LogTag.TagOnly(tag);
+            var logTag = new LogTag(tag);
             var processor = new MessageParameterPostRendererColorize(viewConfig);
             
             //Act
