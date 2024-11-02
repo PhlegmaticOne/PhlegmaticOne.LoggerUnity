@@ -6,7 +6,6 @@ namespace OpenMyGame.LoggerUnity.Base
     public interface ILogger : IDisposable
     {
         event Action<LogMessage> MessageLogged;
-        event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
         bool IsEnabled { get; set; }
         void Initialize();
         LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel);

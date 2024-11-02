@@ -21,7 +21,6 @@ namespace OpenMyGame.LoggerUnity
         private bool _isEnabled;
         private bool _isDisposed;
 
-        public event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
         public event Action<LogMessage> MessageLogged;
         
         public Logger(
@@ -80,8 +79,7 @@ namespace OpenMyGame.LoggerUnity
             {
                 if (logDestination.CanLogMessage(logMessage))
                 {
-                    var renderedLogMessage = logDestination.LogMessage(logMessage, messageParts, parameters);
-                    OnMessageToDestinationLogged(logMessage, renderedLogMessage, logDestination);
+                    logDestination.LogMessage(logMessage, messageParts, parameters);
                 }
             }
             
@@ -128,15 +126,6 @@ namespace OpenMyGame.LoggerUnity
             {
                 Dispose();
             }
-        }
-
-        private void OnMessageToDestinationLogged(
-            in LogMessage logMessage, string renderedMessage, ILogDestination loggerDestination)
-        {
-            var args = new LogMessageDestinationLoggedEventArgs(
-                logMessage, renderedMessage, loggerDestination.DestinationName);
-            
-            MessageToDestinationLogged?.Invoke(args);
         }
     }
 }

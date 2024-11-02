@@ -38,12 +38,11 @@ namespace OpenMyGame.LoggerUnity.Base
             OnInitializing(configurationParameters);
         }
 
-        public virtual string LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters)
+        public virtual void LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters)
         {
             var renderedMessage = _messageFormat.Render(messageParts, parameters);
             var renderedLogMessage = _logFormat.Render(message, renderedMessage, messageParts, parameters);
             LogRenderedMessage(message, renderedLogMessage, parameters);
-            return renderedLogMessage;
         }
 
         public virtual void Dispose() { }

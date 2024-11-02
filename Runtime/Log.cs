@@ -217,13 +217,11 @@ namespace OpenMyGame.LoggerUnity
         private static void SetNewLogger(ILogger logger)
         {
             LoggerPrivate = logger;
-            LoggerPrivate.MessageToDestinationLogged += OnMessageToDestinationLogged;
             LoggerPrivate.MessageLogged += OnMessageLogged;
         }
 
         private static void DisposeCurrentLogger()
         {
-            LoggerPrivate.MessageToDestinationLogged -= OnMessageToDestinationLogged;
             LoggerPrivate.MessageLogged -= OnMessageLogged;
             LoggerPrivate.Dispose();
         }
@@ -231,11 +229,6 @@ namespace OpenMyGame.LoggerUnity
         private static void OnMessageLogged(LogMessage logMessage)
         {
             MessageLogged?.Invoke(logMessage);
-        }
-
-        private static void OnMessageToDestinationLogged(LogMessageDestinationLoggedEventArgs messageDestinationLoggedEventArgs)
-        {
-            MessageToDestinationLogged?.Invoke(messageDestinationLoggedEventArgs);
         }
     }
 }
