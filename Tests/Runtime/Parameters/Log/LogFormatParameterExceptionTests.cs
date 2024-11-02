@@ -17,7 +17,6 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var parameter = new LogFormatParameterException();
             var messagePart = MessagePart.Parameter("Exception:ns");
             var destination = new ValueStringBuilder();
-            ValueStringBuilder testMessage = string.Empty;
             const string expected = "Exception: Test exception";
             
             try
@@ -28,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             catch (Exception exception)
             {
                 var message = new LogMessage().WithException(exception);
-                parameter.Render(ref destination, ref testMessage, messagePart, message);
+                parameter.Render(ref destination, messagePart, message);
                 
                 //Assert
                 Assert.AreEqual(expected, destination.ToString());

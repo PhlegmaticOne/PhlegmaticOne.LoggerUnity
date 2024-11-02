@@ -17,7 +17,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
         
         public override string DestinationName => LogDestinationsSupported.Debug;
         
-        protected override void OnInitializing(LoggerConfigurationParameters configurationParameters)
+        protected override void OnInitializing()
         {
             _partLoggingMessageFormat = new PartLoggingMessageFormat(Configuration.MessagePartFormat);
         }

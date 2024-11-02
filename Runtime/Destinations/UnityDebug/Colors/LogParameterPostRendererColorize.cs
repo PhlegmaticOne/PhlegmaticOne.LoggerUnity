@@ -42,17 +42,12 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 
         private static bool CanProcess(in MessagePart messagePart, in ReadOnlySpan<char> value)
         {
-            return !messagePart.IsParameter || ValueIsMessage(value) || ValueIsNewLine(value);
+            return !messagePart.IsParameter || ValueIsNewLine(value);
         }
 
         private static bool ValueIsNewLine(in ReadOnlySpan<char> messagePart)
         {
             return messagePart.Equals(LogFormatParameterNewLine.KeyParameter, StringComparison.OrdinalIgnoreCase);
-        }
-
-        private static bool ValueIsMessage(in ReadOnlySpan<char> messagePart)
-        {
-            return messagePart.Equals(LogFormatParameterMessage.KeyParameter, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

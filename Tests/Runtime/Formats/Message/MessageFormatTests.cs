@@ -7,6 +7,7 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
 {
@@ -18,6 +19,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
         {
             //Arrange
             var messageParts = Array.Empty<MessagePart>();
+            var destination = ValueStringBuilder.Create();
 
             var parameters = new object[]
             {
@@ -30,10 +32,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 new MessageParameterPostRenderer());
 
             //Act
-            var renderedMessage = messageFormat.Render(messageParts, parameters);
+            messageFormat.Render(ref destination, messageParts, parameters);
             
             //Assert
-            Assert.AreEqual(string.Empty, renderedMessage.ToString());
+            Assert.AreEqual(string.Empty, destination.ToString());
         }
         
         [Test]
@@ -45,6 +47,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 MessagePart.Message("Test "),
                 MessagePart.Parameter("Value")
             };
+            var destination = ValueStringBuilder.Create();
 
             var parameters = new object[]
             {
@@ -57,10 +60,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 new MessageParameterPostRenderer());
 
             //Act
-            var renderedMessage = messageFormat.Render(messageParts, parameters);
+            messageFormat.Render(ref destination, messageParts, parameters);
             
             //Assert
-            Assert.AreEqual("Test Value", renderedMessage.ToString());
+            Assert.AreEqual("Test Value", destination.ToString());
         }
         
         [Test]
@@ -72,6 +75,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 MessagePart.Message("Test "),
                 MessagePart.Parameter("Value:u"),
             };
+            var destination = ValueStringBuilder.Create();
 
             var parameters = new object[]
             {
@@ -84,10 +88,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 new MessageParameterPostRenderer());
 
             //Act
-            var renderedMessage = messageFormat.Render(messageParts, parameters);
+            messageFormat.Render(ref destination, messageParts, parameters);
             
             //Assert
-            Assert.AreEqual("Test VALUE", renderedMessage.ToString());
+            Assert.AreEqual("Test VALUE", destination.ToString());
         }
         
         [Test]
@@ -99,7 +103,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 MessagePart.Message("Test "),
                 MessagePart.Parameter("@Value")
             };
-
+            var destination = ValueStringBuilder.Create();
+            
             var parameters = new object[]
             {
                 new { Value = 5, Name = "Name" }
@@ -111,10 +116,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 new MessageParameterPostRenderer());
 
             //Act
-            var renderedMessage = messageFormat.Render(messageParts, parameters);
+            messageFormat.Render(ref destination, messageParts, parameters);
             
             //Assert
-            Assert.AreEqual("Test {\"Value\":5,\"Name\":\"Name\"}", renderedMessage.ToString());
+            Assert.AreEqual("Test {\"Value\":5,\"Name\":\"Name\"}", destination.ToString());
         }
     }
 }

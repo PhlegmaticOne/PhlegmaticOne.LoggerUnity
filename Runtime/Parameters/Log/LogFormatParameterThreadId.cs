@@ -15,8 +15,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
         public const string KeyParameter = "ThreadId";
         public string Key => KeyParameter;
 
-        public void Render(ref ValueStringBuilder destination, ref ValueStringBuilder renderedMessage, in MessagePart messagePart,
-            in LogMessage message)
+        public void Render(ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message)
         {
             destination.Append(Thread.CurrentThread.ManagedThreadId);
         }

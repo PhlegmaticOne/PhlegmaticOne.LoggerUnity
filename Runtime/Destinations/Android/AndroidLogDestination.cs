@@ -19,7 +19,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
         
         public override string DestinationName => LogDestinationsSupported.Android;
 
-        protected override void OnInitializing(LoggerConfigurationParameters configurationParameters)
+        protected override void OnInitializing()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             _androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");

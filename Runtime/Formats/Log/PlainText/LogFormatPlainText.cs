@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
@@ -27,20 +28,19 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             _postRenderer = postRenderer;
         }
         
-        public ValueStringBuilder Render(
-            in LogMessage logMessage, ref ValueStringBuilder renderedMessage, MessagePart[] messageParts, in Span<object> parameters)
+        public void Render(
+            ref ValueStringBuilder destination, in LogMessage logMessage, ref LogMessageRenderData messageRenderData)
         {
-            var destination = ValueStringBuilder.Create();
-            RenderLogMessage(logMessage, ref renderedMessage, ref destination);
+            RenderLogMessage(ref destination, in logMessage, ref messageRenderData);
             TryAppendStacktrace(ref destination, logMessage);
-            return destination;
         }
 
-        private void RenderLogMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage, ref ValueStringBuilder destination)
+        private void RenderLogMessage(
+            ref ValueStringBuilder destination, in LogMessage logMessage, ref LogMessageRenderData messageRenderData)
         {
             foreach (var messagePart in _messageParts.AsSpan())
             {
-                Render(messagePart, logMessage, ref renderedMessage, ref destination);
+                Render(ref destination, messagePart, in logMessage, ref messageRenderData);
             }
         }
 
@@ -59,7 +59,8 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
         }
 
         private void Render(
-            in MessagePart messagePart, in LogMessage message, ref ValueStringBuilder renderedMessage, ref ValueStringBuilder destination)
+            ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message,
+            ref LogMessageRenderData messageRenderData)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out _);
 
@@ -73,13 +74,19 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
                 destination.Append(parameterValue);
                 return;
             }
+
+            if (parameterValue.SequenceEqual(LoggerStaticData.MessageParameterKey))
+            {
+                messageRenderData.Render(ref destination);
+                return;
+            }
             
             var property = _logFormatParameters.GetValueOrDefault(parameterValue.ToString());
 
             if (!property.IsEmpty(message))
             {
                 _postRenderer.Preprocess(ref destination, messagePart, property.GetValue(message));
-                property.Render(ref destination, ref renderedMessage, messagePart, message);
+                property.Render(ref destination, messagePart, message);
                 _postRenderer.Postprocess(ref destination, messagePart);
             }
         }

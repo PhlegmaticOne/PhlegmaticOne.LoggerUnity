@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using NUnit.Framework;
+using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
 using OpenMyGame.LoggerUnity.Parameters.Log;
@@ -64,7 +65,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
             var processor = new LogParameterPostRendererColorize(viewConfig);
             var destination = new ValueStringBuilder();
-            var messagePart = MessagePart.Parameter(LogFormatParameterMessage.KeyParameter);
+            var messagePart = MessagePart.Parameter(LoggerStaticData.MessageParameterKey);
             
             //Act
             processor.Preprocess(ref destination, messagePart, null);

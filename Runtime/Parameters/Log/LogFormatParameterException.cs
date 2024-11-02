@@ -20,8 +20,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
             return message.Exception is null;
         }
 
-        public void Render(
-            ref ValueStringBuilder destination, ref ValueStringBuilder renderedMessage, in MessagePart messagePart, in LogMessage message)
+        public void Render(ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message)
         {
             if (message.Exception is null)
             {

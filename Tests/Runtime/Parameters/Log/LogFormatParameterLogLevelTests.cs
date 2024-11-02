@@ -19,11 +19,10 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel");
             var destination = new ValueStringBuilder();
-            ValueStringBuilder testMessage = string.Empty;
             var logMessage = new LogMessage(logLevel);
             
             //Act
-            parameter.Render(ref destination, ref testMessage, messagePart, logMessage);
+            parameter.Render(ref destination, messagePart, logMessage);
             
             //Assert
             Assert.AreEqual(logLevel.ToString(), destination.ToString());

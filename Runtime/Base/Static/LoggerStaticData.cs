@@ -23,6 +23,7 @@ namespace OpenMyGame.LoggerUnity.Base
         public const char SerializeParameterPrefix = '@';
         public const string LogFormat = "{Message}{NewLine}{Exception}";
         public const string TagFormat = "#{Tag}#";
+        public const string MessageParameterKey = "Message";
 
         public const bool IsExtractStacktrace = false;
         public const bool IsEnabled = true;
@@ -46,7 +47,6 @@ namespace OpenMyGame.LoggerUnity.Base
                 AddLogFormatProperty(result, new LogFormatParameterLogLevel());
                 AddLogFormatProperty(result, new LogFormatParameterUnityTime());
                 AddLogFormatProperty(result, new LogFormatParameterNewLine());
-                AddLogFormatProperty(result, new LogFormatParameterMessage());
                 AddLogFormatProperty(result, new LogFormatParameterThreadId());
                 AddLogFormatProperty(result, new LogFormatParameterTimeUtc());
                 AddLogFormatProperty(result, new LogFormatParameterMessageId());

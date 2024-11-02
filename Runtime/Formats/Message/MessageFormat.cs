@@ -25,22 +25,19 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
             _postRenderer = postRenderer;
         }
 
-        public ValueStringBuilder Render(MessagePart[] messageParts, Span<object> parameters)
+        public void Render(ref ValueStringBuilder destination, MessagePart[] messageParts, Span<object> parameters)
         {
             if (messageParts.Length == 0)
             {
-                return string.Empty;
+                return;
             }
             
-            var destination = ValueStringBuilder.Create();
             var currentParameterIndex = -1;
 
             foreach (var messagePart in messageParts.AsSpan())
             {
                 Render(messagePart, parameters, ref destination, ref currentParameterIndex);
             }
-            
-            return destination;
         }
 
         private void Render(

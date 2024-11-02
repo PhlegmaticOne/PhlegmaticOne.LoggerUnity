@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Factories;

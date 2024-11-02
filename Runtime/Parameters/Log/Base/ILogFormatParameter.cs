@@ -17,8 +17,6 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
         bool IsEmpty(in LogMessage message) => false;
         object GetValue(in LogMessage message) => null;
 
-        void Render(
-            ref ValueStringBuilder destination, ref ValueStringBuilder renderedMessage, 
-            in MessagePart messagePart, in LogMessage message);
+        void Render(ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message);
     }
 }
