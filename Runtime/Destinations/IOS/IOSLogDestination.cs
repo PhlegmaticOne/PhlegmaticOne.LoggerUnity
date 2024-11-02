@@ -39,7 +39,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
 #if UNITY_IOS && !UNITY_EDITOR
         private static async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)
         {
-            var tag = logMessage.Tag?.Value ?? DefaultTagValue;
+            var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
             await UniTask.SwitchToMainThread();
 
             switch (logMessage.LogLevel)
