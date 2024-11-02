@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Base;
@@ -16,10 +15,10 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors
     [LoggerConfigMetadata("ParameterColorsViewConfig", "Create parameter colors view config", orderInEditor: 1)]
     public class ParameterColorsViewConfig : LoggerConfigBase, IParameterColorsViewConfig
     {
-        [SerializeField, OverrideElementNames] private List<LogParameterColorConfigData> _logParameterColors;
-        [SerializeField, OverrideElementNames] private List<MessageParameterColorConfigData> _messageParameterColors;
-        [SerializeField, OverrideElementNames] private List<LogLevelColorConfigData> _logLevelColors;
-        [SerializeField, OverrideElementNames] private List<TagColorConfigData> _tagColors;
+        [SerializeField, OverrideElementNames] private LogParameterColorConfigData[] _logParameterColors;
+        [SerializeField, OverrideElementNames] private MessageParameterColorConfigData[] _messageParameterColors;
+        [SerializeField, OverrideElementNames] private LogLevelColorConfigData[] _logLevelColors;
+        [SerializeField, OverrideElementNames] private TagColorConfigData[] _tagColors;
 
         public static IParameterColorsViewConfig Load(string resourcePath = "LoggerUnity/ParameterColorsViewConfig")
         {
@@ -29,39 +28,40 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors
 
         public override void SetupDefaults()
         {
-            _tagColors = new List<TagColorConfigData>();
+            _tagColors = Array.Empty<TagColorConfigData>();
             
             _logParameterColors = UnityDebugColorsStaticData.LogParameterColorsMap
                 .Select(x => new LogParameterColorConfigData(x.Key, x.Value))
-                .ToList();
+                .ToArray();
 
             _messageParameterColors = UnityDebugColorsStaticData.MessageParameterColorsMap
                 .Select(x => new MessageParameterColorConfigData(x.Key, x.Value))
-                .ToList();
+                .ToArray();
 
             _logLevelColors = UnityDebugColorsStaticData.LogLevelColorsMap
                 .Select(x => new LogLevelColorConfigData(Enum.Parse<LogLevel>(x.Key), x.Value))
-                .ToList();
+                .ToArray();
         }
 
         public Color GetTagColor(string tag)
         {
-            var tagColorData = _tagColors.Find(x => x.Tag.Equals(tag, StringComparison.OrdinalIgnoreCase));
+            var tagColorData = Array.Find(_tagColors, x => x.Tag.Equals(tag, StringComparison.OrdinalIgnoreCase));
             return tagColorData.ContainsData() ? tagColorData.Color : LoggerStaticData.DefaultLogTextColor;
         }
 
         public Color GetMessageParameterColor(object parameter)
         {
             var parameterTypeName = parameter.GetType();
-            var parameterColor = _messageParameterColors.Find(x => x.ParameterType == parameterTypeName);
+            var parameterColor = Array.Find(_messageParameterColors, x => x.ParameterType == parameterTypeName);
             return parameterColor.ContainsData() ? parameterColor.Color : LoggerStaticData.DefaultLogTextColor;
         }
 
-        public Color GetLogParameterColor(in ReadOnlySpan<char> parameterKey, in ReadOnlySpan<char> renderedValue)
+        public Color GetLogParameterColor(string parameterKey, object parameterValue)
         {
             if (parameterKey.Equals(LogFormatParameterLogLevel.KeyParameter, StringComparison.OrdinalIgnoreCase))
             {
-                return GetLogLevelColor(renderedValue);
+                var logLevel = (LogLevel)parameterValue;
+                return Array.Find(_logLevelColors, x => x.LogLevel == logLevel).Color;
             }
 
             if (!TryGetLogParameterColor(parameterKey, out var result))
@@ -72,9 +72,9 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors
             return result.Color;
         }
 
-        private bool TryGetLogParameterColor(in ReadOnlySpan<char> parameterKey, out LogParameterColorConfigData result)
+        private bool TryGetLogParameterColor(string parameterKey, out LogParameterColorConfigData result)
         {
-            foreach (var configData in _logParameterColors)
+            foreach (var configData in _logParameterColors.AsSpan())
             {
                 if (configData.ParameterEquals(parameterKey))
                 {
@@ -85,21 +85,6 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors
 
             result = new LogParameterColorConfigData();
             return false;
-        }
-
-        private Color GetLogLevelColor(in ReadOnlySpan<char> logLevelValue)
-        {
-            var logLevel = LogLevelHelper.ParseFromSpan(logLevelValue);
-
-            foreach (var logLevelColorData in _logLevelColors)
-            {
-                if (logLevelColorData.LogLevel == logLevel)
-                {
-                    return logLevelColorData.Color;
-                }
-            }
-
-            return LoggerStaticData.DefaultLogTextColor;
         }
     }
 }

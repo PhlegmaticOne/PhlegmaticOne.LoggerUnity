@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Extensions;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.PoolableTypes;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Formats.Message
 {
@@ -16,78 +15,77 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
         private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
         private readonly IMessageParameterPostRenderer _postRenderer;
-        private readonly IPoolProvider _poolProvider;
 
         public MessageFormat(
             Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
             IMessageFormatParameterSerializer parameterSerializer,
-            IMessageParameterPostRenderer postRenderer,
-            IPoolProvider poolProvider)
+            IMessageParameterPostRenderer postRenderer)
         {
             _messageFormatParameters = messageFormatParameters;
             _parameterSerializer = parameterSerializer;
             _postRenderer = postRenderer;
-            _poolProvider = poolProvider;
         }
 
-        public string Render(MessagePart[] messageParts, Span<object> parameters)
+        public void Render(ref ValueStringBuilder destination, MessagePart[] messageParts, Span<object> parameters)
         {
             if (messageParts.Length == 0)
             {
-                return string.Empty;
+                return;
             }
             
-            var destination = _poolProvider.Get<StringBuilderPoolable>();
             var currentParameterIndex = -1;
 
-            foreach (var messagePart in messageParts)
+            foreach (var messagePart in messageParts.AsSpan())
             {
-                var renderMessagePart = Render(messagePart, parameters, ref currentParameterIndex);
-
-                if (!messagePart.IsParameter)
-                {
-                    destination.Value.Append(renderMessagePart);
-                }
-                else if(parameters.IndexWithinRange(currentParameterIndex))
-                {
-                    _postRenderer.Process(destination.Value, renderMessagePart, parameters[currentParameterIndex]);   
-                }
+                Render(messagePart, parameters, ref destination, ref currentParameterIndex);
             }
-
-            var result = destination.ToStringResult();
-            _poolProvider.Return(destination);
-            return result;
         }
 
-        private ReadOnlySpan<char> Render(in MessagePart messagePart, in Span<object> parameters, ref int currentParameterIndex)
+        private void Render(
+            in MessagePart messagePart, in Span<object> parameters, ref ValueStringBuilder destination, ref int currentParameterIndex)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out var format);
+
+            if (parameterValue.IsEmpty)
+            {
+                return;
+            }
             
             if (!messagePart.IsParameter || parameters.Length == 0)
             {
-                return parameterValue;
+                destination.Append(parameterValue);
+                return;
             }
 
             var parameter = GetCurrentParameter(in parameters, ref currentParameterIndex);
-            return RenderParameter(parameter, parameterValue, format);
-        }
 
-        private ReadOnlySpan<char> RenderParameter(
-            object parameter, in ReadOnlySpan<char> parameterValue, in ReadOnlySpan<char> format)
-        {
-            var type = parameter.GetType();
+            _postRenderer.Preprocess(ref destination, parameter);
 
             if (parameterValue[0] == LoggerStaticData.SerializeParameterPrefix)
             {
-                return _parameterSerializer.Serialize(parameter, format);
+                destination.Append(_parameterSerializer.Serialize(parameter, format));
             }
-            
-            if (_messageFormatParameters.TryGetValue(type, out var property))
+            else
             {
-                return property.Render(parameter, format);
+                var type = parameter.GetType();
+
+                if (type.IsEnum)
+                {
+                    destination.Append(((Enum)parameter).ToStringCache());
+                    return;
+                }
+                
+                if (_messageFormatParameters.TryGetValue(parameter.GetType(), out var property))
+                {
+                    property.Render(ref destination, parameter, format);
+                }
+                else
+                {
+                    destination.Append(parameter.ToString());
+                }
             }
             
-            return parameter.ToString();
+            _postRenderer.Postprocess(ref destination, parameter);
         }
 
         private static object GetCurrentParameter(in Span<object> parameters, ref int currentParameterIndex)

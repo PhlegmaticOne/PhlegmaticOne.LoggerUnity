@@ -1,6 +1,5 @@
-﻿using System;
-using System.Text;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+﻿using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Processors
 {
@@ -9,10 +8,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log.Processors
     /// </summary>
     public interface ILogParameterPostRenderer
     {
-        /// <summary>
-        /// Метод должен обработать отрендеренный параметр и затем добавить его в destination
-        /// </summary>
-        /// <remarks>Дефолтная реализация добавляет параметр без обработки</remarks>
-        void Process(StringBuilder destination, in MessagePart messagePart, in ReadOnlySpan<char> renderedValue);
+        void Preprocess(ref ValueStringBuilder destination, in MessagePart messagePart, object parameterValue);
+        void Postprocess(ref ValueStringBuilder destination, in MessagePart messagePart);
     }
 }

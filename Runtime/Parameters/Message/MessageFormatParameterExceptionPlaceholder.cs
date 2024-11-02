@@ -2,6 +2,7 @@
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Messages.Exceptions;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
@@ -9,9 +10,9 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
     [SerializeReferenceDropdownName("ExceptionPlaceholder")]
     internal class MessageFormatParameterExceptionPlaceholder : MessageFormatParameter<LogExceptionPlaceholder>
     {
-        protected override ReadOnlySpan<char> Render(LogExceptionPlaceholder parameter, in ReadOnlySpan<char> format)
+        protected override void Render(ref ValueStringBuilder destination, LogExceptionPlaceholder parameter, in ReadOnlySpan<char> format)
         {
-            return parameter.Placeholder;
+            destination.Append(parameter.Placeholder);
         }
     }
 }

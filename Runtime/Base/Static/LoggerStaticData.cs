@@ -23,6 +23,7 @@ namespace OpenMyGame.LoggerUnity.Base
         public const char SerializeParameterPrefix = '@';
         public const string LogFormat = "{Message}{NewLine}{Exception}";
         public const string TagFormat = "#{Tag}#";
+        public const string MessageParameterKey = "Message";
 
         public const bool IsExtractStacktrace = false;
         public const bool IsEnabled = true;
@@ -46,7 +47,6 @@ namespace OpenMyGame.LoggerUnity.Base
                 AddLogFormatProperty(result, new LogFormatParameterLogLevel());
                 AddLogFormatProperty(result, new LogFormatParameterUnityTime());
                 AddLogFormatProperty(result, new LogFormatParameterNewLine());
-                AddLogFormatProperty(result, new LogFormatParameterMessage());
                 AddLogFormatProperty(result, new LogFormatParameterThreadId());
                 AddLogFormatProperty(result, new LogFormatParameterTimeUtc());
                 AddLogFormatProperty(result, new LogFormatParameterMessageId());
@@ -65,6 +65,20 @@ namespace OpenMyGame.LoggerUnity.Base
                 AddMessageFormatProperty(result, new MessageFormatParameterGuid());
                 AddMessageFormatProperty(result, new MessageFormatParameterTag());
                 AddMessageFormatProperty(result, new MessageFormatParameterExceptionPlaceholder());
+                AddMessageFormatProperty(result, new MessageFormatParameterBool());
+                AddMessageFormatProperty(result, new MessageFormatParameterByte());
+                AddMessageFormatProperty(result, new MessageFormatParameterChar());
+                AddMessageFormatProperty(result, new MessageFormatParameterDecimal());
+                AddMessageFormatProperty(result, new MessageFormatParameterDouble());
+                AddMessageFormatProperty(result, new MessageFormatParameterFloat());
+                AddMessageFormatProperty(result, new MessageFormatParameterInt());
+                AddMessageFormatProperty(result, new MessageFormatParameterLong());
+                AddMessageFormatProperty(result, new MessageFormatParameterSByte());
+                AddMessageFormatProperty(result, new MessageFormatParameterShort());
+                AddMessageFormatProperty(result, new MessageFormatParameterTag());
+                AddMessageFormatProperty(result, new MessageFormatParameterUInt());
+                AddMessageFormatProperty(result, new MessageFormatParameterULong());
+                AddMessageFormatProperty(result, new MessageFormatParameterUShort());
                 return result;
             }
         }

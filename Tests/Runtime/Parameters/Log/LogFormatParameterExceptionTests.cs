@@ -3,6 +3,7 @@ using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
 {
@@ -15,6 +16,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             //Arrange
             var parameter = new LogFormatParameterException();
             var messagePart = MessagePart.Parameter("Exception:ns");
+            var destination = new ValueStringBuilder();
             const string expected = "Exception: Test exception";
             
             try
@@ -24,11 +26,11 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             }
             catch (Exception exception)
             {
-                var logMessage = new LogMessage().WithException(exception);
-                var actual = parameter.GetValue(messagePart, logMessage, "").ToString();
+                var message = new LogMessage().WithException(exception);
+                parameter.Render(ref destination, messagePart, message);
                 
                 //Assert
-                Assert.AreEqual(expected, actual);
+                Assert.AreEqual(expected, destination.ToString());
             }
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 
@@ -13,12 +12,10 @@ namespace OpenMyGame.LoggerUnity
     {
         public LoggerConfigurationParameters(
             Dictionary<Type, IMessageFormatParameter> formatParameters, 
-            IMessageFormatParameterSerializer parameterSerializer,
-            IPoolProvider poolProvider)
+            IMessageFormatParameterSerializer parameterSerializer)
         {
             FormatParameters = formatParameters;
             ParameterSerializer = parameterSerializer;
-            PoolProvider = poolProvider;
         }
 
         /// <summary>
@@ -30,10 +27,5 @@ namespace OpenMyGame.LoggerUnity
         /// Сериализатор, используемый для парметров с префиксом <b>@</b>
         /// </summary>
         public IMessageFormatParameterSerializer ParameterSerializer { get; }
-        
-        /// <summary>
-        /// Пулы для переиспользуемых объектов
-        /// </summary>
-        public IPoolProvider PoolProvider { get; }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Text;
 using NUnit.Framework;
+using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
@@ -26,7 +28,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
                 public Color GetTagColor(string tag) => throw new NotImplementedException();
 
                 public Color GetMessageParameterColor(object parameter) => throw new NotImplementedException();
-                public Color GetLogParameterColor(in ReadOnlySpan<char> parameterKey, in ReadOnlySpan<char> renderedValue)
+                public Color GetLogParameterColor(string parameterKey, object parameterValue)
                 {
                     return _logParameterColor;
                 }
@@ -44,11 +46,12 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             //Arrange
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
             var processor = new LogParameterPostRendererColorize(viewConfig);
-            var destination = new StringBuilder();
+            var destination = new ValueStringBuilder();
             var messagePart = MessagePart.Message("Test");
             
             //Act
-            processor.Process(destination, messagePart, ReadOnlySpan<char>.Empty);
+            processor.Preprocess(ref destination, messagePart, null);
+            processor.Postprocess(ref destination, messagePart);
             
             //Assert
             Assert.AreEqual(string.Empty, destination.ToString());
@@ -61,11 +64,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             const string renderedValue = "Rendered message";
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
             var processor = new LogParameterPostRendererColorize(viewConfig);
-            var destination = new StringBuilder();
-            var messagePart = MessagePart.Parameter(LogFormatParameterMessage.KeyParameter);
+            var destination = new ValueStringBuilder();
+            var messagePart = MessagePart.Parameter(LoggerStaticData.MessageParameterKey);
             
             //Act
-            processor.Process(destination, messagePart, renderedValue);
+            processor.Preprocess(ref destination, messagePart, null);
+            destination.Append(renderedValue);
+            processor.Postprocess(ref destination, messagePart);
             
             //Assert
             Assert.AreEqual(renderedValue, destination.ToString());
@@ -78,11 +83,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             const string renderedValue = "\n";
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
             var processor = new LogParameterPostRendererColorize(viewConfig);
-            var destination = new StringBuilder();
+            var destination = new ValueStringBuilder();
             var messagePart = MessagePart.Parameter(LogFormatParameterNewLine.KeyParameter);
             
             //Act
-            processor.Process(destination, messagePart, renderedValue);
+            processor.Preprocess(ref destination, messagePart, null);
+            destination.Append(renderedValue);
+            processor.Postprocess(ref destination, messagePart);
             
             //Assert
             Assert.AreEqual(renderedValue, destination.ToString());
@@ -95,11 +102,13 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             const string renderedValue = "Parameter value";
             var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
             var processor = new LogParameterPostRendererColorize(viewConfig);
-            var destination = new StringBuilder();
+            var destination = new ValueStringBuilder();
             var messagePart = MessagePart.Parameter(LogFormatParameterTime.KeyParameter);
             
             //Act
-            processor.Process(destination, messagePart, renderedValue);
+            processor.Preprocess(ref destination, messagePart, null);
+            destination.Append(renderedValue);
+            processor.Postprocess(ref destination, messagePart);
             
             //Assert
             Assert.AreEqual("<color=#FFFFFF>Parameter value</color>", destination.ToString());

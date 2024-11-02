@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.PoolableTypes;
-using OpenMyGame.LoggerUnity.Infrastructure.Pools.Providers;
+using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
 {
@@ -15,68 +15,80 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
         private readonly MessagePart[] _messageParts;
         private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
         private readonly ILogParameterPostRenderer _postRenderer;
-        private readonly IPoolProvider _poolProvider;
 
         public LogFormatPlainText(
             MessagePart[] messageParts,
             bool appendStacktraceToRenderingMessage, 
             Dictionary<string, ILogFormatParameter> logFormatParameters,
-            ILogParameterPostRenderer postRenderer,
-            IPoolProvider poolProvider)
+            ILogParameterPostRenderer postRenderer)
         {
             _appendStacktraceToRenderingMessage = appendStacktraceToRenderingMessage;
             _messageParts = messageParts;
             _logFormatParameters = logFormatParameters;
             _postRenderer = postRenderer;
-            _poolProvider = poolProvider;
         }
         
-        public string Render(in LogMessage logMessage, string renderedMessage, MessagePart[] messageParts, in Span<object> parameters)
+        public void Render(
+            ref ValueStringBuilder destination, in LogMessage logMessage, ref LogMessageRenderData messageRenderData)
         {
-            var destination = _poolProvider.Get<StringBuilderPoolable>();
-            RenderLogMessage(logMessage, renderedMessage, destination);
-            TryAppendStacktrace(destination, logMessage);
-            var result = destination.ToStringResult();
-            _poolProvider.Return(destination);
-            return result;
+            RenderLogMessage(ref destination, in logMessage, ref messageRenderData);
+            TryAppendStacktrace(ref destination, logMessage);
         }
 
-        private void RenderLogMessage(in LogMessage logMessage, string renderedMessage, StringBuilderPoolable logBuilder)
+        private void RenderLogMessage(
+            ref ValueStringBuilder destination, in LogMessage logMessage, ref LogMessageRenderData messageRenderData)
         {
-            foreach (var messagePart in _messageParts)
+            foreach (var messagePart in _messageParts.AsSpan())
             {
-                var renderMessagePart = Render(messagePart, logMessage, renderedMessage);
-
-                if (messagePart.IsParameter)
-                {
-                    _postRenderer.Process(logBuilder.Value, messagePart, renderMessagePart);
-                }
-                else
-                {
-                    logBuilder.Value.Append(renderMessagePart);
-                }
+                Render(ref destination, messagePart, in logMessage, ref messageRenderData);
             }
         }
 
-        private void TryAppendStacktrace(StringBuilderPoolable destination, in LogMessage logMessage)
+        private void TryAppendStacktrace(ref ValueStringBuilder destination, in LogMessage logMessage)
         {
             if (_appendStacktraceToRenderingMessage && 
                 logMessage.Stacktrace.TryGetUserCodeStacktrace(out var userCodeStacktrace))
             {
-                if (destination.Value[^1] != '\n')
+                if (destination[^1] != '\n')
                 {
-                    destination.Value.AppendLine();
+                    destination.AppendLine();
                 }
                 
-                destination.Value.Append(userCodeStacktrace);
+                destination.Append(userCodeStacktrace);
             }
         }
 
-        private ReadOnlySpan<char> Render(in MessagePart messagePart, in LogMessage message, string renderedMessage)
+        private void Render(
+            ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message,
+            ref LogMessageRenderData messageRenderData)
         {
             messagePart.SplitParameterToValueAndFormat(out var parameterValue, out _);
+
+            if (parameterValue.IsEmpty)
+            {
+                return;
+            }
+            
+            if (!messagePart.IsParameter)
+            {
+                destination.Append(parameterValue);
+                return;
+            }
+
+            if (parameterValue.SequenceEqual(LoggerStaticData.MessageParameterKey))
+            {
+                messageRenderData.Render(ref destination);
+                return;
+            }
+            
             var property = _logFormatParameters.GetValueOrDefault(parameterValue.ToString());
-            return property is null ? parameterValue : property.GetValue(messagePart, message, renderedMessage);
+
+            if (!property.IsEmpty(message))
+            {
+                _postRenderer.Preprocess(ref destination, messagePart, property.GetValue(message));
+                property.Render(ref destination, messagePart, message);
+                _postRenderer.Postprocess(ref destination, messagePart);
+            }
         }
     }
 }

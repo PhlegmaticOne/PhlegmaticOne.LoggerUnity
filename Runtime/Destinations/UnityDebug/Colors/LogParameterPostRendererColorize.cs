@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Text;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors.Helpers;
+using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {
@@ -16,29 +16,38 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
         {
             _colorsViewConfig = colorsViewConfig;
         }
-        
-        public void Process(StringBuilder destination, in MessagePart messagePart, in ReadOnlySpan<char> renderedValue)
+
+        public void Preprocess(ref ValueStringBuilder destination, in MessagePart messagePart, object parameterValue)
         {
             var value = messagePart.GetValue();
             
-            if (renderedValue.IsEmpty || ValueIsMessage(value) || ValueIsNewLine(value))
+            if (CanProcess(messagePart, value))
             {
-                destination.Append(renderedValue);
                 return;
             }
             
-            var color = _colorsViewConfig.GetLogParameterColor(value.ToString(), renderedValue);
-            UnityDebugStringColorizer.ColorizeNonHeapAlloc(destination, in renderedValue, color);
+            var color = _colorsViewConfig.GetLogParameterColor(value.ToString(), parameterValue);
+            destination.AppendColorPrefix(color);
+        }
+
+        public void Postprocess(ref ValueStringBuilder destination, in MessagePart messagePart)
+        {
+            if (CanProcess(messagePart, messagePart.GetValue()))
+            {
+                return;
+            }
+            
+            destination.AppendColorPostfix();
+        }
+
+        private static bool CanProcess(in MessagePart messagePart, in ReadOnlySpan<char> value)
+        {
+            return !messagePart.IsParameter || ValueIsNewLine(value);
         }
 
         private static bool ValueIsNewLine(in ReadOnlySpan<char> messagePart)
         {
             return messagePart.Equals(LogFormatParameterNewLine.KeyParameter, StringComparison.OrdinalIgnoreCase);
-        }
-        
-        private static bool ValueIsMessage(in ReadOnlySpan<char> messagePart)
-        {
-            return messagePart.Equals(LogFormatParameterMessage.KeyParameter, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

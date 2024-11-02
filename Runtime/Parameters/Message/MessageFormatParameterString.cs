@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
@@ -8,19 +9,21 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
     [SerializeReferenceDropdownName("String")]
     internal class MessageFormatParameterString : MessageFormatParameter<string>
     {
-        protected override ReadOnlySpan<char> Render(string parameter, in ReadOnlySpan<char> format)
+        protected override void Render(ref ValueStringBuilder destination, string parameter, in ReadOnlySpan<char> format)
         {
             if (format.Equals("u", StringComparison.OrdinalIgnoreCase))
             {
-                return parameter.ToUpper();
-            }
-
-            if (format.Equals("l", StringComparison.OrdinalIgnoreCase))
-            {
-                return parameter.ToLower();
+                destination.Append(parameter.ToUpper());
+                return;
             }
             
-            return parameter;
+            if (format.Equals("l", StringComparison.OrdinalIgnoreCase))
+            {
+                destination.Append(parameter.ToLower());
+                return;
+            }
+            
+            destination.Append(parameter);
         }
     }
 }

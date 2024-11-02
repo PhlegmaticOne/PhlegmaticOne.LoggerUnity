@@ -1,9 +1,10 @@
-﻿using System;
-using OpenMyGame.LoggerUnity.Base;
+﻿using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages;
+using SpanUtilities.StringBuilders;
 #if UNITY_ANDROID && !UNITY_EDITOR
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System;
 #endif
 
 namespace OpenMyGame.LoggerUnity.Destinations.Android
@@ -18,14 +19,14 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
         
         public override string DestinationName => LogDestinationsSupported.Android;
 
-        protected override void OnInitializing(LoggerConfigurationParameters configurationParameters)
+        protected override void OnInitializing()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             _androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
 #endif
         }
 
-        protected override void LogRenderedMessage(in LogMessage logMessage, string renderedMessage, Span<object> parameters)
+        protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             if (_androidLogger is null)
@@ -33,7 +34,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
                 return;
             }
 
-            LogMessageInMainThread(logMessage, renderedMessage).Forget();
+            LogMessageInMainThread(logMessage, renderedMessage.ToString()).Forget();
 #endif
         }
         

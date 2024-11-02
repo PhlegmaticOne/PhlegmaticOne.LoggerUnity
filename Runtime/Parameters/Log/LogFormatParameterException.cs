@@ -4,6 +4,7 @@ using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
@@ -13,10 +14,20 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
     {
         public const string KeyParameter = "Exception";
         public string Key => KeyParameter;
-        
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, in LogMessage message, string renderedMessage)
+
+        public bool IsEmpty(in LogMessage message)
         {
-            return message.Exception?.ToStringNoStacktrace() ?? string.Empty;
+            return message.Exception is null;
+        }
+
+        public void Render(ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message)
+        {
+            if (message.Exception is null)
+            {
+                return;
+            }
+            
+            destination.Append(message.Exception.ToStringNoStacktrace());
         }
     }
 }

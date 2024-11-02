@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Text;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
+using SpanUtilities.StringBuilders;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
@@ -26,7 +26,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
 
                 public Color GetMessageParameterColor(object parameter) => _color;
 
-                public Color GetLogParameterColor(in ReadOnlySpan<char> parameterKey, in ReadOnlySpan<char> renderedValue) => _color;
+                public Color GetLogParameterColor(string parameterKey, object paramterValue) => _color;
             }
             
             public static IParameterColorsViewConfig ConfigWithMessageParameterColor(Color color)
@@ -47,13 +47,15 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             string colorString, string renderedParameter, string expected)
         {
             //Arrange
-            var builder = new StringBuilder();
+            var builder = new ValueStringBuilder();
             ColorUtility.TryParseHtmlString(colorString, out var color);
             var viewConfig = Mocks.ConfigWithMessageParameterColor(color);
             var processor = new MessageParameterPostRendererColorize(viewConfig);
             
             //Act
-            processor.Process(builder, renderedParameter, new object());
+            processor.Preprocess(ref builder, renderedParameter);
+            builder.Append(renderedParameter);
+            processor.Postprocess(ref builder, renderedParameter);
             
             //Assert
             Assert.AreEqual(expected, builder.ToString());
@@ -68,12 +70,14 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             //Arrange
             ColorUtility.TryParseHtmlString(colorString, out var color);
             var viewConfig = Mocks.ConfigWithTagColor(color);
-            var builder = new StringBuilder();
+            var builder = new ValueStringBuilder();
             var logTag = new LogTag(tag);
             var processor = new MessageParameterPostRendererColorize(viewConfig);
             
             //Act
-            processor.Process(builder, tag, logTag);
+            processor.Preprocess(ref builder, logTag);
+            builder.Append(tag);
+            processor.Postprocess(ref builder, logTag);
             
             //Assert
             Assert.AreEqual(expected, builder.ToString());

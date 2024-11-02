@@ -3,6 +3,7 @@ using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
+using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log
 {
@@ -12,15 +13,16 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
     {
         public const string KeyParameter = "TimeUtc";
         public string Key => KeyParameter;
-        
-        public ReadOnlySpan<char> GetValue(MessagePart messagePart, in LogMessage message, string renderedMessage)
+
+        public void Render(ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message)
         {
             if (messagePart.TryGetFormat(out var format))
             {
-                return DateTime.UtcNow.ToString(format.ToString());
+                destination.Append(DateTime.UtcNow, format);
+                return;
             }
 
-            return DateTime.UtcNow.ToString("G");
+            destination.Append(DateTime.UtcNow);
         }
     }
 }
