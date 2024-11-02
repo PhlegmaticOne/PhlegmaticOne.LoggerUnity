@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parsing.Models;
@@ -21,7 +22,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log
 
         public void Render(ref ValueStringBuilder destination, in MessagePart messagePart, in LogMessage message)
         {
-            destination.Append(message.LogLevel.ToString());
+            destination.Append(message.LogLevel.ToStringCache());
         }
     }
 }

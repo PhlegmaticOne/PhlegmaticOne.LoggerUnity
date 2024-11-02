@@ -28,14 +28,6 @@ namespace SpanUtilities.StringBuilders
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ValueStringBuilder(Span<char> initialBuffer)
-        {
-            bufferPosition = 0;
-            buffer = initialBuffer;
-            arrayFromPool = null;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ValueStringBuilder(ReadOnlySpan<char> initialText)
         {
             bufferPosition = 0;
@@ -49,20 +41,21 @@ namespace SpanUtilities.StringBuilders
 
         public readonly ref char this[int index] => ref buffer[index];
         
-#pragma warning disable CA2225
         public static implicit operator ValueStringBuilder(string fromString) => new(fromString.AsSpan());
-#pragma warning restore CA2225
-        
-#pragma warning disable CA2225
         public static implicit operator ValueStringBuilder(ReadOnlySpan<char> fromString) => new(fromString);
-#pragma warning restore CA2225
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly override string ToString() => new(buffer[..bufferPosition]);
+        public readonly override string ToString()
+        {
+            return new string(buffer[..bufferPosition]);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly ReadOnlySpan<char> AsSpan() => buffer[..bufferPosition];
-        
+        public readonly ReadOnlySpan<char> AsSpan()
+        {
+            return buffer[..bufferPosition];
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public readonly ReadOnlyMemory<char> AsMemory()
         {
@@ -70,7 +63,10 @@ namespace SpanUtilities.StringBuilders
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Equals(ReadOnlySpan<char> span) => span.SequenceEqual(AsSpan());
+        public readonly bool Equals(ReadOnlySpan<char> span)
+        {
+            return span.SequenceEqual(AsSpan());
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Dispose()
@@ -115,17 +111,17 @@ namespace SpanUtilities.StringBuilders
             }
         }
         
-        public readonly Enumerator GetEnumerator() => new(buffer[..bufferPosition]);
-        
-        /// <summary>Enumerates the elements of a <see cref="Span{T}"/>.</summary>
+        public readonly Enumerator GetEnumerator()
+        {
+            return new Enumerator(buffer[..bufferPosition]);
+        }
+
         [StructLayout(LayoutKind.Auto)]
         public ref struct Enumerator
         {
             private readonly ReadOnlySpan<char> span;
             private int index;
 
-            /// <summary>Initializes a new instance of the <see cref="Enumerator"/> struct.</summary>
-            /// <param name="span">The span to enumerate.</param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal Enumerator(ReadOnlySpan<char> span)
             {
@@ -133,18 +129,17 @@ namespace SpanUtilities.StringBuilders
                 index = -1;
             }
 
-            /// <summary>Gets the element at the current position of the enumerator.</summary>
-            /// <value>The element at the current position of the enumerator. </value>
             public readonly char Current
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get => span[index];
             }
 
-            /// <summary>Advances the enumerator to the next element of the span.</summary>
-            /// <returns>True if the enumerator was successfully advancing to the next element; false if the enumerator has passed the end of the span.</returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext() => ++index < span.Length;
+            public bool MoveNext()
+            {
+                return ++index < span.Length;
+            }
         }
     }
 }

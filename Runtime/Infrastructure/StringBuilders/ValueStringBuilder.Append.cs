@@ -24,12 +24,6 @@ namespace SpanUtilities.StringBuilders
 
             bufferPosition += charsWritten;
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(ValueStringBuilder valueStringBuilder)
-        {
-            Append(valueStringBuilder.AsSpan());
-        }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Append(ReadOnlySpan<char> value)
@@ -81,13 +75,6 @@ namespace SpanUtilities.StringBuilders
         public void AppendLine()
         {
             Append(Environment.NewLine);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void AppendLine(ReadOnlySpan<char> value)
-        {
-            Append(value);
-            AppendLine();
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
