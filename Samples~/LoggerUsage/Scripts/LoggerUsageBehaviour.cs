@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Configuration.Logger;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
@@ -9,6 +10,11 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
 {
     public class LoggerUsageBehaviour : MonoBehaviour
     {
+        private enum Test
+        {
+            Debug = 0
+        }
+        
         private void Awake()
         {
             //Log.Logger = LoggerBuilder.FromConfig(LoggerConfig.Load());
