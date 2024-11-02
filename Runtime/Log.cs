@@ -13,7 +13,7 @@ namespace OpenMyGame.LoggerUnity
     {
         private const string FormatParameterName = "format";
         
-        private static ILogger LoggerPrivate;
+        private static ILogger LoggerPrivate = new NullLogger();
 
         /// <summary>
         /// Реализация логгера
@@ -31,11 +31,6 @@ namespace OpenMyGame.LoggerUnity
                 SetNewLogger(value);
             }
         }
-
-        /// <summary>
-        /// Событие вызывается после логгирования сообщения в каждый из приемников логов
-        /// </summary>
-        public static event Action<LogMessageDestinationLoggedEventArgs> MessageToDestinationLogged;
         
         /// <summary>
         /// Событие вызывается после логгирования сообщения во все приеменики логов
