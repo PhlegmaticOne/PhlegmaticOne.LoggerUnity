@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
@@ -66,6 +67,14 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
             }
             else
             {
+                var type = parameter.GetType();
+
+                if (type.IsEnum)
+                {
+                    destination.Append(((Enum)parameter).ToStringCache());
+                    return;
+                }
+                
                 if (_messageFormatParameters.TryGetValue(parameter.GetType(), out var property))
                 {
                     property.Render(ref destination, parameter, format);
