@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity;
 using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;
 using Unity.PerformanceTesting;
@@ -22,10 +21,9 @@ namespace Tests.Performance.Android
         {
             Log.Logger = new LoggerBuilder()
                 .SetIsExtractStackTraces(true)
-                .LogToUnityDebug(x =>
+                .LogToAndroidLog(x =>
                 {
                     x.RenderAs.PlainText("[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}");
-                    x.IsUnityStacktraceEnabled = false;
                 })
                 .CreateLogger();
         }
