@@ -106,36 +106,5 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
                 ArrayPool<char>.Shared.Return(oldBufferFromPool);
             }
         }
-        
-        public readonly Enumerator GetEnumerator()
-        {
-            return new Enumerator(buffer[..bufferPosition]);
-        }
-
-        [StructLayout(LayoutKind.Auto)]
-        public ref struct Enumerator
-        {
-            private readonly ReadOnlySpan<char> span;
-            private int index;
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal Enumerator(ReadOnlySpan<char> span)
-            {
-                this.span = span;
-                index = -1;
-            }
-
-            public readonly char Current
-            {
-                [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                get => span[index];
-            }
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext()
-            {
-                return ++index < span.Length;
-            }
-        }
     }
 }

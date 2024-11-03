@@ -8,11 +8,11 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {
-    internal class LogParameterPostRendererColorize : ILogParameterPostRenderer
+    internal class LogParameterProcessorColorize : ILogParameterProcessor
     {
         private readonly IParameterColorsViewConfig _colorsViewConfig;
 
-        public LogParameterPostRendererColorize(IParameterColorsViewConfig colorsViewConfig)
+        public LogParameterProcessorColorize(IParameterColorsViewConfig colorsViewConfig)
         {
             _colorsViewConfig = colorsViewConfig;
         }
@@ -21,7 +21,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
         {
             var value = messagePart.GetValue();
             
-            if (CanProcess(messagePart, value))
+            if (CannotProcess(messagePart, value))
             {
                 return;
             }
@@ -32,7 +32,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 
         public void Postprocess(ref ValueStringBuilder destination, in MessagePart messagePart)
         {
-            if (CanProcess(messagePart, messagePart.GetValue()))
+            if (CannotProcess(messagePart, messagePart.GetValue()))
             {
                 return;
             }
@@ -40,7 +40,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
             destination.AppendColorPostfix();
         }
 
-        private static bool CanProcess(in MessagePart messagePart, in ReadOnlySpan<char> value)
+        private static bool CannotProcess(in MessagePart messagePart, in ReadOnlySpan<char> value)
         {
             return !messagePart.IsParameter || ValueIsNewLine(value);
         }

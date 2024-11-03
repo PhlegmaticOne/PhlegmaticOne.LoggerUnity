@@ -11,19 +11,14 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.Factory
     public class LogFormatFactoryData
     {
         /// <summary>
-        /// Может ли приемник логов добавить стектрейс в сообщение
-        /// </summary>
-        public bool CanAppendStacktrace { get; set; }
-        
-        /// <summary>
         /// Обрабатывает отрендеренный параметр сообщения
         /// </summary>
-        public IMessageParameterPostRenderer MessageParameterPostRenderer { get; set; }
+        public IMessageParameterProcessor MessageParameterProcessor { get; set; }
         
         /// <summary>
         /// Обрабатывает отрендеренный параметр логгируемого сообщения
         /// </summary>
-        public ILogParameterPostRenderer LogParameterPostRenderer { get; set; }
+        public ILogParameterProcessor LogParameterProcessor { get; set; }
         
         /// <summary>
         /// <see cref="LoggerConfigurationParameters"/>

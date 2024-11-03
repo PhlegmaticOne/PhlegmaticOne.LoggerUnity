@@ -140,14 +140,6 @@ namespace OpenMyGame.LoggerUnity.Parsing.Models
             
             return _format.AsSpan()[_startIndex.._endIndex];
         }
-        
-        /// <summary>
-        /// Возврщает полное значение части сообщения в виде строки (параметр + формат либо статичную строку)
-        /// </summary>
-        public string GetValueAsString()
-        {
-            return GetValue().ToString();
-        }
 
         public override string ToString()
         {

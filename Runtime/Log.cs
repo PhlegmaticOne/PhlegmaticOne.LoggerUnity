@@ -23,19 +23,10 @@ namespace OpenMyGame.LoggerUnity
             get => LoggerPrivate;
             set
             {
-                if (LoggerPrivate is not null)
-                {
-                    DisposeCurrentLogger();
-                }
-
-                SetNewLogger(value);
+                LoggerPrivate?.Dispose();
+                LoggerPrivate = value;
             }
         }
-        
-        /// <summary>
-        /// Событие вызывается после логгирования сообщения во все приеменики логов
-        /// </summary>
-        public static event Action<LogMessage> MessageLogged;
 
         /// <summary>
         /// Устанавливает активность приемника логов по ключу
@@ -208,22 +199,5 @@ namespace OpenMyGame.LoggerUnity
         public static LogMessage ErrorMessage() => Logger.CreateMessage(LogLevel.Error, 0);
 
         public static LogMessage FatalMessage() => Logger.CreateMessage(LogLevel.Fatal, 0);
-
-        private static void SetNewLogger(ILogger logger)
-        {
-            LoggerPrivate = logger;
-            LoggerPrivate.MessageLogged += OnMessageLogged;
-        }
-
-        private static void DisposeCurrentLogger()
-        {
-            LoggerPrivate.MessageLogged -= OnMessageLogged;
-            LoggerPrivate.Dispose();
-        }
-
-        private static void OnMessageLogged(LogMessage logMessage)
-        {
-            MessageLogged?.Invoke(logMessage);
-        }
     }
 }

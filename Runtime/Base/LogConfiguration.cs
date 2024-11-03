@@ -16,8 +16,8 @@ namespace OpenMyGame.LoggerUnity.Base
         private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
 
         private ILogFormatFactory _logFormatFactory;
-        private ILogParameterPostRenderer _logParameterPostRenderer;
-        private IMessageParameterPostRenderer _messageParameterPostRenderer;
+        private ILogParameterProcessor _logParameterProcessor;
+        private IMessageParameterProcessor _messageParameterProcessor;
 
         protected LogConfiguration()
         {
@@ -25,12 +25,10 @@ namespace OpenMyGame.LoggerUnity.Base
             IsEnabled = LoggerStaticData.IsEnabled;
             MinimumLogLevel = LoggerStaticData.MinimumLogLevel;
             _logFormatParameters = LoggerStaticData.LogFormatParameters;
-            _logParameterPostRenderer = LoggerStaticData.LogParameterPostRenderer;
-            _messageParameterPostRenderer = LoggerStaticData.MessageParameterPostRenderer;
+            _logParameterProcessor = LoggerStaticData.LogParameterProcessor;
+            _messageParameterProcessor = LoggerStaticData.MessageParameterProcessor;
         }
 
-        protected virtual bool CanAppendStacktrace => false;
-        
         /// <summary>
         /// Включает или выключает применик логов на старте
         /// </summary>
@@ -62,19 +60,19 @@ namespace OpenMyGame.LoggerUnity.Base
             }
         }
 
-        protected void SetMessageParameterPostRenderer(IMessageParameterPostRenderer postRenderer)
+        protected void SetMessageParameterPostRenderer(IMessageParameterProcessor processor)
         {
-            if (postRenderer is not null)
+            if (processor is not null)
             {
-                _messageParameterPostRenderer = postRenderer;
+                _messageParameterProcessor = processor;
             }
         }
 
-        protected void SetLogParameterPostRenderer(ILogParameterPostRenderer postRenderer)
+        protected void SetLogParameterPostRenderer(ILogParameterProcessor processor)
         {
-            if (postRenderer is not null)
+            if (processor is not null)
             {
-                _logParameterPostRenderer = postRenderer;
+                _logParameterProcessor = processor;
             }
         }
         
@@ -88,10 +86,9 @@ namespace OpenMyGame.LoggerUnity.Base
             return _logFormatFactory.CreateLogFormat(new LogFormatFactoryData
             {
                 LogFormatParameters = _logFormatParameters,
-                LogParameterPostRenderer = _logParameterPostRenderer,
-                MessageParameterPostRenderer = _messageParameterPostRenderer,
+                LogParameterProcessor = _logParameterProcessor,
+                MessageParameterProcessor = _messageParameterProcessor,
                 ConfigurationParameters = configurationParameters,
-                CanAppendStacktrace = CanAppendStacktrace
             });
         }
 
@@ -100,7 +97,7 @@ namespace OpenMyGame.LoggerUnity.Base
             return new MessageFormat(
                 configurationParameters.FormatParameters, 
                 configurationParameters.ParameterSerializer,
-                _messageParameterPostRenderer);
+                _messageParameterProcessor);
         }
     }
 }

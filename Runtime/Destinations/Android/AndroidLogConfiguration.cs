@@ -9,7 +9,5 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
         {
             Platform = LoggerPlatform.Android;
         }
-        
-        protected override bool CanAppendStacktrace => true;
     }
 }

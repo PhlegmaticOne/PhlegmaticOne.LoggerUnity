@@ -4,8 +4,10 @@ using System.Linq;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Static;
+using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using UnityEngine;
+using LogLevel = OpenMyGame.LoggerUnity.Messages.LogLevel;
 
 namespace OpenMyGame.LoggerUnity.Configuration.Colors
 {
@@ -49,7 +51,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors
             
             if (parameterKey.Equals(LogFormatParameterLogLevel.KeyParameter, StringComparison.OrdinalIgnoreCase))
             {
-                return _logLevelColorsMap[value.ToString()];
+                return _logLevelColorsMap[((LogLevel)value).ToStringCache()];
             }
             
             return _logParameterColorsMap.TryGetValue(parameterKey, out var color) ? color : LoggerStaticData.DefaultLogTextColor;

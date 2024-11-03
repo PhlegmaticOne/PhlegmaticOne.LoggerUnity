@@ -29,8 +29,6 @@ namespace OpenMyGame.LoggerUnity
         private bool _isEnabled;
         private bool _isDisposed;
 
-        public event Action<LogMessage> MessageLogged;
-
         public Logger(
             ILogDestination[] logDestinations,
             IMessageFormatParser messageFormatParser,
@@ -86,6 +84,8 @@ namespace OpenMyGame.LoggerUnity
             var messageParts = _messageFormatParser.Parse(logMessage.Format);
             var stacktrace = ReadOnlySpan<byte>.Empty;
 
+            #region Stacktrace
+            
             if (_isExtractStacktrace)
             {
                 var depth = LoggerStaticData.StacktraceDepth + logMessage.StacktraceDepth;
@@ -110,6 +110,8 @@ namespace OpenMyGame.LoggerUnity
                 }
             }
             
+            #endregion
+            
             foreach (var logDestination in _logDestinations.AsSpan())
             {
                 if (logDestination.CanLogMessage(logMessage))
@@ -117,8 +119,6 @@ namespace OpenMyGame.LoggerUnity
                     logDestination.LogMessage(logMessage, messageParts, parameters, stacktrace);
                 }
             }
-
-            MessageLogged?.Invoke(logMessage);
         }
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled)

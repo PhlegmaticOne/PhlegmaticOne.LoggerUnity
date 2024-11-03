@@ -6,11 +6,11 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {
-    internal class MessageParameterPostRendererColorize : IMessageParameterPostRenderer
+    internal class MessageParameterProcessorColorize : IMessageParameterProcessor
     {
         private readonly IParameterColorsViewConfig _colorsViewConfig;
 
-        public MessageParameterPostRendererColorize(IParameterColorsViewConfig colorsViewConfig)
+        public MessageParameterProcessorColorize(IParameterColorsViewConfig colorsViewConfig)
         {
             _colorsViewConfig = colorsViewConfig;
         }

@@ -14,16 +14,16 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
     {
         private readonly Dictionary<Type, IMessageFormatParameter> _messageFormatParameters;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
-        private readonly IMessageParameterPostRenderer _postRenderer;
+        private readonly IMessageParameterProcessor _processor;
 
         public MessageFormat(
             Dictionary<Type, IMessageFormatParameter> messageFormatParameters,
             IMessageFormatParameterSerializer parameterSerializer,
-            IMessageParameterPostRenderer postRenderer)
+            IMessageParameterProcessor processor)
         {
             _messageFormatParameters = messageFormatParameters;
             _parameterSerializer = parameterSerializer;
-            _postRenderer = postRenderer;
+            _processor = processor;
         }
 
         public void Render(ref ValueStringBuilder destination, MessagePart[] messageParts, Span<object> parameters)
@@ -59,7 +59,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
 
             var parameter = GetCurrentParameter(in parameters, ref currentParameterIndex);
 
-            _postRenderer.Preprocess(ref destination, parameter);
+            _processor.Preprocess(ref destination, parameter);
 
             if (parameterValue[0] == LoggerStaticData.SerializeParameterPrefix)
             {
@@ -85,7 +85,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
                 }
             }
             
-            _postRenderer.Postprocess(ref destination, parameter);
+            _processor.Postprocess(ref destination, parameter);
         }
 
         private static object GetCurrentParameter(in Span<object> parameters, ref int currentParameterIndex)

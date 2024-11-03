@@ -1,7 +1,11 @@
-﻿namespace OpenMyGame.LoggerUnity.Messages.Tagging
+﻿using System.Collections.Concurrent;
+
+namespace OpenMyGame.LoggerUnity.Messages.Tagging
 {
     public class LogTagFormat
     {
+        private static readonly ConcurrentDictionary<string, string> FormatsCache = new();
+        
         public string Format { get; private set; }
         public string Prefix { get; private set; }
         public string Postfix { get; private set; }
@@ -23,7 +27,7 @@
         
         public string AddTagToFormat(string format)
         {
-            return $"{Format} {format}";
+            return FormatsCache.GetOrAdd(format, f => $"{Format} {f}");
         }
     }
 }

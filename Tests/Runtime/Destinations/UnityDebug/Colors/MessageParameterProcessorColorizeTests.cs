@@ -8,7 +8,7 @@ using UnityEngine;
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
 {
     [TestFixture]
-    public class MessageParameterPostRendererColorizeTests
+    public class MessageParameterProcessorColorizeTests
     {
         private static class Mocks
         {
@@ -49,7 +49,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             var builder = new ValueStringBuilder();
             ColorUtility.TryParseHtmlString(colorString, out var color);
             var viewConfig = Mocks.ConfigWithMessageParameterColor(color);
-            var processor = new MessageParameterPostRendererColorize(viewConfig);
+            var processor = new MessageParameterProcessorColorize(viewConfig);
             
             //Act
             processor.Preprocess(ref builder, renderedParameter);
@@ -71,7 +71,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
             var viewConfig = Mocks.ConfigWithTagColor(color);
             var builder = new ValueStringBuilder();
             var logTag = new LogTag(tag);
-            var processor = new MessageParameterPostRendererColorize(viewConfig);
+            var processor = new MessageParameterProcessorColorize(viewConfig);
             
             //Act
             processor.Preprocess(ref builder, logTag);

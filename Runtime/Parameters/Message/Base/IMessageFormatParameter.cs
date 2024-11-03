@@ -8,11 +8,7 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
     /// </summary>
     public interface IMessageFormatParameter
     {
-        /// <summary>
-        /// Тип параметра
-        /// </summary>
         Type PropertyType { get; }
-        
         void Render(ref ValueStringBuilder destination, object parameter, ReadOnlySpan<char> format);
     }
 }

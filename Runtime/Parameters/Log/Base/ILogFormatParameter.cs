@@ -9,9 +9,6 @@ namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
     /// </summary>
     public interface ILogFormatParameter
     {
-        /// <summary>
-        /// Название параметра
-        /// </summary>
         string Key { get; }
 
         bool IsEmpty(in LogMessage message) => false;

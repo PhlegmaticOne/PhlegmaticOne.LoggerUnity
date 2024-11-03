@@ -6,8 +6,6 @@ namespace OpenMyGame.LoggerUnity
 {
     public class NullLogger : ILogger
     {
-        public event Action<LogMessage> MessageLogged;
-
         public bool IsEnabled
         {
             get => false; 
@@ -18,10 +16,7 @@ namespace OpenMyGame.LoggerUnity
 
         public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth) => new();
 
-        public void LogMessage(LogMessage logMessage, Span<object> parameters)
-        {
-            MessageLogged?.Invoke(logMessage);
-        }
+        public void LogMessage(LogMessage logMessage, Span<object> parameters) { }
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled) { }
 

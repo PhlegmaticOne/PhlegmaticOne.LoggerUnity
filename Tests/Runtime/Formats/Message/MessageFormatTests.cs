@@ -29,7 +29,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer());
+                new MessageParameterProcessor());
 
             //Act
             messageFormat.Render(ref destination, messageParts, parameters);
@@ -57,7 +57,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer());
+                new MessageParameterProcessor());
 
             //Act
             messageFormat.Render(ref destination, messageParts, parameters);
@@ -85,7 +85,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 LoggerStaticData.MessageFormatParameters,
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer());
+                new MessageParameterProcessor());
 
             //Act
             messageFormat.Render(ref destination, messageParts, parameters);
@@ -113,7 +113,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             var messageFormat = new MessageFormat(
                 new Dictionary<Type, IMessageFormatParameter>(),
                 new MessageFormatParameterSerializer(),
-                new MessageParameterPostRenderer());
+                new MessageParameterProcessor());
 
             //Act
             messageFormat.Render(ref destination, messageParts, parameters);

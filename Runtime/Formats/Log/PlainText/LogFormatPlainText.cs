@@ -11,21 +11,18 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
 {
     internal class LogFormatPlainText : ILogFormat
     {
-        private readonly bool _appendStacktraceToRenderingMessage;
         private readonly MessagePart[] _messageParts;
         private readonly Dictionary<string, ILogFormatParameter> _logFormatParameters;
-        private readonly ILogParameterPostRenderer _postRenderer;
+        private readonly ILogParameterProcessor _processor;
 
         public LogFormatPlainText(
             MessagePart[] messageParts,
-            bool appendStacktraceToRenderingMessage, 
             Dictionary<string, ILogFormatParameter> logFormatParameters,
-            ILogParameterPostRenderer postRenderer)
+            ILogParameterProcessor processor)
         {
-            _appendStacktraceToRenderingMessage = appendStacktraceToRenderingMessage;
             _messageParts = messageParts;
             _logFormatParameters = logFormatParameters;
-            _postRenderer = postRenderer;
+            _processor = processor;
         }
         
         public void Render(
@@ -42,19 +39,6 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             foreach (var messagePart in _messageParts.AsSpan())
             {
                 Render(ref destination, messagePart, in logMessage, ref messageRenderData);
-            }
-        }
-
-        private void TryAppendStacktrace(ref ValueStringBuilder destination, in ReadOnlySpan<byte> stacktrace)
-        {
-            if (_appendStacktraceToRenderingMessage && !stacktrace.IsEmpty)
-            {
-                if (destination[^1] != '\n')
-                {
-                    destination.AppendLine();
-                }
-                
-                destination.AppendEncodedBytes(stacktrace);
             }
         }
 
@@ -85,10 +69,25 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
 
             if (!property.IsEmpty(message))
             {
-                _postRenderer.Preprocess(ref destination, messagePart, property.GetValue(message));
+                _processor.Preprocess(ref destination, messagePart, property.GetValue(message));
                 property.Render(ref destination, messagePart, message);
-                _postRenderer.Postprocess(ref destination, messagePart);
+                _processor.Postprocess(ref destination, messagePart);
             }
+        }
+
+        private static void TryAppendStacktrace(ref ValueStringBuilder destination, in ReadOnlySpan<byte> stacktrace)
+        {
+            if (stacktrace.IsEmpty)
+            {
+                return;
+            }
+            
+            if (destination[^1] != '\n')
+            {
+                destination.AppendLine();
+            }
+                
+            destination.AppendEncodedBytes(stacktrace);
         }
     }
 }

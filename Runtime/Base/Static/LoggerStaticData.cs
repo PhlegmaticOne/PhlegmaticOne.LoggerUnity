@@ -35,11 +35,11 @@ namespace OpenMyGame.LoggerUnity.Base
         public static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>
             new MessageFormatParameterSerializer();
 
-        public static ILogParameterPostRenderer LogParameterPostRenderer =>
-            new LogParameterPostRenderer();
+        public static ILogParameterProcessor LogParameterProcessor =>
+            new LogParameterProcessor();
 
-        public static IMessageParameterPostRenderer MessageParameterPostRenderer =>
-            new MessageParameterPostRenderer();
+        public static IMessageParameterProcessor MessageParameterProcessor =>
+            new MessageParameterProcessor();
 
         public static Dictionary<string, ILogFormatParameter> LogFormatParameters
         {

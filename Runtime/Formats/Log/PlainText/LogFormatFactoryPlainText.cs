@@ -19,9 +19,8 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
         public ILogFormat CreateLogFormat(LogFormatFactoryData factoryData)
         {
             return new LogFormatPlainText(_messageParts,
-                factoryData.CanAppendStacktrace, 
                 factoryData.LogFormatParameters, 
-                factoryData.LogParameterPostRenderer);
+                factoryData.LogParameterProcessor);
         }
     }
 }

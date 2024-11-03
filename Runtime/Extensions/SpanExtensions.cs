@@ -4,20 +4,26 @@ namespace OpenMyGame.LoggerUnity.Extensions
 {
     internal static class SpanExtensions
     {
-        public static void ToUpperCase(this in Span<char> span)
+        public static int GetPositionAfterByte(this ref Span<byte> str, byte value, int indexNumber)
         {
-            for (var i = 0; i < span.Length; i++)
+            var currentIndex = 0;
+            var cumulativePosition = 0;
+
+            while (currentIndex < indexNumber)
             {
-                span[i] = char.ToUpper(span[i]);
+                var currentPosition = str.IndexOf(value) + 1;
+
+                if (currentPosition == -1)
+                {
+                    return -1;
+                }
+
+                currentIndex++;
+                str = str[currentPosition..];
+                cumulativePosition += currentPosition;
             }
-        }
-        
-        public static void ToLowerCase(this in Span<char> span)
-        {
-            for (var i = 0; i < span.Length; i++)
-            {
-                span[i] = char.ToLower(span[i]);
-            }
+            
+            return cumulativePosition;
         }
     }
 }

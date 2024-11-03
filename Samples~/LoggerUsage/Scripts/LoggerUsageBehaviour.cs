@@ -15,8 +15,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
-                .SetIsExtractStackTraces(true)
-                .LogToAndroidLog(config =>
+                .LogToUnityDebug(config =>
                 {
                     config.RenderAs.PlainText();
                     config.MinimumLogLevel = LogLevel.Debug;

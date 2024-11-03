@@ -2,7 +2,7 @@
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Processors
 {
-    internal class MessageParameterPostRenderer : IMessageParameterPostRenderer
+    internal class MessageParameterProcessor : IMessageParameterProcessor
     {
         public void Preprocess(ref ValueStringBuilder destination, object parameter) { }
         public void Postprocess(ref ValueStringBuilder destination, object parameter) { }
