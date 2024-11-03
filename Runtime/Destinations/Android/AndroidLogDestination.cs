@@ -2,9 +2,11 @@
 using OpenMyGame.LoggerUnity.Messages;
 using SpanUtilities.StringBuilders;
 #if UNITY_ANDROID && !UNITY_EDITOR
+using OpenMyGame.LoggerUnity.Extensions;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
+using System.Buffers;
 #endif
 
 namespace OpenMyGame.LoggerUnity.Destinations.Android
@@ -14,27 +16,26 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
 #if UNITY_ANDROID && !UNITY_EDITOR
         private const string DefaultTagValue = "Unity";
 
+        private AndroidParameterArrayPool _arrayPool;
         private AndroidJavaObject _androidLogger;
 #endif
         
         public override string DestinationName => LogDestinationsSupported.Android;
-
+        
+#if UNITY_ANDROID && !UNITY_EDITOR
         protected override void OnInitializing()
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
             _androidLogger = new AndroidJavaObject("com.openmygame.nativelogger.Logger");
-#endif
+            _arrayPool = new AndroidParameterArrayPool();
         }
+#endif
 
         protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-            if (_androidLogger is null)
-            {
-                return;
-            }
-
-            LogMessageInMainThread(logMessage, renderedMessage.ToString()).Forget();
+            var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
+            var methodName = logMessage.LogLevel.ToStringCache();
+            LogMessageInMainThread(methodName, tag, renderedMessage.arrayFromPool, renderedMessage.Length).Forget();
 #endif
         }
         
@@ -46,24 +47,17 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             base.Dispose();
         }
 
-        private async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)
+        private async UniTaskVoid LogMessageInMainThread(
+            string methodName, string tag, char[] messageBuffer, int length)
         {
-            var methodName = ToNativeMethodName(logMessage.LogLevel);
-            var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
             await UniTask.SwitchToMainThread();
-            _androidLogger.CallStatic(methodName, tag, renderedMessage);
-        }
-
-        private static string ToNativeMethodName(LogLevel logLevel)
-        {
-            return logLevel switch
-            {
-                LogLevel.Debug => "Debug",
-                LogLevel.Warning => "Warning",
-                LogLevel.Error => "Error",
-                LogLevel.Fatal => "Fatal",
-                _ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null)
-            };
+            
+            var parameters = _arrayPool.Get();
+            parameters[0] = tag;
+            parameters[1] = messageBuffer;
+            parameters[2] = length;
+            _androidLogger.CallStatic(methodName, parameters);
+            _arrayPool.Return(parameters);
         }
 #endif
     }

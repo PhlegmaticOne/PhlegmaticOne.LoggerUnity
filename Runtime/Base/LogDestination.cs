@@ -41,7 +41,7 @@ namespace OpenMyGame.LoggerUnity.Base
 
         public virtual void LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters)
         {
-            var destination = new ValueStringBuilder();
+            var destination = new ValueStringBuilder(0);
             var messageRenderData = new LogMessageRenderData(_messageFormat, parameters, messageParts);
             _logFormat.Render(ref destination, message, ref messageRenderData);
             LogRenderedMessage(message, ref destination);

@@ -12,7 +12,7 @@ namespace SpanUtilities.StringBuilders
         
         private int bufferPosition;
         private Span<char> buffer;
-        private char[] arrayFromPool;
+        internal char[] arrayFromPool;
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ValueStringBuilder(int initialCapacity = 32)
