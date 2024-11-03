@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Text;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using SpanUtilities.StringBuilders;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors

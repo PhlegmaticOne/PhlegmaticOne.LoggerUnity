@@ -3,7 +3,7 @@ using System.Buffers;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace SpanUtilities.StringBuilders
+namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
 {
     [StructLayout(LayoutKind.Sequential)]
     public ref partial struct ValueStringBuilder

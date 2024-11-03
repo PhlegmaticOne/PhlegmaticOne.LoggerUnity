@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
 {
@@ -29,10 +29,11 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
         }
         
         public void Render(
-            ref ValueStringBuilder destination, in LogMessage logMessage, ref LogMessageRenderData messageRenderData)
+            ref ValueStringBuilder destination, in LogMessage logMessage, 
+            ref LogMessageRenderData messageRenderData, in ReadOnlySpan<byte> stacktrace)
         {
             RenderLogMessage(ref destination, in logMessage, ref messageRenderData);
-            TryAppendStacktrace(ref destination, logMessage);
+            TryAppendStacktrace(ref destination, stacktrace);
         }
 
         private void RenderLogMessage(
@@ -44,17 +45,16 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             }
         }
 
-        private void TryAppendStacktrace(ref ValueStringBuilder destination, in LogMessage logMessage)
+        private void TryAppendStacktrace(ref ValueStringBuilder destination, in ReadOnlySpan<byte> stacktrace)
         {
-            if (_appendStacktraceToRenderingMessage && 
-                logMessage.Stacktrace.TryGetUserCodeStacktrace(out var userCodeStacktrace))
+            if (_appendStacktraceToRenderingMessage && !stacktrace.IsEmpty)
             {
                 if (destination[^1] != '\n')
                 {
                     destination.AppendLine();
                 }
                 
-                destination.Append(userCodeStacktrace);
+                destination.AppendEncodedBytes(stacktrace);
             }
         }
 

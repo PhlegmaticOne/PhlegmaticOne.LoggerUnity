@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpanUtilities.StringBuilders
+namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
 {
     public interface ISpanFormattable
     {

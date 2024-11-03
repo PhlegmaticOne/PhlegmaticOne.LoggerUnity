@@ -1,8 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
-namespace SpanUtilities.StringBuilders
+namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
 {
     public partial struct ValueStringBuilder
     {
@@ -47,6 +48,25 @@ namespace SpanUtilities.StringBuilders
                 ref Unsafe.As<char, byte>(ref strRef),
                 (uint)(value.Length * sizeof(char)));
 
+            bufferPosition += value.Length;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void AppendEncodedBytes(ReadOnlySpan<byte> value)
+        {
+            if (value.IsEmpty)
+            {
+                return;
+            }
+            
+            var newSize = value.Length + bufferPosition;
+            
+            if (newSize > buffer.Length)
+            {
+                Grow(newSize);
+            }
+
+            Encoding.UTF8.GetChars(value, buffer[bufferPosition..]);
             bufferPosition += value.Length;
         }
         

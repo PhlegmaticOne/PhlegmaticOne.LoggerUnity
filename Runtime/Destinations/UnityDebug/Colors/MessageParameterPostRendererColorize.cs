@@ -1,8 +1,8 @@
 ﻿using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {

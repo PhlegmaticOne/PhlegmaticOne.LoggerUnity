@@ -1,6 +1,6 @@
 ﻿using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
-using SpanUtilities.StringBuilders;
 #if UNITY_ANDROID && !UNITY_EDITOR
 using OpenMyGame.LoggerUnity.Extensions;
 using Cysharp.Threading.Tasks;

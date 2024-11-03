@@ -124,7 +124,9 @@ namespace OpenMyGame.LoggerUnity
             LogTag.Format.UpdateFormat(_tagFormat);
             
             ILogger logger = new Logger(
-                _loggerDestinations.ToArray(), GetParser(), GetConfigurationParameters(), GetMessageFactory());
+                _loggerDestinations.ToArray(), 
+                GetParser(), GetConfigurationParameters(), 
+                GetMessageFactory(), _isExtractStackTraces);
             
             logger.IsEnabled = _isEnabled;
             
@@ -132,20 +134,20 @@ namespace OpenMyGame.LoggerUnity
             
             return logger;
         }
+
+        private LoggerConfigurationParameters GetConfigurationParameters()
+        {
+            return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer);
+        }
         
         private static IMessageFormatParser GetParser()
         {
             return new MessageFormatParserCached(new MessageFormatParser());
         }
 
-        private LoggerConfigurationParameters GetConfigurationParameters()
+        private static ILogMessageFactory GetMessageFactory()
         {
-            return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer);
-        }
-
-        private ILogMessageFactory GetMessageFactory()
-        {
-            return new LogMessageFactory(_isExtractStackTraces, startStacktraceDepthLevel: 5);
+            return new LogMessageFactory();
         }
     }
 }

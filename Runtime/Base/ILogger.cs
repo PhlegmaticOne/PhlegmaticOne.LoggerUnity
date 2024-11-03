@@ -8,8 +8,8 @@ namespace OpenMyGame.LoggerUnity.Base
         event Action<LogMessage> MessageLogged;
         bool IsEnabled { get; set; }
         void Initialize();
-        LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel);
-        void LogMessage(in LogMessage logMessage, in Span<object> parameters);
+        LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth);
+        void LogMessage(LogMessage logMessage, Span<object> parameters);
         void SetDestinationEnabled(string destinationName, bool isEnabled);
     }
 }

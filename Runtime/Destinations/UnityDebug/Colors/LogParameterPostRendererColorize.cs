@@ -1,10 +1,10 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 {

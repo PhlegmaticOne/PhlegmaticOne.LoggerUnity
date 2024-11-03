@@ -1,4 +1,4 @@
-﻿using SpanUtilities.StringBuilders;
+﻿using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Processors
 {

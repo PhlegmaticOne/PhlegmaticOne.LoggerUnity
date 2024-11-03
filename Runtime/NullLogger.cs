@@ -16,9 +16,12 @@ namespace OpenMyGame.LoggerUnity
 
         public void Initialize() { }
 
-        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel) => new();
+        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth) => new();
 
-        public void LogMessage(in LogMessage logMessage, in Span<object> parameters) { }
+        public void LogMessage(LogMessage logMessage, Span<object> parameters)
+        {
+            MessageLogged?.Invoke(logMessage);
+        }
 
         public void SetDestinationEnabled(string destinationName, bool isEnabled) { }
 

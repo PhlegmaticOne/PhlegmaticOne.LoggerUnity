@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Message;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Formats.Log;
 using OpenMyGame.LoggerUnity.Formats.Message;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
@@ -39,11 +39,12 @@ namespace OpenMyGame.LoggerUnity.Base
             OnInitializing();
         }
 
-        public virtual void LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters)
+        public virtual void LogMessage(
+            in LogMessage message, MessagePart[] messageParts, Span<object> parameters, ReadOnlySpan<byte> stacktrace)
         {
             var destination = new ValueStringBuilder(0);
             var messageRenderData = new LogMessageRenderData(_messageFormat, parameters, messageParts);
-            _logFormat.Render(ref destination, message, ref messageRenderData);
+            _logFormat.Render(ref destination, message, ref messageRenderData, stacktrace);
             LogRenderedMessage(message, ref destination);
             destination.Dispose();
         }

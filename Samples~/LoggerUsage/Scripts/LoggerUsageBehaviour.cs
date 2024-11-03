@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;
@@ -14,13 +15,11 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
-                .LogToUnityDebug(config =>
+                .SetIsExtractStackTraces(true)
+                .LogToAndroidLog(config =>
                 {
                     config.RenderAs.PlainText();
                     config.MinimumLogLevel = LogLevel.Debug;
-                    config.IsUnityStacktraceEnabled = false;
-                    config.MessagePartMaxSize = 4000;
-                    config.ColorizeParameters();
                 })
                 .CreateLogger();
         }

@@ -1,4 +1,4 @@
-﻿using SpanUtilities.StringBuilders;
+﻿using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions

@@ -1,6 +1,6 @@
-﻿using OpenMyGame.LoggerUnity.Messages;
+﻿using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
+using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
 {

@@ -2,6 +2,6 @@
 {
     internal interface ILogMessageFactory
     {
-        LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepthLevel);
+        LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth);
     }
 }

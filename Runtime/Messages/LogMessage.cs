@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Messages.Stacktrace;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
@@ -17,17 +16,17 @@ namespace OpenMyGame.LoggerUnity.Messages
             LogLevel = logLevel;
             _logger = null;
             Id = 0;
-            Stacktrace = LogStacktrace.Empty;
             Exception = null;
             Format = null;
             Tag = LogTag.Empty;
+            StacktraceDepth = 0;
         }
 
-        public LogMessage(int id, LogLevel logLevel, LogStacktrace stacktrace, ILogger logger)
+        public LogMessage(int id, int stacktraceDepth, LogLevel logLevel, ILogger logger)
         {
             Id = id;
+            StacktraceDepth = stacktraceDepth;
             LogLevel = logLevel;
-            Stacktrace = stacktrace;
             _logger = logger;
             Exception = null;
             Format = null;
@@ -45,11 +44,6 @@ namespace OpenMyGame.LoggerUnity.Messages
         public LogLevel LogLevel { get; }
         
         /// <summary>
-        /// Стектрейс при вызове метода логгирования
-        /// </summary>
-        public LogStacktrace Stacktrace { get; }
-        
-        /// <summary>
         /// Исключение
         /// </summary>
         public Exception Exception { get; private set; }
@@ -63,6 +57,8 @@ namespace OpenMyGame.LoggerUnity.Messages
         /// Формат переданный в метод <see cref="Log(string)"/>
         /// </summary>
         public string Format { get; private set; }
+        
+        public int StacktraceDepth { get; }
 
         /// <summary>
         /// Проверяет сообщение на наличие тега
@@ -74,14 +70,27 @@ namespace OpenMyGame.LoggerUnity.Messages
         }
 
         /// <summary>
-        /// Проверяет сообщение на наличие стектрейса
+        /// Устанавливает тег для сообщения
         /// </summary>
-        /// <returns><b>true</b> - стектрейс есть, <b>false</b> - нет</returns>
-        public bool HasStacktrace()
+        public void SetTag(string tag)
         {
-            return Stacktrace.HasValue();
+            if (!string.IsNullOrEmpty(tag))
+            {
+                Tag = new LogTag(tag);
+            }
         }
 
+        /// <summary>
+        /// Устанавливает исключение для сообщения
+        /// </summary>
+        public void SetException(Exception exception)
+        {
+            if (exception is not null)
+            {
+                Exception = exception;
+            }
+        }
+        
         /// <summary>
         /// Устанавливает тег для сообщения
         /// </summary>
@@ -91,7 +100,7 @@ namespace OpenMyGame.LoggerUnity.Messages
             {
                 Tag = new LogTag(tag);
             }
-
+            
             return this;
         }
 

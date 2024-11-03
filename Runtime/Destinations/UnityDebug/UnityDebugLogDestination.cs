@@ -2,9 +2,9 @@
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Exceptions;
-using SpanUtilities.StringBuilders;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug

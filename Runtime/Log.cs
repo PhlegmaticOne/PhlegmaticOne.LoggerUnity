@@ -55,9 +55,9 @@ namespace OpenMyGame.LoggerUnity
                 return;
             }
 
-            Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 0)
-                .WithException(exception)
-                .Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
+            var message = Logger.CreateMessage(LogLevel.Fatal, 0);
+            message.SetException(exception);
+            message.Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
 
         public static LogWithTag WithTag(string tag)
@@ -201,13 +201,13 @@ namespace OpenMyGame.LoggerUnity
             FatalMessage().Log(format, parameters);
         }
 
-        public static LogMessage DebugMessage() => Logger.CreateMessage(LogLevel.Debug, stacktraceDepthLevel: 0);
+        public static LogMessage DebugMessage() => Logger.CreateMessage(LogLevel.Debug, 0);
 
-        public static LogMessage WarningMessage() => Logger.CreateMessage(LogLevel.Warning, stacktraceDepthLevel: 0);
+        public static LogMessage WarningMessage() => Logger.CreateMessage(LogLevel.Warning, 0);
 
-        public static LogMessage ErrorMessage() => Logger.CreateMessage(LogLevel.Error, stacktraceDepthLevel: 0);
+        public static LogMessage ErrorMessage() => Logger.CreateMessage(LogLevel.Error, 0);
 
-        public static LogMessage FatalMessage() => Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 0);
+        public static LogMessage FatalMessage() => Logger.CreateMessage(LogLevel.Fatal, 0);
 
         private static void SetNewLogger(ILogger logger)
         {

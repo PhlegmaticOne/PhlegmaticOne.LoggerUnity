@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Formats.Message;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing.Models;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
 {

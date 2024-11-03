@@ -9,7 +9,7 @@ namespace OpenMyGame.LoggerUnity
     public readonly struct LogWithTag
     {
         private const string FormatParameterName = "format";
-        
+
         private readonly string _tag;
 
         public LogWithTag(string tag)
@@ -20,25 +20,25 @@ namespace OpenMyGame.LoggerUnity
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Exception(Exception exception)
         {
-            Log.Logger.CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 1)
-                .WithTag(_tag)
-                .WithException(exception)
-                .Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
+            var message = Log.Logger.CreateMessage(LogLevel.Fatal, 0);
+            message.SetTag(_tag);
+            message.SetException(exception);
+            message.Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
-        
+
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Debug(string message)
         {
             DebugMessage().Log(message);
         }
-        
+
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Debug<T>(string format, T parameter1)
         {
             DebugMessage().Log(format, parameter1);
         }
-        
+
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Debug<T1, T2>(string format, T1 parameter1, T2 parameter2)
@@ -52,14 +52,14 @@ namespace OpenMyGame.LoggerUnity
         {
             DebugMessage().Log(format, parameter1, parameter2, parameter3);
         }
-        
+
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Debug(string format, params object[] parameters)
         {
             DebugMessage().Log(format, parameters);
         }
-        
+
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Warning(string message)
         {
@@ -93,7 +93,7 @@ namespace OpenMyGame.LoggerUnity
         {
             WarningMessage().Log(format, parameters);
         }
-        
+
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Error(string message)
         {
@@ -127,7 +127,7 @@ namespace OpenMyGame.LoggerUnity
         {
             ErrorMessage().Log(format, parameters);
         }
-        
+
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Fatal(string message)
         {
@@ -154,7 +154,7 @@ namespace OpenMyGame.LoggerUnity
         {
             FatalMessage().Log(format, parameter1, parameter2, parameter3);
         }
-        
+
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Fatal(string format, params object[] parameters)
@@ -164,30 +164,30 @@ namespace OpenMyGame.LoggerUnity
 
         public LogMessage DebugMessage()
         {
-            return Log.Logger
-                .CreateMessage(LogLevel.Debug, stacktraceDepthLevel: 1)
-                .WithTag(_tag);
+            var message = Log.Logger.CreateMessage(LogLevel.Debug, 0);
+            message.SetTag(_tag);
+            return message;
         }
 
         public LogMessage WarningMessage()
         {
-            return Log.Logger
-                .CreateMessage(LogLevel.Warning, stacktraceDepthLevel: 1)
-                .WithTag(_tag);
+            var message = Log.Logger.CreateMessage(LogLevel.Warning, 0);
+            message.SetTag(_tag);
+            return message;
         }
 
         public LogMessage ErrorMessage()
         {
-            return Log.Logger
-                .CreateMessage(LogLevel.Error, stacktraceDepthLevel: 1)
-                .WithTag(_tag);
+            var message = Log.Logger.CreateMessage(LogLevel.Error, 0);
+            message.SetTag(_tag);
+            return message;
         }
 
         public LogMessage FatalMessage()
         {
-            return Log.Logger
-                .CreateMessage(LogLevel.Fatal, stacktraceDepthLevel: 1)
-                .WithTag(_tag);
+            var message = Log.Logger.CreateMessage(LogLevel.Fatal, 0);
+            message.SetTag(_tag);
+            return message;
         }
     }
 }

@@ -24,6 +24,10 @@ namespace OpenMyGame.LoggerUnity.Base
         public const string LogFormat = "{Message}{NewLine}{Exception}";
         public const string TagFormat = "#{Tag}#";
         public const string MessageParameterKey = "Message";
+        
+        public const int StacktraceDepth = 4;
+        public const int StacktraceBufferSize = 18000;
+        public const byte NewLineByte = 10;
 
         public const bool IsExtractStacktrace = false;
         public const bool IsEnabled = true;

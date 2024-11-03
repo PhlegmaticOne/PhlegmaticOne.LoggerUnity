@@ -1,5 +1,5 @@
-﻿using OpenMyGame.LoggerUnity.Parsing.Models;
-using SpanUtilities.StringBuilders;
+﻿using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Processors
 {

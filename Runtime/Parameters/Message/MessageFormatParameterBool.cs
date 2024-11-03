@@ -1,7 +1,7 @@
 using System;
 using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
-using SpanUtilities.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message
 {
