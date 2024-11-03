@@ -19,7 +19,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
         {
             //Arrange
             var messageParts = Array.Empty<MessagePart>();
-            var destination = ValueStringBuilder.Create();
+            var destination = new ValueStringBuilder();
 
             var parameters = new object[]
             {
@@ -47,7 +47,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 MessagePart.Message("Test "),
                 MessagePart.Parameter("Value")
             };
-            var destination = ValueStringBuilder.Create();
+            var destination = new ValueStringBuilder();
 
             var parameters = new object[]
             {
@@ -75,7 +75,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 MessagePart.Message("Test "),
                 MessagePart.Parameter("Value:u"),
             };
-            var destination = ValueStringBuilder.Create();
+            var destination = new ValueStringBuilder();
 
             var parameters = new object[]
             {
@@ -103,7 +103,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
                 MessagePart.Message("Test "),
                 MessagePart.Parameter("@Value")
             };
-            var destination = ValueStringBuilder.Create();
+            var destination = new ValueStringBuilder();
             
             var parameters = new object[]
             {

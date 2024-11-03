@@ -1,7 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System;
 using System.Runtime.InteropServices;
-using SpanUtilities.StringBuilders.SpanFormattables;
 
 namespace SpanUtilities.StringBuilders
 {
@@ -80,90 +79,23 @@ namespace SpanUtilities.StringBuilders
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Append(Guid value, ReadOnlySpan<char> format = default, int bufferSize = 36)
         {
-            Append(new SpanFormattableGuid(value), format, bufferSize);
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(int value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableInt32(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(float value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableFloat(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(double value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableDouble(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(byte value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableByte(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(long value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableInt64(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(short value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableInt16(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(sbyte value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableSByte(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(uint value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableUInt32(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(ulong value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableUInt64(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(ushort value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableUInt16(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(decimal value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableDecimal(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(DateTime value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableDateTime(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append(TimeSpan value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-        {
-            Append(new SpanFormattableTimeSpan(value), format, bufferSize);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append<T>(T value, ReadOnlySpan<char> format = default, int bufferSize = 36)
-            where T : ISpanFormattable
+        public void Append(int value, ReadOnlySpan<char> format = default, int bufferSize = 11)
         {
             var newSize = bufferSize + bufferPosition;
             
@@ -175,6 +107,241 @@ namespace SpanUtilities.StringBuilders
             if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
             {
                 throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(float value, ReadOnlySpan<char> format = default, int bufferSize = 24)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(double value, ReadOnlySpan<char> format = default, int bufferSize = 36)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(byte value, ReadOnlySpan<char> format = default, int bufferSize = 3)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(long value, ReadOnlySpan<char> format = default, int bufferSize = 21)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(short value, ReadOnlySpan<char> format = default, int bufferSize = 6)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(sbyte value, ReadOnlySpan<char> format = default, int bufferSize = 4)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(uint value, ReadOnlySpan<char> format = default, int bufferSize = 10)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(ulong value, ReadOnlySpan<char> format = default, int bufferSize = 20)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(ushort value, ReadOnlySpan<char> format = default, int bufferSize = 5)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(decimal value, ReadOnlySpan<char> format = default, int bufferSize = 40)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(DateTime value, ReadOnlySpan<char> format = default, int bufferSize = 40)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(TimeSpan value, ReadOnlySpan<char> format = default, int bufferSize = 13)
+        {
+            var newSize = bufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {bufferSize}) large enough?");
+            }
+
+            bufferPosition += written;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append<T>(T value, ReadOnlySpan<char> format = default)
+            where T : ISpanFormattable
+        {
+            var newSize = value.BufferSize + bufferPosition;
+            
+            if (newSize >= Capacity)
+            {
+                Grow(newSize);
+            }
+
+            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
+            {
+                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {value.BufferSize}) large enough?");
             }
 
             bufferPosition += written;

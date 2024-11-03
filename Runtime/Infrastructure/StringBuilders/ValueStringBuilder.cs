@@ -8,18 +8,14 @@ namespace SpanUtilities.StringBuilders
     [StructLayout(LayoutKind.Sequential)]
     public ref partial struct ValueStringBuilder
     {
+        private const int InitialBufferCapacity = 32768;
+        
         private int bufferPosition;
         private Span<char> buffer;
         private char[] arrayFromPool;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ValueStringBuilder Create()
-        {
-            return new ValueStringBuilder(32);
-        }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ValueStringBuilder(int initialCapacity)
+        public ValueStringBuilder(int initialCapacity = 32)
         {
             bufferPosition = 0;
             buffer = default;
@@ -82,7 +78,7 @@ namespace SpanUtilities.StringBuilders
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Grow(int capacity = 0)
         {
-            var size = buffer.Length == 0 ? 8 : buffer.Length;
+            var size = buffer.Length == 0 ? InitialBufferCapacity : buffer.Length;
 
             while (size < capacity)
             {
