@@ -3,7 +3,6 @@ using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 #if UNITY_ANDROID && !UNITY_EDITOR
 using OpenMyGame.LoggerUnity.Extensions;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
 using System.Buffers;
@@ -35,7 +34,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
 #if UNITY_ANDROID && !UNITY_EDITOR
             var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
             var methodName = logMessage.LogLevel.ToStringCache();
-            LogMessageInMainThread(methodName, tag, renderedMessage.arrayFromPool, renderedMessage.Length).Forget();
+            Log(methodName, tag, renderedMessage.arrayFromPool, renderedMessage.Length);
 #endif
         }
         
@@ -47,11 +46,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
             base.Dispose();
         }
 
-        private async UniTaskVoid LogMessageInMainThread(
-            string methodName, string tag, char[] messageBuffer, int length)
+        private void Log(string methodName, string tag, char[] messageBuffer, int length)
         {
-            await UniTask.SwitchToMainThread();
-            
             var parameters = _arrayPool.Get();
             parameters[0] = tag;
             parameters[1] = messageBuffer;

@@ -2,7 +2,6 @@
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 #if !UNITY_EDITOR && UNITY_IOS
-using Cysharp.Threading.Tasks;
 using System.Runtime.InteropServices;
 #endif
 
@@ -33,16 +32,13 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
 #if !UNITY_EDITOR && UNITY_IOS
             var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
             var logLevel = logMessage.LogLevel;
-            LogMessageInMainThread(tag, logLevel, renderedMessage.ToString()).Forget();
+            Log(tag, logLevel, renderedMessage.ToString());
 #endif
         }
         
 #if !UNITY_EDITOR && UNITY_IOS
-        private static async UniTaskVoid LogMessageInMainThread(
-            string tag, LogLevel logLevel, string renderedMessage)
+        private static void Log(string tag, LogLevel logLevel, string renderedMessage)
         {
-            await UniTask.SwitchToMainThread();
-
             switch (logLevel)
             {
                 case LogLevel.Debug:

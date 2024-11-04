@@ -8,7 +8,7 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
     [StructLayout(LayoutKind.Sequential)]
     public ref partial struct ValueStringBuilder
     {
-        private const int InitialBufferCapacity = 32768;
+        public const int MinBufferCapacity = 64;
         
         private int bufferPosition;
         private Span<char> buffer;
@@ -78,7 +78,7 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Grow(int capacity = 0)
         {
-            var size = buffer.Length == 0 ? InitialBufferCapacity : buffer.Length;
+            var size = buffer.Length == 0 ? MinBufferCapacity : buffer.Length;
 
             while (size < capacity)
             {
