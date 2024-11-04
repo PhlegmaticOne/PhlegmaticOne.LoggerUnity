@@ -1,13 +1,15 @@
-﻿namespace OpenMyGame.LoggerUnity.Extensions
+﻿using System.Buffers;
+
+namespace OpenMyGame.LoggerUnity.Extensions
 {
     internal static class ArrayExtensions
     {
-        public static T[] PrependValue<T>(this T[] array, T value)
+        public static object[] PrependValue(this object[] array, object value)
         {
-            var result = new T[array.Length + 1];
-            result[0] = value;
-            array.CopyTo(result, 1);
-            return result;
+            var rent = ArrayPool<object>.Shared.Rent(array.Length + 1);
+            rent[0] = value;
+            array.CopyTo(rent, 1);
+            return rent;
         }
     }
 }

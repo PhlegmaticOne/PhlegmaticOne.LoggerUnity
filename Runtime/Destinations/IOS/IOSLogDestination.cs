@@ -1,7 +1,7 @@
 ﻿using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
-#if UNITY_IOS && !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_IOS
 using Cysharp.Threading.Tasks;
 using System.Runtime.InteropServices;
 #endif
@@ -10,7 +10,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
 {
     public class IOSLogDestination : LogDestination<IOSLogConfiguration>
     {
-#if UNITY_IOS && !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_IOS
         private const string DefaultTagValue = "Unity";
 
         [DllImport("__Internal")]
@@ -30,18 +30,20 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
 
         protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {
-#if UNITY_IOS && !UNITY_EDITOR
-            LogMessageInMainThread(logMessage, renderedMessage.ToString()).Forget();
+#if !UNITY_EDITOR && UNITY_IOS
+            var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
+            var logLevel = logMessage.LogLevel;
+            LogMessageInMainThread(tag, logLevel, renderedMessage.ToString()).Forget();
 #endif
         }
         
-#if UNITY_IOS && !UNITY_EDITOR
-        private static async UniTaskVoid LogMessageInMainThread(LogMessage logMessage, string renderedMessage)
+#if !UNITY_EDITOR && UNITY_IOS
+        private static async UniTaskVoid LogMessageInMainThread(
+            string tag, LogLevel logLevel, string renderedMessage)
         {
-            var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
             await UniTask.SwitchToMainThread();
 
-            switch (logMessage.LogLevel)
+            switch (logLevel)
             {
                 case LogLevel.Debug:
                     NativeLoggerIos_Debug(tag, renderedMessage);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Diagnostics;
 using OpenMyGame.LoggerUnity.Attributes;
 using OpenMyGame.LoggerUnity.Base;
@@ -116,7 +117,9 @@ namespace OpenMyGame.LoggerUnity.Messages
             }
 
             Format = AddTagToFormat(format);
-            _logger.LogMessage(this, parameters.PrependValue(Tag));
+            var parametersAppend = parameters.PrependValue(Tag); 
+            _logger.LogMessage(this, parametersAppend);
+            ArrayPool<object>.Shared.Return(parametersAppend, true);
         }
         
         private void LogPrivate<T>(string format, T parameter1)

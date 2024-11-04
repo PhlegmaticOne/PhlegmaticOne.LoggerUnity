@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions
 {
-    public static class ValueStringBuilderExtensions
+    internal static class ValueStringBuilderExtensions
     {
         private static readonly ConcurrentDictionary<Color, string> ColorsMap = new();
         

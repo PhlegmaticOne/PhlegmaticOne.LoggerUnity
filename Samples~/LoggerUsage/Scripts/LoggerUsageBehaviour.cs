@@ -9,6 +9,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
 {
     public class LoggerUsageBehaviour : MonoBehaviour
     {
+        private const string LongFormat = "Time: {Time}; Weather: {Weather}, Velocity: {Velocity}; Mass: {Mass}; Acceleration: {Acceleration}";
+
         private void Awake()
         {
             //Log.Logger = LoggerBuilder.FromConfig(LoggerConfig.Load());
@@ -34,6 +36,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.WithTag("Time").Warning("Warning current time with tag: {Time}", DateTime.Now);
             Log.WithTag("Time").Error("Error current time with tag: {Time}", DateTime.Now);
             Log.WithTag("Time").Fatal("Fatal current time with tag: {Time}", DateTime.Now);
+            
+            Log.WithTag("Test").Debug(LongFormat, DateTime.Now, 42, 69, 420, 690);
             
             LogWithTag();
             
