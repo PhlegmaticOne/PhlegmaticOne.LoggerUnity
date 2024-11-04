@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using OpenMyGame.LoggerUnity;
 using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
@@ -9,25 +9,24 @@ using UnityEngine;
 namespace Tests.Performance.Android
 {
     [TestFixture]
-    public class LoggerAndroidWithoutStacktracePerformanceTests
+    public class AndroidSimpleMessageWithStacktrace
     {
         private const int WarmupCount = 10;
         private const int IterationsCount = 100;
         private const int MeasurementsCount = 15;
-
+        
         [OneTimeSetUp]
         public void Setup()
         {
             Log.Logger = new LoggerBuilder()
-                .SetIsExtractStackTraces(false)
+                .SetIsExtractStackTraces(true)
                 .LogToAndroidLog(x =>
                 {
-                    x.RenderAs.PlainText(
-                        "[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}{NewLine}{Exception}");
+                    x.RenderAs.PlainText("[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}{NewLine}{Exception}");
                 })
                 .CreateLogger();
         }
-
+        
         [Test, Performance]
         public void Performance_DebugLog()
         {

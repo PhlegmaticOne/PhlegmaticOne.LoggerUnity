@@ -1,3 +1,6 @@
+﻿using System;
+using System.Text;
+using System.Threading;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity;
 using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
@@ -9,24 +12,25 @@ using UnityEngine;
 namespace Tests.Performance.Android
 {
     [TestFixture]
-    public class LoggerAndroidWithStacktracePerformanceTests
+    public class AndroidStringBuilderNoStacktrace
     {
-        private const int WarmupCount = 10;
-        private const int IterationsCount = 100;
-        private const int MeasurementsCount = 15;
-        
+        private const int WarmupCount = 5;
+        private const int IterationsCount = 80;
+        private const int MeasurementsCount = 50;
+
         [OneTimeSetUp]
         public void Setup()
         {
             Log.Logger = new LoggerBuilder()
-                .SetIsExtractStackTraces(true)
+                .SetIsExtractStackTraces(false)
                 .LogToAndroidLog(x =>
                 {
-                    x.RenderAs.PlainText("[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}{NewLine}{Exception}");
+                    x.RenderAs.PlainText(
+                        "[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}{NewLine}{Exception}");
                 })
                 .CreateLogger();
         }
-        
+
         [Test, Performance]
         public void Performance_DebugLog()
         {
@@ -43,7 +47,7 @@ namespace Tests.Performance.Android
         public void Performance_AndroidLog()
         {
             Measure
-                .Method(() => Log.Debug("Test message"))
+                .Method(LogMessageAndroid)
                 .WarmupCount(WarmupCount)
                 .SampleGroup(new SampleGroup("Performance.AndroidLog"))
                 .IterationsPerMeasurement(IterationsCount)
@@ -68,7 +72,7 @@ namespace Tests.Performance.Android
         public void Memory_AndroidLog()
         {
             Measure
-                .Method(() => Log.Debug("Test message"))
+                .Method(LogMessageAndroid)
                 .WarmupCount(WarmupCount)
                 .GC()
                 .SampleGroup(new SampleGroup("Memory.AndroidLog", SampleUnit.Megabyte))
@@ -76,13 +80,23 @@ namespace Tests.Performance.Android
                 .MeasurementCount(MeasurementsCount)
                 .Run();
         }
-
+        
         private static void LogMessageDebug()
         {
-            var thread = 1;
-            var loglevel = LogLevel.Debug;
-            var message = "TestMessage";
-            Debug.Log($"[Thread: {thread}, LogLevel: {loglevel}] {message}\n");
+            var sb = new StringBuilder()
+                .AppendFormat("[Thread: {0}, ", Thread.CurrentThread.ManagedThreadId)
+                .AppendFormat("LogLevel: {0}] ", LogLevel.Debug)
+                .AppendFormat("#{0}# ", "Tag")
+                .AppendFormat("Current time: {0:D}; ", DateTime.Now)
+                .AppendFormat("Weather: {0}", 42)
+                .AppendLine();
+            
+            Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", sb.ToString());
+        }
+
+        private static void LogMessageAndroid()
+        {
+            Log.WithTag("Test").Debug("Current time: {Time:D}; Weather: {Weather}", DateTime.Now, 42);
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Threading;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity;
 using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
@@ -12,11 +10,11 @@ using UnityEngine;
 namespace Tests.Performance.Android
 {
     [TestFixture]
-    public class LoggerAndroidStringBuilderPerformanceTests
+    public class AndroidTwoParametersWithStacktrace
     {
         private const int WarmupCount = 5;
-        private const int IterationsCount = 80;
-        private const int MeasurementsCount = 50;
+        private const int IterationsCount = 30;
+        private const int MeasurementsCount = 125;
 
         [OneTimeSetUp]
         public void Setup()
@@ -25,8 +23,7 @@ namespace Tests.Performance.Android
                 .SetIsExtractStackTraces(true)
                 .LogToAndroidLog(x =>
                 {
-                    x.RenderAs.PlainText(
-                        "[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}{NewLine}{Exception}");
+                    x.RenderAs.PlainText("[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}");
                 })
                 .CreateLogger();
         }
@@ -80,18 +77,14 @@ namespace Tests.Performance.Android
                 .MeasurementCount(MeasurementsCount)
                 .Run();
         }
-        
+
         private static void LogMessageDebug()
         {
-            var sb = new StringBuilder()
-                .AppendFormat("[Thread: {0}, ", Thread.CurrentThread.ManagedThreadId)
-                .AppendFormat("LogLevel: {0}]", LogLevel.Debug)
-                .AppendFormat("#{0}# ", "Tag")
-                .AppendFormat("Current time: {0:D}; ", DateTime.Now)
-                .AppendFormat("Weather: {0}", 42)
-                .AppendLine();
-            
-            Debug.Log(sb.ToString());
+            var thread = 1;
+            var loglevel = LogLevel.Debug;
+            var message = $"Current Time: {DateTime.Now:D}; Weather: {42}";
+            var tag = "Test";
+            Debug.Log($"[Thread: {thread}, LogLevel: {loglevel}] #{tag}# {message}");
         }
 
         private static void LogMessageAndroid()

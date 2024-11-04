@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Threading;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity;
 using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
@@ -10,20 +12,23 @@ using UnityEngine;
 namespace Tests.Performance.Android
 {
     [TestFixture]
-    public class LoggerAndroidWithTwoParametersAndTagTests
+    public class AndroidWithManyParametersNoStacktrace
     {
+        private const string Format = "Time: {Time}; Weather: {Weather}, Velocity: {Velocity}; Mass: {Mass}; Acceleration: {Acceleration}";
+
         private const int WarmupCount = 5;
         private const int IterationsCount = 30;
-        private const int MeasurementsCount = 125;
+        private const int MeasurementsCount = 130;
 
         [OneTimeSetUp]
         public void Setup()
         {
             Log.Logger = new LoggerBuilder()
-                .SetIsExtractStackTraces(true)
+                .SetIsExtractStackTraces(false)
                 .LogToAndroidLog(x =>
                 {
-                    x.RenderAs.PlainText("[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}");
+                    x.RenderAs.PlainText(
+                        "[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}{NewLine}{Exception}");
                 })
                 .CreateLogger();
         }
@@ -77,19 +82,26 @@ namespace Tests.Performance.Android
                 .MeasurementCount(MeasurementsCount)
                 .Run();
         }
-
+        
         private static void LogMessageDebug()
         {
-            var thread = 1;
-            var loglevel = LogLevel.Debug;
-            var message = $"Current Time: {DateTime.Now:D}; Weather: {42}";
-            var tag = "Test";
-            Debug.Log($"[Thread: {thread}, LogLevel: {loglevel}] #{tag}# {message}");
+            var sb = new StringBuilder()
+                .AppendFormat("[Thread: {0}, ", Thread.CurrentThread.ManagedThreadId)
+                .AppendFormat("LogLevel: {0}] ", LogLevel.Debug)
+                .AppendFormat("#{0}# ", "Tag")
+                .AppendFormat("Time: {0}; ", DateTime.Now)
+                .AppendFormat("Weather: {0}; ", 42)
+                .AppendFormat("Velocity: {0}; ", 69)
+                .AppendFormat("Mass: {0}; ", 420)
+                .AppendFormat("Acceleration: {0}", 690)
+                .AppendLine();
+            
+            Debug.LogFormat(LogType.Log, LogOption.NoStacktrace, null, "{0}", sb.ToString());
         }
 
         private static void LogMessageAndroid()
         {
-            Log.WithTag("Test").Debug("Current time: {Time:D}; Weather: {Weather}", DateTime.Now, 42);
+            Log.WithTag("Test").Debug(Format, DateTime.Now, 42, 69, 420, 690);
         }
     }
 }
