@@ -17,26 +17,15 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
 
         public void Preprocess(ref ValueStringBuilder destination, object parameter)
         {
-            if (parameter is LogTag tag)
-            {
-                var color = _colorsViewConfig.GetTagColor(tag.Value);
-                destination.AppendColorPrefix(color);
-                destination.Append(LogTag.Format.Prefix);
-            }
-            else
-            {
-                var color = _colorsViewConfig.GetMessageParameterColor(parameter);
-                destination.AppendColorPrefix(color);
-            }
+            var color = parameter is LogTag tag
+                ? _colorsViewConfig.GetTagColor(tag.Value)
+                : _colorsViewConfig.GetMessageParameterColor(parameter);
+
+            destination.AppendColorPrefix(color);
         }
 
         public void Postprocess(ref ValueStringBuilder destination, object parameter)
         {
-            if (parameter is LogTag)
-            {
-                destination.Append(LogTag.Format.Postfix);
-            }
-            
             destination.AppendColorPostfix();
         }
     }

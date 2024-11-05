@@ -45,6 +45,7 @@ namespace OpenMyGame.LoggerUnity.Base
             var destination = new ValueStringBuilder(stacktrace.Length + ValueStringBuilder.MinBufferCapacity);
             var messageRenderData = new LogMessageRenderData(_messageFormat, parameters, messageParts);
             _logFormat.Render(ref destination, message, ref messageRenderData, stacktrace);
+            destination.Append('\0');
             LogRenderedMessage(message, ref destination);
             destination.Dispose();
         }
