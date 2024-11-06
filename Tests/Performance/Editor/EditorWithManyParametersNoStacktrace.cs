@@ -46,7 +46,7 @@ namespace Tests.Performance.Editor
         }
 
         [Test, Performance]
-        public void Performance_AndroidLog()
+        public void Performance_EditorLog()
         {
             Measure
                 .Method(LogMessageEditor)
