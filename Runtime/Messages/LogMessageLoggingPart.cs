@@ -9,7 +9,7 @@ using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {
-    public ref partial struct LogMessage
+    public partial struct LogMessage
     {
         private const string FormatParameterName = "format";
         

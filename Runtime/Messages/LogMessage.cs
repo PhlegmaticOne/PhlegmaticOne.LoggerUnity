@@ -7,7 +7,7 @@ namespace OpenMyGame.LoggerUnity.Messages
     /// <summary>
     /// Класс сообщения, используемый при логгировании
     /// </summary>
-    public ref partial struct LogMessage
+    public partial struct LogMessage
     {
         private readonly ILogger _logger;
 
