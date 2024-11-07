@@ -9,7 +9,7 @@ using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {
-    public partial struct LogMessage
+    public ref partial struct LogMessage
     {
         private const string FormatParameterName = "format";
         
@@ -26,8 +26,7 @@ namespace OpenMyGame.LoggerUnity.Messages
             
             if (!Tag.HasValue())
             {
-                Format = format;
-                _logger.LogMessage(this, Span<object>.Empty);
+                LogPrivate(format, Span<object>.Empty);
                 return;
             }
 
@@ -111,14 +110,12 @@ namespace OpenMyGame.LoggerUnity.Messages
             
             if (!Tag.HasValue())
             {
-                Format = format;
-                _logger.LogMessage(this, parameters);
+                LogPrivate(format, parameters.AsSpan());
                 return;
             }
-
-            Format = AddTagToFormat(format);
+            
             var parametersAppend = parameters.PrependValue(Tag); 
-            _logger.LogMessage(this, parametersAppend);
+            LogPrivate(AddTagToFormat(format), parametersAppend.AsSpan());
             ArrayPool<object>.Shared.Return(parametersAppend, true);
         }
         
@@ -161,6 +158,12 @@ namespace OpenMyGame.LoggerUnity.Messages
             parameters[1] = parameter2;
             parameters[2] = parameter3;
             parameters[3] = parameter4;
+            _logger.LogMessage(this, parameters);
+        }
+
+        private void LogPrivate(string format, Span<object> parameters)
+        {
+            Format = format;
             _logger.LogMessage(this, parameters);
         }
 
