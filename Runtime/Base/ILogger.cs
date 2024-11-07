@@ -7,7 +7,7 @@ namespace OpenMyGame.LoggerUnity.Base
     {
         bool IsEnabled { get; set; }
         void Initialize();
-        LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth);
+        LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null);
         void LogMessage(LogMessage logMessage, Span<object> parameters);
         void SetDestinationEnabled(string destinationName, bool isEnabled);
     }

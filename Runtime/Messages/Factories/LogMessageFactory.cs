@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace OpenMyGame.LoggerUnity.Messages.Factories
 {
@@ -6,13 +7,13 @@ namespace OpenMyGame.LoggerUnity.Messages.Factories
     {
         private int _currentMessageId = -1;
         
-        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth)
+        public LogMessage CreateMessage(LogLevel logLevel, string tag, Exception exception)
         {
-            return new LogMessage(
-                Interlocked.Increment(ref _currentMessageId), 
-                stacktraceDepth,
-                logLevel, 
-                Log.Logger);
+            var messageId = Interlocked.Increment(ref _currentMessageId);
+            var message = new LogMessage(messageId, logLevel);
+            message.SetException(exception);
+            message.SetTag(tag);
+            return message;
         }
     }
 }

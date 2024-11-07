@@ -125,7 +125,7 @@ namespace OpenMyGame.LoggerUnity.Messages
             var propertiesInlineArray = new PropertyInlineArray1();
             var parameters = propertiesInlineArray.AsSpan();
             parameters[0] = parameter1;
-            _logger.LogMessage(this, parameters);
+            LoggerUnity.Log.Logger.LogMessage(this, parameters);
         }
         
         private void LogPrivate<T1, T2>(string format, T1 parameter1, T2 parameter2)
@@ -135,7 +135,7 @@ namespace OpenMyGame.LoggerUnity.Messages
             var parameters = propertiesInlineArray.AsSpan();
             parameters[0] = parameter1;
             parameters[1] = parameter2;
-            _logger.LogMessage(this, parameters);
+            LoggerUnity.Log.Logger.LogMessage(this, parameters);
         }
         
         private void LogPrivate<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
@@ -146,7 +146,7 @@ namespace OpenMyGame.LoggerUnity.Messages
             parameters[0] = parameter1;
             parameters[1] = parameter2;
             parameters[2] = parameter3;
-            _logger.LogMessage(this, parameters);
+            LoggerUnity.Log.Logger.LogMessage(this, parameters);
         }
         
         private void LogPrivate<T1, T2, T3, T4>(string format, T1 parameter1, T2 parameter2, T3 parameter3, T4 parameter4)
@@ -158,18 +158,18 @@ namespace OpenMyGame.LoggerUnity.Messages
             parameters[1] = parameter2;
             parameters[2] = parameter3;
             parameters[3] = parameter4;
-            _logger.LogMessage(this, parameters);
+            LoggerUnity.Log.Logger.LogMessage(this, parameters);
         }
 
         private void LogPrivate(string format, Span<object> parameters)
         {
             Format = format;
-            _logger.LogMessage(this, parameters);
+            LoggerUnity.Log.Logger.LogMessage(this, parameters);
         }
 
-        private bool CanLogMessage(string format)
+        private static bool CanLogMessage(string format)
         {
-            return _logger is not null && _logger.IsEnabled && !string.IsNullOrEmpty(format);
+            return LoggerUnity.Log.Logger.IsEnabled && !string.IsNullOrEmpty(format);
         }
 
         private static string AddTagToFormat(string format)

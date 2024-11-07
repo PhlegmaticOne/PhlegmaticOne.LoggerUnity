@@ -41,14 +41,13 @@ namespace OpenMyGame.LoggerUnity
         [Conditional(LoggerStaticData.ConditionalName)]
         public static void Exception(Exception exception)
         {
-            if (Logger is null || !Logger.IsEnabled || exception is null)
+            if (!Logger.IsEnabled || exception is null)
             {
                 return;
             }
 
-            var message = Logger.CreateMessage(LogLevel.Fatal, 0);
-            message.SetException(exception);
-            message.Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
+            FatalMessage(exception: exception).Log(
+                LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
 
         public static LogWithTag WithTag(string tag)
@@ -192,12 +191,24 @@ namespace OpenMyGame.LoggerUnity
             FatalMessage().Log(format, parameters);
         }
 
-        public static LogMessage DebugMessage() => Logger.CreateMessage(LogLevel.Debug, 0);
+        public static LogMessage DebugMessage(string tag = null, Exception exception = null)
+        {
+            return Logger.CreateMessage(LogLevel.Debug, tag, exception);
+        }
 
-        public static LogMessage WarningMessage() => Logger.CreateMessage(LogLevel.Warning, 0);
+        public static LogMessage WarningMessage(string tag = null, Exception exception = null)
+        {
+            return Logger.CreateMessage(LogLevel.Warning, tag, exception);
+        }
 
-        public static LogMessage ErrorMessage() => Logger.CreateMessage(LogLevel.Error, 0);
+        public static LogMessage ErrorMessage(string tag = null, Exception exception = null)
+        {
+            return Logger.CreateMessage(LogLevel.Error, tag, exception);
+        }
 
-        public static LogMessage FatalMessage() => Logger.CreateMessage(LogLevel.Fatal, 0);
+        public static LogMessage FatalMessage(string tag = null, Exception exception = null)
+        {
+            return Logger.CreateMessage(LogLevel.Fatal, tag, exception);
+        }
     }
 }

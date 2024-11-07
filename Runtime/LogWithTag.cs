@@ -20,10 +20,13 @@ namespace OpenMyGame.LoggerUnity
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Exception(Exception exception)
         {
-            var message = Log.Logger.CreateMessage(LogLevel.Fatal, 0);
-            message.SetTag(_tag);
-            message.SetException(exception);
-            message.Log(LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
+            if (!Log.Logger.IsEnabled || exception is null)
+            {
+                return;
+            }
+            
+            FatalMessage(exception).Log(
+                LoggerStaticData.ExceptionPlaceholderFormat, LoggerStaticData.ExceptionPlaceholder);
         }
 
         [Conditional(LoggerStaticData.ConditionalName)]
@@ -162,32 +165,24 @@ namespace OpenMyGame.LoggerUnity
             ErrorMessage().Log(format, parameters);
         }
 
-        public LogMessage DebugMessage()
+        public LogMessage DebugMessage(Exception exception = null)
         {
-            var message = Log.Logger.CreateMessage(LogLevel.Debug, 0);
-            message.SetTag(_tag);
-            return message;
+            return Log.Logger.CreateMessage(LogLevel.Debug, _tag, exception);
         }
 
-        public LogMessage WarningMessage()
+        public LogMessage WarningMessage(Exception exception = null)
         {
-            var message = Log.Logger.CreateMessage(LogLevel.Warning, 0);
-            message.SetTag(_tag);
-            return message;
+            return Log.Logger.CreateMessage(LogLevel.Warning, _tag, exception);
         }
 
-        public LogMessage ErrorMessage()
+        public LogMessage ErrorMessage(Exception exception = null)
         {
-            var message = Log.Logger.CreateMessage(LogLevel.Error, 0);
-            message.SetTag(_tag);
-            return message;
+            return Log.Logger.CreateMessage(LogLevel.Error, _tag, exception);
         }
 
-        public LogMessage FatalMessage()
+        public LogMessage FatalMessage(Exception exception = null)
         {
-            var message = Log.Logger.CreateMessage(LogLevel.Fatal, 0);
-            message.SetTag(_tag);
-            return message;
+            return Log.Logger.CreateMessage(LogLevel.Fatal, _tag, exception);
         }
     }
 }

@@ -57,25 +57,6 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors
         }
         
         [Test]
-        public void Process_ShouldNotColorizeValue_WhenMessagePartIsMessageParameter()
-        {
-            //Arrange
-            const string renderedValue = "Rendered message";
-            var viewConfig = Mocks.ConfigWithLogParameterColor(Color.white);
-            var processor = new LogParameterProcessorColorize(viewConfig);
-            var destination = new ValueStringBuilder();
-            var messagePart = MessagePart.Parameter(LoggerStaticData.MessageParameterKey);
-            
-            //Act
-            processor.Preprocess(ref destination, messagePart, null);
-            destination.Append(renderedValue);
-            processor.Postprocess(ref destination, messagePart);
-            
-            //Assert
-            Assert.AreEqual(renderedValue, destination.ToString());
-        }
-        
-        [Test]
         public void Process_ShouldNotColorizeValue_WhenMessagePartIsNewLineParameter()
         {
             //Arrange

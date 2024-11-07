@@ -4,30 +4,21 @@ using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
 {
-    /// <summary>
-    /// Класс сообщения, используемый при логгировании
-    /// </summary>
     public partial struct LogMessage
     {
-        private readonly ILogger _logger;
-
         internal LogMessage(LogLevel logLevel = LogLevel.Debug)
         {
             LogLevel = logLevel;
-            _logger = null;
             Id = 0;
             Exception = null;
             Format = null;
             Tag = LogTag.Empty;
-            StacktraceDepth = 0;
         }
 
-        public LogMessage(int id, int stacktraceDepth, LogLevel logLevel, ILogger logger)
+        public LogMessage(int id, LogLevel logLevel)
         {
             Id = id;
-            StacktraceDepth = stacktraceDepth;
             LogLevel = logLevel;
-            _logger = logger;
             Exception = null;
             Format = null;
             Tag = LogTag.Empty;
@@ -58,8 +49,6 @@ namespace OpenMyGame.LoggerUnity.Messages
         /// </summary>
         public string Format { get; private set; }
         
-        public int StacktraceDepth { get; }
-
         /// <summary>
         /// Проверяет сообщение на наличие тега
         /// </summary>
@@ -91,32 +80,6 @@ namespace OpenMyGame.LoggerUnity.Messages
             }
         }
         
-        /// <summary>
-        /// Устанавливает тег для сообщения
-        /// </summary>
-        public LogMessage WithTag(string tag)
-        {
-            if (!string.IsNullOrEmpty(tag))
-            {
-                Tag = new LogTag(tag);
-            }
-            
-            return this;
-        }
-
-        /// <summary>
-        /// Устанавливает исключение для сообщения
-        /// </summary>
-        public LogMessage WithException(Exception exception)
-        {
-            if (exception is not null)
-            {
-                Exception = exception;
-            }
-
-            return this;
-        }
-
         public override string ToString()
         {
             return Format;

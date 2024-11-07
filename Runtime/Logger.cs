@@ -69,9 +69,9 @@ namespace OpenMyGame.LoggerUnity
             _isDisposed = false;
         }
 
-        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth)
+        public LogMessage CreateMessage(LogLevel logLevel, string tag, Exception exception)
         {
-            return _messageFactory.CreateMessage(logLevel, stacktraceDepth);
+            return _messageFactory.CreateMessage(logLevel, tag, exception);
         }
 
         public unsafe void LogMessage(LogMessage logMessage, Span<object> parameters)
@@ -88,8 +88,8 @@ namespace OpenMyGame.LoggerUnity
             
             if (_isExtractStacktrace)
             {
-                var depth = LoggerStaticData.StacktraceDepth + logMessage.StacktraceDepth;
-                
+                const int depth = LoggerStaticData.StacktraceDepth;
+
                 fixed (byte* stackArray = stackalloc byte[LoggerStaticData.StacktraceBufferSize])
                 {
 #if UNITY_EDITOR

@@ -14,7 +14,7 @@ namespace OpenMyGame.LoggerUnity
 
         public void Initialize() { }
 
-        public LogMessage CreateMessage(LogLevel logLevel, int stacktraceDepth) => new();
+        public LogMessage CreateMessage(LogLevel logLevel, string tag, Exception exception) => new();
 
         public void LogMessage(LogMessage logMessage, Span<object> parameters) { }
 
