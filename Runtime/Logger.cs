@@ -20,6 +20,8 @@ namespace OpenMyGame.LoggerUnity
     /// </summary>
     internal class Logger : ILogger
     {
+        private static readonly string DataPath = Application.dataPath;
+        
         private readonly ILogDestination[] _logDestinations;
         private readonly IMessageFormatParser _messageFormatParser;
         private readonly LoggerConfigurationParameters _configurationParameters;
@@ -94,7 +96,7 @@ namespace OpenMyGame.LoggerUnity
                 {
 #if UNITY_EDITOR
                     var actualExtracted = Debug
-                        .ExtractStackTraceNoAlloc(stackArray, LoggerStaticData.StacktraceBufferSize, Application.dataPath);
+                        .ExtractStackTraceNoAlloc(stackArray, LoggerStaticData.StacktraceBufferSize, DataPath);
 
                     var temp = new Span<byte>(stackArray, actualExtracted);
                     var userCodeStartPosition = temp.GetPositionAfterByte(LoggerStaticData.NewLineByte, depth);

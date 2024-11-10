@@ -1,8 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
+using System.Threading.Tasks;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
-using OpenMyGame.LoggerUnity.Messages;
 using UnityEngine;
 
 namespace OpenMyGame.LoggerUnity.LoggerUsage
@@ -20,11 +19,10 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             
             Log.Logger = new LoggerBuilder()
                 .SetTagFormat("#{Tag}#")
-                .SetIsExtractStackTraces(true)
-                .LogToAndroidLog(config =>
+                .LogToUnityDebug(config =>
                 {
-                    config.RenderAs.PlainText();
-                    config.MinimumLogLevel = LogLevel.Debug;
+                    config.RenderAs.PlainText("[Thread: {ThreadId}]: {Message}{NewLine}{Exception}");
+                    config.IsUnityStacktraceEnabled = false;
                 })
                 .CreateLogger();
         }
@@ -35,6 +33,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             Log.Warning("Warning current time: {Time}", DateTime.Now);
             Log.Error("Error current time: {Time}", DateTime.Now);
             Log.Fatal("Fatal current time: {Time}", DateTime.Now);
+
+            Task.Run(ParallelLogging);
             
             LogTime.Debug("Debug current time with tag: {Time}", DateTime.Now);
             LogTime.Warning("Warning current time with tag: {Time}", DateTime.Now);
@@ -65,6 +65,14 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             {
                 Log.Exception(e);
             }
+        }
+
+        private static void ParallelLogging()
+        {
+            LogTime.Debug("Debug current time with tag: {Time}", DateTime.Now);
+            LogTime.Warning("Warning current time with tag: {Time}", DateTime.Now);
+            LogTime.Error("Error current time with tag: {Time}", DateTime.Now);
+            LogTime.Fatal("Fatal current time with tag: {Time}", DateTime.Now);
         }
 
         private static void LogWithTag()
