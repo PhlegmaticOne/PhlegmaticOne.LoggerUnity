@@ -88,12 +88,6 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
                 }
 
                 stringBuilder.Append(')');
-
-                if (frame.GetILOffset() != -1)
-                {
-                    stringBuilder.Append(':');
-                    stringBuilder.Append(frame.GetFileLineNumber());
-                }
             }
 
             stringBuilder.Append(Environment.NewLine);

@@ -104,7 +104,7 @@ namespace OpenMyGame.LoggerUnity
                     stacktrace = new ReadOnlySpan<byte>(
                         stackArray + userCodeStartPosition, actualExtracted - userCodeStartPosition);   
 #else
-                    var stackTrace = new StackTrace(depth, true);
+                    var stackTrace = new StackTrace(depth, false);
                     var stringBuilder = new SpanStringBuilder(stackArray, LoggerStaticData.StacktraceBufferSize);
                     StacktraceBuilder.Build(ref stringBuilder, stackTrace);
                     stacktrace = new ReadOnlySpan<byte>(stackArray, stringBuilder.Length);
