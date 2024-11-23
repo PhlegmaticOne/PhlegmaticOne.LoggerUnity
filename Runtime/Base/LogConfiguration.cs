@@ -29,29 +29,11 @@ namespace OpenMyGame.LoggerUnity.Base
             _messageParameterProcessor = LoggerStaticData.MessageParameterProcessor;
         }
 
-        /// <summary>
-        /// Включает или выключает применик логов на старте
-        /// </summary>
         public bool IsEnabled { get; set; }
-        
-        /// <summary>
-        /// Платформа/ы, на которых работает логгер с такой конфигурацией
-        /// </summary>
         public LoggerPlatform Platform { get; set; }
-        
-        /// <summary>
-        /// Устанавливает минимальный уровень логгирования сообщений
-        /// </summary>
         public LogLevel MinimumLogLevel { get; set; }
-        
-        /// <summary>
-        /// Кофнигурирует результирующий вид сообщения
-        /// </summary>
         public RenderMessageOptions RenderAs { get; }
-
-        /// <summary>
-        /// Добавляет новый параметр, используемый при формировании результирующего сообщения
-        /// </summary>
+        
         public void AddLogFormatParameter(ILogFormatParameter formatParameter)
         {
             if (formatParameter is not null)

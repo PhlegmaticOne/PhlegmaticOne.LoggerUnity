@@ -4,9 +4,6 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
 {
-    /// <summary>
-    /// Интерфейс для параметров, которые добавляются в логгируемое сообщение
-    /// </summary>
     public interface ILogFormatParameter
     {
         string Key { get; }

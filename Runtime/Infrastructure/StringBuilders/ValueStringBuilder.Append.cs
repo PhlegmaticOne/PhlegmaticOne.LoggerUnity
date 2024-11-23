@@ -347,24 +347,5 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
 
             bufferPosition += written;
         }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Append<T>(T value, ReadOnlySpan<char> format = default)
-            where T : ISpanFormattable
-        {
-            var newSize = value.BufferSize + bufferPosition;
-            
-            if (newSize >= Capacity)
-            {
-                Grow(newSize);
-            }
-
-            if (!value.TryFormat(buffer[bufferPosition..], out var written, format))
-            {
-                throw new InvalidOperationException($"Could not insert {value} into given buffer. Is the buffer (size: {value.BufferSize}) large enough?");
-            }
-
-            bufferPosition += written;
-        }
     }
 }

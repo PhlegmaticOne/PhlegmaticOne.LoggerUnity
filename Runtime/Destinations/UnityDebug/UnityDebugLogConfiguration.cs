@@ -20,15 +20,8 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
             Platform = LoggerPlatform.Editor | LoggerPlatform.Android | LoggerPlatform.Ios;
         }
 
-        /// <summary>
-        /// Включает или выключает формирование стектрейса от Unity
-        /// </summary>
         public bool IsUnityStacktraceEnabled { get; set; }
 
-        /// <summary>
-        /// Устанавливает максимальный размер сообщения, после которого начинается его разбиение на части
-        /// </summary>
-        /// <exception cref="ArgumentException">Размер меньше 0</exception>
         public int MessagePartMaxSize
         {
             get => _messagePartMaxSize;
@@ -43,12 +36,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
             }
         }
 
-        /// <summary>
-        /// Устаналивает формат для формирования частей сообщения при его разбиении
-        /// </summary>
-        /// <remarks>Должно содержать параметры: MessageId, PartIndex, PartsCount, MessagePart - или часть из них</remarks>
-        /// <example>[Id: {MessageId}, Part: {PartIndex}/{PartsCount}] {MessagePart}</example>
-        /// <exception cref="ArgumentException">Формат null или пустая строка</exception>
         public string MessagePartFormat
         {
             get => _messagePartFormat;
@@ -63,17 +50,11 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
             }
         }
 
-        /// <summary>
-        /// Включает раскрашивание параметров при логгировании при помощи тега <i>color</i> с дефолтным конфигом
-        /// </summary>
         public void ColorizeParameters()
         {
             ColorizeParameters(new ParameterColorsViewConfigDefault());
         }
         
-        /// <summary>
-        /// Включает раскрашивание параметров при логгировании при помощи тега <i>color</i> с кастомным конфигом
-        /// </summary>
         public void ColorizeParameters(IParameterColorsViewConfig colorsViewConfig)
         {
             SetMessageParameterPostRenderer(new MessageParameterProcessorColorize(colorsViewConfig));

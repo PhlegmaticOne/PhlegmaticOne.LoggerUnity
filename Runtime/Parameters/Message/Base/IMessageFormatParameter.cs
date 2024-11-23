@@ -3,9 +3,6 @@ using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
 {
-    /// <summary>
-    /// Интерфейс для создания параметров сообщений с кастомным типом
-    /// </summary>
     public interface IMessageFormatParameter
     {
         Type PropertyType { get; }

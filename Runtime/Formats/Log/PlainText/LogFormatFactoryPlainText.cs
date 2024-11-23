@@ -12,10 +12,6 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             _messageParts = messageParts;
         }
         
-        /// <summary>
-        /// Создает формат для формирования результирующего сообщения в виде простого текста
-        /// </summary>
-        /// <param name="factoryData">Данные добавленные при конфигурации логгера</param>
         public ILogFormat CreateLogFormat(LogFormatFactoryData factoryData)
         {
             return new LogFormatPlainText(_messageParts,

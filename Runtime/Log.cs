@@ -6,18 +6,12 @@ using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity
 {
-    /// <summary>
-    /// Класс для взаимодействия с логгером
-    /// </summary>
     public static class Log
     {
         private const string FormatParameterName = "format";
         
         private static ILogger LoggerPrivate = new NullLogger();
 
-        /// <summary>
-        /// Реализация логгера
-        /// </summary>
         public static ILogger Logger
         {
             get => LoggerPrivate;
@@ -28,11 +22,6 @@ namespace OpenMyGame.LoggerUnity
             }
         }
 
-        /// <summary>
-        /// Устанавливает активность приемника логов по ключу
-        /// </summary>
-        /// <param name="destinationName">Название приемника логов</param>
-        /// <param name="isEnabled">Активность</param>
         public static void SetDestinationEnabled(string destinationName, bool isEnabled)
         {
             Logger.SetDestinationEnabled(destinationName, isEnabled);

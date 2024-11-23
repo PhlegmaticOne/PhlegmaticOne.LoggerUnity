@@ -13,9 +13,6 @@ namespace OpenMyGame.LoggerUnity.Messages
     {
         private const string FormatParameterName = "format";
         
-        /// <summary>
-        /// Логгирует простое сообщение
-        /// </summary>
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Log(string format)
         {
@@ -33,9 +30,6 @@ namespace OpenMyGame.LoggerUnity.Messages
             LogPrivate(AddTagToFormat(format), Tag);
         }
         
-        /// <summary>
-        /// Логгирует сообщение c одним параметром
-        /// </summary>
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Log<T>(string format, T parameter1)
@@ -54,9 +48,6 @@ namespace OpenMyGame.LoggerUnity.Messages
             LogPrivate(AddTagToFormat(format), Tag, parameter1);
         }
         
-        /// <summary>
-        /// Логгирует сообщение c двумя параметром
-        /// </summary>
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Log<T1, T2>(string format, T1 parameter1, T2 parameter2)
@@ -75,9 +66,6 @@ namespace OpenMyGame.LoggerUnity.Messages
             LogPrivate(AddTagToFormat(format), Tag, parameter1, parameter2);
         }
         
-        /// <summary>
-        /// Логгирует сообщение c тремя параметром
-        /// </summary>
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Log<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
@@ -96,9 +84,6 @@ namespace OpenMyGame.LoggerUnity.Messages
             LogPrivate(AddTagToFormat(format), Tag, parameter1, parameter2, parameter3);
         }
         
-        /// <summary>
-        /// Логгирует сообщение c коллекцией параметров
-        /// </summary>
         [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerStaticData.ConditionalName)]
         public void Log(string format, params object[] parameters)

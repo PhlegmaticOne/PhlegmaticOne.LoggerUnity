@@ -4,9 +4,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS.Extensions
 {
     public static class LoggerBuilderExtensions
     {
-        /// <summary>
-        /// Конфигурирует логгирование сообщений в IOS
-        /// </summary>
         public static LoggerBuilder LogToIOS(
             this LoggerBuilder loggerBuilder, Action<IOSLogConfiguration> configureAction = null)
         {

@@ -1,8 +1,5 @@
 ﻿namespace OpenMyGame.LoggerUnity.Messages
 {
-    /// <summary>
-    /// Уровень логгирования сообщений
-    /// </summary>
     public enum LogLevel
     {
         Debug = 0,

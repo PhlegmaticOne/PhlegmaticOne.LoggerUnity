@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Messages
@@ -24,43 +23,21 @@ namespace OpenMyGame.LoggerUnity.Messages
             Tag = LogTag.Empty;
         }
         
-        /// <summary>
-        /// Порядковый идентификатор сообщения
-        /// </summary>
         public int Id { get; }
         
-        /// <summary>
-        /// Уровень логгирования
-        /// </summary>
         public LogLevel LogLevel { get; }
         
-        /// <summary>
-        /// Исключение
-        /// </summary>
         public Exception Exception { get; private set; }
         
-        /// <summary>
-        /// Тег сообщения
-        /// </summary>
         public LogTag Tag { get; private set; }
         
-        /// <summary>
-        /// Формат переданный в метод <see cref="Log(string)"/>
-        /// </summary>
         public string Format { get; private set; }
         
-        /// <summary>
-        /// Проверяет сообщение на наличие тега
-        /// </summary>
-        /// <returns><b>true</b> - тег есть, <b>false</b> - нет</returns>
         public bool HasTag()
         {
             return Tag.HasValue();
         }
 
-        /// <summary>
-        /// Устанавливает тег для сообщения
-        /// </summary>
         public void SetTag(string tag)
         {
             if (!string.IsNullOrEmpty(tag))
@@ -69,9 +46,6 @@ namespace OpenMyGame.LoggerUnity.Messages
             }
         }
 
-        /// <summary>
-        /// Устанавливает исключение для сообщения
-        /// </summary>
         public void SetException(Exception exception)
         {
             if (exception is not null)

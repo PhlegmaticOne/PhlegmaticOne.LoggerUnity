@@ -15,9 +15,6 @@ using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity
 {
-    /// <summary>
-    /// Стандартная реализация логгера
-    /// </summary>
     internal class Logger : ILogger
     {
         private static readonly string DataPath = Application.dataPath;
