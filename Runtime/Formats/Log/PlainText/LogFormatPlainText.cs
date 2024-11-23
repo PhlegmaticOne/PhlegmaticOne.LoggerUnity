@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
@@ -59,7 +60,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
                 return;
             }
 
-            if (parameterValue.SequenceEqual(LoggerStaticData.MessageParameterKey))
+            if (parameterValue.SequenceEqual(LoggerConfigurationData.MessageParameterKey))
             {
                 messageRenderData.Render(ref destination);
                 return;

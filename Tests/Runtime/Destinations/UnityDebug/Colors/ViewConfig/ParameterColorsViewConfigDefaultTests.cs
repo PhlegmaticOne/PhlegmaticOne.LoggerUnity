@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Configuration.Colors;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 
@@ -18,7 +18,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Vi
             var tagColor = viewConfig.GetTagColor("Tag");
             
             //Assert
-            Assert.AreEqual(LoggerStaticData.DefaultLogTextColor, tagColor);
+            Assert.AreEqual(LoggerConfigurationData.DefaultLogTextColor, tagColor);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Vi
             var color = viewConfig.GetMessageParameterColor(parameter);
             
             //Assert
-            Assert.AreEqual(LoggerStaticData.DefaultLogTextColor, color);
+            Assert.AreEqual(LoggerConfigurationData.DefaultLogTextColor, color);
         }
         
         [Test]
@@ -45,7 +45,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Vi
             var color = viewConfig.GetMessageParameterColor(null);
             
             //Assert
-            Assert.AreEqual(LoggerStaticData.DefaultLogTextColor, color);
+            Assert.AreEqual(LoggerConfigurationData.DefaultLogTextColor, color);
         }
         
         [Test]
@@ -59,7 +59,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Vi
             var color = viewConfig.GetMessageParameterColor(parameter);
             
             //Assert
-            Assert.AreNotEqual(LoggerStaticData.DefaultLogTextColor, color);
+            Assert.AreNotEqual(LoggerConfigurationData.DefaultLogTextColor, color);
         }
         
         [Test]
@@ -72,7 +72,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Vi
             var color = viewConfig.GetLogParameterColor("", null);
             
             //Assert
-            Assert.AreEqual(LoggerStaticData.DefaultLogTextColor, color);
+            Assert.AreEqual(LoggerConfigurationData.DefaultLogTextColor, color);
         }
         
         [Test]
@@ -86,7 +86,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Vi
             var color = viewConfig.GetLogParameterColor(key, null);
             
             //Assert
-            Assert.AreEqual(LoggerStaticData.DefaultLogTextColor, color);
+            Assert.AreEqual(LoggerConfigurationData.DefaultLogTextColor, color);
         }
         
         [Test]
@@ -99,7 +99,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.Vi
             var color = viewConfig.GetLogParameterColor(LogFormatParameterThreadId.KeyParameter, null);
             
             //Assert
-            Assert.AreNotEqual(LoggerStaticData.DefaultLogTextColor, color);
+            Assert.AreNotEqual(LoggerConfigurationData.DefaultLogTextColor, color);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Builders;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Factories;
@@ -87,16 +89,16 @@ namespace OpenMyGame.LoggerUnity
             
             if (_isExtractStacktrace)
             {
-                const int depth = LoggerStaticData.StacktraceDepth;
+                const int depth = LoggerConfigurationData.StacktraceDepth;
 
-                fixed (byte* stackArray = stackalloc byte[LoggerStaticData.StacktraceBufferSize])
+                fixed (byte* stackArray = stackalloc byte[LoggerConfigurationData.StacktraceBufferSize])
                 {
 #if UNITY_EDITOR
                     var actualExtracted = Debug
-                        .ExtractStackTraceNoAlloc(stackArray, LoggerStaticData.StacktraceBufferSize, DataPath);
+                        .ExtractStackTraceNoAlloc(stackArray, LoggerConfigurationData.StacktraceBufferSize, DataPath);
 
                     var temp = new Span<byte>(stackArray, actualExtracted);
-                    var userCodeStartPosition = temp.GetPositionAfterByte(LoggerStaticData.NewLineByte, depth);
+                    var userCodeStartPosition = temp.GetPositionAfterByte(LoggerConfigurationData.NewLineByte, depth);
                 
                     stacktrace = new ReadOnlySpan<byte>(
                         stackArray + userCodeStartPosition, actualExtracted - userCodeStartPosition);   

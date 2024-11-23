@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Buffers;
 using System.Diagnostics;
-using OpenMyGame.LoggerUnity.Attributes;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.Attributes;
 using OpenMyGame.LoggerUnity.Infrastructure.InlineArrays;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 
@@ -13,7 +13,7 @@ namespace OpenMyGame.LoggerUnity.Messages
     {
         private const string FormatParameterName = "format";
         
-        [Conditional(LoggerStaticData.ConditionalName)]
+        [Conditional(LoggerConfigurationData.ConditionalName)]
         public void Log(string format)
         {
             if (!CanLogMessage(format))
@@ -31,7 +31,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         }
         
         [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerStaticData.ConditionalName)]
+        [Conditional(LoggerConfigurationData.ConditionalName)]
         public void Log<T>(string format, T parameter1)
         {
             if (!CanLogMessage(format))
@@ -49,7 +49,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         }
         
         [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerStaticData.ConditionalName)]
+        [Conditional(LoggerConfigurationData.ConditionalName)]
         public void Log<T1, T2>(string format, T1 parameter1, T2 parameter2)
         {
             if (!CanLogMessage(format))
@@ -67,7 +67,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         }
         
         [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerStaticData.ConditionalName)]
+        [Conditional(LoggerConfigurationData.ConditionalName)]
         public void Log<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
         {
             if (!CanLogMessage(format))
@@ -85,7 +85,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         }
         
         [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerStaticData.ConditionalName)]
+        [Conditional(LoggerConfigurationData.ConditionalName)]
         public void Log(string format, params object[] parameters)
         {
             if (!CanLogMessage(format))

@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Builders;
 
 namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions
 {

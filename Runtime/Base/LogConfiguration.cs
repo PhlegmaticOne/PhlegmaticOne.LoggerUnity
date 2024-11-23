@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using OpenMyGame.LoggerUnity.Builders;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Formats;
 using OpenMyGame.LoggerUnity.Formats.Log;
@@ -22,11 +24,11 @@ namespace OpenMyGame.LoggerUnity.Base
         protected LogConfiguration()
         {
             RenderAs = new RenderMessageOptions(this);
-            IsEnabled = LoggerStaticData.IsEnabled;
-            MinimumLogLevel = LoggerStaticData.MinimumLogLevel;
-            _logFormatParameters = LoggerStaticData.LogFormatParameters;
-            _logParameterProcessor = LoggerStaticData.LogParameterProcessor;
-            _messageParameterProcessor = LoggerStaticData.MessageParameterProcessor;
+            IsEnabled = LoggerConfigurationData.IsEnabled;
+            MinimumLogLevel = LoggerConfigurationData.MinimumLogLevel;
+            _logFormatParameters = LoggerConfigurationData.LogFormatParameters;
+            _logParameterProcessor = LoggerConfigurationData.LogParameterProcessor;
+            _messageParameterProcessor = LoggerConfigurationData.MessageParameterProcessor;
         }
 
         public bool IsEnabled { get; set; }

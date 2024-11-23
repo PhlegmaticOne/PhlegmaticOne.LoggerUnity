@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;

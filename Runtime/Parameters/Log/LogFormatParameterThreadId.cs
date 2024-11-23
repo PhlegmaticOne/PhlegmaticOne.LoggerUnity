@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using OpenMyGame.LoggerUnity.Attributes;
+using OpenMyGame.LoggerUnity.Configuration.Attributes;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;

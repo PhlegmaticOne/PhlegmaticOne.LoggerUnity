@@ -1,4 +1,4 @@
-﻿using OpenMyGame.LoggerUnity.Attributes;
+﻿using OpenMyGame.LoggerUnity.Configuration.Attributes;
 using UnityEditor;
 using UnityEngine;
 

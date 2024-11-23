@@ -1,4 +1,5 @@
 ﻿using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 #if !UNITY_EDITOR && UNITY_IOS

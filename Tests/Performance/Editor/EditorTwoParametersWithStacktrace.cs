@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity;
+using OpenMyGame.LoggerUnity.Builders;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;

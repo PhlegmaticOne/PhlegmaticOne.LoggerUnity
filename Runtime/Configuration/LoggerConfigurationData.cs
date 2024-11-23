@@ -11,9 +11,9 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace OpenMyGame.LoggerUnity.Configuration
 {
-    internal static class LoggerStaticData
+    internal static class LoggerConfigurationData
     {
         public static readonly Color DefaultLogTextColor = Color.white;
         public const string ConditionalName = "UNITY_LOGGING_ENABLED";

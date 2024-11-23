@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Static;
 using OpenMyGame.LoggerUnity.Extensions;
@@ -28,25 +27,25 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors
         
         public Color GetTagColor(string tag)
         {
-            return LoggerStaticData.DefaultLogTextColor;
+            return LoggerConfigurationData.DefaultLogTextColor;
         }
 
         public Color GetMessageParameterColor(object parameter)
         {
             if (parameter is null)
             {
-                return LoggerStaticData.DefaultLogTextColor;
+                return LoggerConfigurationData.DefaultLogTextColor;
             }
             
             return _messageParameterColorsMap
-                .TryGetValue(parameter.GetType(), out var color) ? color : LoggerStaticData.DefaultLogTextColor;
+                .TryGetValue(parameter.GetType(), out var color) ? color : LoggerConfigurationData.DefaultLogTextColor;
         }
 
         public Color GetLogParameterColor(string parameterKey, object value)
         {
             if (string.IsNullOrEmpty(parameterKey))
             {
-                return LoggerStaticData.DefaultLogTextColor;
+                return LoggerConfigurationData.DefaultLogTextColor;
             }
             
             if (parameterKey.Equals(LogFormatParameterLogLevel.KeyParameter, StringComparison.OrdinalIgnoreCase))
@@ -54,7 +53,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Colors
                 return _logLevelColorsMap[((LogLevel)value).ToStringCache()];
             }
             
-            return _logParameterColorsMap.TryGetValue(parameterKey, out var color) ? color : LoggerStaticData.DefaultLogTextColor;
+            return _logParameterColorsMap.TryGetValue(parameterKey, out var color) ? color : LoggerConfigurationData.DefaultLogTextColor;
         }
     }
 }

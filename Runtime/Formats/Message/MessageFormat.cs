@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Extensions;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
@@ -61,7 +61,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Message
 
             _processor.Preprocess(ref destination, parameter);
 
-            if (parameterValue[0] == LoggerStaticData.SerializeParameterPrefix)
+            if (parameterValue[0] == LoggerConfigurationData.SerializeParameterPrefix)
             {
                 destination.Append(_parameterSerializer.Serialize(parameter, format));
             }

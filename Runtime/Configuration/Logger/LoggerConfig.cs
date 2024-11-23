@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Attributes;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Builders;
+using OpenMyGame.LoggerUnity.Configuration.Attributes;
 using OpenMyGame.LoggerUnity.Configuration.Base;
 using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
@@ -13,8 +13,8 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger
     public class LoggerConfig : LoggerConfigBase
     {
         [SerializeField] private bool _isEnabled = true;
-        [SerializeField] private bool _isExtractStacktraces = LoggerStaticData.IsExtractStacktrace;
-        [SerializeField] private string _tagFormat = LoggerStaticData.TagFormat;
+        [SerializeField] private bool _isExtractStacktraces = LoggerConfigurationData.IsExtractStacktrace;
+        [SerializeField] private string _tagFormat = LoggerConfigurationData.TagFormat;
 
         [SerializeReference, SerializeReferenceDropdown]
         private IMessageFormatParameter[] _messageFormatParameters;
@@ -46,7 +46,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger
 
         public override void SetupDefaults()
         {
-            _messageFormatParameters = LoggerStaticData.MessageFormatParameters
+            _messageFormatParameters = LoggerConfigurationData.MessageFormatParameters
                 .Select(x => x.Value)
                 .ToArray();
             

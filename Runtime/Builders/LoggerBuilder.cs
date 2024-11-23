@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Configuration.Logger;
 using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
 using OpenMyGame.LoggerUnity.Messages.Factories;
@@ -10,7 +11,7 @@ using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 using OpenMyGame.LoggerUnity.Parsing;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 
-namespace OpenMyGame.LoggerUnity
+namespace OpenMyGame.LoggerUnity.Builders
 {
     public class LoggerBuilder
     {
@@ -25,11 +26,11 @@ namespace OpenMyGame.LoggerUnity
         public LoggerBuilder()
         {
             _loggerDestinations = new List<ILogDestination>();
-            _tagFormat = LoggerStaticData.TagFormat;
-            _isEnabled = LoggerStaticData.IsEnabled;
-            _isExtractStackTraces = LoggerStaticData.IsExtractStacktrace;
-            _formatParameters = LoggerStaticData.MessageFormatParameters;
-            _parameterSerializer = LoggerStaticData.MessageFormatParameterSerializer;
+            _tagFormat = LoggerConfigurationData.TagFormat;
+            _isEnabled = LoggerConfigurationData.IsEnabled;
+            _isExtractStackTraces = LoggerConfigurationData.IsExtractStacktrace;
+            _formatParameters = LoggerConfigurationData.MessageFormatParameters;
+            _parameterSerializer = LoggerConfigurationData.MessageFormatParameterSerializer;
         }
 
         public static ILogger FromConfig(LoggerConfig loggerConfig)

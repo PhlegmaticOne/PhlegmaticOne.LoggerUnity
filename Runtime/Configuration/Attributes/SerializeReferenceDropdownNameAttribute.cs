@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Attributes
+namespace OpenMyGame.LoggerUnity.Configuration.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class SerializeReferenceDropdownNameAttribute : PropertyAttribute

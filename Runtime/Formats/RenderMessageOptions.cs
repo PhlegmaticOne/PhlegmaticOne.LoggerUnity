@@ -1,4 +1,5 @@
 ﻿using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Formats.Log.Factory;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 
@@ -11,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Formats
         public RenderMessageOptions(LogConfiguration logConfiguration)
         {
             _logConfiguration = logConfiguration;
-            this.PlainText(LoggerStaticData.LogFormat);
+            this.PlainText(LoggerConfigurationData.LogFormat);
         }
         
         public void FromFactory(ILogFormatFactory logFormatFactory)

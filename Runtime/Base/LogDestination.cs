@@ -1,4 +1,6 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Builders;
+using OpenMyGame.LoggerUnity.Formats;
 using OpenMyGame.LoggerUnity.Formats.Log;
 using OpenMyGame.LoggerUnity.Formats.Message;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;

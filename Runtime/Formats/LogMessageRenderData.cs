@@ -3,7 +3,7 @@ using OpenMyGame.LoggerUnity.Formats.Message;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace OpenMyGame.LoggerUnity.Formats
 {
     public readonly ref struct LogMessageRenderData
     {

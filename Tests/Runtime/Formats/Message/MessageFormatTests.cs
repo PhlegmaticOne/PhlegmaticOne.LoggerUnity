@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Formats.Message;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
@@ -83,7 +83,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
             };
 
             var messageFormat = new MessageFormat(
-                LoggerStaticData.MessageFormatParameters,
+                LoggerConfigurationData.MessageFormatParameters,
                 new MessageFormatParameterSerializer(),
                 new MessageParameterProcessor());
 

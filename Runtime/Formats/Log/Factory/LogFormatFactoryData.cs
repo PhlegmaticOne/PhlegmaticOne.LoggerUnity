@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using OpenMyGame.LoggerUnity.Builders;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;
 using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;

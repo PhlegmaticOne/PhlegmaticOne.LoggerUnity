@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using OpenMyGame.LoggerUnity;
+using OpenMyGame.LoggerUnity.Builders;
 using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
 using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
 using OpenMyGame.LoggerUnity.Messages;

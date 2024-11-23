@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
 
-namespace OpenMyGame.LoggerUnity
+namespace OpenMyGame.LoggerUnity.Builders
 {
     public class LoggerConfigurationParameters
     {

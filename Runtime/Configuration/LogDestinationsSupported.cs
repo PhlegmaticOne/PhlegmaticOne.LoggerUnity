@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Base
+﻿namespace OpenMyGame.LoggerUnity.Configuration
 {
     public static class LogDestinationsSupported
     {

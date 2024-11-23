@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
+using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
