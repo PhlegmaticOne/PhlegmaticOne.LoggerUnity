@@ -4,7 +4,7 @@ using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity
 {
-    public class NullLogger : ILogger
+    internal class NullLogger : ILogger
     {
         public bool IsEnabled { get => false; set => _ = value; }
         public LogMessage CreateMessage(LogLevel logLevel, string tag, Exception exception) => new();

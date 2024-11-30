@@ -4,7 +4,7 @@ using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 
 namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
 {
-    public static class StacktraceBuilder
+    internal static class StacktraceBuilder
     {
         public static void Build(ref SpanStringBuilder stringBuilder, StackTrace stackTrace)
         {
