@@ -16,7 +16,7 @@ namespace OpenMyGame.LoggerUnity.Configuration
     internal static class LoggerConfigurationData
     {
         public static readonly Color DefaultLogTextColor = Color.white;
-        public const string ConditionalName = "UNITY_LOGGING_ENABLED";
+        public const string ConditionalName = "ENABLE_UNITY_LOGGING";
         public const LogLevel MinimumLogLevel = LogLevel.Debug;
         public const string ExceptionPlaceholderFormat = "{Placeholder}";
         public static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
