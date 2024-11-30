@@ -1,20 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.Stacktrace;
+using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Factories;
 using OpenMyGame.LoggerUnity.Parsing.Base;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 using ILogger = OpenMyGame.LoggerUnity.Base.ILogger;
 
 namespace OpenMyGame.LoggerUnity
 {
     internal class Logger : ILogger
     {
-        private static readonly string DataPath = Application.dataPath;
-        
         private readonly ILogDestination[] _logDestinations;
         private readonly IMessageFormatParser _messageFormatParser;
         private readonly ILogMessageFactory _logMessageFactory;
@@ -49,33 +47,16 @@ namespace OpenMyGame.LoggerUnity
             var messageParts = _messageFormatParser.Parse(message.Format);
             var stacktrace = ReadOnlySpan<byte>.Empty;
 
-            #region Stacktrace
-            
             if (_isExtractStacktrace)
             {
-                const int depth = LoggerConfigurationData.StacktraceDepth;
-
                 fixed (byte* stackArray = stackalloc byte[LoggerConfigurationData.StacktraceBufferSize])
                 {
-#if UNITY_EDITOR
-                    var actualExtracted = Debug
-                        .ExtractStackTraceNoAlloc(stackArray, LoggerConfigurationData.StacktraceBufferSize, DataPath);
-
-                    var temp = new Span<byte>(stackArray, actualExtracted);
-                    var userCodeStartPosition = temp.GetPositionAfterByte(LoggerConfigurationData.NewLineByte, depth);
-                
-                    stacktrace = new ReadOnlySpan<byte>(
-                        stackArray + userCodeStartPosition, actualExtracted - userCodeStartPosition);   
-#else
-                    var stackTrace = new StackTrace(depth, false);
-                    var stringBuilder = new SpanStringBuilder(stackArray, LoggerStaticData.StacktraceBufferSize);
+                    var stackTrace = new StackTrace(LoggerConfigurationData.StacktraceDepth, false);
+                    var stringBuilder = new SpanStringBuilder(stackArray, LoggerConfigurationData.StacktraceBufferSize);
                     StacktraceBuilder.Build(ref stringBuilder, stackTrace);
                     stacktrace = new ReadOnlySpan<byte>(stackArray, stringBuilder.Length);
-#endif
                 }
             }
-            
-            #endregion
             
             foreach (var logDestination in _logDestinations.AsSpan())
             {

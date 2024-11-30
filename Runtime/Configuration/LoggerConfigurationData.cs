@@ -26,9 +26,8 @@ namespace OpenMyGame.LoggerUnity.Configuration
         public const string MessageParameterKey = "Message";
         public const string FormatParameterName = "format";
         
-        public const int StacktraceDepth = 4;
-        public const int StacktraceBufferSize = 18000;
-        public const byte NewLineByte = 10;
+        public const int StacktraceDepth = 2;
+        public const int StacktraceBufferSize = 16384;
 
         public const bool IsExtractStacktrace = false;
         public const bool IsEnabled = true;

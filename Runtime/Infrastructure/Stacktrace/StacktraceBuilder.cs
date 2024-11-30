@@ -9,6 +9,8 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
     {
         public static void Build(ref SpanStringBuilder stringBuilder, StackTrace stackTrace)
         {
+            var currentAssembly = Assembly.GetAssembly(typeof(StacktraceBuilder));
+            
             var flag2 = true;
 
             for (var i = 0; i < stackTrace.FrameCount; ++i)
@@ -17,6 +19,13 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
                 var method = frame.GetMethod();
 
                 if (method == null)
+                {
+                    continue;
+                }
+                
+                var declaringType = method.DeclaringType;
+
+                if (declaringType != null && declaringType.Assembly == currentAssembly)
                 {
                     continue;
                 }
@@ -31,8 +40,6 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
                 }
 
                 stringBuilder.Append("   at ");
-
-                var declaringType = method.DeclaringType;
 
                 if (declaringType != null)
                 {
