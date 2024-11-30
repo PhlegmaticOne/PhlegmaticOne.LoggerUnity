@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using OpenMyGame.LoggerUnity.Parsing.Exceptions;
 using OpenMyGame.LoggerUnity.Parsing.Models;

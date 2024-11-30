@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
 using OpenMyGame.LoggerUnity.Configuration.Colors.Static;
-using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
 using OpenMyGame.LoggerUnity.Parameters.Log;
 using UnityEngine;
 using LogLevel = OpenMyGame.LoggerUnity.Messages.LogLevel;

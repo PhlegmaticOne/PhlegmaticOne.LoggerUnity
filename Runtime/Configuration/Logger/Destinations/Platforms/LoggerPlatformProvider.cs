@@ -4,6 +4,7 @@
     {
         internal static LoggerPlatform GetPlatform()
         {
+            #pragma warning disable CS0162
 #if UNITY_EDITOR
             return LoggerPlatform.Editor;
 #endif
@@ -17,6 +18,7 @@
 #endif
             
             return LoggerPlatform.None;
+            #pragma warning restore CS0162
         }
     }
 }

@@ -24,14 +24,12 @@ namespace OpenMyGame.LoggerUnity.Base
         protected LogConfiguration()
         {
             RenderAs = new RenderMessageOptions(this);
-            IsEnabled = LoggerConfigurationData.IsEnabled;
             MinimumLogLevel = LoggerConfigurationData.MinimumLogLevel;
             _logFormatParameters = LoggerConfigurationData.LogFormatParameters;
             _logParameterProcessor = LoggerConfigurationData.LogParameterProcessor;
             _messageParameterProcessor = LoggerConfigurationData.MessageParameterProcessor;
         }
 
-        public bool IsEnabled { get; set; }
         public LoggerPlatform Platform { get; set; }
         public LogLevel MinimumLogLevel { get; set; }
         public RenderMessageOptions RenderAs { get; }
@@ -60,7 +58,7 @@ namespace OpenMyGame.LoggerUnity.Base
             }
         }
         
-        internal void SetFormatsFactory(ILogFormatFactory logFormatFactory)
+        internal void SetFormatFactory(ILogFormatFactory logFormatFactory)
         {
             _logFormatFactory = logFormatFactory;
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
 using OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
@@ -15,8 +14,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
         private const string Format = "{0}";
 
         private PartLoggingMessageFormat _partLoggingMessageFormat;
-        
-        public override string DestinationName => LogDestinationsSupported.Debug;
         
         protected override void OnInitializing()
         {

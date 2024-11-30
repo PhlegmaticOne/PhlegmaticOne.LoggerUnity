@@ -1,5 +1,4 @@
 ﻿using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 #if !UNITY_EDITOR && UNITY_IOS
@@ -25,8 +24,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
         [DllImport("__Internal")]
         private static extern void NativeLoggerIos_Fatal(string tag, string message);
 #endif
-
-        public override string DestinationName => LogDestinationsSupported.IOS;
 
         protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {

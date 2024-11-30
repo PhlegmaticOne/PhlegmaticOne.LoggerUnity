@@ -16,7 +16,6 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
     [Serializable]
     public abstract class LoggerDestinationBuilder : IDefaultSetup
     {
-        [SerializeField] private bool _isEnabled = LoggerConfigurationData.IsEnabled;
         [SerializeField] private LoggerPlatform _platform;
         [SerializeField] private LogLevel _minimumLogLevel = LoggerConfigurationData.MinimumLogLevel;
 
@@ -47,7 +46,6 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
         
         protected void SetupConfigurationBase(LogConfiguration config)
         {
-            config.IsEnabled = _isEnabled;
             config.MinimumLogLevel = _minimumLogLevel;
             config.Platform = _platform;
             _renderBuilder.Build(config.RenderAs);

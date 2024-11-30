@@ -93,21 +93,23 @@ namespace OpenMyGame.LoggerUnity.Builders
         {
             LogTag.Format.UpdateFormat(_tagFormat);
             
-            ILogger logger = new Logger(
-                _loggerDestinations.ToArray(), 
-                GetParser(), GetConfigurationParameters(), 
-                GetMessageFactory(), _isExtractStackTraces);
-            
-            logger.IsEnabled = _isEnabled;
-            
-            logger.Initialize();
-            
-            return logger;
+            return new Logger(GetInitializedDestinations(), GetParser(), GetMessageFactory(), _isExtractStackTraces)
+            {
+                IsEnabled = _isEnabled
+            };
         }
 
-        private LoggerConfigurationParameters GetConfigurationParameters()
+        private ILogDestination[] GetInitializedDestinations()
         {
-            return new LoggerConfigurationParameters(_formatParameters, _parameterSerializer);
+            var destinations = _loggerDestinations.ToArray();
+            var configurationParameters = new LoggerConfigurationParameters(_formatParameters, _parameterSerializer);
+            
+            foreach (var destination in destinations.AsSpan())
+            {
+                destination.Initialize(configurationParameters);
+            }
+
+            return destinations;
         }
         
         private static IMessageFormatParser GetParser()

@@ -15,12 +15,12 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
         internal char[] arrayFromPool;
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ValueStringBuilder(int initialCapacity = 32)
+        public ValueStringBuilder(int initialCapacity = 0)
         {
             bufferPosition = 0;
             buffer = default;
             arrayFromPool = null;
-            Grow(initialCapacity);
+            Grow(initialCapacity + MinBufferCapacity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

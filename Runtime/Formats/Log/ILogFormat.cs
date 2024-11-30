@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 
@@ -9,6 +8,6 @@ namespace OpenMyGame.LoggerUnity.Formats.Log
     {
         void Render(
             ref ValueStringBuilder destination, in LogMessage logMessage,
-            ref LogMessageRenderData messageRenderData, in ReadOnlySpan<byte> stacktrace);
+            ref LogMessageRenderData messageRenderData, ReadOnlySpan<byte> stacktrace);
     }
 }

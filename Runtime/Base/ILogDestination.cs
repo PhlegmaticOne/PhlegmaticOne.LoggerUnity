@@ -5,10 +5,8 @@ using OpenMyGame.LoggerUnity.Parsing.Models;
 
 namespace OpenMyGame.LoggerUnity.Base
 {
-    public interface ILogDestination : IDisposable
+    public interface ILogDestination
     {
-        bool IsEnabled { get; set; }
-        string DestinationName { get; }
         bool CanLogMessage(in LogMessage logMessage);
         void Initialize(LoggerConfigurationParameters configurationParameters);
         void LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters, ReadOnlySpan<byte> stacktrace);

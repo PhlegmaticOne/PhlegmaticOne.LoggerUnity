@@ -1,6 +1,6 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Parameters.Log.Base;

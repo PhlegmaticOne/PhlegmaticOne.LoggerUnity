@@ -1,5 +1,4 @@
 ﻿using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -27,8 +26,6 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android
         private static extern void Fatal(string tag, char[] message);
 #endif
         
-        public override string DestinationName => LogDestinationsSupported.Android;
-
         protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR

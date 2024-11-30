@@ -14,7 +14,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Messages.Factories
             var factory = new LogMessageFactory();
 
             //Act
-            var message = factory.CreateMessage(LogLevel.Debug, string.Empty, null);
+            var message = factory.CreateMessage(LogLevel.Debug, string.Empty, null, null);
             
             //Assert
             Assert.AreEqual(LogLevel.Debug, message.LogLevel);
@@ -27,8 +27,8 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Messages.Factories
             var factory = new LogMessageFactory();
 
             //Act
-            var message1 = factory.CreateMessage(LogLevel.Debug, string.Empty, null);
-            var message2 = factory.CreateMessage(LogLevel.Debug, string.Empty, null);
+            var message1 = factory.CreateMessage(LogLevel.Debug, string.Empty, null, null);
+            var message2 = factory.CreateMessage(LogLevel.Debug, string.Empty, null, null);
             
             //Assert
             Assert.AreEqual(0, message1.Id);

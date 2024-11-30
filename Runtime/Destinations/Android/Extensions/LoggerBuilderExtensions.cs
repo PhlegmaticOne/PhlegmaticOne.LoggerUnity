@@ -11,19 +11,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android.Extensions
             return loggerBuilder.LogTo<AndroidLogDestination, AndroidLogConfiguration>(x =>
             {
                 configureAction?.Invoke(x);
-                x.IsEnabled = GetIsLoggerEnabled();
             });
-        }
-
-        private static bool GetIsLoggerEnabled()
-        {
-#if UNITY_EDITOR
-            return false;
-#elif UNITY_ANDROID
-            return true;
-#else
-            return false;
-#endif
         }
     }
 }

@@ -16,7 +16,6 @@ namespace OpenMyGame.LoggerUnity.Builders
         }
 
         public Dictionary<Type, IMessageFormatParameter> FormatParameters { get; }
-        
         public IMessageFormatParameterSerializer ParameterSerializer { get; }
     }
 }

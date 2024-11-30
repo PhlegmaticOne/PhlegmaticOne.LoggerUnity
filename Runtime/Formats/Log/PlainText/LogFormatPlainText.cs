@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
@@ -28,9 +27,9 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
         
         public void Render(
             ref ValueStringBuilder destination, in LogMessage logMessage, 
-            ref LogMessageRenderData messageRenderData, in ReadOnlySpan<byte> stacktrace)
+            ref LogMessageRenderData messageRenderData, ReadOnlySpan<byte> stacktrace)
         {
-            RenderLogMessage(ref destination, in logMessage, ref messageRenderData);
+            RenderLogMessage(ref destination, logMessage, ref messageRenderData);
             TryAppendStacktrace(ref destination, stacktrace);
         }
 
@@ -76,7 +75,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             }
         }
 
-        private static void TryAppendStacktrace(ref ValueStringBuilder destination, in ReadOnlySpan<byte> stacktrace)
+        private static void TryAppendStacktrace(ref ValueStringBuilder destination, ReadOnlySpan<byte> stacktrace)
         {
             if (stacktrace.IsEmpty)
             {

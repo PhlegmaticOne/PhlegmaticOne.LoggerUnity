@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Extensions
+﻿namespace OpenMyGame.LoggerUnity.Infrastructure.Extensions
 {
     internal static class StringExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Parameters.Message.Base;
 using OpenMyGame.LoggerUnity.Parameters.Message.Processors;

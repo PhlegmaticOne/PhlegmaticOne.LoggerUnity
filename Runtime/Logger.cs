@@ -1,19 +1,13 @@
 ﻿using System;
 using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Builders;
 using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Extensions;
+using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Factories;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using ILogger = OpenMyGame.LoggerUnity.Base.ILogger;
-#if !UNITY_EDITOR
-using System.Diagnostics;
-using OpenMyGame.LoggerUnity.Infrastructure.Stacktrace;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-#endif
 
 namespace OpenMyGame.LoggerUnity
 {
@@ -23,66 +17,36 @@ namespace OpenMyGame.LoggerUnity
         
         private readonly ILogDestination[] _logDestinations;
         private readonly IMessageFormatParser _messageFormatParser;
-        private readonly LoggerConfigurationParameters _configurationParameters;
-        private readonly ILogMessageFactory _messageFactory;
+        private readonly ILogMessageFactory _logMessageFactory;
         private readonly bool _isExtractStacktrace;
 
-        private bool _isEnabled;
-        private bool _isDisposed;
-
         public Logger(
-            ILogDestination[] logDestinations,
+            ILogDestination[] logDestinations, 
             IMessageFormatParser messageFormatParser,
-            LoggerConfigurationParameters configurationParameters,
-            ILogMessageFactory messageFactory,
+            ILogMessageFactory logMessageFactory,
             bool isExtractStacktrace)
         {
             _logDestinations = logDestinations;
             _messageFormatParser = messageFormatParser;
-            _configurationParameters = configurationParameters;
-            _messageFactory = messageFactory;
+            _logMessageFactory = logMessageFactory;
             _isExtractStacktrace = isExtractStacktrace;
-            _isDisposed = true;
         }
 
-        public bool IsEnabled
+        public bool IsEnabled { get; set; }
+
+        public LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null)
         {
-            get => _isEnabled;
-            set
-            {
-                _isEnabled = value;
-                HandleLoggerEnabledUpdated();
-            }
+            return _logMessageFactory.CreateMessage(logLevel, tag, exception, this);
         }
-
-        public void Initialize()
+        
+        public unsafe void LogMessage(LogMessage message, Span<object> parameters)
         {
             if (!IsEnabled)
             {
                 return;
             }
-
-            foreach (var loggerDestination in _logDestinations.AsSpan())
-            {
-                loggerDestination.Initialize(_configurationParameters);
-            }
-
-            _isDisposed = false;
-        }
-
-        public LogMessage CreateMessage(LogLevel logLevel, string tag, Exception exception)
-        {
-            return _messageFactory.CreateMessage(logLevel, tag, exception);
-        }
-
-        public unsafe void LogMessage(LogMessage logMessage, Span<object> parameters)
-        {
-            if (!IsEnabled)
-            {
-                return;
-            }
-
-            var messageParts = _messageFormatParser.Parse(logMessage.Format);
+            
+            var messageParts = _messageFormatParser.Parse(message.Format);
             var stacktrace = ReadOnlySpan<byte>.Empty;
 
             #region Stacktrace
@@ -115,52 +79,10 @@ namespace OpenMyGame.LoggerUnity
             
             foreach (var logDestination in _logDestinations.AsSpan())
             {
-                if (logDestination.CanLogMessage(logMessage))
+                if (logDestination.CanLogMessage(message))
                 {
-                    logDestination.LogMessage(logMessage, messageParts, parameters, stacktrace);
+                    logDestination.LogMessage(message, messageParts, parameters, stacktrace);
                 }
-            }
-        }
-
-        public void SetDestinationEnabled(string destinationName, bool isEnabled)
-        {
-            if (!IsEnabled)
-            {
-                return;
-            }
-
-            var destination = Array.Find(_logDestinations, x => x.DestinationName == destinationName);
-
-            if (destination is not null)
-            {
-                destination.IsEnabled = isEnabled;
-            }
-        }
-
-        public void Dispose()
-        {
-            if (_isDisposed)
-            {
-                return;
-            }
-
-            foreach (var loggerDestination in _logDestinations.AsSpan())
-            {
-                loggerDestination.Dispose();
-            }
-
-            _isDisposed = true;
-        }
-
-        private void HandleLoggerEnabledUpdated()
-        {
-            if (_isEnabled)
-            {
-                Initialize();
-            }
-            else
-            {
-                Dispose();
             }
         }
     }

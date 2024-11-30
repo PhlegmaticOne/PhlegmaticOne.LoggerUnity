@@ -7,39 +7,26 @@ using OpenMyGame.LoggerUnity.Messages;
 
 namespace OpenMyGame.LoggerUnity
 {
-    public static class Log
+    public class Log : ILogger
     {
-        private const string FormatParameterName = "format";
+        public static ILogger Logger { get; set; } = new NullLogger();
         
-        private static ILogger LoggerPrivate = new NullLogger();
-
-        public static ILogger Logger
+        public bool IsEnabled
         {
-            get => LoggerPrivate;
-            set
-            {
-                LoggerPrivate?.Dispose();
-                LoggerPrivate = value;
-            }
+            get => Logger.IsEnabled; 
+            set => Logger.IsEnabled = value;
+        }
+                
+        public LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null)
+        {
+            return Logger.CreateMessage(logLevel, tag, exception);
         }
 
-        public static void SetDestinationEnabled(string destinationName, bool isEnabled)
+        public void LogMessage(LogMessage message, Span<object> parameters)
         {
-            Logger.SetDestinationEnabled(destinationName, isEnabled);
+            Logger.LogMessage(message, parameters);
         }
-
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Exception(Exception exception)
-        {
-            if (!Logger.IsEnabled || exception is null)
-            {
-                return;
-            }
-
-            FatalMessage(exception: exception).Log(
-                LoggerConfigurationData.ExceptionPlaceholderFormat, LoggerConfigurationData.ExceptionPlaceholder);
-        }
-
+        
         public static LogWithTag WithTag(string tag)
         {
             return new LogWithTag(tag);
@@ -48,157 +35,79 @@ namespace OpenMyGame.LoggerUnity
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Debug(string message)
         {
-            DebugMessage().Log(message);
+            Logger.Debug(message);
         }
         
-        [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Debug<T>(string format, T parameter1)
-        {
-            DebugMessage().Log(format, parameter1);
-        }
-        
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Debug<T1, T2>(string format, T1 parameter1, T2 parameter2)
-        {
-            DebugMessage().Log(format, parameter1, parameter2);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Debug<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
-        {
-            DebugMessage().Log(format, parameter1, parameter2, parameter3);
-        }
-        
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Debug(string format, params object[] parameters)
         {
-            DebugMessage().Log(format, parameters);
+            Logger.Debug(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Warning(string message)
         {
-            WarningMessage().Log(message);
+            Logger.Warning(message);
         }
 
-        [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Warning<T>(string format, T parameter1)
-        {
-            WarningMessage().Log(format, parameter1);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Warning<T1, T2>(string format, T1 parameter1, T2 parameter2)
-        {
-            WarningMessage().Log(format, parameter1, parameter2);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Warning<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
-        {
-            WarningMessage().Log(format, parameter1, parameter2, parameter3);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Warning(string format, params object[] parameters)
         {
-            WarningMessage().Log(format, parameters);
+            Logger.Warning(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Error(string message)
         {
-            ErrorMessage().Log(message);
+            Logger.Error(message);
         }
 
-        [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Error<T>(string format, T parameter1)
-        {
-            ErrorMessage().Log(format, parameter1);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Error<T1, T2>(string format, T1 parameter1, T2 parameter2)
-        {
-            ErrorMessage().Log(format, parameter1, parameter2);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Error<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
-        {
-            ErrorMessage().Log(format, parameter1, parameter2, parameter3);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Error(string format, params object[] parameters)
         {
-            ErrorMessage().Log(format, parameters);
+            Logger.Error(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Fatal(string message)
         {
-            FatalMessage().Log(message);
+            Logger.Fatal(message);
         }
 
-        [MessageTemplateFormatMethod(FormatParameterName)]
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Fatal<T>(string format, T parameter1)
-        {
-            FatalMessage().Log(format, parameter1);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Fatal<T1, T2>(string format, T1 parameter1, T2 parameter2)
-        {
-            FatalMessage().Log(format, parameter1, parameter2);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Fatal<T1, T2, T3>(string format, T1 parameter1, T2 parameter2, T3 parameter3)
-        {
-            FatalMessage().Log(format, parameter1, parameter2, parameter3);
-        }
-
-        [MessageTemplateFormatMethod(FormatParameterName)]
-        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Fatal(string format, params object[] parameters)
         {
-            FatalMessage().Log(format, parameters);
+            Logger.Fatal(format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void Exception(Exception exception)
+        {
+            Logger.Exception(exception);
         }
 
         public static LogMessage DebugMessage(string tag = null, Exception exception = null)
         {
-            return Logger.CreateMessage(LogLevel.Debug, tag, exception);
+            return Logger.DebugMessage(tag, exception);
         }
 
         public static LogMessage WarningMessage(string tag = null, Exception exception = null)
         {
-            return Logger.CreateMessage(LogLevel.Warning, tag, exception);
+            return Logger.WarningMessage(tag, exception);
         }
 
         public static LogMessage ErrorMessage(string tag = null, Exception exception = null)
         {
-            return Logger.CreateMessage(LogLevel.Error, tag, exception);
+            return Logger.ErrorMessage(tag, exception);
         }
 
         public static LogMessage FatalMessage(string tag = null, Exception exception = null)
         {
-            return Logger.CreateMessage(LogLevel.Fatal, tag, exception);
+            return Logger.FatalMessage(tag, exception);
         }
     }
 }

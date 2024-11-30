@@ -19,7 +19,7 @@ namespace OpenMyGame.LoggerUnity.Formats
         {
             if (logFormatFactory is not null)
             {
-                _logConfiguration.SetFormatsFactory(logFormatFactory);
+                _logConfiguration.SetFormatFactory(logFormatFactory);
             }
         }
     }
