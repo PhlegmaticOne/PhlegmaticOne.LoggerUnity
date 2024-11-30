@@ -8,12 +8,9 @@ namespace OpenMyGame.LoggerUnity
     {
         private readonly string _tag;
         private readonly ILogger _logger;
-
-        public LogWithTag(string tag) : this(tag, Log.Logger)
-        {
-            _tag = tag;
-        }
-
+        
+        public LogWithTag(string tag) : this(tag, Log.Logger) { }
+        
         public LogWithTag(string tag, ILogger logger)
         {
             _tag = tag;
@@ -24,12 +21,21 @@ namespace OpenMyGame.LoggerUnity
         
         public LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null)
         {
-            return _logger.CreateMessage(logLevel, _tag, exception);
+            return GetLogger().CreateMessage(logLevel, _tag, exception);
         }
 
         public void LogMessage(LogMessage message, Span<object> parameters)
         {
-            _logger.LogMessage(message, parameters);
+            GetLogger().LogMessage(message, parameters);
+        }
+
+        private ILogger GetLogger()
+        {
+            return _logger switch
+            {
+                NullLogger => Log.Logger,
+                _ => _logger
+            };
         }
     }
 }

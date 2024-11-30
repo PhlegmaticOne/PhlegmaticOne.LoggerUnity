@@ -21,7 +21,7 @@ namespace OpenMyGame.LoggerUnity.Base
         public bool CanLogMessage(in LogMessage logMessage)
         {
             return logMessage.LogLevel >= Configuration.MinimumLogLevel &&
-                   Configuration.Platform == LoggerPlatformProvider.GetPlatform();
+                   Configuration.Platform.HasFlag(LoggerPlatformProvider.GetPlatform());
         }
 
         public void Initialize(LoggerConfigurationParameters configurationParameters)
