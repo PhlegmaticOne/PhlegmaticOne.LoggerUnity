@@ -12,9 +12,10 @@ namespace OpenMyGame.LoggerUnity.Parameters.Message
     {
         protected override void Render(ref ValueStringBuilder destination, LogTag parameter, in ReadOnlySpan<char> format)
         {
-            destination.Append(LogTag.Format.Prefix);
+            var tafFormat = parameter.Format;
+            destination.Append(tafFormat.Prefix);
             destination.Append(parameter.Value);
-            destination.Append(LogTag.Format.Postfix);
+            destination.Append(tafFormat.Postfix);
         }
     }
 }

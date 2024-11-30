@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Factories;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 
 namespace OpenMyGame.LoggerUnity.Tests.Runtime.Messages.Factories
 {
@@ -11,7 +12,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Messages.Factories
         public void CreateMessage_ShouldReturnMessageWithProvidedLogLevel()
         {
             //Arrange
-            var factory = new LogMessageFactory();
+            var factory = new LogMessageFactory(LogTagFormat.Default);
 
             //Act
             var message = factory.CreateMessage(LogLevel.Debug, string.Empty, null, null);
@@ -24,7 +25,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Messages.Factories
         public void CreateMessage_ShouldReturnMessagesWithSequentialIds()
         {
             //Arrange
-            var factory = new LogMessageFactory();
+            var factory = new LogMessageFactory(LogTagFormat.Default);
 
             //Act
             var message1 = factory.CreateMessage(LogLevel.Debug, string.Empty, null, null);

@@ -23,7 +23,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
                 .LogToUnityDebug(config =>
                 {
                     config.RenderAs.PlainText("[Thread: {ThreadId}]: {Message}{NewLine}{Exception}");
-                    config.IsUnityStacktraceEnabled = false;
+                    config.IsUnityStacktraceEnabled = true;
+                    config.ColorizeParameters();
                 })
                 .CreateLogger();
         }

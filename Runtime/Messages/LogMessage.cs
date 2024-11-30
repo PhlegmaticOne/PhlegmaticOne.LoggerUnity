@@ -14,10 +14,12 @@ namespace OpenMyGame.LoggerUnity.Messages
         private const string MessageFormat = "{Message}";
         
         private readonly ILogger _logger;
+        private readonly LogTagFormat _logTagFormat;
 
-        public LogMessage(int id, LogLevel logLevel, ILogger logger)
+        public LogMessage(int id, LogLevel logLevel, ILogger logger, LogTagFormat logTagFormat)
         {
             _logger = logger;
+            _logTagFormat = logTagFormat;
             Id = id;
             LogLevel = logLevel;
             Exception = null;
@@ -35,7 +37,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         {
             if (!string.IsNullOrEmpty(tag))
             {
-                Tag = new LogTag(tag);
+                Tag = new LogTag(tag, _logTagFormat);
             }
         }
 
@@ -111,9 +113,9 @@ namespace OpenMyGame.LoggerUnity.Messages
             return _logger.IsEnabled && !string.IsNullOrEmpty(format);
         }
         
-        private static string AddTagToFormat(string format)
+        private string AddTagToFormat(string format)
         {
-            return LogTag.Format.AddTagToFormat(format);
+            return _logTagFormat.AddTagToFormat(format);
         }
     }
 }

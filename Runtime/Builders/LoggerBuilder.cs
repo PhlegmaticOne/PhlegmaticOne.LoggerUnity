@@ -91,8 +91,6 @@ namespace OpenMyGame.LoggerUnity.Builders
 
         public ILogger CreateLogger()
         {
-            LogTag.Format.UpdateFormat(_tagFormat);
-            
             return new Logger(GetInitializedDestinations(), GetParser(), GetMessageFactory(), _isExtractStackTraces)
             {
                 IsEnabled = _isEnabled
@@ -117,9 +115,10 @@ namespace OpenMyGame.LoggerUnity.Builders
             return new MessageFormatParserCached(new MessageFormatParser());
         }
 
-        private static ILogMessageFactory GetMessageFactory()
+        private ILogMessageFactory GetMessageFactory()
         {
-            return new LogMessageFactory();
+            var tagFormat = new LogTagFormat(_tagFormat);
+            return new LogMessageFactory(tagFormat);
         }
     }
 }
