@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Configuration
         public const string FormatParameterName = "format";
         
         public const int StacktraceDepth = 2;
-        public const int StacktraceBufferSize = 16384;
+        public const int StacktraceBufferSize = 8192;
 
         public const bool IsExtractStacktrace = false;
         public const bool IsEnabled = true;

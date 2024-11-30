@@ -7,6 +7,7 @@ using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
 using OpenMyGame.LoggerUnity.Messages.Tagging;
 using OpenMyGame.LoggerUnity.Parsing.Base;
+using OpenMyGame.LoggerUnity.Parsing.Models;
 using ILogger = OpenMyGame.LoggerUnity.Base.ILogger;
 
 namespace OpenMyGame.LoggerUnity
@@ -45,19 +46,25 @@ namespace OpenMyGame.LoggerUnity
             }
             
             var messageParts = _messageFormatParser.Parse(message.Format);
-            var stacktrace = ReadOnlySpan<byte>.Empty;
 
             if (_isExtractStacktrace)
             {
-                fixed (byte* stackArray = stackalloc byte[LoggerConfigurationData.StacktraceBufferSize])
-                {
-                    var stackTrace = new StackTrace(LoggerConfigurationData.StacktraceDepth, false);
-                    var stringBuilder = new SpanStringBuilder(stackArray, LoggerConfigurationData.StacktraceBufferSize);
-                    StacktraceBuilder.Build(ref stringBuilder, stackTrace);
-                    stacktrace = new ReadOnlySpan<byte>(stackArray, stringBuilder.Length);
-                }
+                Span<char> stacktraceBuffer = stackalloc char[LoggerConfigurationData.StacktraceBufferSize];
+                var stacktrace = new StackTrace(LoggerConfigurationData.StacktraceDepth, false);
+                var stringBuilder = new SpanStringBuilder(stacktraceBuffer);
+                StacktraceBuilder.Build(ref stringBuilder, stacktrace);
+                LogMessageToDestinations(message, messageParts, parameters, stacktraceBuffer);
             }
-            
+            else
+            {
+                LogMessageToDestinations(message, messageParts, parameters, Span<char>.Empty);
+            }
+        }
+
+        private void LogMessageToDestinations(
+            in LogMessage message, MessagePart[] messageParts, 
+            Span<object> parameters, Span<char> stacktrace)
+        {
             foreach (var logDestination in _logDestinations.AsSpan())
             {
                 if (logDestination.CanLogMessage(message))

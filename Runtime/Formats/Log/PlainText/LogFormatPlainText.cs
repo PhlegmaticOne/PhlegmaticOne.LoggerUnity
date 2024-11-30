@@ -27,7 +27,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
         
         public void Render(
             ref ValueStringBuilder destination, in LogMessage logMessage, 
-            ref LogMessageRenderData messageRenderData, ReadOnlySpan<byte> stacktrace)
+            ref LogMessageRenderData messageRenderData, Span<char> stacktrace)
         {
             RenderLogMessage(ref destination, logMessage, ref messageRenderData);
             TryAppendStacktrace(ref destination, stacktrace);
@@ -75,7 +75,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
             }
         }
 
-        private static void TryAppendStacktrace(ref ValueStringBuilder destination, ReadOnlySpan<byte> stacktrace)
+        private static void TryAppendStacktrace(ref ValueStringBuilder destination, Span<char> stacktrace)
         {
             if (stacktrace.IsEmpty)
             {
@@ -87,7 +87,7 @@ namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
                 destination.AppendLine();
             }
                 
-            destination.AppendEncodedBytes(stacktrace);
+            destination.Append(stacktrace);
         }
     }
 }

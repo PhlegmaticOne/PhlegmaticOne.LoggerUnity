@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 
@@ -36,7 +35,7 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
                 }
                 else
                 {
-                    stringBuilder.Append(Environment.NewLine);
+                    stringBuilder.AppendLine();
                 }
 
                 stringBuilder.Append("   at ");
@@ -97,7 +96,7 @@ namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
                 stringBuilder.Append(')');
             }
 
-            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.AppendLine();
         }
     }
 }

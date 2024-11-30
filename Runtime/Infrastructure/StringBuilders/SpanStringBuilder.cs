@@ -1,70 +1,61 @@
 ﻿using System;
-using System.Text;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
 {
-    public unsafe ref struct SpanStringBuilder
+    [StructLayout(LayoutKind.Sequential)]
+    public ref struct SpanStringBuilder
     {
-        private readonly int _length;
-        private readonly byte* _array;
+        private int _position;
+        private Span<char> _buffer;
 
-        public SpanStringBuilder(byte* array, int length)
+        public SpanStringBuilder(Span<char> buffer)
         {
-            _array = array;
-            _length = length;
-            Length = 0;
+            _buffer = buffer;
+            _position = 0;
         }
 
-        public int Length { get; private set; }
-
-        public void Append(string value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsFilled()
         {
-            if (Length >= _length)
+            return _position >= _buffer.Length;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Append(ReadOnlySpan<char> value)
+        {
+            if (IsFilled())
             {
                 return;
             }
 
-            fixed (char* stringPointer = value)
+            if (_position + value.Length <= _buffer.Length)
             {
-                var canAdd = Length + value.Length <= _length ? value.Length : _length - Length;
-                Length += Encoding.UTF8.GetBytes(stringPointer, canAdd, _array + Length, int.MaxValue);
+                value.CopyTo(_buffer[_position..]);
+                _position += value.Length;
+            }
+            else
+            {
+                var length = _buffer.Length - _position;
+                value.Slice(0, length).CopyTo(_buffer[_position..]);
+                _position += length;
             }
         }
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Append(char value)
         {
-            if (Length >= _length)
+            if (!IsFilled())
             {
-                return;
-            }
-
-            Span<char> temp = stackalloc char[1];
-            temp[0] = value;
-
-            fixed (char* pointer = temp)
-            {
-                Length += Encoding.UTF8.GetBytes(pointer, 1, _array + Length, int.MaxValue);
+                _buffer[_position++] = value;
             }
         }
-        
-        public void Append(int value)
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void AppendLine()
         {
-            if (Length >= _length)
-            {
-                return;
-            }
-
-            Span<char> temp = stackalloc char[11];
-
-            if (value.TryFormat(temp, out var charsWritten))
-            {
-                var canAdd = Length + charsWritten <= _length ? charsWritten : _length - Length;
-                
-                fixed (char* pointer = temp)
-                {
-                    Length += Encoding.UTF8.GetBytes(pointer, canAdd, _array + Length, int.MaxValue);
-                }
-            }
+            Append(Environment.NewLine);
         }
     }
 }

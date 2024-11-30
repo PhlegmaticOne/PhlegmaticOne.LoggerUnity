@@ -8,6 +8,6 @@ namespace OpenMyGame.LoggerUnity.Formats.Log
     {
         void Render(
             ref ValueStringBuilder destination, in LogMessage logMessage,
-            ref LogMessageRenderData messageRenderData, ReadOnlySpan<byte> stacktrace);
+            ref LogMessageRenderData messageRenderData, Span<char> stacktrace);
     }
 }

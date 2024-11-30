@@ -9,6 +9,6 @@ namespace OpenMyGame.LoggerUnity.Base
     {
         bool CanLogMessage(in LogMessage logMessage);
         void Initialize(LoggerConfigurationParameters configurationParameters);
-        void LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters, ReadOnlySpan<byte> stacktrace);
+        void LogMessage(in LogMessage message, MessagePart[] messageParts, Span<object> parameters, Span<char> stacktrace);
     }
 }

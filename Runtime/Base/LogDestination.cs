@@ -32,7 +32,7 @@ namespace OpenMyGame.LoggerUnity.Base
         }
 
         public virtual void LogMessage(
-            in LogMessage message, MessagePart[] messageParts, Span<object> parameters, ReadOnlySpan<byte> stacktrace)
+            in LogMessage message, MessagePart[] messageParts, Span<object> parameters, Span<char> stacktrace)
         {
             var destination = new ValueStringBuilder(stacktrace.Length);
             var messageRenderData = new LogMessageRenderData(_messageFormat, parameters, messageParts);
