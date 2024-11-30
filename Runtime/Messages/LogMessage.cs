@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Diagnostics;
+using System.Threading;
 using OpenMyGame.LoggerUnity.Base;
 using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
@@ -11,20 +12,24 @@ namespace OpenMyGame.LoggerUnity.Messages
 {
     public struct LogMessage
     {
+        private static int CurrentId = -1;
+        
         private const string MessageFormat = "{Message}";
         
         private readonly ILogger _logger;
         private readonly LogTagFormat _logTagFormat;
 
-        public LogMessage(int id, LogLevel logLevel, ILogger logger, LogTagFormat logTagFormat)
+        public LogMessage(LogLevel logLevel, ILogger logger, LogTagFormat logTagFormat, string tag = null, Exception exception = null)
         {
             _logger = logger;
             _logTagFormat = logTagFormat;
-            Id = id;
+            Id = Interlocked.Increment(ref CurrentId);
             LogLevel = logLevel;
             Exception = null;
             Format = null;
             Tag = LogTag.Empty;
+            SetTag(tag);
+            SetException(exception);
         }
         
         public int Id { get; }

@@ -5,7 +5,7 @@ using OpenMyGame.LoggerUnity.Configuration;
 using OpenMyGame.LoggerUnity.Infrastructure.Stacktrace;
 using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
 using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Messages.Factories;
+using OpenMyGame.LoggerUnity.Messages.Tagging;
 using OpenMyGame.LoggerUnity.Parsing.Base;
 using ILogger = OpenMyGame.LoggerUnity.Base.ILogger;
 
@@ -14,19 +14,19 @@ namespace OpenMyGame.LoggerUnity
     internal class Logger : ILogger
     {
         private readonly ILogDestination[] _logDestinations;
+        private readonly LogTagFormat _tagFormat;
         private readonly IMessageFormatParser _messageFormatParser;
-        private readonly ILogMessageFactory _logMessageFactory;
         private readonly bool _isExtractStacktrace;
 
         public Logger(
             ILogDestination[] logDestinations, 
+            LogTagFormat tagFormat,
             IMessageFormatParser messageFormatParser,
-            ILogMessageFactory logMessageFactory,
             bool isExtractStacktrace)
         {
             _logDestinations = logDestinations;
+            _tagFormat = tagFormat;
             _messageFormatParser = messageFormatParser;
-            _logMessageFactory = logMessageFactory;
             _isExtractStacktrace = isExtractStacktrace;
         }
 
@@ -34,9 +34,9 @@ namespace OpenMyGame.LoggerUnity
 
         public LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null)
         {
-            return _logMessageFactory.CreateMessage(logLevel, tag, exception, this);
+            return new LogMessage(logLevel, this, _tagFormat, tag, exception);
         }
-        
+
         public unsafe void LogMessage(LogMessage message, Span<object> parameters)
         {
             if (!IsEnabled)
