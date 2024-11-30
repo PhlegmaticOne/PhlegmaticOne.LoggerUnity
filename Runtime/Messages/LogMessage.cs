@@ -14,8 +14,6 @@ namespace OpenMyGame.LoggerUnity.Messages
     {
         private static int CurrentId = -1;
         
-        private const string MessageFormat = "{Message}";
-        
         private readonly ILogger _logger;
         private readonly LogTagFormat _logTagFormat;
 
@@ -69,7 +67,7 @@ namespace OpenMyGame.LoggerUnity.Messages
 
             if (!Tag.HasValue())
             {
-                SetFormat(MessageFormat);
+                SetFormat(LoggerConfigurationData.MessageFormat);
                 var propertiesInlineArray = new PropertyInlineArray1();
                 var parameters = propertiesInlineArray.AsSpan();
                 parameters[0] = message;
@@ -77,7 +75,7 @@ namespace OpenMyGame.LoggerUnity.Messages
             }
             else
             {
-                SetFormat(AddTagToFormat(MessageFormat));
+                SetFormat(AddTagToFormat(LoggerConfigurationData.MessageFormat));
                 var propertiesInlineArray = new PropertyInlineArray2();
                 var parameters = propertiesInlineArray.AsSpan();
                 parameters[0] = Tag;

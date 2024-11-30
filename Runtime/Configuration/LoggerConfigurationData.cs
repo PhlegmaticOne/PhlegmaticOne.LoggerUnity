@@ -22,6 +22,7 @@ namespace OpenMyGame.LoggerUnity.Configuration
         public static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
         public const char SerializeParameterPrefix = '@';
         public const string LogFormat = "{Message}{NewLine}{Exception}";
+        public const string MessageFormat = "{Message}";
         public const string TagFormat = "#{Tag}#";
         public const string MessageParameterKey = "Message";
         public const string FormatParameterName = "format";
