@@ -13,16 +13,16 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
         private const string DefaultTagValue = "Unity";
 
         [DllImport("__Internal")]
-        private static extern void NativeLoggerIos_Debug(string tag, string message);
+        private static extern void NativeLoggerIos_Debug(string tag, char[] message);
 
         [DllImport("__Internal")]
-        private static extern void NativeLoggerIos_Warning(string tag, string message);
+        private static extern void NativeLoggerIos_Warning(string tag, char[] message);
 
         [DllImport("__Internal")]
-        private static extern void NativeLoggerIos_Error(string tag, string message);
+        private static extern void NativeLoggerIos_Error(string tag, char[] message);
 
         [DllImport("__Internal")]
-        private static extern void NativeLoggerIos_Fatal(string tag, string message);
+        private static extern void NativeLoggerIos_Fatal(string tag, char[] message);
 #endif
 
         protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
@@ -30,29 +30,23 @@ namespace OpenMyGame.LoggerUnity.Destinations.IOS
 #if !UNITY_EDITOR && UNITY_IOS
             var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
             var logLevel = logMessage.LogLevel;
-            Log(tag, logLevel, renderedMessage.ToString());
-#endif
-        }
-        
-#if !UNITY_EDITOR && UNITY_IOS
-        private static void Log(string tag, LogLevel logLevel, string renderedMessage)
-        {
+
             switch (logLevel)
             {
                 case LogLevel.Debug:
-                    NativeLoggerIos_Debug(tag, renderedMessage);
+                    NativeLoggerIos_Debug(tag, renderedMessage.arrayFromPool);
                     break;
                 case LogLevel.Warning:
-                    NativeLoggerIos_Warning(tag, renderedMessage);
+                    NativeLoggerIos_Warning(tag, renderedMessage.arrayFromPool);
                     break;
                 case LogLevel.Error:
-                    NativeLoggerIos_Error(tag, renderedMessage);
+                    NativeLoggerIos_Error(tag, renderedMessage.arrayFromPool);
                     break;
                 case LogLevel.Fatal:
-                    NativeLoggerIos_Fatal(tag, renderedMessage);
+                    NativeLoggerIos_Fatal(tag, renderedMessage.arrayFromPool);
                     break;
             }
-        }
 #endif
+        }
     }
 }
