@@ -25,7 +25,7 @@ namespace Tests.Performance.Android
         public void Setup()
         {
             Log.Logger = new LoggerBuilder()
-                .SetIsExtractStackTraces(false)
+                .SetIsExtractStacktrace(false)
                 .LogToAndroidLog(x =>
                 {
                     x.RenderAs.PlainText(

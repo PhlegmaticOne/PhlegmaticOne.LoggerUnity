@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenMyGame.LoggerUnity.Configuration.Attributes;
 using OpenMyGame.LoggerUnity.Configuration.Base;
 using Object = UnityEngine.Object;
 

@@ -23,6 +23,11 @@ namespace OpenMyGame.LoggerUnity.Messages.Tagging
             return _formatsCache.GetOrAdd(format, f => $"{Format} {f}");
         }
 
+        public override string ToString()
+        {
+            return Format;
+        }
+
         private void UpdateFormat(string format)
         {
             var openIndex = format.IndexOf('{');

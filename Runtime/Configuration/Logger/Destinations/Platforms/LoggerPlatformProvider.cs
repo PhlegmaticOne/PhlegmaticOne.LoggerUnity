@@ -2,6 +2,11 @@
 {
     internal static class LoggerPlatformProvider
     {
+        internal static bool HasPlatform(LoggerPlatform platform)
+        {
+            return platform.HasFlag(GetPlatform());
+        }
+        
         internal static LoggerPlatform GetPlatform()
         {
             #pragma warning disable CS0162

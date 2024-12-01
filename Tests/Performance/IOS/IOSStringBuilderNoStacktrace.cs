@@ -23,7 +23,7 @@ namespace Tests.Performance.IOS
         public void Setup()
         {
             Log.Logger = new LoggerBuilder()
-                .SetIsExtractStackTraces(false)
+                .SetIsExtractStacktrace(false)
                 .LogToIOS(x =>
                 {
                     x.RenderAs.PlainText(

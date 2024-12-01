@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using OpenMyGame.LoggerUnity.Configuration.Attributes;
 using OpenMyGame.LoggerUnity.Configuration.Base;
 using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Models;
 using UnityEditor;

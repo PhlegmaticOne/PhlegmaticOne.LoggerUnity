@@ -14,20 +14,20 @@ namespace OpenMyGame.LoggerUnity.Builders
 {
     public class LoggerBuilder
     {
-        private readonly List<ILogDestination> _loggerDestinations;
+        private readonly List<ILogDestination> _logDestinations;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
         private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
 
-        private bool _isExtractStackTraces;
+        private bool _isExtractStacktrace;
         private string _tagFormat;
         private bool _isEnabled;
 
         public LoggerBuilder()
         {
-            _loggerDestinations = new List<ILogDestination>();
+            _logDestinations = new List<ILogDestination>();
             _tagFormat = LoggerConfigurationData.TagFormat;
             _isEnabled = LoggerConfigurationData.IsEnabled;
-            _isExtractStackTraces = LoggerConfigurationData.IsExtractStacktrace;
+            _isExtractStacktrace = LoggerConfigurationData.IsExtractStacktrace;
             _formatParameters = LoggerConfigurationData.MessageFormatParameters;
             _parameterSerializer = LoggerConfigurationData.MessageFormatParameterSerializer;
         }
@@ -51,9 +51,9 @@ namespace OpenMyGame.LoggerUnity.Builders
             return this;
         }
 
-        public LoggerBuilder SetIsExtractStackTraces(bool isExtractStackTraces)
+        public LoggerBuilder SetIsExtractStacktrace(bool isExtractStacktrace)
         {
-            _isExtractStackTraces = isExtractStackTraces;
+            _isExtractStacktrace = isExtractStacktrace;
             return this;
         }
 
@@ -74,39 +74,35 @@ namespace OpenMyGame.LoggerUnity.Builders
         {
             var configuration = new TConfiguration();
             configureDestinationAction?.Invoke(configuration);
-            
-            if (!configuration.Platform.HasFlag(LoggerPlatformProvider.GetPlatform()))
+
+            if (LoggerPlatformProvider.HasPlatform(configuration.Platform))
             {
-                return this;
+                _logDestinations.Add(new TDestination
+                {
+                    Configuration = configuration
+                });
             }
-            
-            _loggerDestinations.Add(new TDestination
-            {
-                Configuration = configuration
-            });
             
             return this;
         }
 
         public ILogger CreateLogger()
         {
-            return new Logger(GetInitializedDestinations(), GetTagFormat(), GetParser(), _isExtractStackTraces)
-            {
-                IsEnabled = _isEnabled
-            };
+            return new Logger(
+                GetInitializedDestinations(), GetTagFormat(), GetParser(), _isExtractStacktrace, _isEnabled);
         }
 
         private ILogDestination[] GetInitializedDestinations()
         {
-            var destinations = _loggerDestinations.ToArray();
+            var logDestinations = _logDestinations.ToArray();
             var configurationParameters = new LoggerConfigurationParameters(_formatParameters, _parameterSerializer);
             
-            foreach (var destination in destinations.AsSpan())
+            foreach (var destination in logDestinations.AsSpan())
             {
                 destination.Initialize(configurationParameters);
             }
 
-            return destinations;
+            return logDestinations;
         }
         
         private static IMessageFormatParser GetParser()

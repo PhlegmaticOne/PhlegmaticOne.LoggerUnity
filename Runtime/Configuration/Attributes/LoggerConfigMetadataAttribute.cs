@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Base
+namespace OpenMyGame.LoggerUnity.Configuration.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     internal class LoggerConfigMetadataAttribute : Attribute

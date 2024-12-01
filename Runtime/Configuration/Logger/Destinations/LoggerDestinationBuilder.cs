@@ -29,8 +29,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
         
         public bool CanBuild()
         {
-            var currentPlatform = LoggerPlatformProvider.GetPlatform();
-            return _platform.HasFlag(currentPlatform);
+            return LoggerPlatformProvider.HasPlatform(_platform);
         }
         
         public abstract void Build(LoggerBuilder loggerBuilder);

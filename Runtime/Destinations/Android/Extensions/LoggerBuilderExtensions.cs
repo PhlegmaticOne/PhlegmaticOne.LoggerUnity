@@ -8,10 +8,7 @@ namespace OpenMyGame.LoggerUnity.Destinations.Android.Extensions
         public static LoggerBuilder LogToAndroidLog(
             this LoggerBuilder loggerBuilder, Action<AndroidLogConfiguration> configureAction = null)
         {
-            return loggerBuilder.LogTo<AndroidLogDestination, AndroidLogConfiguration>(x =>
-            {
-                configureAction?.Invoke(x);
-            });
+            return loggerBuilder.LogTo<AndroidLogDestination, AndroidLogConfiguration>(x => configureAction?.Invoke(x));
         }
     }
 }

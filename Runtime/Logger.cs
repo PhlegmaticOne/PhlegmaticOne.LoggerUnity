@@ -23,8 +23,10 @@ namespace OpenMyGame.LoggerUnity
             ILogDestination[] logDestinations, 
             LogTagFormat tagFormat,
             IMessageFormatParser messageFormatParser,
-            bool isExtractStacktrace)
+            bool isExtractStacktrace,
+            bool isEnabled)
         {
+            IsEnabled = isEnabled;
             _logDestinations = logDestinations;
             _tagFormat = tagFormat;
             _messageFormatParser = messageFormatParser;

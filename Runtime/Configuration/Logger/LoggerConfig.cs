@@ -13,7 +13,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger
     public class LoggerConfig : LoggerConfigBase
     {
         [SerializeField] private bool _isEnabled = true;
-        [SerializeField] private bool _isExtractStacktraces = LoggerConfigurationData.IsExtractStacktrace;
+        [SerializeField] private bool _isExtractStacktrace = LoggerConfigurationData.IsExtractStacktrace;
         [SerializeField] private string _tagFormat = LoggerConfigurationData.TagFormat;
 
         [SerializeReference, SerializeReferenceDropdown]
@@ -38,7 +38,7 @@ namespace OpenMyGame.LoggerUnity.Configuration.Logger
         public void Build(LoggerBuilder loggerBuilder)
         {
             loggerBuilder.SetEnabled(_isEnabled);
-            loggerBuilder.SetIsExtractStackTraces(_isExtractStacktraces);
+            loggerBuilder.SetIsExtractStacktrace(_isExtractStacktrace);
             loggerBuilder.SetTagFormat(_tagFormat);
             AddMessageParameters(loggerBuilder);
             BuildDestinations(loggerBuilder);

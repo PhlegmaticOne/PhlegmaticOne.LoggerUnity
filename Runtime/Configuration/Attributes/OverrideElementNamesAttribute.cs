@@ -4,5 +4,5 @@ using UnityEngine;
 namespace OpenMyGame.LoggerUnity.Configuration.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class OverrideElementNamesAttribute : PropertyAttribute { }
+    internal class OverrideElementNamesAttribute : PropertyAttribute { }
 }

@@ -20,7 +20,7 @@ namespace Tests.Performance.Android
         public void Setup()
         {
             Log.Logger = new LoggerBuilder()
-                .SetIsExtractStackTraces(true)
+                .SetIsExtractStacktrace(true)
                 .LogToAndroidLog(x =>
                 {
                     x.RenderAs.PlainText("[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}{NewLine}{Exception}");

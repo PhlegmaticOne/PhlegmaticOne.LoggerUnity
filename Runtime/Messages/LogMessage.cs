@@ -113,12 +113,12 @@ namespace OpenMyGame.LoggerUnity.Messages
         
         private bool CanLogMessage(string format)
         {
-            return _logger.IsEnabled && !string.IsNullOrEmpty(format);
+            return _logger is not null && _logger.IsEnabled && !string.IsNullOrEmpty(format);
         }
         
         private string AddTagToFormat(string format)
         {
-            return _logTagFormat.AddTagToFormat(format);
+            return _logTagFormat is null ? format : _logTagFormat.AddTagToFormat(format);
         }
     }
 }

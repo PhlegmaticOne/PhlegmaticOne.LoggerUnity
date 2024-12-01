@@ -21,7 +21,7 @@ namespace Tests.Performance.IOS
         public void Setup()
         {
             Log.Logger = new LoggerBuilder()
-                .SetIsExtractStackTraces(true)
+                .SetIsExtractStacktrace(true)
                 .LogToIOS(x =>
                 {
                     x.RenderAs.PlainText("[Thread: {ThreadId}, LogLevel: {LogLevel}] {Message}");
