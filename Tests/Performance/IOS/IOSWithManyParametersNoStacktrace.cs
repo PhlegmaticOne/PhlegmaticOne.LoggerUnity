@@ -102,7 +102,7 @@ namespace Tests.Performance.IOS
 
         private static void LogMessageIOS()
         {
-            Log.WithTag("Test").Debug(Format, DateTime.Now, 42, 69, 420, 690);
+            Log.TagDebug("Test", Format, DateTime.Now, 42, 69, 420, 690);
         }
     }
 }

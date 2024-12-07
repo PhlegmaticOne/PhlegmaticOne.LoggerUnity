@@ -19,7 +19,7 @@ namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel");
             var destination = new ValueStringBuilder();
-            var logMessage = new LogMessage(logLevel, null, null);
+            var logMessage = new LogMessage(null, null, logLevel);
             
             //Act
             parameter.Render(ref destination, messagePart, logMessage);

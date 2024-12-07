@@ -102,7 +102,7 @@ namespace Tests.Performance.Editor
 
         private static void LogMessageEditor()
         {
-            Log.WithTag("Test").Debug(Format, DateTime.Now, 42, 69, 420, 690);
+            Log.TagDebug("Test", Format, DateTime.Now, 42, 69, 420, 690);
         }
     }
 }

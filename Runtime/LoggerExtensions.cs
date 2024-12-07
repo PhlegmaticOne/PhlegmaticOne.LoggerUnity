@@ -12,53 +12,201 @@ namespace OpenMyGame.LoggerUnity
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Debug(this ILogger logger, string messagePlain)
         {
-            logger.DebugMessage().Log(messagePlain);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Debug);
+            message.Log(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagDebug(this ILogger logger, string tag, string messagePlain)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Debug, tag);
+            message.Log(messagePlain);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Debug(this ILogger logger, string format, params object[] parameters)
         {
-            logger.DebugMessage().Log(format, parameters);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Debug);
+            message.Log(format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagDebug(this ILogger logger, string tag, string format, params object[] parameters)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Debug, tag);
+            message.Log(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Warning(this ILogger logger, string messagePlain)
         {
-            logger.WarningMessage().Log(messagePlain);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Warning);
+            message.Log(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagWarning(this ILogger logger, string tag, string messagePlain)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Warning, tag);
+            message.Log(messagePlain);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Warning(this ILogger logger, string format, params object[] parameters)
         {
-            logger.WarningMessage().Log(format, parameters);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Warning);
+            message.Log(format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagWarning(this ILogger logger, string tag, string format, params object[] parameters)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Warning, tag);
+            message.Log(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Error(this ILogger logger, string messagePlain)
         {
-            logger.ErrorMessage().Log(messagePlain);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Error);
+            message.Log(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagError(this ILogger logger, string tag, string messagePlain)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Error, tag);
+            message.Log(messagePlain);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Error(this ILogger logger, string format, params object[] parameters)
         {
-            logger.ErrorMessage().Log(format, parameters);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Error);
+            message.Log(format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagError(this ILogger logger, string tag, string format, params object[] parameters)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Error, tag);
+            message.Log(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Fatal(this ILogger logger, string messagePlain)
         {
-            logger.FatalMessage().Log(messagePlain);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Fatal);
+            message.Log(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagFatal(this ILogger logger, string tag, string messagePlain)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Fatal, tag);
+            message.Log(messagePlain);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Fatal(this ILogger logger, string format, params object[] parameters)
         {
-            logger.FatalMessage().Log(format, parameters);
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Fatal);
+            message.Log(format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagFatal(this ILogger logger, string tag, string format, params object[] parameters)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format))
+            {
+                return;
+            }
+            
+            var message = logger.CreateMessage(LogLevel.Fatal, tag);
+            message.Log(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
@@ -68,42 +216,77 @@ namespace OpenMyGame.LoggerUnity
             {
                 return;
             }
+            
+            var message = logger.CreateMessage(LogLevel.Fatal, exception: exception);
+            message.Log(
+                LoggerConfigurationData.ExceptionPlaceholderFormat, 
+                LoggerConfigurationData.ExceptionPlaceholder);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void Exception(this ILogger logger, Exception exception, string messagePlain)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain) || exception is null)
+            {
+                return;
+            }
 
-            logger.FatalMessage(exception: exception).Log(
+            var message = logger.CreateMessage(LogLevel.Fatal, exception: exception);
+            message.Log(LoggerConfigurationData.MessageFormat, messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void Exception(this ILogger logger, 
+            Exception exception, string format, params object[] parameters)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format) || exception is null)
+            {
+                return;
+            }
+
+            var message = logger.CreateMessage(LogLevel.Fatal, exception: exception);
+            message.Log(format, parameters);
+        }
+
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagException(this ILogger logger, string tag, Exception exception)
+        {
+            if (!logger.IsEnabled || exception is null)
+            {
+                return;
+            }
+
+            var message = logger.CreateMessage(LogLevel.Fatal, tag, exception);
+            message.Log(
                 LoggerConfigurationData.ExceptionPlaceholderFormat, 
                 LoggerConfigurationData.ExceptionPlaceholder);
         }
 
-        public static LogMessage DebugMessage(this ILogger logger, Exception exception = null) => 
-            logger.CreateMessage(LogLevel.Debug, null, exception);
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagException(this ILogger logger, string tag, Exception exception, string messagePlain)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(messagePlain) || exception is null)
+            {
+                return;
+            }
 
-        public static LogMessage DebugMessage(this ILogger logger, string tag) => 
-            logger.CreateMessage(LogLevel.Debug, tag);
-        public static LogMessage DebugMessage(this ILogger logger, string tag, Exception exception) => 
-            logger.CreateMessage(LogLevel.Debug, tag, exception);
+            var message = logger.CreateMessage(LogLevel.Fatal, tag, exception);
+            message.Log(LoggerConfigurationData.MessageFormat, messagePlain);
+        }
 
-        public static LogMessage WarningMessage(this ILogger logger, Exception exception = null) => 
-            logger.CreateMessage(LogLevel.Warning, null, exception);
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagException(this ILogger logger, 
+            string tag, Exception exception, string format, params object[] parameters)
+        {
+            if (!logger.IsEnabled || string.IsNullOrEmpty(format) || exception is null)
+            {
+                return;
+            }
 
-        public static LogMessage WarningMessage(this ILogger logger, string tag) => 
-            logger.CreateMessage(LogLevel.Warning, tag);
-        public static LogMessage WarningMessage(this ILogger logger, string tag, Exception exception) => 
-            logger.CreateMessage(LogLevel.Warning, tag, exception);
-
-        public static LogMessage ErrorMessage(this ILogger logger, Exception exception = null) => 
-            logger.CreateMessage(LogLevel.Error, null, exception);
-
-        public static LogMessage ErrorMessage(this ILogger logger, string tag) => 
-            logger.CreateMessage(LogLevel.Error, tag);
-        public static LogMessage ErrorMessage(this ILogger logger, string tag, Exception exception) => 
-            logger.CreateMessage(LogLevel.Error, tag, exception);
-
-        public static LogMessage FatalMessage(this ILogger logger, Exception exception = null) => 
-            logger.CreateMessage(LogLevel.Fatal, null, exception);
-
-        public static LogMessage FatalMessage(this ILogger logger, string tag) => 
-            logger.CreateMessage(LogLevel.Fatal, tag);
-        public static LogMessage FatalMessage(this ILogger logger, string tag, Exception exception) => 
-            logger.CreateMessage(LogLevel.Fatal, tag, exception);
+            var message = logger.CreateMessage(LogLevel.Fatal, tag, exception);
+            message.Log(format, parameters);
+        }
     }
 }

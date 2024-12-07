@@ -27,15 +27,21 @@ namespace OpenMyGame.LoggerUnity
             Logger.LogMessage(message, parameters);
         }
         
-        public static LogWithTag WithTag(string tag)
+        public static LogWithTag TagLogger(string tag)
         {
-            return new LogWithTag(tag);
+            return new LogWithTag(tag, Logger);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Debug(string message)
+        public static void Debug(string messagePlain)
         {
-            Logger.Debug(message);
+            Logger.Debug(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagDebug(string tag, string messagePlain)
+        {
+            Logger.TagDebug(tag, messagePlain);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
@@ -46,9 +52,22 @@ namespace OpenMyGame.LoggerUnity
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Warning(string message)
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagDebug(string tag, string format, params object[] parameters)
         {
-            Logger.Warning(message);
+            Logger.TagDebug(tag, format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void Warning(string messagePlain)
+        {
+            Logger.Warning(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagWarning(string tag, string messagePlain)
+        {
+            Logger.TagWarning(tag, messagePlain);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName)]
@@ -59,9 +78,22 @@ namespace OpenMyGame.LoggerUnity
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Error(string message)
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagWarning(string tag, string format, params object[] parameters)
         {
-            Logger.Error(message);
+            Logger.TagWarning(tag, format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void Error(string messagePlain)
+        {
+            Logger.Error(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagError(string tag, string messagePlain)
+        {
+            Logger.TagError(tag, messagePlain);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName)]
@@ -72,9 +104,22 @@ namespace OpenMyGame.LoggerUnity
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
-        public static void Fatal(string message)
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagError(string tag, string format, params object[] parameters)
         {
-            Logger.Fatal(message);
+            Logger.TagError(tag, format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void Fatal(string messagePlain)
+        {
+            Logger.Fatal(messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagFatal(string tag, string messagePlain)
+        {
+            Logger.TagFatal(tag, messagePlain);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName)]
@@ -85,29 +130,48 @@ namespace OpenMyGame.LoggerUnity
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagFatal(string tag, string format, params object[] parameters)
+        {
+            Logger.TagFatal(tag, format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
         public static void Exception(Exception exception)
         {
             Logger.Exception(exception);
         }
-
-        public static LogMessage DebugMessage(string tag = null, Exception exception = null)
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void Exception(Exception exception, string messagePlain)
         {
-            return Logger.DebugMessage(tag, exception);
+            Logger.Exception(exception, messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void Exception(Exception exception, string format, params object[] parameters)
+        {
+            Logger.Exception(exception, format, parameters);
         }
 
-        public static LogMessage WarningMessage(string tag = null, Exception exception = null)
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagException(string tag, Exception exception)
         {
-            return Logger.WarningMessage(tag, exception);
+            Logger.TagException(tag, exception);
         }
 
-        public static LogMessage ErrorMessage(string tag = null, Exception exception = null)
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        public static void TagException(string tag, Exception exception, string messagePlain)
         {
-            return Logger.ErrorMessage(tag, exception);
+            Logger.TagException(tag, exception, messagePlain);
         }
 
-        public static LogMessage FatalMessage(string tag = null, Exception exception = null)
+        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagException(string tag, Exception exception, string format, params object[] parameters)
         {
-            return Logger.FatalMessage(tag, exception);
+            Logger.TagException(tag, exception, format, parameters);
         }
     }
 }

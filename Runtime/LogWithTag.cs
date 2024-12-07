@@ -15,10 +15,11 @@ namespace OpenMyGame.LoggerUnity
         {
             _tag = tag;
             _logger = logger;
+            IsEnabled = true;
         }
 
         public bool IsEnabled { get; set; }
-        
+
         public LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null)
         {
             return GetLogger().CreateMessage(logLevel, _tag, exception);

@@ -90,7 +90,7 @@ namespace Tests.Performance.IOS
 
         private static void LogMessageIOS()
         {
-            Log.WithTag("Test").Debug("Current time: {Time:D}; Weather: {Weather}", DateTime.Now, 42);
+            Log.TagDebug("Test", "Current time: {Time:D}; Weather: {Weather}", DateTime.Now, 42);
         }
     }
 }

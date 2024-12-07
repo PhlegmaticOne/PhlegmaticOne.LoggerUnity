@@ -15,12 +15,14 @@ namespace OpenMyGame.LoggerUnity.Messages
         private static int CurrentId = -1;
         
         private readonly ILogger _logger;
-        private readonly LogTagFormat _logTagFormat;
+        private readonly LogTagFormat _tagFormat;
 
-        public LogMessage(LogLevel logLevel, ILogger logger, LogTagFormat logTagFormat, string tag = null, Exception exception = null)
+        public LogMessage(
+            ILogger logger, LogTagFormat tagFormat, 
+            LogLevel logLevel, string tag = null, Exception exception = null)
         {
             _logger = logger;
-            _logTagFormat = logTagFormat;
+            _tagFormat = tagFormat;
             Id = Interlocked.Increment(ref CurrentId);
             LogLevel = logLevel;
             Exception = null;
@@ -40,7 +42,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         {
             if (!string.IsNullOrEmpty(tag))
             {
-                Tag = new LogTag(tag, _logTagFormat);
+                Tag = new LogTag(tag, _tagFormat);
             }
         }
 
@@ -118,7 +120,7 @@ namespace OpenMyGame.LoggerUnity.Messages
         
         private string AddTagToFormat(string format)
         {
-            return _logTagFormat is null ? format : _logTagFormat.AddTagToFormat(format);
+            return _tagFormat is null ? format : _tagFormat.AddTagToFormat(format);
         }
     }
 }

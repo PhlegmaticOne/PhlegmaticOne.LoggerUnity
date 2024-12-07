@@ -37,7 +37,7 @@ namespace OpenMyGame.LoggerUnity
 
         public LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null)
         {
-            return new LogMessage(logLevel, this, _tagFormat, tag, exception);
+            return new LogMessage(this, _tagFormat, logLevel, tag, exception);
         }
 
         public unsafe void LogMessage(LogMessage message, Span<object> parameters)

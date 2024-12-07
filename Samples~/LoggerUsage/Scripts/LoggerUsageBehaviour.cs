@@ -9,8 +9,8 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
 {
     public class LoggerUsageBehaviour : MonoBehaviour
     {
-        private static readonly LogWithTag LogTime = new("Time");
-        private static readonly LogWithTag LogSystem = new("System");
+        private static readonly LogWithTag LogTime = Log.TagLogger("Time");
+        private static readonly LogWithTag LogSystem = Log.TagLogger("System");
         
         private const string LongFormat = "Time: {Time}; Weather: {Weather}, Velocity: {Velocity}; Mass: {Mass}; Acceleration: {Acceleration}";
 
@@ -43,7 +43,7 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             LogTime.Error("Error current time with tag: {Time}", DateTime.Now);
             LogTime.Fatal("Fatal current time with tag: {Time}", DateTime.Now);
             
-            Log.WithTag("Test").Debug(LongFormat, DateTime.Now, 42, 69, 420, 690);
+            Log.TagDebug("Time", LongFormat, DateTime.Now, 42, 69, 420, 690);
             
             LogWithTag();
             
@@ -51,11 +51,9 @@ namespace OpenMyGame.LoggerUnity.LoggerUsage
             
             var systemException = new Exception("System failed");
             
-            Log.FatalMessage("System", systemException)
-                .Log("System error: {Error}", "Something went wrong");
-            
-            LogSystem.FatalMessage(systemException)
-                .Log("System error: {Error}", "Something went wrong");
+            Log.TagException("System", systemException, "System error: {Error}", "Something went wrong");
+
+            LogSystem.Exception(systemException, "System error: {Error}", "Something went wrong");
             
             Log.Exception(new Exception("Test exception"));
             
