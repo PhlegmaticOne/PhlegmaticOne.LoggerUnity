@@ -59,7 +59,7 @@ namespace Openmygame.Logger.Messages
             Format = format;
         }
 
-        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public void Log(string message)
         {
             if (!CanLogMessage(message))
@@ -86,7 +86,7 @@ namespace Openmygame.Logger.Messages
             }
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName)]
+        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public void Log(string format, params object[] parameters)
         {
             if (!CanLogMessage(format))
