@@ -3,7 +3,7 @@
 namespace Openmygame.Logger.Infrastructure.Attributes
 {
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method)]
-    internal sealed class MessageTemplateFormatMethodAttribute : Attribute
+    public sealed class MessageTemplateFormatMethodAttribute : Attribute
     {
         public MessageTemplateFormatMethodAttribute(string messageTemplateParameterName)
         {
