@@ -1,11 +1,13 @@
 {
   "name": "com.openmygame.logger",
-  "version": "1.0.0",
-  "displayName": "Logger Unity",
-  "description": "Logger for Unity",
+  "version": "2.0.0",
+  "displayName": "OMG Logger",
+  "description": "Logger package for Unity",
   "unity": "2021.3",
   "keywords": [
-    "Logger"
+    "logger",
+    "debug",
+    "openmygame"
   ],
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.1",
@@ -19,7 +21,6 @@
     }
   ],
   "author": {
-    "name": "Aleksandr Krotov",
-    "email": "a.krotov@openmygame.com"
+    "name": "Openmygame"
   }
 }
