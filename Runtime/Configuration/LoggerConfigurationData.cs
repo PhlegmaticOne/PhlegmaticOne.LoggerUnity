@@ -13,36 +13,37 @@ using UnityEngine;
 
 namespace Openmygame.Logger.Configuration
 {
-    internal static class LoggerConfigurationData
+    public static class LoggerConfigurationData
     {
-        public static readonly Color DefaultLogTextColor = Color.white;
         public const string ConditionalName = "ENABLE_LOGGING";
-        public const LogLevel MinimumLogLevel = LogLevel.Debug;
-        public const string ExceptionPlaceholderFormat = "{Placeholder}";
-        public static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
-        public const char SerializeParameterPrefix = '@';
-        public const string LogFormat = "{Message}{NewLine}{Exception}";
-        public const string MessageFormat = "{Message}";
-        public const string TagFormat = "#{Tag}#";
-        public const string MessageParameterKey = "Message";
-        public const string FormatParameterName = "format";
         
-        public const int StacktraceDepth = 2;
-        public const int StacktraceBufferSize = 8192;
+        internal static readonly Color DefaultLogTextColor = Color.white;
+        internal const LogLevel MinimumLogLevel = LogLevel.Debug;
+        internal const string ExceptionPlaceholderFormat = "{Placeholder}";
+        internal static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
+        internal const char SerializeParameterPrefix = '@';
+        internal const string LogFormat = "{Message}{NewLine}{Exception}";
+        internal const string MessageFormat = "{Message}";
+        internal const string TagFormat = "#{Tag}#";
+        internal const string MessageParameterKey = "Message";
+        internal const string FormatParameterName = "format";
+        
+        internal const int StacktraceDepth = 2;
+        internal const int StacktraceBufferSize = 8192;
 
-        public const bool IsExtractStacktrace = false;
-        public const bool IsEnabled = true;
+        internal const bool IsExtractStacktrace = false;
+        internal const bool IsEnabled = true;
         
-        public static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>
+        internal static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>
             new MessageFormatParameterSerializer();
 
-        public static ILogParameterProcessor LogParameterProcessor =>
+        internal static ILogParameterProcessor LogParameterProcessor =>
             new LogParameterProcessor();
 
-        public static IMessageParameterProcessor MessageParameterProcessor =>
+        internal static IMessageParameterProcessor MessageParameterProcessor =>
             new MessageParameterProcessor();
 
-        public static Dictionary<string, ILogFormatParameter> LogFormatParameters
+        internal static Dictionary<string, ILogFormatParameter> LogFormatParameters
         {
             get
             {
@@ -59,7 +60,7 @@ namespace Openmygame.Logger.Configuration
             }
         }
 
-        public static Dictionary<Type, IMessageFormatParameter> MessageFormatParameters
+        internal static Dictionary<Type, IMessageFormatParameter> MessageFormatParameters
         {
             get
             {
