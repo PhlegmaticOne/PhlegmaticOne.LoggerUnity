@@ -75,7 +75,7 @@ namespace Openmygame.Logger.Formats.Message
                     return;
                 }
                 
-                if (_messageFormatParameters.TryGetValue(parameter.GetType(), out var property))
+                if (_messageFormatParameters.TryGetValue(type, out var property))
                 {
                     property.Render(ref destination, parameter, format);
                 }
