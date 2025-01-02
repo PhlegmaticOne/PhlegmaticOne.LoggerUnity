@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
+﻿using Openmygame.Logger.Base;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
 
-namespace OpenMyGame.LoggerUnity.Destinations.Android
+namespace Openmygame.Logger.Destinations.Android
 {
     public class AndroidLogConfiguration : LogConfiguration
     {

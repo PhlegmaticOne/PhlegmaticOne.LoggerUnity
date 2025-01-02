@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
+﻿namespace Openmygame.Logger.Destinations.UnityDebug
 {
     internal static class UnityDebugLogStaticData
     {

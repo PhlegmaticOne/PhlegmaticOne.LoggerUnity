@@ -1,8 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
 
-namespace OpenMyGame.LoggerUnity.Formats.Log
+namespace Openmygame.Logger.Formats.Log
 {
     public interface ILogFormat
     {

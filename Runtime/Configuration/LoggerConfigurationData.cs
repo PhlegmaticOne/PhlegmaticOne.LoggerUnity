@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Messages.Exceptions;
-using OpenMyGame.LoggerUnity.Parameters.Log;
-using OpenMyGame.LoggerUnity.Parameters.Log.Base;
-using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
-using OpenMyGame.LoggerUnity.Parameters.Message;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
-using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Messages.Exceptions;
+using Openmygame.Logger.Parameters.Log;
+using Openmygame.Logger.Parameters.Log.Base;
+using Openmygame.Logger.Parameters.Log.Processors;
+using Openmygame.Logger.Parameters.Message;
+using Openmygame.Logger.Parameters.Message.Base;
+using Openmygame.Logger.Parameters.Message.Processors;
+using Openmygame.Logger.Parameters.Message.Serializing;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration
+namespace Openmygame.Logger.Configuration
 {
     internal static class LoggerConfigurationData
     {
         public static readonly Color DefaultLogTextColor = Color.white;
-        public const string ConditionalName = "ENABLE_UNITY_LOGGING";
+        public const string ConditionalName = "ENABLE_LOGGING";
         public const LogLevel MinimumLogLevel = LogLevel.Debug;
         public const string ExceptionPlaceholderFormat = "{Placeholder}";
         public static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");

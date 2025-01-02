@@ -1,9 +1,9 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Parameters.Message.Base;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Colors.Models
+namespace Openmygame.Logger.Configuration.Colors.Models
 {
     [Serializable]
     public struct MessageParameterColorConfigData

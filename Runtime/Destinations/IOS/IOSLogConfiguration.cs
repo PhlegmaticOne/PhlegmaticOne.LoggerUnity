@@ -1,7 +1,7 @@
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
 
-namespace OpenMyGame.LoggerUnity.Destinations.IOS
+namespace Openmygame.Logger.Destinations.IOS
 {
     public class IOSLogConfiguration : LogConfiguration
     {

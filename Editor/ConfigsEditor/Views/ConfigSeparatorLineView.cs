@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Views
+namespace Openmygame.Logger.Editor.ConfigsEditor.Views
 {
     public class ConfigSeparatorLineView
     {

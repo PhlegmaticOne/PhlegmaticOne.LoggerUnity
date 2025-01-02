@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Base;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Models;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Static;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parameters.Log;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Base;
+using Openmygame.Logger.Configuration.Colors.Base;
+using Openmygame.Logger.Configuration.Colors.Models;
+using Openmygame.Logger.Configuration.Colors.Static;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parameters.Log;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Colors
+namespace Openmygame.Logger.Configuration.Colors
 {
     [LoggerConfigMetadata("ParameterColorsViewConfig", "Create parameter colors view config", orderInEditor: 1)]
     public class ParameterColorsViewConfig : LoggerConfigBase, IParameterColorsViewConfig

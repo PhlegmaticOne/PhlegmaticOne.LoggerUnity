@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Base
+namespace Openmygame.Logger.Configuration.Base
 {
     public abstract class LoggerConfigBase : ScriptableObject, IDefaultSetup
     {

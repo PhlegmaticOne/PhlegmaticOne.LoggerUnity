@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Parameters.Log.Base;
-using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
-using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Parameters.Log.Base;
+using Openmygame.Logger.Parameters.Log.Processors;
+using Openmygame.Logger.Parameters.Message.Processors;
 
-namespace OpenMyGame.LoggerUnity.Formats.Log.Factory
+namespace Openmygame.Logger.Formats.Log.Factory
 {
     public class LogFormatFactoryData
     {

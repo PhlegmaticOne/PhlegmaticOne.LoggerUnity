@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Base;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Base;
+using Openmygame.Logger.Configuration.Logger.Destinations;
+using Openmygame.Logger.Parameters.Message.Base;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Logger
+namespace Openmygame.Logger.Configuration.Logger
 {
     [LoggerConfigMetadata("LoggerConfig", "Create logger config", orderInEditor: 0)]
     public class LoggerConfig : LoggerConfigBase

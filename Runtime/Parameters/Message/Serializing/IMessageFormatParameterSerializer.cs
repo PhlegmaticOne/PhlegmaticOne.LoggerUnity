@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Message.Serializing
+namespace Openmygame.Logger.Parameters.Message.Serializing
 {
     public interface IMessageFormatParameterSerializer
     {

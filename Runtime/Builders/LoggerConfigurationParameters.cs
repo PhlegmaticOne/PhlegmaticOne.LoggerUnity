@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
+using Openmygame.Logger.Parameters.Message.Base;
+using Openmygame.Logger.Parameters.Message.Serializing;
 
-namespace OpenMyGame.LoggerUnity.Builders
+namespace Openmygame.Logger.Builders
 {
     public class LoggerConfigurationParameters
     {

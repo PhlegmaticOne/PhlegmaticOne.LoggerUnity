@@ -1,8 +1,8 @@
 ﻿using System.Collections.Concurrent;
-using OpenMyGame.LoggerUnity.Parsing.Base;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Parsing.Base;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Parsing
+namespace Openmygame.Logger.Parsing
 {
     internal class MessageFormatParserCached : IMessageFormatParser
     {

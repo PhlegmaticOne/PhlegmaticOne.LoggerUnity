@@ -1,10 +1,10 @@
-﻿using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages.Tagging;
-using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
+﻿using Openmygame.Logger.Configuration.Colors.Base;
+using Openmygame.Logger.Destinations.UnityDebug.Extensions;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages.Tagging;
+using Openmygame.Logger.Parameters.Message.Processors;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
+namespace Openmygame.Logger.Destinations.UnityDebug.Colors
 {
     internal class MessageParameterProcessorColorize : IMessageParameterProcessor
     {

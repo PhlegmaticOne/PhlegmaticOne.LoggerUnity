@@ -1,11 +1,11 @@
-﻿using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
+﻿using Openmygame.Logger.Base;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
 #if !UNITY_EDITOR && UNITY_IOS
 using System.Runtime.InteropServices;
 #endif
 
-namespace OpenMyGame.LoggerUnity.Destinations.IOS
+namespace Openmygame.Logger.Destinations.IOS
 {
     public class IOSLogDestination : LogDestination<IOSLogConfiguration>
     {

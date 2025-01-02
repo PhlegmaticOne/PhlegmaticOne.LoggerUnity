@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Messages;
+using Openmygame.Logger.Messages;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace Openmygame.Logger.Base
 {
     public interface ILogger
     {

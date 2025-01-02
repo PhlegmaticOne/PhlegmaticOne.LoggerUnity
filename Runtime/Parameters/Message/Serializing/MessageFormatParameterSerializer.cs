@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Message.Serializing
+namespace Openmygame.Logger.Parameters.Message.Serializing
 {
     internal class MessageFormatParameterSerializer : IMessageFormatParameterSerializer
     {

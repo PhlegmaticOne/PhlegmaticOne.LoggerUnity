@@ -2,13 +2,13 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Threading;
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
-using OpenMyGame.LoggerUnity.Infrastructure.InlineArrays;
-using OpenMyGame.LoggerUnity.Messages.Tagging;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Infrastructure.Extensions;
+using Openmygame.Logger.Infrastructure.InlineArrays;
+using Openmygame.Logger.Messages.Tagging;
 
-namespace OpenMyGame.LoggerUnity.Messages
+namespace Openmygame.Logger.Messages
 {
     public struct LogMessage
     {

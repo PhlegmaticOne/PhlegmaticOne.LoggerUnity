@@ -1,8 +1,8 @@
-﻿using OpenMyGame.LoggerUnity.Configuration.Attributes;
+﻿using Openmygame.Logger.Configuration.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.PropertyDrawers
+namespace Openmygame.Logger.Editor.ConfigsEditor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(OverrideElementNamesAttribute))]
     public class OverrideElementNamesPropertyDrawer : PropertyDrawer

@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
+using Openmygame.Logger.Infrastructure.StringBuilders;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Message.Base
+namespace Openmygame.Logger.Parameters.Message.Base
 {
     [Serializable]
     public abstract class MessageFormatParameter<T> : IMessageFormatParameter

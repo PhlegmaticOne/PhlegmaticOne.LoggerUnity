@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Builders;
+using Openmygame.Logger.Builders;
 
-namespace OpenMyGame.LoggerUnity.Destinations.Android.Extensions
+namespace Openmygame.Logger.Destinations.Android.Extensions
 {
     public static class LoggerBuilderExtensions
     {

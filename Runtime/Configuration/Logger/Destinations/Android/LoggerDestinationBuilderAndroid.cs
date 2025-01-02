@@ -1,10 +1,10 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
-using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Destinations.Android.Extensions;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Android
+namespace Openmygame.Logger.Configuration.Logger.Destinations.Android
 {
     [Serializable]
     [SerializeReferenceDropdownName("Android Log")]

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Parsing;
-using OpenMyGame.LoggerUnity.Parsing.Exceptions;
+using Openmygame.Logger.Parsing;
+using Openmygame.Logger.Parsing.Exceptions;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parsing
+namespace Openmygame.Logger.Tests.Runtime.Parsing
 {
     [TestFixture]
     public class MessageFormatParserTests

@@ -1,8 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging;
+using Openmygame.Logger.Destinations.UnityDebug.PartLogging;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.PartLogging
+namespace Openmygame.Logger.Tests.Runtime.Destinations.UnityDebug.PartLogging
 {
     [TestFixture]
     public class PartLoggingMessageFormatTests

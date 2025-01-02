@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Configuration.Colors;
-using OpenMyGame.LoggerUnity.Parameters.Log;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Configuration.Colors;
+using Openmygame.Logger.Parameters.Log;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Destinations.UnityDebug.Colors.ViewConfig
+namespace Openmygame.Logger.Tests.Runtime.Destinations.UnityDebug.Colors.ViewConfig
 {
     [TestFixture]
     public class ParameterColorsViewConfigDefaultTests

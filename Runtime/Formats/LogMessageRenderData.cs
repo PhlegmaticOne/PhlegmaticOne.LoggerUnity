@@ -1,9 +1,9 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Formats.Message;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Formats.Message;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Formats
+namespace Openmygame.Logger.Formats
 {
     public readonly ref struct LogMessageRenderData
     {

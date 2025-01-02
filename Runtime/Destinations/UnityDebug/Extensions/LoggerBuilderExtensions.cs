@@ -1,7 +1,7 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Builders;
+using Openmygame.Logger.Builders;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions
+namespace Openmygame.Logger.Destinations.UnityDebug.Extensions
 {
     public static class LoggerBuilderExtensions
     {

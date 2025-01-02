@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parameters.Log.Base;
-using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parameters.Log.Base;
+using Openmygame.Logger.Parameters.Log.Processors;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
+namespace Openmygame.Logger.Formats.Log.PlainText
 {
     internal class LogFormatPlainText : ILogFormat
     {

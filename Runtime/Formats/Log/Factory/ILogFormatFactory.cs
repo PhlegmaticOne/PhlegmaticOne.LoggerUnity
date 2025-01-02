@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Formats.Log.Factory
+﻿namespace Openmygame.Logger.Formats.Log.Factory
 {
     public interface ILogFormatFactory
     {

@@ -1,6 +1,6 @@
 ﻿using System.Buffers;
 
-namespace OpenMyGame.LoggerUnity.Infrastructure.Extensions
+namespace Openmygame.Logger.Infrastructure.Extensions
 {
     internal static class ArrayExtensions
     {

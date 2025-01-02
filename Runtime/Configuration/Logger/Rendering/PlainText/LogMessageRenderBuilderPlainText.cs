@@ -1,10 +1,10 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Formats;
-using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Formats;
+using Openmygame.Logger.Formats.Log.PlainText;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Logger.Rendering.PlainText
+namespace Openmygame.Logger.Configuration.Logger.Rendering.PlainText
 {
     [Serializable]
     [SerializeReferenceDropdownName("Plain text")]

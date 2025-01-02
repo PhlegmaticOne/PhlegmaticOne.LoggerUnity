@@ -1,9 +1,9 @@
-﻿using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Formats.Log.Factory;
-using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
+﻿using Openmygame.Logger.Base;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Formats.Log.Factory;
+using Openmygame.Logger.Formats.Log.PlainText;
 
-namespace OpenMyGame.LoggerUnity.Formats
+namespace Openmygame.Logger.Formats
 {
     public class RenderMessageOptions
     {

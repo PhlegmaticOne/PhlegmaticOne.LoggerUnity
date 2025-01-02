@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Infrastructure.Stacktrace;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Messages.Tagging;
-using OpenMyGame.LoggerUnity.Parsing.Base;
-using OpenMyGame.LoggerUnity.Parsing.Models;
-using ILogger = OpenMyGame.LoggerUnity.Base.ILogger;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Infrastructure.Stacktrace;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Messages.Tagging;
+using Openmygame.Logger.Parsing.Base;
+using Openmygame.Logger.Parsing.Models;
+using ILogger = Openmygame.Logger.Base.ILogger;
 
-namespace OpenMyGame.LoggerUnity
+namespace Openmygame.Logger
 {
     internal class Logger : ILogger
     {

@@ -1,9 +1,9 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Base;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Base;
 using Object = UnityEngine.Object;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Models
+namespace Openmygame.Logger.Editor.ConfigsEditor.Models
 {
     internal class LoggerConfigViewModel
     {

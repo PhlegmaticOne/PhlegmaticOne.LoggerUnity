@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parameters.Log.Base;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parameters.Log.Base;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Log
+namespace Openmygame.Logger.Parameters.Log
 {
     [Serializable]
     [SerializeReferenceDropdownName(KeyParameter)]

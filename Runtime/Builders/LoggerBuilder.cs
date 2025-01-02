@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Configuration.Logger;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
-using OpenMyGame.LoggerUnity.Messages.Tagging;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
-using OpenMyGame.LoggerUnity.Parsing;
-using OpenMyGame.LoggerUnity.Parsing.Base;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Configuration.Logger;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Messages.Tagging;
+using Openmygame.Logger.Parameters.Message.Base;
+using Openmygame.Logger.Parameters.Message.Serializing;
+using Openmygame.Logger.Parsing;
+using Openmygame.Logger.Parsing.Base;
 
-namespace OpenMyGame.LoggerUnity.Builders
+namespace Openmygame.Logger.Builders
 {
     public class LoggerBuilder
     {

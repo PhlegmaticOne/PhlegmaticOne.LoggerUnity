@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Build;
 
-namespace OpenMyGame.LoggerUnity.Editor.DefineSymbols
+namespace Openmygame.Logger.Editor.DefineSymbols
 {
     internal static class ScriptingDefineSymbols
     {
@@ -54,6 +54,5 @@ namespace OpenMyGame.LoggerUnity.Editor.DefineSymbols
             defines.CopyTo(resultDefines, currentDefines.Length);
             return resultDefines;
         }
-
     }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "OpenMyGame.LoggerUnity.Samples.LoggerUsage",
-    "rootNamespace": "OpenMyGame.LoggerUnity.LoggerUsage",
+    "name": "Openmygame.Logger.Samples.LoggerUsage",
+    "rootNamespace": "Openmygame.Logger.LoggerUsage",
     "references": [
         "GUID:9126765d0f77aa14594444aaf2fb6a20"
     ],

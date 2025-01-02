@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
-using OpenMyGame.LoggerUnity.Formats;
-using OpenMyGame.LoggerUnity.Formats.Log;
-using OpenMyGame.LoggerUnity.Formats.Log.Factory;
-using OpenMyGame.LoggerUnity.Formats.Message;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parameters.Log.Base;
-using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
-using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Formats;
+using Openmygame.Logger.Formats.Log;
+using Openmygame.Logger.Formats.Log.Factory;
+using Openmygame.Logger.Formats.Message;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parameters.Log.Base;
+using Openmygame.Logger.Parameters.Log.Processors;
+using Openmygame.Logger.Parameters.Message.Processors;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace Openmygame.Logger.Base
 {
     public abstract class LogConfiguration
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Parameters.Log;
-using OpenMyGame.LoggerUnity.Parameters.Log.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using Openmygame.Logger.Parameters.Log;
+using Openmygame.Logger.Parameters.Log.Base;
+using Openmygame.Logger.Parameters.Message;
+using Openmygame.Logger.Parameters.Message.Base;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Colors.Static
+namespace Openmygame.Logger.Configuration.Colors.Static
 {
     internal static class UnityDebugColorsStaticData
     {

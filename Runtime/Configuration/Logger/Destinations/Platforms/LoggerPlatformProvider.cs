@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms
+﻿namespace Openmygame.Logger.Configuration.Logger.Destinations.Platforms
 {
     internal static class LoggerPlatformProvider
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OpenMyGame.LoggerUnity.Infrastructure.Extensions
+namespace Openmygame.Logger.Infrastructure.Extensions
 {
     internal static class EnumExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Messages.Tagging;
+using Openmygame.Logger.Messages.Tagging;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Tagging
+namespace Openmygame.Logger.Tests.Runtime.Tagging
 {
     [TestFixture]
     public class LogTagFormatTests

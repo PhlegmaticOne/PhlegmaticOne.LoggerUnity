@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
+namespace Openmygame.Logger.Infrastructure.StringBuilders
 {
     [StructLayout(LayoutKind.Sequential)]
     public ref struct SpanStringBuilder

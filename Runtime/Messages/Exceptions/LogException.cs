@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Messages.Exceptions
+namespace Openmygame.Logger.Messages.Exceptions
 {
     public class LogException : Exception
     {

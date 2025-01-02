@@ -1,12 +1,12 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Parameters.Log;
-using OpenMyGame.LoggerUnity.Parameters.Log.Processors;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Configuration.Colors.Base;
+using Openmygame.Logger.Destinations.UnityDebug.Extensions;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Parameters.Log;
+using Openmygame.Logger.Parameters.Log.Processors;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors
+namespace Openmygame.Logger.Destinations.UnityDebug.Colors
 {
     internal class LogParameterProcessorColorize : ILogParameterProcessor
     {

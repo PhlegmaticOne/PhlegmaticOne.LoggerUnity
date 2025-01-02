@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+﻿using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Log.Processors
+namespace Openmygame.Logger.Parameters.Log.Processors
 {
     internal class LogParameterProcessor : ILogParameterProcessor
     {

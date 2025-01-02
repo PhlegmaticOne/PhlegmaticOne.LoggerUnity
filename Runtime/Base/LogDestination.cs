@@ -1,14 +1,14 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
-using OpenMyGame.LoggerUnity.Formats;
-using OpenMyGame.LoggerUnity.Formats.Log;
-using OpenMyGame.LoggerUnity.Formats.Message;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Formats;
+using Openmygame.Logger.Formats.Log;
+using Openmygame.Logger.Formats.Message;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace Openmygame.Logger.Base
 {
     public abstract class LogDestination<TConfiguration> : ILogDestination 
         where TConfiguration : LogConfiguration

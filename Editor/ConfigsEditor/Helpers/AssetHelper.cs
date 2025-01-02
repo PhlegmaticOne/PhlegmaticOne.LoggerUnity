@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Base;
-using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Models;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Base;
+using Openmygame.Logger.Editor.ConfigsEditor.Models;
 using UnityEditor;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers
+namespace Openmygame.Logger.Editor.ConfigsEditor.Helpers
 {
     internal static class AssetHelper
     {

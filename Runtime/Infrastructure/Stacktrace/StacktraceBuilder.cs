@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
+using Openmygame.Logger.Infrastructure.StringBuilders;
 
-namespace OpenMyGame.LoggerUnity.Infrastructure.Stacktrace
+namespace Openmygame.Logger.Infrastructure.Stacktrace
 {
     internal static class StacktraceBuilder
     {

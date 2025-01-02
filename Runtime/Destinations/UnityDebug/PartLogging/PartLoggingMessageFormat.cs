@@ -1,9 +1,9 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Parsing;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Parsing;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
+namespace Openmygame.Logger.Destinations.UnityDebug.PartLogging
 {
     internal class PartLoggingMessageFormat
     {

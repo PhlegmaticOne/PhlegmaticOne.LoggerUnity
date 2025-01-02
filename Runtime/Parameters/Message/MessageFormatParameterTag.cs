@@ -1,10 +1,10 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages.Tagging;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages.Tagging;
+using Openmygame.Logger.Parameters.Message.Base;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Message
+namespace Openmygame.Logger.Parameters.Message
 {
     [Serializable]
     [SerializeReferenceDropdownName("Tag")]

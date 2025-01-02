@@ -1,9 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Parameters.Message;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Parameters.Message;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Message
+namespace Openmygame.Logger.Tests.Runtime.Parameters.Message
 {
     [TestFixture]
     public class MessageFormatParameterTimeSpanTests

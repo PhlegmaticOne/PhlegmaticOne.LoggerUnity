@@ -1,8 +1,8 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Messages;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Messages;
 
-namespace OpenMyGame.LoggerUnity
+namespace Openmygame.Logger
 {
     public class LogWithTag : ILogger
     {

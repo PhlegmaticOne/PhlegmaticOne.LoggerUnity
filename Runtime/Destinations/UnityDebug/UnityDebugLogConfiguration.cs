@@ -1,11 +1,11 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Configuration.Colors;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Colors;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Configuration.Colors;
+using Openmygame.Logger.Configuration.Colors.Base;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Destinations.UnityDebug.Colors;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
+namespace Openmygame.Logger.Destinations.UnityDebug
 {
     public class UnityDebugLogConfiguration : LogConfiguration
     {

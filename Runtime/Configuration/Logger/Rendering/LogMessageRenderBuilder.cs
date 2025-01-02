@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Configuration.Base;
-using OpenMyGame.LoggerUnity.Formats;
+﻿using Openmygame.Logger.Configuration.Base;
+using Openmygame.Logger.Formats;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Logger.Rendering
+namespace Openmygame.Logger.Configuration.Logger.Rendering
 {
     public abstract class LogMessageRenderBuilder : IDefaultSetup
     {

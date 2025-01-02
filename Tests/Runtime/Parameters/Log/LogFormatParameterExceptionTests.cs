@@ -1,11 +1,11 @@
 ﻿using System;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parameters.Log;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parameters.Log;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Parameters.Log
+namespace Openmygame.Logger.Tests.Runtime.Parameters.Log
 {
     [TestFixture]
     public class LogFormatParameterExceptionTests

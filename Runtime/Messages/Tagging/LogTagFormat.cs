@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
-using OpenMyGame.LoggerUnity.Configuration;
+using Openmygame.Logger.Configuration;
 
-namespace OpenMyGame.LoggerUnity.Messages.Tagging
+namespace Openmygame.Logger.Messages.Tagging
 {
     public class LogTagFormat
     {

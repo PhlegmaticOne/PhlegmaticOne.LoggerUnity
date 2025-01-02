@@ -1,13 +1,13 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Messages.Exceptions;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Destinations.UnityDebug.Extensions;
+using Openmygame.Logger.Destinations.UnityDebug.PartLogging;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Messages.Exceptions;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug
+namespace Openmygame.Logger.Destinations.UnityDebug
 {
     internal class UnityDebugLogDestination : LogDestination<UnityDebugLogConfiguration>
     {

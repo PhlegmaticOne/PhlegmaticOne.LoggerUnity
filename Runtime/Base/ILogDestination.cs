@@ -1,9 +1,9 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Base
+namespace Openmygame.Logger.Base
 {
     public interface ILogDestination
     {

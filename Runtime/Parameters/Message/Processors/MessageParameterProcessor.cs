@@ -1,6 +1,6 @@
-﻿using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
+﻿using Openmygame.Logger.Infrastructure.StringBuilders;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Message.Processors
+namespace Openmygame.Logger.Parameters.Message.Processors
 {
     internal class MessageParameterProcessor : IMessageParameterProcessor
     {

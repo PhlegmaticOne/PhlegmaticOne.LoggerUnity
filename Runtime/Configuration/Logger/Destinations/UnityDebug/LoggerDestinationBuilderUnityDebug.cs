@@ -1,13 +1,13 @@
 ﻿using System;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Colors;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Colors;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Destinations.UnityDebug;
+using Openmygame.Logger.Destinations.UnityDebug.Extensions;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.UnityDebug
+namespace Openmygame.Logger.Configuration.Logger.Destinations.UnityDebug
 {
     [Serializable]
     [SerializeReferenceDropdownName("Unity Debug")]

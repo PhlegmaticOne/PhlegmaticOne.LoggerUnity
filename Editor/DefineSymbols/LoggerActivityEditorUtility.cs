@@ -1,8 +1,8 @@
-﻿using OpenMyGame.LoggerUnity.Configuration;
+﻿using Openmygame.Logger.Configuration;
 using UnityEditor;
 using UnityEditor.Build;
 
-namespace OpenMyGame.LoggerUnity.Editor.DefineSymbols
+namespace Openmygame.Logger.Editor.DefineSymbols
 {
     internal static class LoggerActivityEditorUtility
     {
@@ -37,6 +37,5 @@ namespace OpenMyGame.LoggerUnity.Editor.DefineSymbols
             return ScriptingDefineSymbols.TargetHasDefine(NamedBuildTarget.Android, EnableLoggerDefineName) ||
                    ScriptingDefineSymbols.TargetHasDefine(NamedBuildTarget.iOS, EnableLoggerDefineName);
         }
-
     }
 }

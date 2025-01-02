@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.PartLogging
+namespace Openmygame.Logger.Destinations.UnityDebug.PartLogging
 {
     internal struct PartLoggingParameters
     {

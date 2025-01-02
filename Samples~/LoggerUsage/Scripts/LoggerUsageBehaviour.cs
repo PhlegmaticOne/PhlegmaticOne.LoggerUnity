@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions;
-using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Destinations.UnityDebug.Extensions;
+using Openmygame.Logger.Formats.Log.PlainText;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.LoggerUsage
+namespace Openmygame.Logger.LoggerUsage
 {
     public class LoggerUsageBehaviour : MonoBehaviour
     {

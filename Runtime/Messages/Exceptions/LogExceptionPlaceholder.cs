@@ -1,4 +1,4 @@
-﻿namespace OpenMyGame.LoggerUnity.Messages.Exceptions
+﻿namespace Openmygame.Logger.Messages.Exceptions
 {
     internal class LogExceptionPlaceholder
     {

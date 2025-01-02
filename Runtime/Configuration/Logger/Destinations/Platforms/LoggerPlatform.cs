@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms
+namespace Openmygame.Logger.Configuration.Logger.Destinations.Platforms
 {
     [Flags]
     public enum LoggerPlatform

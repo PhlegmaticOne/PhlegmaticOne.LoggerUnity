@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers;
-using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Models;
-using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Views;
+using Openmygame.Logger.Editor.ConfigsEditor.Helpers;
+using Openmygame.Logger.Editor.ConfigsEditor.Models;
+using Openmygame.Logger.Editor.ConfigsEditor.Views;
 using UnityEditor;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor
+namespace Openmygame.Logger.Editor.ConfigsEditor
 {
     public class LoggerConfigsEditorWindow : EditorWindow
     {

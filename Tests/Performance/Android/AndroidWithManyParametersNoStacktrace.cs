@@ -2,11 +2,11 @@
 using System.Text;
 using System.Threading;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Destinations.Android.Extensions;
-using OpenMyGame.LoggerUnity.Formats.Log.PlainText;
-using OpenMyGame.LoggerUnity.Messages;
+using Openmygame.Logger;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Destinations.Android.Extensions;
+using Openmygame.Logger.Formats.Log.PlainText;
+using Openmygame.Logger.Messages;
 using Unity.PerformanceTesting;
 using UnityEngine;
 

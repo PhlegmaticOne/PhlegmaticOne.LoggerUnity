@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace OpenMyGame.LoggerUnity.Infrastructure.InlineArrays
+namespace Openmygame.Logger.Infrastructure.InlineArrays
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct PropertyInlineArray1

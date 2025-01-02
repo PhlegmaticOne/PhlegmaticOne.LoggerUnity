@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Formats.Log.Factory;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+﻿using Openmygame.Logger.Formats.Log.Factory;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
+namespace Openmygame.Logger.Formats.Log.PlainText
 {
     internal class LogFormatFactoryPlainText : ILogFormatFactory
     {

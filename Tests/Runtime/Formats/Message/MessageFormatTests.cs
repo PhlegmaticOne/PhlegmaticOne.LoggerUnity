@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Formats.Message;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Parameters.Message.Base;
-using OpenMyGame.LoggerUnity.Parameters.Message.Processors;
-using OpenMyGame.LoggerUnity.Parameters.Message.Serializing;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Formats.Message;
+using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Parameters.Message.Base;
+using Openmygame.Logger.Parameters.Message.Processors;
+using Openmygame.Logger.Parameters.Message.Serializing;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Tests.Runtime.Formats.Message
+namespace Openmygame.Logger.Tests.Runtime.Formats.Message
 {
     [TestFixture]
     public class MessageFormatTests

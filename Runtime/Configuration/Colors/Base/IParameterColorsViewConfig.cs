@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Colors.Base
+namespace Openmygame.Logger.Configuration.Colors.Base
 {
     public interface IParameterColorsViewConfig
     {

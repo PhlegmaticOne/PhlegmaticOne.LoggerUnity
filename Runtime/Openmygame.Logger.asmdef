@@ -1,6 +1,6 @@
 {
-    "name": "OpenMyGame.LoggerUnity",
-    "rootNamespace": "OpenMyGame.LoggerUnity",
+    "name": "Openmygame.Logger",
+    "rootNamespace": "Openmygame.Logger",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

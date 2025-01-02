@@ -3,7 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace OpenMyGame.LoggerUnity.Infrastructure.StringBuilders
+namespace Openmygame.Logger.Infrastructure.StringBuilders
 {
     public partial struct ValueStringBuilder
     {

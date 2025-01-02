@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Base;
-using OpenMyGame.LoggerUnity.Configuration.Colors.Static;
-using OpenMyGame.LoggerUnity.Infrastructure.Extensions;
-using OpenMyGame.LoggerUnity.Parameters.Log;
+using Openmygame.Logger.Configuration.Colors.Base;
+using Openmygame.Logger.Configuration.Colors.Static;
+using Openmygame.Logger.Infrastructure.Extensions;
+using Openmygame.Logger.Parameters.Log;
 using UnityEngine;
-using LogLevel = OpenMyGame.LoggerUnity.Messages.LogLevel;
+using LogLevel = Openmygame.Logger.Messages.LogLevel;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Colors
+namespace Openmygame.Logger.Configuration.Colors
 {
     internal class ParameterColorsViewConfigDefault : IParameterColorsViewConfig
     {

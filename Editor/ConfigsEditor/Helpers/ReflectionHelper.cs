@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Assembly = System.Reflection.Assembly;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers
+namespace Openmygame.Logger.Editor.ConfigsEditor.Helpers
 {
     internal static class ReflectionHelper
     {

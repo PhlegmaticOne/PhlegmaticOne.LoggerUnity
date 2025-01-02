@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenMyGame.LoggerUnity.Messages.Tagging
+namespace Openmygame.Logger.Messages.Tagging
 {
     [Serializable]
     public struct LogTag : IEquatable<LogTag>

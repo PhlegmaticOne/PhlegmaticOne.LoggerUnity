@@ -1,8 +1,8 @@
-﻿using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parsing.Models;
+﻿using Openmygame.Logger.Infrastructure.StringBuilders;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parsing.Models;
 
-namespace OpenMyGame.LoggerUnity.Parameters.Log.Base
+namespace Openmygame.Logger.Parameters.Log.Base
 {
     public interface ILogFormatParameter
     {

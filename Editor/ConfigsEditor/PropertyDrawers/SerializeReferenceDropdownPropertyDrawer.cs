@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Base;
-using OpenMyGame.LoggerUnity.Editor.ConfigsEditor.Helpers;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Base;
+using Openmygame.Logger.Editor.ConfigsEditor.Helpers;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Editor.ConfigsEditor.PropertyDrawers
+namespace Openmygame.Logger.Editor.ConfigsEditor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(SerializeReferenceDropdownAttribute))]
     internal class SerializeReferenceDropdownPropertyDrawer : PropertyDrawer

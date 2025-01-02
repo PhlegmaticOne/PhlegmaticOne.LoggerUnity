@@ -1,8 +1,8 @@
 ﻿using System.Collections.Concurrent;
-using OpenMyGame.LoggerUnity.Infrastructure.StringBuilders;
+using Openmygame.Logger.Infrastructure.StringBuilders;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Destinations.UnityDebug.Extensions
+namespace Openmygame.Logger.Destinations.UnityDebug.Extensions
 {
     internal static class ValueStringBuilderExtensions
     {

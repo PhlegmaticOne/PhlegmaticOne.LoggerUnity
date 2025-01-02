@@ -1,4 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("OpenMyGame.LoggerUnity.Editor")]
-[assembly: InternalsVisibleTo("OpenMyGame.LoggerUnity.Tests")]
+[assembly: InternalsVisibleTo("Openmygame.Logger.Editor")]
+[assembly: InternalsVisibleTo("Openmygame.Logger.Tests")]

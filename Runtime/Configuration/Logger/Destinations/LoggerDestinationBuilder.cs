@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
-using OpenMyGame.LoggerUnity.Base;
-using OpenMyGame.LoggerUnity.Builders;
-using OpenMyGame.LoggerUnity.Configuration.Attributes;
-using OpenMyGame.LoggerUnity.Configuration.Base;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Destinations.Platforms;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Rendering;
-using OpenMyGame.LoggerUnity.Configuration.Logger.Rendering.PlainText;
-using OpenMyGame.LoggerUnity.Messages;
-using OpenMyGame.LoggerUnity.Parameters.Log.Base;
+using Openmygame.Logger.Base;
+using Openmygame.Logger.Builders;
+using Openmygame.Logger.Configuration.Attributes;
+using Openmygame.Logger.Configuration.Base;
+using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
+using Openmygame.Logger.Configuration.Logger.Rendering;
+using Openmygame.Logger.Configuration.Logger.Rendering.PlainText;
+using Openmygame.Logger.Messages;
+using Openmygame.Logger.Parameters.Log.Base;
 using UnityEngine;
 
-namespace OpenMyGame.LoggerUnity.Configuration.Logger.Destinations
+namespace Openmygame.Logger.Configuration.Logger.Destinations
 {
     [Serializable]
     public abstract class LoggerDestinationBuilder : IDefaultSetup

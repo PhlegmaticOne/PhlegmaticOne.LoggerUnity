@@ -1,7 +1,7 @@
-﻿using OpenMyGame.LoggerUnity.Configuration;
-using OpenMyGame.LoggerUnity.Parsing;
+﻿using Openmygame.Logger.Configuration;
+using Openmygame.Logger.Parsing;
 
-namespace OpenMyGame.LoggerUnity.Formats.Log.PlainText
+namespace Openmygame.Logger.Formats.Log.PlainText
 {
     public static class RenderMessageOptionsExtensions
     {
