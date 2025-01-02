@@ -1,5 +1,5 @@
 {
-  "name": "com.openmygame.logger",
+  "name": "com.openmygame.loggerunity",
   "version": "2.0.0",
   "displayName": "OMG Logger",
   "description": "Logger package for Unity",
