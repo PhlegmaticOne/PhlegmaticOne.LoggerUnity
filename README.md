@@ -1,5 +1,5 @@
-# unity-package-logger-unity
-## com.openmygame.loggerunity
+# unity-package-logger
+## com.openmygame.logger
 
 ## <b>Подключение и импорт пакета</b>
 
@@ -7,7 +7,7 @@
 
 [Импорт пакета в Unity](https://gitlab.com/openmygame/unity-modules-registry#%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D1%8E%D0%BD%D0%B8%D1%82%D0%B8)
 
-Для включения логгирования нужно прописать define: ```ENABLE_UNITY_LOGGING```
+Для включения логгирования нужно прописать define: ```ENABLE_LOGGING```
 
 ## <b>Описание</b>
 
