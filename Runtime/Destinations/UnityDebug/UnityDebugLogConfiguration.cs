@@ -4,6 +4,7 @@ using Openmygame.Logger.Configuration.Colors;
 using Openmygame.Logger.Configuration.Colors.Base;
 using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
 using Openmygame.Logger.Destinations.UnityDebug.Colors;
+using Openmygame.Logger.Destinations.UnityDebug.Exceptions;
 
 namespace Openmygame.Logger.Destinations.UnityDebug
 {
@@ -11,12 +12,14 @@ namespace Openmygame.Logger.Destinations.UnityDebug
     {
         private int _messagePartMaxSize;
         private string _messagePartFormat;
+        private IUnityDebugExceptionFunc _customDebugExceptionFunc;
         
         public UnityDebugLogConfiguration()
         {
             MessagePartMaxSize = UnityDebugLogStaticData.MessagePartMaxSize;
             MessagePartFormat = UnityDebugLogStaticData.MessagePartFormat;
             IsUnityStacktraceEnabled = UnityDebugLogStaticData.IsUnityStacktraceEnabled;
+            _customDebugExceptionFunc = UnityDebugLogStaticData.DebugExceptionFunc;
             Platform = LoggerPlatform.Editor | LoggerPlatform.Android | LoggerPlatform.Ios;
         }
 
@@ -47,6 +50,18 @@ namespace Openmygame.Logger.Destinations.UnityDebug
                 }
 
                 _messagePartFormat = value;
+            }
+        }
+
+        public IUnityDebugExceptionFunc CustomDebugExceptionFunc
+        {
+            get => _customDebugExceptionFunc;
+            set
+            {
+                if (value is not null)
+                {
+                    _customDebugExceptionFunc = value;
+                }
             }
         }
 

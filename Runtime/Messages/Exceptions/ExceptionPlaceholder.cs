@@ -1,10 +1,10 @@
 ﻿namespace Openmygame.Logger.Messages.Exceptions
 {
-    internal class LogExceptionPlaceholder
+    internal class ExceptionPlaceholder
     {
         public string Placeholder { get; }
 
-        public LogExceptionPlaceholder(string placeholder)
+        public ExceptionPlaceholder(string placeholder)
         {
             Placeholder = placeholder;
         }

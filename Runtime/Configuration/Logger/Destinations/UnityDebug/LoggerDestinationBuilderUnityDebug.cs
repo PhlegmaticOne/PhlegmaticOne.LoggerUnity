@@ -4,6 +4,7 @@ using Openmygame.Logger.Configuration.Attributes;
 using Openmygame.Logger.Configuration.Colors;
 using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
 using Openmygame.Logger.Destinations.UnityDebug;
+using Openmygame.Logger.Destinations.UnityDebug.Exceptions;
 using Openmygame.Logger.Destinations.UnityDebug.Extensions;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ namespace Openmygame.Logger.Configuration.Logger.Destinations.UnityDebug
         [SerializeField] private bool _isColorizeParameters;
         [Tooltip("Если конфиг не указан, то используется дефолтный конфиг")]
         [SerializeField] private ParameterColorsViewConfig _customViewConfig;
+        [Tooltip("Если не указан, то используется LogWrapException")]
+        [SerializeReference, SerializeReferenceDropdown] private IUnityDebugExceptionFunc _exceptionFunc;
 
         protected override LoggerPlatform Platform => LoggerPlatform.Editor;
 
@@ -32,6 +35,7 @@ namespace Openmygame.Logger.Configuration.Logger.Destinations.UnityDebug
                 config.MessagePartMaxSize = _maxMessagePartSize;
                 config.MessagePartFormat = _messagePartFormat;
                 config.IsUnityStacktraceEnabled = _isUnityStacktraceEnabled;
+                config.CustomDebugExceptionFunc = _exceptionFunc;
                 EnableColorizeParameters(config);
             });
         }

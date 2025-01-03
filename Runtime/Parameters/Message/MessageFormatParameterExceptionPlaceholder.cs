@@ -8,9 +8,9 @@ namespace Openmygame.Logger.Parameters.Message
 {
     [Serializable]
     [SerializeReferenceDropdownName("ExceptionPlaceholder")]
-    internal class MessageFormatParameterExceptionPlaceholder : MessageFormatParameter<LogExceptionPlaceholder>
+    internal class MessageFormatParameterExceptionPlaceholder : MessageFormatParameter<ExceptionPlaceholder>
     {
-        protected override void Render(ref ValueStringBuilder destination, LogExceptionPlaceholder parameter, in ReadOnlySpan<char> format)
+        protected override void Render(ref ValueStringBuilder destination, ExceptionPlaceholder parameter, in ReadOnlySpan<char> format)
         {
             destination.Append(parameter.Placeholder);
         }

@@ -4,6 +4,7 @@ using Openmygame.Logger.Configuration;
 using Openmygame.Logger.Infrastructure.Attributes;
 using Openmygame.Logger.Infrastructure.InlineArrays;
 using Openmygame.Logger.Messages;
+using Openmygame.Logger.Messages.Exceptions;
 using ILogger = Openmygame.Logger.Base.ILogger;
 
 namespace Openmygame.Logger
@@ -139,7 +140,7 @@ namespace Openmygame.Logger
             var message = new LogMessage(LogLevel.Fatal, LoggerConfigurationData.ExceptionPlaceholderFormat, exception);
             var array = new PropertyInlineArray();
             var parameters = array.AsSpan();
-            parameters[0] = LoggerConfigurationData.ExceptionPlaceholder;
+            parameters[0] = new ExceptionPlaceholder(exception.Message);
             logger.LogMessage(message, parameters);
         }
         

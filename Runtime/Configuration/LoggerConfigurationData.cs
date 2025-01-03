@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Openmygame.Logger.Messages;
-using Openmygame.Logger.Messages.Exceptions;
 using Openmygame.Logger.Parameters.Log;
 using Openmygame.Logger.Parameters.Log.Base;
 using Openmygame.Logger.Parameters.Log.Processors;
@@ -22,7 +21,6 @@ namespace Openmygame.Logger.Configuration
         internal static readonly Color DefaultLogTextColor = Color.white;
         internal const LogLevel MinimumLogLevel = LogLevel.Debug;
         internal const string ExceptionPlaceholderFormat = "{Placeholder}";
-        internal static readonly LogExceptionPlaceholder ExceptionPlaceholder = new("Exception occurred!");
         internal const char SerializeParameterPrefix = '@';
         internal const string LogFormat = "{Message}{NewLine}{Exception}";
         internal const string MessageFormat = "{Message}";

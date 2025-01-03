@@ -4,7 +4,6 @@ using Openmygame.Logger.Destinations.UnityDebug.Extensions;
 using Openmygame.Logger.Destinations.UnityDebug.PartLogging;
 using Openmygame.Logger.Infrastructure.StringBuilders;
 using Openmygame.Logger.Messages;
-using Openmygame.Logger.Messages.Exceptions;
 using Openmygame.Logger.Messages.Tagging;
 using UnityEngine;
 
@@ -29,7 +28,9 @@ namespace Openmygame.Logger.Destinations.UnityDebug
             switch (logType)
             {
                 case LogType.Exception:
-                    LogException(new LogException(renderedMessage.ToString()));
+                    var exception = Configuration.CustomDebugExceptionFunc
+                        .CreateDebugException(renderedMessage.ToString(), logMessage.Exception);
+                    LogException(exception);
                     break;
                 case LogType.Error:
                 case LogType.Assert:
