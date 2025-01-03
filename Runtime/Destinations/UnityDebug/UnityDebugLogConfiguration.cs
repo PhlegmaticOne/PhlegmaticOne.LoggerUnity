@@ -67,13 +67,17 @@ namespace Openmygame.Logger.Destinations.UnityDebug
 
         public void ColorizeParameters()
         {
+#if UNITY_EDITOR
             ColorizeParameters(new ParameterColorsViewConfigDefault());
+#endif
         }
         
         public void ColorizeParameters(IParameterColorsViewConfig colorsViewConfig)
         {
+#if UNITY_EDITOR
             SetMessageParameterPostRenderer(new MessageParameterProcessorColorize(colorsViewConfig));
-            SetLogParameterPostRenderer(new LogParameterProcessorColorize(colorsViewConfig));
+            SetLogParameterPostRenderer(new LogParameterProcessorColorize(colorsViewConfig));      
+#endif
         }
     }
 }
