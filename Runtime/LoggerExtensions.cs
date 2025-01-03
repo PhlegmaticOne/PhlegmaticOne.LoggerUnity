@@ -11,6 +11,16 @@ namespace Openmygame.Logger
 {
     public static class LoggerExtensions
     {
+        public static ILogger Tag(this ILogger logger, string tag, string tagFormat = null)
+        {
+            return Log.Tag(tag, tagFormat, logger);
+        }
+
+        public static ILogger Subsystem(this ILogger logger, string subsystem, string subsystemFormat = null)
+        {
+            return Log.Subsystem(subsystem, subsystemFormat, logger);
+        }
+        
         [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Debug(this ILogger logger, string messagePlain)
         {
