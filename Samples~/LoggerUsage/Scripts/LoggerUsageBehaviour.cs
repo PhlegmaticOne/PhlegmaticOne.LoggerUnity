@@ -29,7 +29,7 @@ namespace Openmygame.Logger.LoggerUsage
                 .CreateLogger();
 
             _logTime = Log.Tag("Time");
-            _logSystem = Log.Subsystem("Time", "System");
+            _logSystem = Log.TagSubsystem("Time", "System");
         }
 
         private void Start()
@@ -61,7 +61,8 @@ namespace Openmygame.Logger.LoggerUsage
             
             Log.TagException("System", systemException, "System error: {Error}", "Something went wrong");
 
-            _logSystem.Exception(systemException, "System error: {Error}", "Something went wrong");
+            var systemDecorate = Log.Subsystem("Exception", logger: _logSystem);
+            systemDecorate.Exception(systemException, "System error: {Error}", "Something went wrong");
             
             Log.Exception(new Exception("Test exception"));
             

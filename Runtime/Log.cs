@@ -25,15 +25,20 @@ namespace Openmygame.Logger
         
         public static ILogger Tag(string tag, string tagFormat = null, ILogger logger = null)
         {
-            return GetTagLogger(tag, tagFormat, false, logger);
+            var format = string.IsNullOrEmpty(tagFormat) ? LogTagFormatsProvider.Tag() : tagFormat;
+            return TagLogger(tag, format, false, logger);
+        }
+        
+        public static ILogger Subsystem(string subsystem, string subsystemFormat = null, ILogger logger = null)
+        {
+            var format = string.IsNullOrEmpty(subsystemFormat) ? LogTagFormatsProvider.Subsystem() : subsystemFormat;
+            return TagLogger(subsystem, format, true, logger);
         }
 
-        public static ILogger Subsystem(string tag, string subsystem,
+        public static ILogger TagSubsystem(string tag, string subsystem,
             string tagFormat = null, string subsystemFormat = null, ILogger logger = null)
         {
-            var tagLogger = Tag(tag, tagFormat, logger);
-            var format = string.IsNullOrEmpty(subsystemFormat) ? LogTagFormatsProvider.Subsystem() : subsystemFormat;
-            return GetTagLogger(subsystem, format, true, tagLogger);
+            return Subsystem(subsystem, subsystemFormat, Tag(tag, tagFormat, logger));
         }
         
         [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -198,9 +203,8 @@ namespace Openmygame.Logger
             Tag(tag).Exception(exception, format, parameters);
         }
 
-        private static LogTag GetTagLogger(string tag, string tagFormat, bool isSubsystem, ILogger logger)
+        private static LogTag TagLogger(string tag, string format, bool isSubsystem, ILogger logger)
         {
-            var format = string.IsNullOrEmpty(tagFormat) ? LogTagFormatsProvider.Tag() : tagFormat;
             var internalLogger = logger ?? Logger;
             var internalTag = Messages.Tagging.Tag.Create(tag, format, isSubsystem);
             return new LogTag(internalTag, internalLogger);
