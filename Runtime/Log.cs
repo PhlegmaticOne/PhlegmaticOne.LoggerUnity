@@ -135,7 +135,7 @@ namespace Openmygame.Logger
         }
         
         [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
-        public static void TagFatal(Exception exception, string tag, string messagePlain)
+        public static void TagFatal(string tag, Exception exception, string messagePlain)
         {
             TagLoggerDefault(tag).Fatal(exception, messagePlain);
         }
@@ -163,7 +163,7 @@ namespace Openmygame.Logger
         
         [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
-        public static void TagFatal(Exception exception, string tag, string format, params object[] parameters)
+        public static void TagFatal(string tag, Exception exception, string format, params object[] parameters)
         {
             TagLoggerDefault(tag).Fatal(exception, format, parameters);
         }
