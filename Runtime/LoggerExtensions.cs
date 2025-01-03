@@ -105,35 +105,44 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.EnableConditionalName), 
-         Conditional(LoggerConfigurationData.Editor),
-         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Fatal(this ILogger logger, string messagePlain)
+        {
+            Fatal(logger, null, messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        public static void Fatal(this ILogger logger, Exception exception, string messagePlain)
         {
             if (logger is null || !logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
             {
                 return;
             }
             
-            var message = new LogMessage(LogLevel.Fatal, LoggerConfigurationData.MessageFormat);
+            var message = new LogMessage(LogLevel.Fatal, LoggerConfigurationData.MessageFormat, exception);
             var array = new PropertyInlineArray();
             var parameters = array.AsSpan();
             parameters[0] = messagePlain;
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.EnableConditionalName), 
-         Conditional(LoggerConfigurationData.Editor),
-         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Fatal(this ILogger logger, string format, params object[] parameters)
+        {
+            Fatal(logger, null, format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void Fatal(this ILogger logger, Exception exception, string format, params object[] parameters)
         {
             if (logger is null || !logger.IsEnabled || string.IsNullOrEmpty(format))
             {
                 return;
             }
             
-            var message = new LogMessage(LogLevel.Fatal, format);
+            var message = new LogMessage(LogLevel.Fatal, format, exception);
             logger.LogMessage(message, parameters);
         }
         

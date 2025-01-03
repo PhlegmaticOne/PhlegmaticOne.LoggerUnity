@@ -116,38 +116,56 @@ namespace Openmygame.Logger
             TagLoggerDefault(tag).Error(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.EnableConditionalName), 
-         Conditional(LoggerConfigurationData.Editor),
-         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Fatal(string messagePlain)
         {
             Logger.Fatal(messagePlain);
         }
         
-        [Conditional(LoggerConfigurationData.EnableConditionalName), 
-         Conditional(LoggerConfigurationData.Editor),
-         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        public static void Fatal(Exception exception, string messagePlain)
+        {
+            Logger.Fatal(exception, messagePlain);
+        }
+        
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagFatal(string tag, string messagePlain)
         {
             TagLoggerDefault(tag).Fatal(messagePlain);
         }
+        
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        public static void TagFatal(Exception exception, string tag, string messagePlain)
+        {
+            TagLoggerDefault(tag).Fatal(exception, messagePlain);
+        }
 
-        [Conditional(LoggerConfigurationData.EnableConditionalName), 
-         Conditional(LoggerConfigurationData.Editor),
-         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Fatal(string format, params object[] parameters)
         {
             Logger.Fatal(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.EnableConditionalName), 
-         Conditional(LoggerConfigurationData.Editor),
-         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void Fatal(Exception exception, string format, params object[] parameters)
+        {
+            Logger.Fatal(exception, format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagFatal(string tag, string format, params object[] parameters)
         {
             TagLoggerDefault(tag).Fatal(format, parameters);
+        }
+        
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
+        public static void TagFatal(Exception exception, string tag, string format, params object[] parameters)
+        {
+            TagLoggerDefault(tag).Fatal(exception, format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.EnableConditionalName), 

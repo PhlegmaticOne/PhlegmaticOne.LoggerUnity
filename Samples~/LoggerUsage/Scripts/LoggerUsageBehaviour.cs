@@ -63,6 +63,7 @@ namespace Openmygame.Logger.LoggerUsage
 
             var systemDecorate = _logSystem.Subsystem("Exception");
             systemDecorate.Exception(systemException, "System error: {Error}", "Something went wrong");
+            systemDecorate.Fatal(systemException, "System error: {Error}", "Error");
             
             Log.Exception(new Exception("Test exception"));
             
