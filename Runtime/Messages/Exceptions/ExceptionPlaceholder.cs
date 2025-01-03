@@ -1,6 +1,6 @@
 ﻿namespace Openmygame.Logger.Messages.Exceptions
 {
-    internal class ExceptionPlaceholder
+    public sealed class ExceptionPlaceholder
     {
         public string Placeholder { get; }
 
