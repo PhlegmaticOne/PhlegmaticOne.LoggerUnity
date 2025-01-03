@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Diagnostics;
-using Openmygame.Logger.Base;
 using Openmygame.Logger.Configuration;
 using Openmygame.Logger.Infrastructure.Attributes;
 using Openmygame.Logger.Messages;
+using Openmygame.Logger.Messages.Tagging;
+using ILogger = Openmygame.Logger.Base.ILogger;
 
 namespace Openmygame.Logger
 {
     public class Log : ILogger
     {
-        public static ILogger Logger { get; set; } = new NullLogger();
+        public static ILogger Logger { get; set; } = new LogNull();
         
         public bool IsEnabled
         {
             get => Logger.IsEnabled; 
             set => Logger.IsEnabled = value;
-        }
-                
-        public LogMessage CreateMessage(LogLevel logLevel, string tag = null, Exception exception = null)
-        {
-            return Logger.CreateMessage(logLevel, tag, exception);
         }
 
         public void LogMessage(LogMessage message, Span<object> parameters)
@@ -27,9 +23,17 @@ namespace Openmygame.Logger
             Logger.LogMessage(message, parameters);
         }
         
-        public static LogWithTag TagLogger(string tag)
+        public static ILogger Tag(string tag, string tagFormat = null, ILogger logger = null)
         {
-            return new LogWithTag(tag, Logger);
+            return GetTagLogger(tag, tagFormat, false, logger);
+        }
+
+        public static ILogger Subsystem(string tag, string subsystem,
+            string tagFormat = null, string subsystemFormat = null, ILogger logger = null)
+        {
+            var tagLogger = Tag(tag, tagFormat, logger);
+            var format = string.IsNullOrEmpty(subsystemFormat) ? LogTagFormatsProvider.Subsystem() : subsystemFormat;
+            return GetTagLogger(subsystem, format, true, tagLogger);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -41,7 +45,7 @@ namespace Openmygame.Logger
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagDebug(string tag, string messagePlain)
         {
-            Logger.TagDebug(tag, messagePlain);
+            Tag(tag).Debug(messagePlain);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -55,7 +59,7 @@ namespace Openmygame.Logger
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagDebug(string tag, string format, params object[] parameters)
         {
-            Logger.TagDebug(tag, format, parameters);
+            Tag(tag).Debug(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -67,7 +71,7 @@ namespace Openmygame.Logger
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagWarning(string tag, string messagePlain)
         {
-            Logger.TagWarning(tag, messagePlain);
+            Tag(tag).Warning(messagePlain);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -81,7 +85,7 @@ namespace Openmygame.Logger
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagWarning(string tag, string format, params object[] parameters)
         {
-            Logger.TagWarning(tag, format, parameters);
+            Tag(tag).Warning(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -93,7 +97,7 @@ namespace Openmygame.Logger
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagError(string tag, string messagePlain)
         {
-            Logger.TagError(tag, messagePlain);
+            Tag(tag).Error(messagePlain);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -107,7 +111,7 @@ namespace Openmygame.Logger
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagError(string tag, string format, params object[] parameters)
         {
-            Logger.TagError(tag, format, parameters);
+            Tag(tag).Error(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -119,7 +123,7 @@ namespace Openmygame.Logger
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagFatal(string tag, string messagePlain)
         {
-            Logger.TagFatal(tag, messagePlain);
+            Tag(tag).Fatal(messagePlain);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -133,7 +137,7 @@ namespace Openmygame.Logger
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagFatal(string tag, string format, params object[] parameters)
         {
-            Logger.TagFatal(tag, format, parameters);
+            Tag(tag).Fatal(format, parameters);
         }
         
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
@@ -158,20 +162,28 @@ namespace Openmygame.Logger
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagException(string tag, Exception exception)
         {
-            Logger.TagException(tag, exception);
+            Tag(tag).Exception(exception);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagException(string tag, Exception exception, string messagePlain)
         {
-            Logger.TagException(tag, exception, messagePlain);
+            Tag(tag).Exception(exception, messagePlain);
         }
 
         [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagException(string tag, Exception exception, string format, params object[] parameters)
         {
-            Logger.TagException(tag, exception, format, parameters);
+            Tag(tag).Exception(exception, format, parameters);
+        }
+
+        private static LogTag GetTagLogger(string tag, string tagFormat, bool isSubsystem, ILogger logger)
+        {
+            var format = string.IsNullOrEmpty(tagFormat) ? LogTagFormatsProvider.Tag() : tagFormat;
+            var internalLogger = logger ?? Logger;
+            var internalTag = Messages.Tagging.Tag.Create(tag, format, isSubsystem);
+            return new LogTag(internalTag, internalLogger);
         }
     }
 }

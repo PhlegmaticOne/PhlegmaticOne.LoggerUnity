@@ -3,6 +3,7 @@ using Openmygame.Logger.Destinations.UnityDebug.Extensions;
 using Openmygame.Logger.Infrastructure.StringBuilders;
 using Openmygame.Logger.Messages.Tagging;
 using Openmygame.Logger.Parameters.Message.Processors;
+using UnityEngine;
 
 namespace Openmygame.Logger.Destinations.UnityDebug.Colors
 {
@@ -17,16 +18,22 @@ namespace Openmygame.Logger.Destinations.UnityDebug.Colors
 
         public void Preprocess(ref ValueStringBuilder destination, object parameter)
         {
-            var color = parameter is LogTag tag
-                ? _colorsViewConfig.GetTagColor(tag.Value)
-                : _colorsViewConfig.GetMessageParameterColor(parameter);
-
-            destination.AppendColorPrefix(color);
+            destination.AppendColorPrefix(GetParameterColor(parameter));
         }
 
         public void Postprocess(ref ValueStringBuilder destination, object parameter)
         {
             destination.AppendColorPostfix();
+        }
+
+        private Color GetParameterColor(object parameter)
+        {
+            if (parameter is not Tag tag)
+            {
+                return _colorsViewConfig.GetMessageParameterColor(parameter);
+            }
+
+            return tag.IsSubsystem ? _colorsViewConfig.GetSubsystemColor() : _colorsViewConfig.GetTagColor(tag.Value);
         }
     }
 }

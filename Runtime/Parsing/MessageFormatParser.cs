@@ -18,7 +18,9 @@ namespace Openmygame.Logger.Parsing
                 throw new MessageFormatParseException("Input format cannot be empty string");
             }
             
-            var (countOpenBraces, countCloseBraces) = format.CountBraces();
+            var countBraces = format.CountBraces();
+            var countOpenBraces = countBraces.CountOpenBraces;
+            var countCloseBraces = countBraces.CountCloseBraces;
 
             if (countOpenBraces == 0 && countCloseBraces == 0)
             {

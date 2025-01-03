@@ -9,12 +9,11 @@ using UnityEngine;
 
 namespace Openmygame.Logger.Configuration.Logger
 {
-    [LoggerConfigMetadata("LoggerConfig", "Create logger config", orderInEditor: 0)]
+    [LoggerConfigMetadata("LoggerConfig", "Create logger config", orderInEditor: 1)]
     public class LoggerConfig : LoggerConfigBase
     {
         [SerializeField] private bool _isEnabled = true;
         [SerializeField] private bool _isExtractStacktrace = LoggerConfigurationData.IsExtractStacktrace;
-        [SerializeField] private string _tagFormat = LoggerConfigurationData.TagFormat;
 
         [SerializeReference, SerializeReferenceDropdown]
         private IMessageFormatParameter[] _messageFormatParameters;
@@ -39,7 +38,6 @@ namespace Openmygame.Logger.Configuration.Logger
         {
             loggerBuilder.SetEnabled(_isEnabled);
             loggerBuilder.SetIsExtractStacktrace(_isExtractStacktrace);
-            loggerBuilder.SetTagFormat(_tagFormat);
             AddMessageParameters(loggerBuilder);
             BuildDestinations(loggerBuilder);
         }

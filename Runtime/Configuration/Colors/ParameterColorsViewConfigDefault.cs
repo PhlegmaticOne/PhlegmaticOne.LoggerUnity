@@ -24,7 +24,12 @@ namespace Openmygame.Logger.Configuration.Colors
                 .ToDictionary(x => x.Key.Key, x => x.Value);
             _logLevelColorsMap = UnityDebugColorsStaticData.LogLevelColorsMap;
         }
-        
+
+        public Color GetSubsystemColor()
+        {
+            return UnityDebugColorsStaticData.DefaultSubsystemColor;
+        }
+
         public Color GetTagColor(string tag)
         {
             return LoggerConfigurationData.DefaultLogTextColor;

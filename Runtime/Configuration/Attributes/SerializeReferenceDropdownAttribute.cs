@@ -2,5 +2,5 @@
 
 namespace Openmygame.Logger.Configuration.Attributes
 {
-    internal class SerializeReferenceDropdownAttribute : PropertyAttribute { }
+    internal sealed class SerializeReferenceDropdownAttribute : PropertyAttribute { }
 }

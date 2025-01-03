@@ -22,9 +22,9 @@ namespace Openmygame.Logger.Tests.Runtime.Destinations.UnityDebug.Colors
                 {
                     _logParameterColor = logParameterColor;
                 }
-                
-                public Color GetTagColor(string tag) => throw new NotImplementedException();
 
+                public Color GetSubsystemColor() => _logParameterColor;
+                public Color GetTagColor(string tag) => throw new NotImplementedException();
                 public Color GetMessageParameterColor(object parameter) => throw new NotImplementedException();
                 public Color GetLogParameterColor(string parameterKey, object parameterValue)
                 {

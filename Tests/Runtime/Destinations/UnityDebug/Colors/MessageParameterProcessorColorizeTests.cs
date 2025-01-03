@@ -20,12 +20,11 @@ namespace Openmygame.Logger.Tests.Runtime.Destinations.UnityDebug.Colors
                 {
                     _color = color;
                 }
-                
+
+                public Color GetSubsystemColor() => _color;
                 public Color GetTagColor(string tag) => _color;
-
                 public Color GetMessageParameterColor(object parameter) => _color;
-
-                public Color GetLogParameterColor(string parameterKey, object paramterValue) => _color;
+                public Color GetLogParameterColor(string parameterKey, object parameterValue) => _color;
             }
             
             public static IParameterColorsViewConfig ConfigWithMessageParameterColor(Color color)
@@ -70,7 +69,7 @@ namespace Openmygame.Logger.Tests.Runtime.Destinations.UnityDebug.Colors
             ColorUtility.TryParseHtmlString(colorString, out var color);
             var viewConfig = Mocks.ConfigWithTagColor(color);
             var builder = new ValueStringBuilder();
-            var logTag = new LogTag(tag);
+            var logTag = new Tag(tag, LogTagFormat.Default, false);
             var processor = new MessageParameterProcessorColorize(viewConfig);
             
             //Act

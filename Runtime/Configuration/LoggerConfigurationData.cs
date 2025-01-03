@@ -26,15 +26,16 @@ namespace Openmygame.Logger.Configuration
         internal const string LogFormat = "{Message}{NewLine}{Exception}";
         internal const string MessageFormat = "{Message}";
         internal const string TagFormat = "#{Tag}#";
+        internal const string SubsystemFormat = "[{Subsystem}]";
         internal const string MessageParameterKey = "Message";
         internal const string FormatParameterName = "format";
-        
+
         internal const int StacktraceDepth = 2;
         internal const int StacktraceBufferSize = 8192;
 
         internal const bool IsExtractStacktrace = false;
         internal const bool IsEnabled = true;
-        
+
         internal static IMessageFormatParameterSerializer MessageFormatParameterSerializer =>
             new MessageFormatParameterSerializer();
 

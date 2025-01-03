@@ -4,13 +4,14 @@ using Openmygame.Logger.Builders;
 using Openmygame.Logger.Destinations.UnityDebug.Extensions;
 using Openmygame.Logger.Formats.Log.PlainText;
 using UnityEngine;
+using ILogger = Openmygame.Logger.Base.ILogger;
 
 namespace Openmygame.Logger.LoggerUsage
 {
     public class LoggerUsageBehaviour : MonoBehaviour
     {
-        private static readonly LogWithTag LogTime = Log.TagLogger("Time");
-        private static readonly LogWithTag LogSystem = Log.TagLogger("System");
+        private ILogger _logTime;
+        private ILogger _logSystem;
         
         private const string LongFormat = "Time: {Time}; Weather: {Weather}, Velocity: {Velocity}; Mass: {Mass}; Acceleration: {Acceleration}";
 
@@ -19,7 +20,6 @@ namespace Openmygame.Logger.LoggerUsage
             //Log.Logger = LoggerBuilder.FromConfig(LoggerConfig.Load());
             
             Log.Logger = new LoggerBuilder()
-                .SetTagFormat("#{Tag}#")
                 .LogToUnityDebug(config =>
                 {
                     config.RenderAs.PlainText("[Thread: {ThreadId}]: {Message}{NewLine}{Exception}");
@@ -27,6 +27,9 @@ namespace Openmygame.Logger.LoggerUsage
                     config.ColorizeParameters();
                 })
                 .CreateLogger();
+
+            _logTime = Log.Tag("Time");
+            _logSystem = Log.Subsystem("Time", "System");
         }
 
         private void Start()
@@ -35,13 +38,18 @@ namespace Openmygame.Logger.LoggerUsage
             Log.Warning("Warning current time: {Time}", DateTime.Now);
             Log.Error("Error current time: {Time}", DateTime.Now);
             Log.Fatal("Fatal current time: {Time}", DateTime.Now);
-
+            
             Task.Run(ParallelLogging);
             
-            LogTime.Debug("Debug current time with tag: {Time}", DateTime.Now);
-            LogTime.Warning("Warning current time with tag: {Time}", DateTime.Now);
-            LogTime.Error("Error current time with tag: {Time}", DateTime.Now);
-            LogTime.Fatal("Fatal current time with tag: {Time}", DateTime.Now);
+            _logTime.Debug("Debug current time with tag: {Time}", DateTime.Now);
+            _logTime.Warning("Warning current time with tag: {Time}", DateTime.Now);
+            _logTime.Error("Error current time with tag: {Time}", DateTime.Now);
+            _logTime.Fatal("Fatal current time with tag: {Time}", DateTime.Now);
+            
+            _logSystem.Debug("Debug current time with tag: {Time}", DateTime.Now);
+            _logSystem.Warning("Warning current time with tag: {Time}", DateTime.Now);
+            _logSystem.Error("Error current time with tag: {Time}", DateTime.Now);
+            _logSystem.Fatal("Fatal current time with tag: {Time}", DateTime.Now);
             
             Log.TagDebug("Time", LongFormat, DateTime.Now, 42, 69, 420, 690);
             
@@ -53,7 +61,7 @@ namespace Openmygame.Logger.LoggerUsage
             
             Log.TagException("System", systemException, "System error: {Error}", "Something went wrong");
 
-            LogSystem.Exception(systemException, "System error: {Error}", "Something went wrong");
+            _logSystem.Exception(systemException, "System error: {Error}", "Something went wrong");
             
             Log.Exception(new Exception("Test exception"));
             
@@ -67,17 +75,17 @@ namespace Openmygame.Logger.LoggerUsage
             }
         }
 
-        private static void ParallelLogging()
+        private void ParallelLogging()
         {
-            LogTime.Debug("Debug current time with tag: {Time}", DateTime.Now);
-            LogTime.Warning("Warning current time with tag: {Time}", DateTime.Now);
-            LogTime.Error("Error current time with tag: {Time}", DateTime.Now);
-            LogTime.Fatal("Fatal current time with tag: {Time}", DateTime.Now);
+            _logTime.Debug("Debug current time with tag: {Time}", DateTime.Now);
+            _logTime.Warning("Warning current time with tag: {Time}", DateTime.Now);
+            _logTime.Error("Error current time with tag: {Time}", DateTime.Now);
+            _logTime.Fatal("Fatal current time with tag: {Time}", DateTime.Now);
         }
 
         private static void LogWithTag()
         {
-            var logWithTag = new LogWithTag("Time");
+            var logWithTag = Log.Tag("Time");
             logWithTag.Debug("Debug current time with log with tag: {Time}", DateTime.Now);
             logWithTag.Exception(new Exception("LogWithTag exception"));
         }

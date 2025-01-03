@@ -1,6 +1,7 @@
 ﻿using Openmygame.Logger.Base;
 using Openmygame.Logger.Infrastructure.StringBuilders;
 using Openmygame.Logger.Messages;
+using Openmygame.Logger.Messages.Tagging;
 #if !UNITY_EDITOR && UNITY_IOS
 using System.Runtime.InteropServices;
 #endif
@@ -25,13 +26,13 @@ namespace Openmygame.Logger.Destinations.IOS
         private static extern void NativeLoggerIos_Fatal(string tag, char[] message);
 #endif
 
-        protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
+        protected override void LogRenderedMessage(
+            in LogMessage logMessage, Tag tag, ref ValueStringBuilder renderedMessage)
         {
 #if !UNITY_EDITOR && UNITY_IOS
-            var tag = logMessage.Tag.HasValue() ? logMessage.Tag.Value : DefaultTagValue;
-            var logLevel = logMessage.LogLevel;
+            var tagValue = tag.HasValue() ? tag.Value : DefaultTagValue;
 
-            switch (logLevel)
+            switch (logMessage.LogLevel)
             {
                 case LogLevel.Debug:
                     NativeLoggerIos_Debug(tag, renderedMessage.arrayFromPool);

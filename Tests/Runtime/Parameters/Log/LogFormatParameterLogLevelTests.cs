@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Openmygame.Logger.Configuration;
 using Openmygame.Logger.Infrastructure.StringBuilders;
 using Openmygame.Logger.Messages;
 using Openmygame.Logger.Parameters.Log;
@@ -19,7 +20,7 @@ namespace Openmygame.Logger.Tests.Runtime.Parameters.Log
             var parameter = new LogFormatParameterLogLevel();
             var messagePart = MessagePart.Parameter("LogLevel");
             var destination = new ValueStringBuilder();
-            var logMessage = new LogMessage(null, null, logLevel);
+            var logMessage = new LogMessage(logLevel, LoggerConfigurationData.MessageFormat);
             
             //Act
             parameter.Render(ref destination, messagePart, logMessage);

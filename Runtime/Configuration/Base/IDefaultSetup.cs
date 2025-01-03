@@ -1,6 +1,6 @@
 ﻿namespace Openmygame.Logger.Configuration.Base
 {
-    public interface IDefaultSetup
+    internal interface IDefaultSetup
     {
         void SetupDefaults();
     }

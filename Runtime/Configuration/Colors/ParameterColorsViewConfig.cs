@@ -11,9 +11,10 @@ using UnityEngine;
 
 namespace Openmygame.Logger.Configuration.Colors
 {
-    [LoggerConfigMetadata("ParameterColorsViewConfig", "Create parameter colors view config", orderInEditor: 1)]
+    [LoggerConfigMetadata("ParameterColorsViewConfig", "Create parameter colors view config", orderInEditor: 2)]
     public class ParameterColorsViewConfig : LoggerConfigBase, IParameterColorsViewConfig
     {
+        [SerializeField] private Color _subsystemColor;
         [SerializeField, OverrideElementNames] private LogParameterColorConfigData[] _logParameterColors;
         [SerializeField, OverrideElementNames] private MessageParameterColorConfigData[] _messageParameterColors;
         [SerializeField, OverrideElementNames] private LogLevelColorConfigData[] _logLevelColors;
@@ -27,6 +28,8 @@ namespace Openmygame.Logger.Configuration.Colors
 
         public override void SetupDefaults()
         {
+            _subsystemColor = UnityDebugColorsStaticData.DefaultSubsystemColor;
+            
             _tagColors = Array.Empty<TagColorConfigData>();
             
             _logParameterColors = UnityDebugColorsStaticData.LogParameterColorsMap
@@ -40,6 +43,11 @@ namespace Openmygame.Logger.Configuration.Colors
             _logLevelColors = UnityDebugColorsStaticData.LogLevelColorsMap
                 .Select(x => new LogLevelColorConfigData(Enum.Parse<LogLevel>(x.Key), x.Value))
                 .ToArray();
+        }
+
+        public Color GetSubsystemColor()
+        {
+            return _subsystemColor;
         }
 
         public Color GetTagColor(string tag)

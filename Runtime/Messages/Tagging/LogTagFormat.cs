@@ -1,21 +1,35 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Openmygame.Logger.Configuration;
 
 namespace Openmygame.Logger.Messages.Tagging
 {
-    public class LogTagFormat
+    public sealed class LogTagFormat : IEquatable<LogTagFormat>
     {
+        private static readonly ConcurrentDictionary<string, LogTagFormat> Formats = new();
+        
         private readonly ConcurrentDictionary<string, string> _formatsCache = new();
 
-        public static readonly LogTagFormat Default = new(LoggerConfigurationData.TagFormat);
-        
-        public string Format { get; private set; }
-        public string Prefix { get; private set; }
-        public string Postfix { get; private set; }
+        public static LogTagFormat Default => GetFormat(LoggerConfigurationData.TagFormat);
 
-        public LogTagFormat(string format)
+        /// <example>[#{Tag}#]</example>
+        public static LogTagFormat GetFormat(string format)
         {
-            UpdateFormat(format);
+            return Formats.GetOrAdd(format, f => new LogTagFormat(f));
+        }
+        
+        public string Format { get; }
+        public string Prefix { get; }
+        public string Postfix { get; }
+        
+        internal LogTagFormat(string format)
+        {
+            var openIndex = format.IndexOf('{');
+            var closeIndex = format.IndexOf('}') + 1;
+            
+            Prefix = format[..openIndex];
+            Postfix = format[closeIndex..];
+            Format = format[openIndex..closeIndex];
         }
 
         public string AddTagToFormat(string format)
@@ -28,14 +42,21 @@ namespace Openmygame.Logger.Messages.Tagging
             return Format;
         }
 
-        private void UpdateFormat(string format)
+        public bool Equals(LogTagFormat other)
         {
-            var openIndex = format.IndexOf('{');
-            var closeIndex = format.IndexOf('}') + 1;
-            
-            Prefix = format[..openIndex];
-            Postfix = format[closeIndex..];
-            Format = format[openIndex..closeIndex];
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Format == other.Format && Prefix == other.Prefix && Postfix == other.Postfix;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return ReferenceEquals(this, obj) || obj is LogTagFormat other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Format, Prefix, Postfix);
         }
     }
 }

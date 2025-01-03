@@ -8,14 +8,14 @@ namespace Openmygame.Logger.Parameters.Message
 {
     [Serializable]
     [SerializeReferenceDropdownName("Tag")]
-    internal class MessageFormatParameterTag : MessageFormatParameter<LogTag>
+    internal class MessageFormatParameterTag : MessageFormatParameter<Tag>
     {
-        protected override void Render(ref ValueStringBuilder destination, LogTag parameter, in ReadOnlySpan<char> format)
+        protected override void Render(ref ValueStringBuilder destination, Tag parameter, in ReadOnlySpan<char> format)
         {
-            var tafFormat = parameter.Format;
-            destination.Append(tafFormat.Prefix);
+            var tagFormat = parameter.Format;
+            destination.Append(tagFormat.Prefix);
             destination.Append(parameter.Value);
-            destination.Append(tafFormat.Postfix);
+            destination.Append(tagFormat.Postfix);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Openmygame.Logger.Configuration.Colors.Static
     {
         private static readonly Color DefaultTimeColor = new(0.1254902f, 0.6470588f, 0.2862745f);
         
+        public static readonly Color DefaultSubsystemColor = new(1f, 1f, 1f);
+        
         public static Dictionary<ILogFormatParameter, Color> LogParameterColorsMap => new()
         {
             { new LogFormatParameterException(), new Color(1f, 0.3254902f, 0.2901961f) },

@@ -5,7 +5,7 @@ using Openmygame.Logger.Parameters.Message.Serializing;
 
 namespace Openmygame.Logger.Builders
 {
-    public class LoggerConfigurationParameters
+    public sealed class LoggerConfigurationParameters
     {
         public LoggerConfigurationParameters(
             Dictionary<Type, IMessageFormatParameter> formatParameters, 

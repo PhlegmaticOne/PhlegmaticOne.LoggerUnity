@@ -4,7 +4,6 @@ using Openmygame.Logger.Base;
 using Openmygame.Logger.Configuration;
 using Openmygame.Logger.Configuration.Logger;
 using Openmygame.Logger.Configuration.Logger.Destinations.Platforms;
-using Openmygame.Logger.Messages.Tagging;
 using Openmygame.Logger.Parameters.Message.Base;
 using Openmygame.Logger.Parameters.Message.Serializing;
 using Openmygame.Logger.Parsing;
@@ -12,20 +11,18 @@ using Openmygame.Logger.Parsing.Base;
 
 namespace Openmygame.Logger.Builders
 {
-    public class LoggerBuilder
+    public sealed class LoggerBuilder
     {
         private readonly List<ILogDestination> _logDestinations;
         private readonly IMessageFormatParameterSerializer _parameterSerializer;
         private readonly Dictionary<Type, IMessageFormatParameter> _formatParameters;
 
         private bool _isExtractStacktrace;
-        private string _tagFormat;
         private bool _isEnabled;
 
         public LoggerBuilder()
         {
             _logDestinations = new List<ILogDestination>();
-            _tagFormat = LoggerConfigurationData.TagFormat;
             _isEnabled = LoggerConfigurationData.IsEnabled;
             _isExtractStacktrace = LoggerConfigurationData.IsExtractStacktrace;
             _formatParameters = LoggerConfigurationData.MessageFormatParameters;
@@ -42,12 +39,6 @@ namespace Openmygame.Logger.Builders
         public LoggerBuilder SetEnabled(bool isEnabled)
         {
             _isEnabled = isEnabled;
-            return this;
-        }
-
-        public LoggerBuilder SetTagFormat(string tagFormat)
-        {
-            _tagFormat = tagFormat;
             return this;
         }
 
@@ -88,8 +79,7 @@ namespace Openmygame.Logger.Builders
 
         public ILogger CreateLogger()
         {
-            return new Logger(
-                GetInitializedDestinations(), GetTagFormat(), GetParser(), _isExtractStacktrace, _isEnabled);
+            return new Logger(GetInitializedDestinations(), GetParser(), _isExtractStacktrace, _isEnabled);
         }
 
         private ILogDestination[] GetInitializedDestinations()
@@ -108,11 +98,6 @@ namespace Openmygame.Logger.Builders
         private static IMessageFormatParser GetParser()
         {
             return new MessageFormatParserCached(new MessageFormatParser());
-        }
-
-        private LogTagFormat GetTagFormat()
-        {
-            return new LogTagFormat(_tagFormat);
         }
     }
 }

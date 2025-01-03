@@ -3,7 +3,7 @@
 namespace Openmygame.Logger.Configuration.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    internal class LoggerConfigMetadataAttribute : Attribute
+    internal sealed class LoggerConfigMetadataAttribute : Attribute
     {
         public string ConfigName { get; }
         public string CreateDescription { get; }

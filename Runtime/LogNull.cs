@@ -4,10 +4,9 @@ using Openmygame.Logger.Messages;
 
 namespace Openmygame.Logger
 {
-    internal class NullLogger : ILogger
+    internal sealed class LogNull : ILogger
     {
         public bool IsEnabled { get => false; set { } }
-        public LogMessage CreateMessage(LogLevel logLevel, string tag, Exception exception) => new();
         public void LogMessage(LogMessage logMessage, Span<object> parameters) { }
     }
 }

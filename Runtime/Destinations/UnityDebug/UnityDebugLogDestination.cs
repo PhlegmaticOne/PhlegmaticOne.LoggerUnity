@@ -5,6 +5,7 @@ using Openmygame.Logger.Destinations.UnityDebug.PartLogging;
 using Openmygame.Logger.Infrastructure.StringBuilders;
 using Openmygame.Logger.Messages;
 using Openmygame.Logger.Messages.Exceptions;
+using Openmygame.Logger.Messages.Tagging;
 using UnityEngine;
 
 namespace Openmygame.Logger.Destinations.UnityDebug
@@ -20,7 +21,8 @@ namespace Openmygame.Logger.Destinations.UnityDebug
             _partLoggingMessageFormat = new PartLoggingMessageFormat(Configuration.MessagePartFormat);
         }
 
-        protected override void LogRenderedMessage(in LogMessage logMessage, ref ValueStringBuilder renderedMessage)
+        protected override void LogRenderedMessage(
+            in LogMessage logMessage, Tag tag, ref ValueStringBuilder renderedMessage)
         {
             var logType = LogLevelToLogTypeConverter.Convert(logMessage.LogLevel);
             
@@ -38,7 +40,7 @@ namespace Openmygame.Logger.Destinations.UnityDebug
                     break;
             }
         }
-
+        
         private void LogMessage(LogType logType, LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {
             if (renderedMessage.Length <= Configuration.MessagePartMaxSize)
@@ -49,7 +51,7 @@ namespace Openmygame.Logger.Destinations.UnityDebug
             
             LogMessageByParts(logType, logMessage, ref renderedMessage);
         }
-
+        
         private void LogMessageByParts(LogType logType, LogMessage logMessage, ref ValueStringBuilder renderedMessage)
         {
             var offset = 0;
@@ -73,13 +75,13 @@ namespace Openmygame.Logger.Destinations.UnityDebug
                 offset += maxSize;
             }
         }
-
+        
         private void Log(LogType logType, ref ValueStringBuilder message)
         {
             var logOption = Configuration.IsUnityStacktraceEnabled ? LogOption.None : LogOption.NoStacktrace;
             Debug.LogFormat(logType, logOption, null, Format, message.AsMemory());
         }
-
+        
         private static void LogException(Exception exception)
         {
             Debug.LogException(exception);
