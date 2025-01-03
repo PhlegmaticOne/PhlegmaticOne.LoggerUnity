@@ -15,7 +15,8 @@ namespace Openmygame.Logger.Configuration
 {
     public static class LoggerConfigurationData
     {
-        public const string ConditionalName = "ENABLE_LOGGING";
+        public const string EnableConditionalName = "ENABLE_LOGGING";
+        public const string ExceptionConditionalName = "ENABLE_EXCEPTION_LOGGING";
         public const string Editor = "UNITY_EDITOR";
         
         internal static readonly Color DefaultLogTextColor = Color.white;

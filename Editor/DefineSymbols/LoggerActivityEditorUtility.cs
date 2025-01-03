@@ -6,7 +6,7 @@ namespace Openmygame.Logger.Editor.DefineSymbols
 {
     internal static class LoggerActivityEditorUtility
     {
-        private const string EnableLoggerDefineName = LoggerConfigurationData.ConditionalName;
+        private const string EnableLoggerDefineName = LoggerConfigurationData.EnableConditionalName;
         private const string LoggerEnableItemName = "Logger/Enable ";
         private const string LoggerDisableItemName = "Logger/Disable ";
         

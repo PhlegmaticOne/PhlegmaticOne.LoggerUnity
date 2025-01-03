@@ -36,142 +36,162 @@ namespace Openmygame.Logger
             return GetTagLogger(subsystem, format, true, tagLogger);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Debug(string messagePlain)
         {
             Logger.Debug(messagePlain);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagDebug(string tag, string messagePlain)
         {
             Tag(tag).Debug(messagePlain);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Debug(string format, params object[] parameters)
         {
             Logger.Debug(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagDebug(string tag, string format, params object[] parameters)
         {
             Tag(tag).Debug(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Warning(string messagePlain)
         {
             Logger.Warning(messagePlain);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagWarning(string tag, string messagePlain)
         {
             Tag(tag).Warning(messagePlain);
         }
 
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Warning(string format, params object[] parameters)
         {
             Logger.Warning(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagWarning(string tag, string format, params object[] parameters)
         {
             Tag(tag).Warning(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Error(string messagePlain)
         {
             Logger.Error(messagePlain);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void TagError(string tag, string messagePlain)
         {
             Tag(tag).Error(messagePlain);
         }
 
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Error(string format, params object[] parameters)
         {
             Logger.Error(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagError(string tag, string format, params object[] parameters)
         {
             Tag(tag).Error(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void Fatal(string messagePlain)
         {
             Logger.Fatal(messagePlain);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void TagFatal(string tag, string messagePlain)
         {
             Tag(tag).Fatal(messagePlain);
         }
 
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Fatal(string format, params object[] parameters)
         {
             Logger.Fatal(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagFatal(string tag, string format, params object[] parameters)
         {
             Tag(tag).Fatal(format, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void Exception(Exception exception)
         {
             Logger.Exception(exception);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void Exception(Exception exception, string messagePlain)
         {
             Logger.Exception(exception, messagePlain);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Exception(Exception exception, string format, params object[] parameters)
         {
             Logger.Exception(exception, format, parameters);
         }
 
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void TagException(string tag, Exception exception)
         {
             Tag(tag).Exception(exception);
         }
 
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void TagException(string tag, Exception exception, string messagePlain)
         {
             Tag(tag).Exception(exception, messagePlain);
         }
 
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void TagException(string tag, Exception exception, string format, params object[] parameters)
         {

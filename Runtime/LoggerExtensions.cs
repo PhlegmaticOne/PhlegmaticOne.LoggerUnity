@@ -10,7 +10,7 @@ namespace Openmygame.Logger
 {
     public static class LoggerExtensions
     {
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Debug(this ILogger logger, string messagePlain)
         {
             if (logger is null || !logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
@@ -25,7 +25,7 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Debug(this ILogger logger, string format, params object[] parameters)
         {
@@ -38,7 +38,7 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Warning(this ILogger logger, string messagePlain)
         {
             if (logger is null || !logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
@@ -53,7 +53,7 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Warning(this ILogger logger, string format, params object[] parameters)
         {
@@ -66,7 +66,7 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         public static void Error(this ILogger logger, string messagePlain)
         {
             if (logger is null || !logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
@@ -81,7 +81,7 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), Conditional(LoggerConfigurationData.Editor)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Error(this ILogger logger, string format, params object[] parameters)
         {
@@ -94,7 +94,9 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void Fatal(this ILogger logger, string messagePlain)
         {
             if (logger is null || !logger.IsEnabled || string.IsNullOrEmpty(messagePlain))
@@ -109,7 +111,9 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Fatal(this ILogger logger, string format, params object[] parameters)
         {
@@ -122,7 +126,9 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void Exception(this ILogger logger, Exception exception)
         {
             if (logger is null || !logger.IsEnabled || exception is null)
@@ -137,7 +143,9 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         public static void Exception(this ILogger logger, Exception exception, string messagePlain)
         {
             if (logger is null || !logger.IsEnabled || string.IsNullOrEmpty(messagePlain) || exception is null)
@@ -152,7 +160,9 @@ namespace Openmygame.Logger
             logger.LogMessage(message, parameters);
         }
         
-        [Conditional(LoggerConfigurationData.ConditionalName), Conditional(LoggerConfigurationData.Editor)]
+        [Conditional(LoggerConfigurationData.EnableConditionalName), 
+         Conditional(LoggerConfigurationData.Editor),
+         Conditional(LoggerConfigurationData.ExceptionConditionalName)]
         [MessageTemplateFormatMethod(LoggerConfigurationData.FormatParameterName)]
         public static void Exception(this ILogger logger, 
             Exception exception, string format, params object[] parameters)
